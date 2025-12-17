@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - BioTune</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'biotune-black': '#0a0a0a',
+                        'biotune-dark': '#1a1a1a',
+                        'biotune-red': '#ff0000',
+                        'biotune-text': '#cccccc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel='icon' type='image/png' href='./assets/favicon.png'>
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased">
+
+    <div class="min-h-screen p-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-4xl font-bold">Panel Administracyjny</h1>
+                <a href="index.html"
+                    class="bg-biotune-red text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                    â† PowrĂłt do sklepu
+                </a>
+            </div>
+
+            <!-- Stock Management Section -->
+            <div class="glass rounded-xl p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-4">ZarzÄ…dzanie Magazynem</h2>
+
+                <div class="overflow-x-auto">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nazwa Produktu</th>
+                                <th>Dawkowanie</th>
+                                <th>Cena (PLN)</th>
+                                <th>Stan Magazynowy</th>
+                                <th>Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table">
+                            <!-- Products will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-6 flex gap-4">
+                    <button onclick="saveChanges()"
+                        class="bg-biotune-red text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors font-bold">
+                        đź’ľ Zapisz Zmiany
+                    </button>
+                    <button onclick="exportData()"
+                        class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-bold">
+                        đź“Ą Eksportuj Dane
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add New Product Section -->
+            <div class="glass rounded-xl p-6">
+                <h2 class="text-2xl font-bold mb-4">Dodaj Nowy Produkt</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">ID Produktu</label>
+                        <input type="text" id="new-product-id" class="admin-input" placeholder="np. new-product">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Nazwa</label>
+                        <input type="text" id="new-product-name" class="admin-input" placeholder="np. New Peptide">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Dawkowanie</label>
+                        <input type="text" id="new-product-dosage" class="admin-input" placeholder="np. 10mg">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Cena (PLN)</label>
+                        <input type="number" id="new-product-price" class="admin-input" placeholder="np. 199.00"
+                            step="0.01">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Stan Magazynowy</label>
+                        <input type="number" id="new-product-stock" class="admin-input" placeholder="np. 30">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium mb-2">Opis</label>
+                        <textarea id="new-product-description" class="admin-input" rows="3"
+                            placeholder="Opis produktu..."></textarea>
+                    </div>
+                </div>
+
+                <button onclick="addNewProduct()"
+                    class="mt-4 bg-biotune-red text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors font-bold">
+                    âž• Dodaj Produkt
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/products-data.js"></script>
+    <script src="./js/admin.js"></script>
+    <script>
+        const html = document.documentElement;
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+    </script>
+</body>
+
+</html>
