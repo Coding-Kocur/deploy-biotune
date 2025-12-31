@@ -280,58 +280,92 @@
         </div>
     </section>
 
-    <!-- Bottom Grid Section -->
+    <!-- Bottom Grid Section - Icon Features with Hover Reveal -->
     <section class="py-32 px-4 bg-black border-t border-white/5">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl font-bold mb-16 text-center">Wiedza i Odpowiedzialność</h2>
+            <h2 class="text-5xl font-bold mb-20 text-center">Wiedza i Odpowiedzialność</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="feature-card p-8 rounded-xl">
-                    <h3 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
-                        <span class="w-2 h-2 bg-biotune-red rounded-full"></span> Przeznaczenie
-                    </h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+                <!-- Feature 1: Przeznaczenie -->
+                <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
+                    <!-- Minimalistic Line Icon - Beaker/Flask -->
+                    <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full">
+                            <path d="M18 6h12M20 6v14l-8 16a2 2 0 001.8 3h20.4a2 2 0 001.8-3l-8-16V6"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M16 32h16" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-3">Przeznaczenie</h3>
+                    <!-- Description - Hidden until hover -->
+                    <p
+                        class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
                         Działamy w oparciu o jasne zasady odpowiedzialności. Wszystkie oferowane przez nas substancje są
                         odczynnikami chemicznymi przeznaczonymi wyłącznie do celów badawczych, naukowych i
                         analitycznych.
                     </p>
                 </div>
 
-                <!-- Card 2 -->
-                <div class="feature-card p-8 rounded-xl">
-                    <h3 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
-                        <span class="w-2 h-2 bg-biotune-red rounded-full"></span> Czym są peptydy?
-                    </h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
+                <!-- Feature 2: Czym są peptydy? -->
+                <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
+                    <!-- Minimalistic Line Icon - Molecular Chain -->
+                    <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full">
+                            <circle cx="12" cy="24" r="4" />
+                            <circle cx="24" cy="14" r="4" />
+                            <circle cx="36" cy="24" r="4" />
+                            <circle cx="24" cy="34" r="4" />
+                            <line x1="16" y1="22" x2="20" y2="16" />
+                            <line x1="28" y1="16" x2="32" y2="22" />
+                            <line x1="32" y1="26" x2="28" y2="32" />
+                            <line x1="20" y1="32" x2="16" y2="26" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-3">Czym są peptydy?</h3>
+                    <!-- Description - Hidden until hover -->
+                    <p
+                        class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
                         W centrum naszej oferty znajdują się peptydy — krótkie łańcuchy aminokwasów połączonych
                         wiązaniami peptydowymi. Chemicznie stanowią one precyzyjne, łatwe do charakterystyki molekuły.
                     </p>
                 </div>
 
-                <!-- Card 3 -->
-                <div class="feature-card p-8 rounded-xl">
-                    <h3 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
-                        <span class="w-2 h-2 bg-biotune-red rounded-full"></span> Gwarancja
-                    </h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
+                <!-- Feature 3: Gwarancja -->
+                <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
+                    <!-- Minimalistic Line Icon - Shield with Checkmark -->
+                    <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full">
+                            <path d="M24 4L6 12v12c0 11 8 17 18 20 10-3 18-9 18-20V12L24 4z" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M16 24l6 6 10-12" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-3">Gwarancja</h3>
+                    <!-- Description - Hidden until hover -->
+                    <p
+                        class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
                         Kupując produkty BioTune, otrzymują Państwo odczynniki, których parametry zostały rzetelnie
                         zweryfikowane. Regularnie powtarzamy procedury testowe, aby zapewnić stałą jakość między
                         seriami.
                     </p>
                 </div>
 
-                <!-- Card 4 (Full Width) -->
-                <div class="feature-card p-8 rounded-xl md:col-span-2 lg:col-span-3 mt-4">
-                    <h3 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
-                        <span class="w-2 h-2 bg-biotune-red rounded-full"></span> Potencjał peptydów
-                    </h3>
-                    <p class="text-gray-400 text-sm leading-relaxed max-w-4xl">
+                <!-- Feature 4: Potencjał peptydów -->
+                <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
+                    <!-- Minimalistic Line Icon - Rising Graph/Potential -->
+                    <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full">
+                            <path d="M6 38l10-10 8 6 18-22" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M32 12h10v10" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-3">Potencjał peptydów</h3>
+                    <!-- Description - Hidden until hover -->
+                    <p
+                        class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
                         Peptydy są jedną z najbardziej obiecujących grup związków we współczesnej chemii
-                        biomolekularnej.
-                        Charakteryzują się zdolnością do selektywnego oddziaływania z określonymi strukturami
-                        biologicznymi
-                        oraz możliwością modulowania fizjologii komórek i organizmów modelowych.
+                        biomolekularnej. Charakteryzują się zdolnością do selektywnego oddziaływania z określonymi
+                        strukturami biologicznymi.
                     </p>
                 </div>
             </div>
