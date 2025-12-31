@@ -135,11 +135,13 @@
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                 </div>
 
-                <!-- Center: Logo (Bigger, No Background) -->
+                <!-- Center: Logo (Much Bigger, SVG with Dark/Light Mode) -->
                 <div class="absolute left-1/2 transform -translate-x-1/2">
                     <a href="index.html" class="flex items-center">
-                        <img src="./assets/biotune-logo.png" alt="BioTune" class="h-12 w-auto"
-                            style="background: transparent; mix-blend-mode: darken;">
+                        <!-- Dark mode logo (light grey Tune) -->
+                        <img src="./assets/biotune-logo-dark.svg" alt="BioTune" class="h-16 w-auto hidden dark:block">
+                        <!-- Light mode logo (dark Tune) -->
+                        <img src="./assets/biotune-logo-light.svg" alt="BioTune" class="h-16 w-auto block dark:hidden">
                     </a>
                 </div>
 
