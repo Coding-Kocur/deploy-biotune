@@ -21,6 +21,31 @@ body::before {
     z-index: -1;
 }
 
+/* Custom Scrollbar - Red thumb, Black track */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff0000;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #cc0000;
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #ff0000 #000000;
+}
+
 /* Fix dropdown menu hover issue */
 .dropdown-trigger {
     position: relative;
