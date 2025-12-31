@@ -45,6 +45,15 @@
             box-shadow: 0 10px 40px -10px rgba(255, 0, 0, 0.15);
         }
 
+        /* Icon Line Glow Effect */
+        .feature-icon-card svg {
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .feature-icon-card:hover svg {
+            filter: drop-shadow(0 0 6px #ff0000) drop-shadow(0 0 12px #ff0000) drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+        }
+
         /* Red Glow Effect */
         .red-glow {
             position: fixed;
@@ -90,13 +99,33 @@
                             </svg>
                         </a>
                         <div class="dropdown-menu">
-                            <div class="py-1">
+                            <div class="py-1 max-h-80 overflow-y-auto">
                                 <a href="index.html#shop"
                                     class="block px-4 py-2 text-sm font-semibold text-biotune-red hover:bg-black/20 border-b border-white/10">Wszystkie</a>
                                 <a href="product.html?id=retatrutide"
                                     class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Retatrutide</a>
                                 <a href="product.html?id=bpc-157-tb-500"
                                     class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">BPC-157 + TB-500</a>
+                                <a href="product.html?id=cjc-1295-ipamorelin"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">CJC-1295 +
+                                    Ipamorelin</a>
+                                <a href="product.html?id=hgh-fragment-176-191"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">HGH Fragment
+                                    176-191</a>
+                                <a href="product.html?id=ghk-cu"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">GHK-Cu</a>
+                                <a href="product.html?id=melanotan-2"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Melanotan 2</a>
+                                <a href="product.html?id=pt-141"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">PT-141</a>
+                                <a href="product.html?id=epithalon"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Epithalon</a>
+                                <a href="product.html?id=mots-c"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">MOTS-c</a>
+                                <a href="product.html?id=semax"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Semax</a>
+                                <a href="product.html?id=selank"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Selank</a>
                             </div>
                         </div>
                     </div>
