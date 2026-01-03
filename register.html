@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zarejestruj siÄ™ - BioTune</title>
+    <title>Zarejestruj się - BioTune</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -39,8 +39,8 @@
                 <a href="index.html">
                     <img src="./assets/logo.png" alt="BioTune" class="w-32 mx-auto mb-4">
                 </a>
-                <h1 class="text-2xl font-bold text-black dark:text-white">UtwĂłrz konto</h1>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">DoĹ‚Ä…cz do BioTune juĹĽ dziĹ›</p>
+                <h1 class="text-2xl font-bold text-black dark:text-white">Utwórz konto</h1>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Dołącz do BioTune już dziś</p>
             </div>
 
             <div id="error-message"></div>
@@ -52,7 +52,7 @@
                         <path
                             d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                     </svg>
-                    Zarejestruj siÄ™ przez Facebook
+                    Zarejestruj się przez Facebook
                 </button>
                 <button onclick="loginWithGoogle()" class="oauth-button oauth-google">
                     <svg class="w-5 h-5" viewBox="0 0 24 24">
@@ -65,70 +65,73 @@
                         <path fill="#EA4335"
                             d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                     </svg>
-                    Zarejestruj siÄ™ przez Google
+                    Zarejestruj się przez Google
                 </button>
             </div>
 
             <div class="divider">
-                <span>lub zarejestruj siÄ™ za pomocÄ…</span>
+                <span>lub zarejestruj się za pomocą</span>
             </div>
 
             <!-- Register Form -->
             <form id="register-form" class="space-y-4">
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        ImiÄ™ (opcjonalne)
+                        Imię (opcjonalne)
                     </label>
-                    <input type="text" id="name" class="auth-input" placeholder="Jak mamy siÄ™ do Ciebie zwracaÄ‡?">
+                    <input type="text" id="name" class="auth-input" placeholder="Jak mamy się do Ciebie zwracać?">
                 </div>
 
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Email
                     </label>
-                    <input type="email" id="email" required class="auth-input" placeholder="WprowadĹş swĂłj email...">
+                    <input type="email" id="email" required class="auth-input" placeholder="Wprowadź swój email...">
                 </div>
 
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        HasĹ‚o
+                        Hasło
                     </label>
-                    <input type="password" id="password" required class="auth-input" placeholder="Minimum 6 znakĂłw...">
+                    <input type="password" id="password" required class="auth-input" placeholder="Minimum 6 znaków...">
                     <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                        HasĹ‚o musi zawieraÄ‡ minimum 6 znakĂłw
+                        Hasło musi zawierać minimum 6 znaków
                     </p>
                 </div>
 
                 <div>
                     <label for="confirm-password"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        PotwierdĹş hasĹ‚o
+                        Potwierdź hasło
                     </label>
                     <input type="password" id="confirm-password" required class="auth-input"
-                        placeholder="PowtĂłrz hasĹ‚o...">
+                        placeholder="Powtórz hasło...">
                 </div>
 
+                <!-- UPDATED: Terms checkbox with proper text and Regulamin link -->
                 <div class="flex items-start">
-                    <input type="checkbox" id="terms" required class="mr-2 mt-1 rounded border-gray-300">
-                    <label for="terms" class="text-sm text-gray-600 dark:text-gray-400">
-                        AkceptujÄ™ <a href="#" class="text-biotune-red hover:underline">regulamin</a> i
-                        <a href="#" class="text-biotune-red hover:underline">politykÄ™ prywatnoĹ›ci</a>
+                    <input type="checkbox" id="terms-accept" required class="mr-2 mt-1 rounded border-gray-300">
+                    <label for="terms-accept" class="text-sm text-gray-600 dark:text-gray-400">
+                        Akceptuję <a href="regulamin.html" target="_blank"
+                            class="text-biotune-red hover:underline">Regulamin sklepu BioTune</a>
+                        oraz potwierdzam, że będę korzystał z zakupionych odczynników wyłącznie do celów badawczych.
                     </label>
                 </div>
 
                 <button type="submit" id="register-btn" class="auth-button">
-                    Zarejestruj siÄ™
+                    Zarejestruj się
                 </button>
             </form>
 
             <div class="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-                Masz juĹĽ konto?
-                <a href="login.html" class="text-biotune-red font-semibold hover:underline">Zaloguj siÄ™</a>
+                Masz już konto?
+                <a href="login.html" class="text-biotune-red font-semibold hover:underline">Zaloguj się</a>
             </div>
         </div>
     </div>
 
     <script src="./js/auth.js"></script>
+    <script src="./js/agreementsStorage.js"></script>
     <script>
         // Theme toggle
         const html = document.documentElement;
@@ -143,15 +146,22 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
+            const termsAccepted = document.getElementById('terms-accept').checked;
             const errorDiv = document.getElementById('error-message');
             const btn = document.getElementById('register-btn');
 
             // Clear previous errors
             errorDiv.innerHTML = '';
 
+            // Validate terms checkbox
+            if (!termsAccepted) {
+                errorDiv.innerHTML = '<div class="alert alert-error">Proszę zaakceptować Regulamin</div>';
+                return;
+            }
+
             // Validate passwords match
             if (password !== confirmPassword) {
-                errorDiv.innerHTML = '<div class="alert alert-error">HasĹ‚a nie sÄ… identyczne</div>';
+                errorDiv.innerHTML = '<div class="alert alert-error">Hasła nie są identyczne</div>';
                 return;
             }
 
@@ -160,6 +170,24 @@
                 btn.innerHTML = '<div class="spinner mx-auto"></div>';
 
                 await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
+
+                // Save registration agreement to localStorage
+                const agreementData = {
+                    type: 'registration',
+                    terms: true,
+                    researchUse: true,
+                    timestamp: Date.now(),
+                    version: 'regulamin_2025-01-03',
+                    email: email
+                };
+
+                if (window.agreementsStorage) {
+                    window.agreementsStorage.save(agreementData);
+                } else {
+                    localStorage.setItem('biotune_registration_agreement', JSON.stringify(agreementData));
+                }
+
+                console.log('[BioTune Registration] Agreement saved:', agreementData);
 
                 authSystem.register(email, password, name);
 
@@ -171,7 +199,7 @@
             } catch (error) {
                 errorDiv.innerHTML = `<div class="alert alert-error">${error.message}</div>`;
                 btn.disabled = false;
-                btn.textContent = 'Zarejestruj siÄ™';
+                btn.textContent = 'Zarejestruj się';
             }
         });
     </script>
