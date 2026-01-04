@@ -6,7 +6,7 @@ const products = [
         price: 299.00,
         stock: 30,
         description: 'Retatrutide to eksperymentalny peptyd, agonista receptorów GLP-1, GIP i glukagonu. Przeznaczony wyłącznie do celów badawczych. Sól fizjologiczna w zestawie',
-        images: ['./assets/products/retatrutide-1.jpg', './assets/products/retatrutide-2.jpg', './assets/products/retatrutide-3.jpg']
+        images: ['./assets/products/retatrutide-1.png', './assets/products/retatrutide-2.jpg', './assets/products/retatrutide-3.jpg']
     },
     {
         id: 'bpc-157-tb-500',
