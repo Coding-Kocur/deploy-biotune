@@ -2,10 +2,10 @@ const products = [
     {
         id: 'retatrutide',
         name: 'Retatrutide',
-        dosage: '5mg',
+        dosage: '10mg',
         price: 299.00,
         stock: 30,
-        description: 'Retatrutide to eksperymentalny peptyd, agonista receptorów GLP-1, GIP i glukagonu. Przeznaczony wyłącznie do celów badawczych. Sól fizjologiczna w zestawie',
+        description: 'Retatrutide (LY-3437943) to eksperymentalny peptyd, potrójny agonista receptorów GLP-1, GIP i glukagonu. W badaniach przedklinicznych wykazuje silną aktywność metaboliczną, wpływając na regulację glukozy, lipolizę oraz homeostazę energetyczną. Badany intensywnie pod kątem mechanizmów regulacji apetytu i wydatku energetycznego w modelach zwierzęcych. Przeznaczony wyłącznie do celów badawczych in vitro i na modelach zwierzęcych.\n\nNr CAS: 2381089-83-2\nMasa molowa: ~5400 Da\nWzór chemiczny: C₂₃₈H₃₇₂N₇₂O₇₅S',
         images: ['./assets/products/retatrutide-1.png', './assets/products/retatrutide-2.jpg', './assets/products/retatrutide-3.jpg']
     },
     {
@@ -14,7 +14,7 @@ const products = [
         dosage: '5mg+5mg',
         price: 219.00,
         stock: 30,
-        description: 'Mieszanka peptydów BPC-157 i TB-500. Popularna w badaniach nad regeneracją tkanek. Sól fizjologiczna w zestawie',
+        description: 'Synergiczna mieszanka dwóch peptydów regeneracyjnych. BPC-157 (Body Protection Compound) to pentadekapeptyd izolowany pierwotnie z soku żołądkowego, wykazujący w badaniach działanie cytoprotekcyjne i proangiogenne. TB-500 (Thymosin Beta-4) to peptyd 43-aminokwasowy zaangażowany w procesy migracji komórek, różnicowania i gojenia ran. Intensywnie badane w modelach zwierzęcych pod kątem regeneracji tkanek miękkich, ścięgien i mięśni. Wyłącznie do badań laboratoryjnych.\n\nBPC-157:\nNr CAS: 137525-51-0\nMasa molowa: 1419.53 g/mol\nWzór: C₆₂H₉₈N₁₆O₂₂\n\nTB-500:\nNr CAS: 77591-33-4\nMasa molowa: 4963.5 g/mol\nWzór: C₂₁₂H₃₅₀N₅₆O₇₈S',
         images: ['./assets/products/bpc-157-tb-500.png']
     },
     {
@@ -23,7 +23,7 @@ const products = [
         dosage: '5mg+5mg',
         price: 219.00,
         stock: 30,
-        description: 'Synergiczne połączenie CJC-1295 (bez DAC) i Ipamoreliny. Badane pod kątem wpływu na wydzielanie hormonu wzrostu. Sól fizjologiczna w zestawie',
+        description: 'Synergiczne połączenie dwóch peptydów wpływających na oś somatotropową. CJC-1295 (bez DAC) to analog GHRH (hormonu uwalniającego hormon wzrostu), który stymuluje przysadkę mózgową do wydzielania GH. Ipamorelin to selektywny agonista receptora ghreliny (GHSR) o minimalnym wpływie na kortyzol i prolaktynę. W badaniach na modelach zwierzęcych wykazano synergistyczne zwiększenie pulsacyjnego wydzielania GH. Wyłącznie do badań przedklinicznych.\n\nCJC-1295:\nNr CAS: 863288-34-0\nMasa molowa: 3367.9 g/mol\nWzór: C₁₅₂H₂₅₂N₄₄O₄₂\n\nIpamorelin:\nNr CAS: 170851-70-4\nMasa molowa: 711.85 g/mol\nWzór: C₃₈H₄₉N₉O₅',
         images: ['./assets/products/cjc-1295-ipamorelin.jpg']
     },
     {
@@ -32,7 +32,7 @@ const products = [
         dosage: '2mg',
         price: 79.00,
         stock: 30,
-        description: 'Fragment hormonu wzrostu (176-191). Badany jako potencjalny środek wpływający na metabolizm tkanki tłuszczowej. Sól fizjologiczna w zestawie',
+        description: 'Fragment 176-191 ludzkiego hormonu wzrostu (hGH) to zmodyfikowany 16-aminokwasowy peptyd odpowiadający C-końcowej części cząsteczki GH. W badaniach przedklinicznych wykazuje aktywność lipolityczną bez wpływu na poziom glukozy i proliferację komórek. Mechanizm działania obejmuje stymulację lipolizy i hamowanie lipogenezy poprzez interakcję z receptorami tkanki tłuszczowej. Badany w modelach otyłości u gryzoni. Wyłącznie do celów badawczych.\n\nNr CAS: 221231-10-3\nMasa molowa: 1817.12 g/mol\nWzór: C₇₈H₁₂₅N₂₃O₂₃S₂',
         images: ['./assets/products/hgh-fragment-176-191.jpg']
     },
     {
@@ -41,7 +41,7 @@ const products = [
         dosage: '50mg',
         price: 179.00,
         stock: 30,
-        description: 'Peptyd miedziowy GHK-Cu. Stosowany w badaniach nad regeneracją skóry i włosów. Sól fizjologiczna w zestawie',
+        description: 'GHK-Cu (Glicylo-L-histydylo-L-lizyna:miedź) to tripeptyd naturalnie występujący w osoczu, ślinie i moczu. Posiada wysokie powinowactwo do jonów miedzi(II). W badaniach in vitro i na modelach zwierzęcych wykazuje właściwości stymulujące syntezę kolagenu, elastyny i glikozaminoglikanów. Badany pod kątem procesów gojenia ran, regeneracji skóry oraz wpływu na angiogenezę i aktywność przeciwzapalną. Wyłącznie do badań laboratoryjnych.\n\nNr CAS: 49557-75-7\nMasa molowa: 403.93 g/mol\nWzór: C₁₄H₂₄CuN₆O₄',
         images: ['./assets/products/ghk-cu.jpg']
     },
     {
@@ -50,7 +50,7 @@ const products = [
         dosage: '10mg',
         price: 99.00,
         stock: 30,
-        description: 'Syntetyczny analog hormonu α-MSH. Badany pod kątem wpływu na pigmentację skóry. Sól fizjologiczna w zestawie',
+        description: 'Melanotan II to syntetyczny cykliczny heptapeptyd, analog naturalnego hormonu α-melanotropiny (α-MSH). Działa jako nieselektywny agonista receptorów melanokortynowych (MC1R-MC5R). W badaniach przedklinicznych wykazuje zdolność do stymulacji melanogenezy (syntezy melaniny w melanocytach) oraz wpływ na zachowania seksualne i apetyt. Badany w modelach zwierzęcych pod kątem fotoprotekcji i pigmentacji. Wyłącznie do celów badawczych.\n\nNr CAS: 121062-08-6\nMasa molowa: 1024.18 g/mol\nWzór: C₅₀H₆₉N₁₅O₉',
         images: ['./assets/products/melanotan-2.jpg']
     },
     {
@@ -59,7 +59,7 @@ const products = [
         dosage: '10mg',
         price: 119.00,
         stock: 30,
-        description: 'Peptyd pochodny Melanotanu II. Badany w kontekście wpływu na funkcje seksualne. Sól fizjologiczna w zestawie',
+        description: 'PT-141 (Bremelanotide) to cykliczny heptapeptyd, metabolit aktywny Melanotanu II. Działa jako selektywny agonista receptorów melanokortynowych MC3R i MC4R w ośrodkowym układzie nerwowym. W badaniach przedklinicznych wykazuje wpływ na szlaki neuralne związane z pobudzeniem seksualnym, działając centralnie bez wpływu na układ naczyniowy. Badany w modelach zwierzęcych pod kątem mechanizmów regulacji funkcji seksualnych. Wyłącznie do badań laboratoryjnych.\n\nNr CAS: 189691-06-3\nMasa molowa: 1025.18 g/mol\nWzór: C₅₀H₆₈N₁₄O₁₀',
         images: ['./assets/products/pt-141.jpg']
     },
     {
@@ -68,7 +68,7 @@ const products = [
         dosage: '10mg',
         price: 139.00,
         stock: 30,
-        description: 'Syntetyczny tetrapeptyd. Badany w kontekście wpływu na telomerazę i potencjalne działanie antystarzeńowe. Sól fizjologiczna w zestawie',
+        description: 'Epithalon (Epitalon) to syntetyczny tetrapeptyd (Ala-Glu-Asp-Gly) będący analogiem Epithalaminu - peptydu produkowanego przez szyszynkę. W badaniach in vitro wykazano jego zdolność do aktywacji telomerazy - enzymu odpowiedzialnego za wydłużanie telomerów. Badania na modelach zwierzęcych sugerują potencjalny wpływ na regulację cyklu dobowego i funkcje neuroendokrynne. Intensywnie badany w kontekście biologii starzenia. Wyłącznie do celów badawczych.\n\nNr CAS: 307297-39-8\nMasa molowa: 390.35 g/mol\nWzór: C₁₄H₂₂N₄O₉',
         images: ['./assets/products/epithalon.jpg']
     },
     {
@@ -77,7 +77,7 @@ const products = [
         dosage: '5mg',
         price: 119.00,
         stock: 30,
-        description: 'Peptyd mitochondrialny. Badany pod kątem wpływu na metabolizm i funkcje mitochondrialne. Sól fizjologiczna w zestawie',
+        description: 'MOTS-c (Mitochondrial Open Reading Frame of the 12S rRNA-c) to 16-aminokwasowy peptyd kodowany przez mitochondrialny DNA. Odkryty w 2015 roku jako nowy regulator metabolizmu. W badaniach przedklinicznych wykazuje zdolność do aktywacji szlaku AMPK, poprawy wrażliwości insulinowej i regulacji homeostazy glukozy. Badany na modelach zwierzęcych pod kątem biologii mitochondrialnej, metabolizmu energetycznego i procesów starzenia. Wyłącznie do badań laboratoryjnych.\n\nNr CAS: 1627580-64-6\nMasa molowa: 2174.67 g/mol\nWzór: C₁₀₁H₁₅₂N₂₈O₂₃S₂',
         images: ['./assets/products/mots-c.jpg']
     },
     {
@@ -86,7 +86,7 @@ const products = [
         dosage: '5mg',
         price: 69.00,
         stock: 30,
-        description: 'Semax to syntetyczny peptyd o właściwościach nootropowych. Badany pod kątem wpływu na funkcje kognitywne i neuroprotekcję. Sól fizjologiczna w zestawie',
+        description: 'Semax to syntetyczny heptapeptyd będący analogiem fragmentu 4-10 hormonu adrenokortykotropowego (ACTH). Został opracowany w Rosji jako neuropeptyd o właściwościach nootropowych. W badaniach przedklinicznych wykazuje działanie neuroprotekcyjne, stymuluje ekspresję BDNF (czynnika neurotroficznego pochodzenia mózgowego) i wpływa na plastyczność synaptyczną. Badany w modelach zwierzęcych pod kątem funkcji kognitywnych i ochrony neuronów. Wyłącznie do celów badawczych.\n\nNr CAS: 80714-61-0\nMasa molowa: 813.93 g/mol\nWzór: C₃₇H₅₁N₉O₁₀',
         images: ['./assets/products/semax.jpg']
     },
     {
@@ -95,7 +95,7 @@ const products = [
         dosage: '5mg',
         price: 99.00,
         stock: 30,
-        description: 'Selank to peptyd anksolityczny, analog tuftsynu. Stosowany w badaniach nad regulacją lęku i stresu. Sól fizjologiczna w zestawie',
+        description: 'Selank to syntetyczny heptapeptyd będący analogiem tuftsynu - naturalnego peptydu immunomodulującego. Opracowany w Instytucie Genetyki Molekularnej Rosyjskiej Akademii Nauk. W badaniach przedklinicznych wykazuje właściwości anksolityczne (przeciwlękowe) bez działania sedatywnego. Wpływa na system GABAergiczny oraz moduluje ekspresję genów związanych z neurotroficznością. Badany w modelach zwierzęcych pod kątem regulacji lęku i funkcji immunologicznych. Wyłącznie do badań laboratoryjnych.\n\nNr CAS: 129954-34-3\nMasa molowa: 751.88 g/mol\nWzór: C₃₃H₅₇N₁₁O₉',
         images: ['./assets/products/selank.jpg']
     }
 ];
