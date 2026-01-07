@@ -501,18 +501,30 @@ body::before {
     z-index: 10;
 }
 
-/* SVG border - HIDDEN by default, fades in on hover */
-.animated-border-rect {
+/* SVG border path - HIDDEN by default */
+.animated-border-path {
     fill: none;
     stroke: #ff0000;
     stroke-width: 1px;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
     opacity: 0;
-    transition: opacity 0.3s ease-out;
 }
 
-/* On hover, show border with fade-in */
-.product-card-wrapper:hover .animated-border-rect {
+/* On hover, trigger drawing animation */
+.product-card-wrapper:hover .animated-border-path {
     opacity: 1;
+    animation: draw-border 0.5s ease-out forwards;
+}
+
+@keyframes draw-border {
+    from {
+        stroke-dashoffset: 400;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 
 /* Product image overlay on hover */
