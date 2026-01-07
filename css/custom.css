@@ -501,35 +501,23 @@ body::before {
     z-index: 10;
 }
 
-/* SVG border - hidden by default */
+/* SVG border - HIDDEN by default using opacity */
 .animated-border-rect {
     fill: none;
     stroke: #ff0000;
     stroke-width: 0.8px;
     stroke-dasharray: 400;
-    /* Approx perimeter of 100x100 rect is 400 */
     stroke-dashoffset: 400;
-    /* Start hidden */
-    transition: stroke-dashoffset 0s;
-    /* Reset instantly */
+    stroke-opacity: 0;
+    /* HIDDEN by default */
+    transition: none;
 }
 
-/* On hover, animate drawing relative to self */
+/* On hover, show and animate drawing */
 .product-card-wrapper:hover .animated-border-rect {
+    stroke-opacity: 1;
     stroke-dashoffset: 0;
-    transition: stroke-dashoffset 0.5s ease-out;
-}
-
-/* Ensure hidden when not hovered */
-.product-card-wrapper:not(:hover) .animated-border-rect {
-    stroke-dashoffset: 400;
-    transition: stroke-dashoffset 0s;
-}
-
-/* When not hovering, reset instantly */
-.product-card-wrapper:not(:hover) .animated-border-rect {
-    stroke-dashoffset: 400;
-    transition: stroke-dashoffset 0s;
+    transition: stroke-dashoffset 0.5s ease-out, stroke-opacity 0s;
 }
 
 /* Product image overlay on hover */

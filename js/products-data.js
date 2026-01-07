@@ -45,7 +45,7 @@ const products = [
         cas: '303760-60-3',
         molarMass: '290.32 g/mol',
         formula: 'C₁₈H₁₄N₂O₂',
-        images: []
+        images: ['./assets/products/slu-pp-332.png']
     },
     {
         id: 'ghk-cu',
@@ -141,7 +141,7 @@ const products = [
         cas: '221231-10-3',
         molarMass: '1815.1 g/mol',
         formula: 'C₇₈H₁₂₃N₂₃O₂₃S₂',
-        images: []
+        images: ['./assets/products/aod9604.png']
     },
     {
         id: 'bac-water',
