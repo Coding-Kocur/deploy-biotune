@@ -506,8 +506,8 @@ body::before {
     fill: none;
     stroke: #ff0000;
     stroke-width: 0.8px;
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
     stroke-opacity: 0;
     /* HIDDEN by default */
     transition: none;

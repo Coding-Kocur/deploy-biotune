@@ -125,6 +125,16 @@
                 window.addToCart(product);
             }
 
+            // Check if BAC Water checkbox is checked
+            const bacWaterCheckbox = document.getElementById('add-bac-water');
+            if (bacWaterCheckbox && bacWaterCheckbox.checked) {
+                const bacWaterProduct = window.productsData.find(p => p.id === 'bac-water');
+                if (bacWaterProduct && bacWaterProduct.stock > 0) {
+                    window.addToCart(bacWaterProduct);
+                }
+                bacWaterCheckbox.checked = false; // Reset checkbox
+            }
+
             // Visual feedback
             const originalText = addToCartBtn.innerHTML;
             addToCartBtn.innerHTML = `
