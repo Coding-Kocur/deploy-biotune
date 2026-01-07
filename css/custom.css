@@ -504,9 +504,9 @@ body::before {
 .animated-border-rect {
     fill: none;
     stroke: #ff0000;
-    stroke-width: 1;
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
+    stroke-width: 0.5;
+    stroke-dasharray: 800;
+    stroke-dashoffset: 800;
     transition: stroke-dashoffset 0s;
 }
 
@@ -518,7 +518,7 @@ body::before {
 
 /* When not hovering, reset instantly */
 .product-card-wrapper:not(:hover) .animated-border-rect {
-    stroke-dashoffset: 400;
+    stroke-dashoffset: 800;
     transition: stroke-dashoffset 0s;
 }
 
