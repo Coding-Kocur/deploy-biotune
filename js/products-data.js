@@ -153,7 +153,7 @@ const products = [
         cas: null,
         molarMass: null,
         formula: null,
-        images: ['./assets/products/bac-water.jpg']
+        images: ['./assets/products/bac-water.png']
     }
 ];
 
