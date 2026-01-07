@@ -504,7 +504,7 @@ body::before {
 .animated-border-rect {
     fill: none;
     stroke: #ff0000;
-    stroke-width: 1;
+    stroke-width: 0.5;
     stroke-dasharray: 400;
     stroke-dashoffset: 400;
     transition: stroke-dashoffset 0s;
