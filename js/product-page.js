@@ -19,23 +19,18 @@
     document.getElementById('product-price').textContent = product.price.toFixed(2);
     document.getElementById('product-stock').textContent = product.stock;
 
-    // Build description with separate parameters and product purpose
-    let fullDescription = product.description;
+    // Set description (without PRZEZNACZENIE - that's in the red box already)
+    document.getElementById('product-description').textContent = product.description;
 
-    // Add product purpose
-    if (window.PRODUCT_PURPOSE) {
-        fullDescription += '\n\n📋 PRZEZNACZENIE PRODUKTU:\n' + window.PRODUCT_PURPOSE;
+    // Add chemical parameters as bullet points in separate div
+    const paramsDiv = document.getElementById('product-params');
+    if (paramsDiv && (product.cas || product.molarMass || product.formula)) {
+        let paramsHTML = '';
+        if (product.cas) paramsHTML += `<p>• <strong>Nr CAS:</strong> ${product.cas}</p>`;
+        if (product.molarMass) paramsHTML += `<p>• <strong>Masa molowa:</strong> ${product.molarMass}</p>`;
+        if (product.formula) paramsHTML += `<p>• <strong>Wzór chemiczny:</strong> ${product.formula}</p>`;
+        paramsDiv.innerHTML = paramsHTML;
     }
-
-    // Add chemical parameters as separate section
-    if (product.cas || product.molarMass || product.formula) {
-        fullDescription += '\n\n📊 PARAMETRY CHEMICZNE:';
-        if (product.cas) fullDescription += '\n• Nr CAS: ' + product.cas;
-        if (product.molarMass) fullDescription += '\n• Masa molowa: ' + product.molarMass;
-        if (product.formula) fullDescription += '\n• Wzór chemiczny: ' + product.formula;
-    }
-
-    document.getElementById('product-description').textContent = fullDescription;
 
     // Set up image gallery with zoom
     const mainImage = document.getElementById('main-image');
