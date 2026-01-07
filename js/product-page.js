@@ -18,7 +18,24 @@
     document.getElementById('product-dosage').textContent = product.dosage;
     document.getElementById('product-price').textContent = product.price.toFixed(2);
     document.getElementById('product-stock').textContent = product.stock;
-    document.getElementById('product-description').textContent = product.description;
+
+    // Build description with separate parameters and product purpose
+    let fullDescription = product.description;
+
+    // Add product purpose
+    if (window.PRODUCT_PURPOSE) {
+        fullDescription += '\n\n📋 PRZEZNACZENIE PRODUKTU:\n' + window.PRODUCT_PURPOSE;
+    }
+
+    // Add chemical parameters as separate section
+    if (product.cas || product.molarMass || product.formula) {
+        fullDescription += '\n\n📊 PARAMETRY CHEMICZNE:';
+        if (product.cas) fullDescription += '\n• Nr CAS: ' + product.cas;
+        if (product.molarMass) fullDescription += '\n• Masa molowa: ' + product.molarMass;
+        if (product.formula) fullDescription += '\n• Wzór chemiczny: ' + product.formula;
+    }
+
+    document.getElementById('product-description').textContent = fullDescription;
 
     // Set up image gallery with zoom
     const mainImage = document.getElementById('main-image');
