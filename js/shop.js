@@ -31,10 +31,10 @@ function renderGrid(filterText = '') {
         <div class="product-card-wrapper relative cursor-pointer" 
              style="animation-delay: ${index * 50}ms"
              onclick="handleCardClick(event, '${product.id}')">
-            <!-- Animated border container -->
-            <div class="animated-border-container">
-                <div class="animated-border"></div>
-            </div>
+            <!-- Animated SVG border -->
+            <svg class="animated-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <rect class="animated-border-rect" x="0.5" y="0.5" width="99" height="99" rx="6" ry="6"/>
+            </svg>
             
             <div class="bg-[#151515] shadow-lg hover:shadow-2xl p-4 rounded-xl relative group product-card transition-all duration-300 hover:-translate-y-1">
                 <div class="aspect-square bg-black/50 rounded-lg mb-4 overflow-hidden border border-white/5 relative">

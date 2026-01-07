@@ -491,60 +491,35 @@ body::before {
     overflow: visible;
 }
 
-/* Animated border using conic gradient for clockwise draw effect */
-.animated-border-container {
+/* SVG border that draws around the card */
+.animated-border-svg {
     position: absolute;
-    inset: -1.5px;
-    border-radius: 0.85rem;
+    inset: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
     pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.15s ease;
+    z-index: 10;
 }
 
-.product-card-wrapper:hover .animated-border-container {
-    opacity: 1;
+.animated-border-rect {
+    fill: none;
+    stroke: #ff0000;
+    stroke-width: 1.5;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    transition: stroke-dashoffset 0s;
 }
 
-/* The border element with conic gradient - draws clockwise */
-.animated-border {
-    position: absolute;
-    inset: 0;
-    border-radius: 0.85rem;
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    padding: 1.5px;
-    --progress: 0;
-    background: conic-gradient(from -90deg, #ff0000 calc(var(--progress) * 100%), transparent calc(var(--progress) * 100%));
-}
-
-/* On hover, animate the border drawing clockwise smoothly */
-.product-card-wrapper:hover .animated-border {
-    animation: draw-border-smooth 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+/* On hover, animate the stroke drawing clockwise */
+.product-card-wrapper:hover .animated-border-rect {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.5s ease-out;
 }
 
 /* When not hovering, reset instantly */
-.product-card-wrapper:not(:hover) .animated-border {
-    animation: none;
-    --progress: 0;
-    background: conic-gradient(from -90deg, #ff0000 0%, transparent 0%);
-}
-
-@keyframes draw-border-smooth {
-    from {
-        --progress: 0;
-        background: conic-gradient(from -90deg, #ff0000 0%, transparent 0%);
-    }
-
-    to {
-        --progress: 1;
-        background: conic-gradient(from -90deg, #ff0000 100%, transparent 100%);
-    }
+.product-card-wrapper:not(:hover) .animated-border-rect {
+    stroke-dashoffset: 400;
+    transition: stroke-dashoffset 0s;
 }
 
 /* Product image overlay on hover */
