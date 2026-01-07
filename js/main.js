@@ -96,10 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function addToCart(product) {
+    // Check if product is in stock
+    if (!product || product.stock === 0) {
+        console.log('Cannot add product to cart: out of stock');
+        return false;
+    }
+
     window.cart.push(product);
     localStorage.setItem('biotune_cart', JSON.stringify(window.cart));
     updateCart();
     window.openCart();
+    return true;
 }
 
 function removeFromCart(index) {
@@ -256,17 +263,19 @@ class WishlistManager {
                          class="w-10 h-10 object-cover rounded-md">
                     <div class="min-w-0">
                         <h4 class="text-sm font-medium text-black dark:text-white truncate group-hover/item:text-biotune-red transition-colors">${product.name}</h4>
-                        <p class="text-xs text-biotune-red font-bold">${product.price.toFixed(2)} zł</p>
+                        <p class="text-xs ${product.stock > 0 ? 'text-biotune-red' : 'text-gray-400'} font-bold">${product.stock > 0 ? product.price.toFixed(2) + ' zł' : 'Brak w magazynie'}</p>
                     </div>
                 </a>
                 <div class="flex items-center gap-1">
+                    ${product.stock > 0 ? `
                     <button onclick="window.addToCart(window.productsData.find(p => p.id === '${product.id}'))" 
                             class="text-gray-400 hover:text-biotune-red transition-colors p-1"
                             title="Dodaj do koszyka">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a .375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                         </svg>
                     </button>
+                    ` : ''}
                     <button onclick="window.wishlistManager.remove('${product.id}')" class="text-gray-400 hover:text-red-500 transition-colors p-1" title="Usuń z listy życzeń">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
