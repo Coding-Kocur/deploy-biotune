@@ -519,38 +519,30 @@ body::before {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     padding: 1.5px;
-    background: conic-gradient(from -90deg, transparent 0%, transparent 100%);
+    --progress: 0;
+    background: conic-gradient(from -90deg, #ff0000 calc(var(--progress) * 100%), transparent calc(var(--progress) * 100%));
 }
 
-/* On hover, animate the border drawing clockwise very fast */
+/* On hover, animate the border drawing clockwise smoothly */
 .product-card-wrapper:hover .animated-border {
-    animation: draw-border-clockwise 0.4s ease-out forwards;
+    animation: draw-border-smooth 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* When not hovering, reset */
+/* When not hovering, reset instantly */
 .product-card-wrapper:not(:hover) .animated-border {
     animation: none;
-    background: conic-gradient(from -90deg, transparent 0%, transparent 100%);
+    --progress: 0;
+    background: conic-gradient(from -90deg, #ff0000 0%, transparent 0%);
 }
 
-@keyframes draw-border-clockwise {
-    0% {
+@keyframes draw-border-smooth {
+    from {
+        --progress: 0;
         background: conic-gradient(from -90deg, #ff0000 0%, transparent 0%);
     }
 
-    25% {
-        background: conic-gradient(from -90deg, #ff0000 25%, transparent 25%);
-    }
-
-    50% {
-        background: conic-gradient(from -90deg, #ff0000 50%, transparent 50%);
-    }
-
-    75% {
-        background: conic-gradient(from -90deg, #ff0000 75%, transparent 75%);
-    }
-
-    100% {
+    to {
+        --progress: 1;
         background: conic-gradient(from -90deg, #ff0000 100%, transparent 100%);
     }
 }
