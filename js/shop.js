@@ -33,7 +33,7 @@ function renderGrid(filterText = '') {
              onclick="handleCardClick(event, '${product.id}')">
             <!-- Animated SVG border -->
             <svg class="animated-border-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <rect class="animated-border-rect" x="0.5" y="0.5" width="99" height="99" rx="6" ry="6"/>
+                <rect class="animated-border-rect" x="0.5" y="0.5" width="99" height="99" rx="6" ry="6" vector-effect="non-scaling-stroke"/>
             </svg>
             
             <div class="bg-[#151515] shadow-lg hover:shadow-2xl p-4 rounded-xl relative group product-card transition-all duration-300 hover:-translate-y-1">
