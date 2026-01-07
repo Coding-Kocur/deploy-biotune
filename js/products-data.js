@@ -57,7 +57,7 @@ const products = [
         cas: '49557-75-7',
         molarMass: '403.93 g/mol',
         formula: 'C₁₄H₂₄CuN₆O₄',
-        images: ['./assets/products/ghk-cu.jpg']
+        images: ['./assets/products/ghk-cu.png']
     },
     {
         id: 'melanotan-2',
