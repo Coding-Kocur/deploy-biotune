@@ -44,14 +44,12 @@ function renderGrid(filterText = '') {
                         <span class="product-overlay-name text-biotune-red font-bold text-xl text-center px-4">${product.name}</span>
                     </div>
                 </div>
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h3 class="text-lg font-bold text-white group-hover:text-biotune-red transition-colors">${product.name}</h3>
-                        <p class="text-sm text-gray-400">${product.dosage || ''}</p>
+                <div class="mb-3">
+                    <div class="flex justify-between items-start gap-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-biotune-red transition-colors leading-tight flex-1">${product.name}</h3>
+                        <span class="font-mono text-biotune-red font-bold text-lg whitespace-nowrap">${product.price.toFixed(2)} zł</span>
                     </div>
-                    <div class="flex flex-col items-end">
-                        <span class="font-mono text-biotune-red font-bold text-lg">${product.price.toFixed(2)} zł</span>
-                    </div>
+                    <p class="text-sm text-gray-400 mt-1">${product.dosage || ''}</p>
                 </div>
                 <div class="flex gap-2 mt-4">
                     <button onclick="handleGridAddToCart(event, '${product.id}')" class="flex-1 bg-biotune-red hover:bg-red-600 text-white font-bold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-[0_0_15px_rgba(255,0,0,0.4)]">
