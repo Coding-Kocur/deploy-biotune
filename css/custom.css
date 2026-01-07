@@ -489,42 +489,13 @@ body::before {
     position: relative;
     border-radius: 0.75rem;
     overflow: visible;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease-out;
 }
 
-/* SVG border that draws around the card */
-.animated-border-svg {
-    position: absolute;
-    inset: -1px;
-    width: calc(100% + 2px);
-    height: calc(100% + 2px);
-    pointer-events: none;
-    z-index: 10;
-}
-
-/* SVG border path - HIDDEN by default */
-.animated-border-path {
-    fill: none;
-    stroke: #ff0000;
-    stroke-width: 1px;
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
-    opacity: 0;
-}
-
-/* On hover, trigger drawing animation */
-.product-card-wrapper:hover .animated-border-path {
-    opacity: 1;
-    animation: draw-border 0.5s ease-out forwards;
-}
-
-@keyframes draw-border {
-    from {
-        stroke-dashoffset: 400;
-    }
-
-    to {
-        stroke-dashoffset: 0;
-    }
+/* On hover, show red border */
+.product-card-wrapper:hover {
+    border-color: #ff0000;
 }
 
 /* Product image overlay on hover */

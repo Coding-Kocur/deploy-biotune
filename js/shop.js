@@ -31,10 +31,6 @@ function renderGrid(filterText = '') {
         <div class="product-card-wrapper relative cursor-pointer" 
              style="animation-delay: ${index * 50}ms"
              onclick="handleCardClick(event, '${product.id}')">
-            <!-- Animated SVG border using path for reliable animation -->
-            <svg class="animated-border-svg" preserveAspectRatio="none" viewBox="0 0 100 100">
-                <path class="animated-border-path" d="M6,0.5 L94,0.5 Q99.5,0.5 99.5,6 L99.5,94 Q99.5,99.5 94,99.5 L6,99.5 Q0.5,99.5 0.5,94 L0.5,6 Q0.5,0.5 6,0.5 Z" vector-effect="non-scaling-stroke"/>
-            </svg>
             
             <div class="bg-[#151515] shadow-lg hover:shadow-2xl p-4 rounded-xl relative group product-card transition-all duration-300 hover:-translate-y-1">
                 <div class="aspect-square bg-black/50 rounded-lg mb-4 overflow-hidden border border-white/5 relative">
@@ -70,9 +66,9 @@ function renderGrid(filterText = '') {
                         </svg>
                     </button>
                 </div>
-            </div>
-        </div>
-        `;
+            </div >
+        </div >
+            `;
     }).join('');
 
     // Animate cards in
@@ -86,7 +82,7 @@ function handleCardClick(event, productId) {
         return;
     }
 
-    window.location.href = `product.html?id=${productId}`;
+    window.location.href = `product.html ? id = ${productId} `;
 }
 
 // Handle add to cart button - stop propagation to prevent card click
