@@ -69,50 +69,77 @@
     const quantityInput = document.getElementById('quantity');
     const decreaseBtn = document.getElementById('decrease-qty');
     const increaseBtn = document.getElementById('increase-qty');
-
-    decreaseBtn.addEventListener('click', () => {
-        const currentValue = parseInt(quantityInput.value);
-        if (currentValue > 1) {
-            quantityInput.value = currentValue - 1;
-        }
-    });
-
-    increaseBtn.addEventListener('click', () => {
-        const currentValue = parseInt(quantityInput.value);
-        if (currentValue < product.stock) {
-            quantityInput.value = currentValue + 1;
-        }
-    });
-
-    quantityInput.addEventListener('input', () => {
-        let value = parseInt(quantityInput.value);
-        if (isNaN(value) || value < 1) value = 1;
-        if (value > product.stock) value = product.stock;
-        quantityInput.value = value;
-    });
-
-    // Add to cart
     const addToCartBtn = document.getElementById('add-to-cart-btn');
-    addToCartBtn.addEventListener('click', () => {
-        const quantity = parseInt(quantityInput.value);
-        for (let i = 0; i < quantity; i++) {
-            window.addToCart(product);
+    const stockInfoDiv = document.getElementById('stock-info');
+
+    if (product.stock === 0) {
+        // Out of stock state
+        quantityInput.disabled = true;
+        decreaseBtn.disabled = true;
+        increaseBtn.disabled = true;
+
+        addToCartBtn.disabled = true;
+        addToCartBtn.innerHTML = '<span>Produkt niedostępny</span>';
+        addToCartBtn.classList.remove('bg-biotune-red', 'hover:bg-red-700', 'hover:shadow-lg', 'hover:shadow-red-500/30');
+        addToCartBtn.classList.add('bg-gray-600', 'opacity-50', 'cursor-not-allowed');
+
+        // Update stock info to grey
+        if (stockInfoDiv) {
+            stockInfoDiv.className = 'inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-500/10 border border-gray-500/20';
+            stockInfoDiv.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                </svg>
+                <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                    Brak w magazynie
+                </span>
+            `;
         }
+    } else {
+        // Active state event listeners
+        decreaseBtn.addEventListener('click', () => {
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
 
-        // Visual feedback
-        const originalText = addToCartBtn.innerHTML;
-        addToCartBtn.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span>Dodano do koszyka!</span>
-        `;
+        increaseBtn.addEventListener('click', () => {
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue < product.stock) {
+                quantityInput.value = currentValue + 1;
+            }
+        });
 
-        setTimeout(() => {
-            addToCartBtn.innerHTML = originalText;
-            quantityInput.value = 1;
-        }, 2000);
-    });
+        quantityInput.addEventListener('input', () => {
+            let value = parseInt(quantityInput.value);
+            if (isNaN(value) || value < 1) value = 1;
+            if (value > product.stock) value = product.stock;
+            quantityInput.value = value;
+        });
+
+        // Add to cart
+        addToCartBtn.addEventListener('click', () => {
+            const quantity = parseInt(quantityInput.value);
+            for (let i = 0; i < quantity; i++) {
+                window.addToCart(product);
+            }
+
+            // Visual feedback
+            const originalText = addToCartBtn.innerHTML;
+            addToCartBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Dodano do koszyka!</span>
+            `;
+
+            setTimeout(() => {
+                addToCartBtn.innerHTML = originalText;
+                quantityInput.value = 1;
+            }, 2000);
+        });
+    }
 
     // Load reviews
     loadReviews(product);
