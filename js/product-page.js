@@ -3,13 +3,13 @@
     const productId = urlParams.get('id');
 
     if (!productId || !window.productsData) {
-        window.location.href = 'index.html#shop';
+        window.location.href = 'shop.html';
         return;
     }
 
     const product = window.productsData.find(p => p.id === productId);
     if (!product) {
-        window.location.href = 'index.html#shop';
+        window.location.href = 'shop.html';
         return;
     }
 

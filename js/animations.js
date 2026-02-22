@@ -86,146 +86,148 @@ function initAnimations() {
     const typewriterTextEl = document.getElementById("typewriter-text");
     const headlineContainer = document.getElementById("about-headline-container");
 
-    // Store completed lines
-    const completedLines = [];
+    if (headlineContainer) {
+        // Store completed lines
+        const completedLines = [];
 
-    const typewriterLines = [
-        {
-            text: "Precyzja w każdym mikrogramie.",
-            trigger: "top top"
-        },
-        {
-            text: "Nowa era badań nad peptydami.",
-            trigger: "15% top"
-        },
-        {
-            text: "Każdy miligram ma znaczenie.",
-            trigger: "25% top"
-        }
-    ];
+        const typewriterLines = [
+            {
+                text: "Precyzja w każdym mikrogramie.",
+                trigger: "top top"
+            },
+            {
+                text: "Nowa era badań nad peptydami.",
+                trigger: "15% top"
+            },
+            {
+                text: "Każdy miligram ma znaczenie.",
+                trigger: "25% top"
+            }
+        ];
 
-    typewriterLines.forEach((line, index) => {
-        const proxy = { val: 0 };
-        let lineCompleted = false;
+        typewriterLines.forEach((line, index) => {
+            const proxy = { val: 0 };
+            let lineCompleted = false;
 
-        gsap.to(proxy, {
-            val: line.text.length,
-            duration: line.text.length * 0.05,
-            ease: "none",
+            gsap.to(proxy, {
+                val: line.text.length,
+                duration: line.text.length * 0.05,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: line.trigger,
+                    toggleActions: "play none none none",
+                    once: true,
+                    onEnter: () => {
+                        // Start typing animation
+                        const typingInterval = setInterval(() => {
+                            if (proxy.val >= line.text.length) {
+                                clearInterval(typingInterval);
+                                completedLines.push(line.text);
+                                lineCompleted = true;
+                                return;
+                            }
+                            proxy.val += 1;
+                            if (typewriterTextEl) {
+                                typewriterTextEl.textContent = line.text.substring(0, Math.floor(proxy.val));
+                            }
+                        }, 50); // 50ms per character
+                    }
+                }
+            });
+        });
+
+        // Scroll the headline container up as user scrolls
+        gsap.to("#about-headline-container", {
+            y: -200,
             scrollTrigger: {
                 trigger: "#about",
-                start: line.trigger,
-                toggleActions: "play none none none",
-                once: true,
-                onEnter: () => {
-                    // Start typing animation
-                    const typingInterval = setInterval(() => {
-                        if (proxy.val >= line.text.length) {
-                            clearInterval(typingInterval);
-                            completedLines.push(line.text);
-                            lineCompleted = true;
-                            return;
-                        }
-                        proxy.val += 1;
-                        if (typewriterTextEl) {
-                            typewriterTextEl.textContent = line.text.substring(0, Math.floor(proxy.val));
-                        }
-                    }, 50); // 50ms per character
-                }
+                start: "20% top",
+                end: "40% top",
+                scrub: 1 // Smooth scrolling with user's scroll
             }
         });
-    });
 
-    // Scroll the headline container up as user scrolls
-    gsap.to("#about-headline-container", {
-        y: -200,
-        scrollTrigger: {
-            trigger: "#about",
-            start: "20% top",
-            end: "40% top",
-            scrub: 1 // Smooth scrolling with user's scroll
-        }
-    });
-
-    // Fade out headline at certain point
-    gsap.to("#about-headline-container", {
-        opacity: 0,
-        scrollTrigger: {
-            trigger: "#about",
-            start: "35% top",
-            end: "45% top",
-            scrub: 1,
-            toggleActions: "play none none reverse" // Allow reverse
-        }
-    });
-
-    // Fade in first paragraph
-    gsap.fromTo("#about-p1",
-        { opacity: 0, y: 50 },
-        {
-            opacity: 1,
-            y: 0,
+        // Fade out headline at certain point
+        gsap.to("#about-headline-container", {
+            opacity: 0,
             scrollTrigger: {
                 trigger: "#about",
-                start: "40% top",
-                end: "50% top",
+                start: "35% top",
+                end: "45% top",
+                scrub: 1,
+                toggleActions: "play none none reverse" // Allow reverse
+            }
+        });
+
+        // Fade in first paragraph
+        gsap.fromTo("#about-p1",
+            { opacity: 0, y: 50 },
+            {
+                opacity: 1,
+                y: 0,
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "40% top",
+                    end: "50% top",
+                    scrub: 1,
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+
+        // Transition to microscope
+        gsap.to("#sequence-canvas", {
+            opacity: 0,
+            scrollTrigger: {
+                trigger: "#about",
+                start: "60% top",
+                end: "70% top",
                 scrub: 1,
                 toggleActions: "play none none reverse"
             }
-        }
-    );
+        });
 
-    // Transition to microscope
-    gsap.to("#sequence-canvas", {
-        opacity: 0,
-        scrollTrigger: {
-            trigger: "#about",
-            start: "60% top",
-            end: "70% top",
-            scrub: 1,
-            toggleActions: "play none none reverse"
-        }
-    });
-
-    gsap.to("#microscope-bg", {
-        opacity: 1,
-        scrollTrigger: {
-            trigger: "#about",
-            start: "60% top",
-            end: "70% top",
-            scrub: 1,
-            toggleActions: "play none none reverse"
-        }
-    });
-
-    // Fade out first paragraph
-    gsap.to("#about-p1", {
-        opacity: 0,
-        y: -50,
-        scrollTrigger: {
-            trigger: "#about",
-            start: "65% top",
-            end: "75% top",
-            scrub: 1,
-            toggleActions: "play none none reverse"
-        }
-    });
-
-    // Fade in second paragraph
-    gsap.fromTo("#about-p2",
-        { opacity: 0, y: 50 },
-        {
+        gsap.to("#microscope-bg", {
             opacity: 1,
-            y: 0,
             scrollTrigger: {
                 trigger: "#about",
-                start: "75% top",
-                end: "85% top",
+                start: "60% top",
+                end: "70% top",
                 scrub: 1,
                 toggleActions: "play none none reverse"
             }
-        }
-    );
+        });
+
+        // Fade out first paragraph
+        gsap.to("#about-p1", {
+            opacity: 0,
+            y: -50,
+            scrollTrigger: {
+                trigger: "#about",
+                start: "65% top",
+                end: "75% top",
+                scrub: 1,
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // Fade in second paragraph
+        gsap.fromTo("#about-p2",
+            { opacity: 0, y: 50 },
+            {
+                opacity: 1,
+                y: 0,
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "75% top",
+                    end: "85% top",
+                    scrub: 1,
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    }
 
     // Input animations
     const inputs = document.querySelectorAll('input, textarea');

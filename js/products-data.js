@@ -13,7 +13,7 @@ const products = [
     },
     {
         id: 'bpc-157-tb-500',
-        name: 'BPC-157 + TB-500',
+        name: 'BPC-157 + TB\u2011500',
         dosage: '5mg+5mg',
         price: 159.00,
         stock: 30,
@@ -33,7 +33,7 @@ const products = [
         cas: '863288-34-0 / 170851-70-4',
         molarMass: '3367.9 / 711.85 g/mol',
         formula: 'C₁₅₂H₂₅₂N₄₄O₄₂ / C₃₈H₄₉N₉O₅',
-        images: ['./assets/products/cjc-1295-ipamorelin.jpg']
+        images: ['./assets/products/cjc-1295-ipamorelin.png']
     },
     {
         id: 'slu-pp-332',
@@ -69,7 +69,7 @@ const products = [
         cas: '121062-08-6',
         molarMass: '1024.18 g/mol',
         formula: 'C₅₀H₆₉N₁₅O₉',
-        images: ['./assets/products/melanotan-2.jpg']
+        images: ['./assets/products/melanotan-2.png']
     },
     {
         id: 'pt-141',
@@ -81,7 +81,7 @@ const products = [
         cas: '189691-06-3',
         molarMass: '1025.18 g/mol',
         formula: 'C₅₀H₆₈N₁₄O₁₀',
-        images: ['./assets/products/pt-141.jpg']
+        images: ['./assets/products/pt-141.png']
     },
     {
         id: 'epithalon',
@@ -93,7 +93,7 @@ const products = [
         cas: '307297-39-8',
         molarMass: '390.35 g/mol',
         formula: 'C₁₄H₂₂N₄O₉',
-        images: ['./assets/products/epithalon.jpg']
+        images: ['./assets/products/epithalon.png']
     },
     {
         id: 'mots-c',
@@ -105,7 +105,7 @@ const products = [
         cas: '1627580-64-6',
         molarMass: '2174.67 g/mol',
         formula: 'C₁₀₁H₁₅₂N₂₈O₂₃S₂',
-        images: ['./assets/products/mots-c.jpg']
+        images: ['./assets/products/mots-c.png']
     },
     {
         id: 'semax',
@@ -117,7 +117,7 @@ const products = [
         cas: '80714-61-0',
         molarMass: '813.93 g/mol',
         formula: 'C₃₇H₅₁N₉O₁₀',
-        images: ['./assets/products/semax.jpg']
+        images: ['./assets/products/semax.png']
     },
     {
         id: 'selank',
@@ -129,7 +129,7 @@ const products = [
         cas: '129954-34-3',
         molarMass: '751.88 g/mol',
         formula: 'C₃₃H₅₇N₁₁O₉',
-        images: ['./assets/products/selank.jpg']
+        images: ['./assets/products/selank.png']
     },
     {
         id: 'aod9604',
@@ -158,7 +158,7 @@ const products = [
 ];
 
 // Product purpose (displayed on product pages)
-const PRODUCT_PURPOSE = 'Oferowane substancje są odczynnikami chemicznymi analitycznymi, przeznaczonymi wyłącznie do zastosowań badawczych in vitro. Produkt nie jest produktem leczniczym, środkiem spożywczym, suplementem diety ani kosmetykiem. Produkt nie nadaje się do użycia u ludzi i zwierzęt.';
+const PRODUCT_PURPOSE = 'Oferowane substancje są odczynnikami chemicznymi analitycznymi, przeznaczonymi wyłącznie do zastosowań badawczych in vitro. Produkt nie jest produktem leczniczym, środkiem spożywczym, suplementem diety ani kosmetykiem. Produkt nie jest przeznaczony do użycia u ludzi i zwierząt.';
 
 window.productsData = products;
 window.PRODUCT_PURPOSE = PRODUCT_PURPOSE;

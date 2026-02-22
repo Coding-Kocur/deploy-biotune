@@ -140,8 +140,11 @@
             <div class="flex items-center justify-between h-24">
                 <!-- Left: Navigation Links -->
                 <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
+                        główna</a>
                     <div class="dropdown-trigger">
-                        <a href="#shop"
+                        <a href="shop.html"
                             class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
                             Sklep
                             <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -153,7 +156,7 @@
                         </a>
                         <div class="dropdown-menu">
                             <div class="py-1 max-h-80 overflow-y-auto">
-                                <a href="index.html#shop" onclick="scrollToProducts(event)"
+                                <a href="shop.html" onclick="/* removed scrollToProducts */"
                                     class="block px-4 py-2 text-sm font-semibold text-biotune-red dark:text-biotune-red hover:bg-gray-100 dark:hover:bg-black/20 border-b border-gray-200 dark:border-white/10">Wszystkie</a>
                                 <a href="product.html?id=retatrutide"
                                     class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Retatrutide</a>
@@ -231,26 +234,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Theme toggle with tooltip -->
-                    <div class="relative group">
-                        <button id="theme-toggle"
-                            class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-                            <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden dark:block">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-                            </svg>
-                            <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 block dark:hidden">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-                            </svg>
-                        </button>
-                        <div
-                            class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-biotune-red text-white text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">
-                            Zmień tryb
-                        </div>
-                    </div>
                     <div class="relative group flex items-center">
                         <button id="wishlist-trigger" class="relative hover:text-biotune-red transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -292,38 +275,124 @@
         </div>
     </nav>
 
-    <section id="shop" class="pt-28 pb-12 min-h-screen relative snap-start flex flex-col justify-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <!-- Light mode hero logo -->
-            <img src="./assets/biotune-logo-transparent.png" alt="BioTune"
-                class="w-full max-w-2xl mx-auto mb-2 block dark:hidden">
-            <!-- Dark mode hero logo -->
-            <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                class="w-full max-w-2xl mx-auto mb-2 hidden dark:block">
+    <!-- Content Blur Overlay for scroll effect -->
+    <div class="content-blur-overlay" id="content-blur"></div>
 
-            <!-- New Motto with Typewriter Animation -->
-            <div class="mb-8">
-                <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-light">
-                    <span id="motto-text"></span><span class="cursor-blink text-biotune-red">|</span>
+    <section id="hero" class="pt-44 pb-12 min-h-screen relative snap-start flex flex-col justify-center">
+        <div class="w-[95%] max-w-screen-2xl mx-auto px-4 sm:px-6 text-center">
+            <!-- Typewriter Taglines -->
+            <div class="h-40 md:h-64 mb-12 flex flex-col items-start justify-center gap-4 md:gap-6 text-left">
+                <p id="typewriter-text-1"
+                    class="text-3xl md:text-5xl lg:text-7xl text-gray-300 font-bold tracking-tight h-10 md:h-16 lg:h-20">
+                </p>
+                <p id="typewriter-text-2"
+                    class="text-3xl md:text-5xl lg:text-7xl text-gray-300 font-bold tracking-tight h-10 md:h-16 lg:h-20">
+                </p>
+                <p id="typewriter-text-3"
+                    class="text-3xl md:text-5xl lg:text-7xl text-biotune-red font-bold tracking-tight h-10 md:h-16 lg:h-20">
                 </p>
             </div>
 
-            <!-- Mission Description -->
-            <div class="max-w-4xl mx-auto mb-16">
-                <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg leading-relaxed">
-                    Jako BioTune naszą misją jest wspieranie innowacji w badaniach nad peptydami. Dostarczamy odczynniki
-                    chemiczne o wysokiej czystości i najwyższej jakości, przeznaczone wyłącznie do profesjonalnych
-                    zastosowań laboratoryjnych. Każda partia podlega rygorystycznej kontroli jakości, aby zapewnić
-                    rzetelność i powtarzalność wyników.
-                </p>
+            <!-- Hero Image Carousel -->
+            <div id="hero-carousel"
+                class="relative w-full max-w-[95%] mx-auto h-[400px] md:h-[500px] rounded-2xl overflow-hidden mb-6 border border-white/10">
+                <div class="carousel-slide active" style="background-image: url('./assets/hero/slide-1.jpg')"></div>
+                <div class="carousel-slide" style="background-image: url('./assets/hero/slide-2.png')"></div>
+                <div class="carousel-slide" style="background-image: url('./assets/hero/slide-3.jpg')"></div>
+                <div class="carousel-slide" style="background-image: url('./assets/hero/slide-4.png')"></div>
+                <!-- Gradient overlay for better readability -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-biotune-black/60 via-transparent to-transparent pointer-events-none">
+                </div>
             </div>
 
-            <div id="product-grid"
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 text-left"></div>
+            <!-- Progress Bars -->
+            <div id="carousel-progress" class="flex gap-3 justify-center mb-12 max-w-lg mx-auto">
+                <div class="progress-bar active" data-slide="0">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-bar" data-slide="1">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-bar" data-slide="2">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-bar" data-slide="3">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Feature Highlights -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+                <div
+                    class="feature-card glass p-6 rounded-xl border border-white/10 hover:border-biotune-red transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-full bg-biotune-red/10 text-biotune-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">>98% Czystość</h3>
+                    <p class="text-sm text-gray-400">Najwyższa jakość odczynników</p>
+                </div>
+                <div
+                    class="feature-card glass p-6 rounded-xl border border-white/10 hover:border-biotune-red transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-full bg-biotune-red/10 text-biotune-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Weryfikacja HPLC</h3>
+                    <p class="text-sm text-gray-400">Każda partia testowana</p>
+                </div>
+                <div
+                    class="feature-card glass p-6 rounded-xl border border-white/10 hover:border-biotune-red transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-full bg-biotune-red/10 text-biotune-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Szybka Dostawa</h3>
+                    <p class="text-sm text-gray-400">Wysyłka w 24h</p>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="shop.html"
+                class="inline-block bg-biotune-red hover:bg-red-600 text-white font-bold py-4 px-10 rounded-lg uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,0,0,0.4)]">
+                Zobacz Produkty
+            </a>
         </div>
     </section>
+
+    <!-- Products Section REMOVED (moved to shop.html) -->
     <section id="about" class="relative snap-start bg-black">
         <!-- Content cleared as requested -->
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Dołącz do naszego newslettera</h2>
+        <form class="newsletter-form">
+            <div class="newsletter-input-group">
+                <input type="email" class="newsletter-input" placeholder="Podaj adres email" required>
+                <button type="submit" class="newsletter-button">Zapisz się</button>
+            </div>
+            <label class="newsletter-consent">
+                <input type="checkbox" required>
+                <span>Wyrażam zgodę na przetwarzanie podanych powyżej danych osobowych w celu otrzymywania
+                    newslettera.</span>
+            </label>
+            <div class="newsletter-feedback"></div>
+        </form>
     </section>
 
     <section id="contact"
@@ -351,16 +420,18 @@
                     Wiadomość</button>
             </form>
         </div>
-        <footer class="mt-24 border-t border-black/5 dark:border-white/5 pt-8 text-center text-gray-500 text-sm">
-            <p>&copy; 2025 BioTune. Wszelkie prawa zastrzeżone.</p>
-            <div class="flex justify-center gap-4 mt-2">
-                <a href="regulamin.html" target="_blank" class="hover:text-biotune-red transition-colors">Regulamin</a>
-                <span>|</span>
-                <a href="privacy.html" target="_blank" class="hover:text-biotune-red transition-colors">Polityka
-                    Prywatności</a>
-            </div>
-        </footer>
     </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/5 text-center text-gray-500 text-sm bg-biotune-dark">
+        <p>&copy; 2025 BioTune. Wszelkie prawa zastrzeżone.</p>
+        <div class="flex justify-center gap-4 mt-2">
+            <a href="regulamin.html" target="_blank" class="hover:text-biotune-red transition-colors">Regulamin</a>
+            <span>|</span>
+            <a href="privacy.html" target="_blank" class="hover:text-biotune-red transition-colors">Polityka
+                Prywatności</a>
+        </div>
+    </footer>
 
     <div id="cart-drawer"
         class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white dark:bg-biotune-dark border-l border-black/10 dark:border-white/10 transform translate-x-full transition-transform duration-300 z-[60] shadow-2xl flex flex-col text-black dark:text-white">
@@ -398,18 +469,9 @@
     <script src="./js/main.js"></script>
     <script src="./js/checkoutAgreements.js"></script>
     <script src="./js/show-about.js"></script>
+    <script src="./js/hero-carousel.js"></script>
     <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-        } else {
-            html.classList.remove('dark');
-        }
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
-        });
+
 
         // Scroll to product grid function
         function scrollToProducts(event) {
@@ -429,41 +491,40 @@
             "Jakość bez kompromisów"
         ];
 
-        const mottoElement = document.getElementById('motto-text');
-        let lineIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 80;
+        function typeLine(elementId, text, delayOffset) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
 
-        function typeWriter() {
-            const currentLine = mottoLines[lineIndex];
-
-            if (isDeleting) {
-                mottoElement.textContent = currentLine.substring(0, charIndex - 1);
-                charIndex--;
-                typingSpeed = 40;
-            } else {
-                mottoElement.textContent = currentLine.substring(0, charIndex + 1);
-                charIndex++;
-                typingSpeed = 80;
-            }
-
-            if (!isDeleting && charIndex === currentLine.length) {
-                // Pause at end of line
-                typingSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                lineIndex = (lineIndex + 1) % mottoLines.length;
-                typingSpeed = 500;
-            }
-
-            setTimeout(typeWriter, typingSpeed);
+            setTimeout(() => {
+                let charIndex = 0;
+                function typeChar() {
+                    if (charIndex < text.length) {
+                        el.textContent = text.substring(0, charIndex + 1);
+                        charIndex++;
+                        setTimeout(typeChar, 80);
+                    }
+                }
+                typeChar();
+            }, delayOffset);
         }
 
-        // Start typewriter after page loads
         window.addEventListener('load', function () {
-            setTimeout(typeWriter, 1000);
+            typeLine('typewriter-text-1', mottoLines[0], 1000);
+            typeLine('typewriter-text-2', mottoLines[1], 2500); // 1.5s later
+            typeLine('typewriter-text-3', mottoLines[2], 4000); // another 1.5s later
+        });
+
+        // Navbar scroll effect
+        const nav = document.querySelector('nav.glass');
+        const contentBlur = document.getElementById('content-blur');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+                if (contentBlur) contentBlur.classList.add('active');
+            } else {
+                nav.classList.remove('scrolled');
+                if (contentBlur) contentBlur.classList.remove('active');
+            }
         });
     </script>
 </body>

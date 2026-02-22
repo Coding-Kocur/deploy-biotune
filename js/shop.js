@@ -32,7 +32,19 @@ function renderGrid(filterText = '') {
              style="animation-delay: ${index * 50}ms"
              onclick="handleCardClick(event, '${product.id}')">
             
-            <div class="bg-[#151515] shadow-lg hover:shadow-2xl p-4 rounded-xl relative group product-card transition-all duration-300 hover:-translate-y-1">
+            <!-- Snake border segments with rounded corners -->
+            <span class="snake-border snake-border-top"></span>
+            <span class="snake-border snake-border-right"></span>
+            <span class="snake-border snake-border-bottom"></span>
+            <span class="snake-border snake-border-left"></span>
+            <!-- Corner pieces for rounded effect -->
+            <span class="snake-corner snake-corner-tl"></span>
+            <span class="snake-corner snake-corner-tr"></span>
+            <span class="snake-corner snake-corner-br"></span>
+            <span class="snake-corner snake-corner-bl"></span>
+            
+            <div class="bg-[#151515] shadow-lg hover:shadow-2xl p-4 rounded-xl relative group product-card transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                
                 <div class="aspect-square bg-black/50 rounded-lg mb-4 overflow-hidden border border-white/5 relative">
                     <img src="${imgSrc}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <!-- Darkened overlay with product name -->
@@ -82,7 +94,7 @@ function handleCardClick(event, productId) {
         return;
     }
 
-    window.location.href = `product.html ? id = ${productId} `;
+    window.location.href = `product.html?id=${productId}`;
 }
 
 // Handle add to cart button - stop propagation to prevent card click

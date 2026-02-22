@@ -120,8 +120,11 @@
             <div class="flex items-center justify-between h-24">
                 <!-- Left: Navigation Links -->
                 <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
+                        główna</a>
                     <div class="dropdown-trigger">
-                        <a href="index.html#shop"
+                        <a href="shop.html"
                             class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
                             Sklep
                             <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -133,7 +136,7 @@
                         </a>
                         <div class="dropdown-menu">
                             <div class="py-1 max-h-80 overflow-y-auto">
-                                <a href="index.html#shop"
+                                <a href="shop.html"
                                     class="block px-4 py-2 text-sm font-semibold text-biotune-red hover:bg-black/20 border-b border-white/10">Wszystkie</a>
                                 <a href="product.html?id=retatrutide"
                                     class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Retatrutide</a>
@@ -228,239 +231,252 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="h-screen flex flex-col items-center justify-center text-center relative px-4 bg-black">
-        <h1 class="text-6xl md:text-9xl font-bold mb-8 tracking-tighter">O NAS</h1>
-        <p class="text-xl md:text-3xl text-biotune-red font-mono tracking-widest uppercase mb-8">NAUKA OPARTA NA FAKTACH
-        </p>
-        <p class="text-gray-400 max-w-xl text-lg">Poznaj BioTune – Twojego partnera w precyzyjnych badaniach.</p>
-        <div class="absolute bottom-10 animate-bounce">
-            <svg class="w-6 h-6 text-biotune-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
-                </path>
-            </svg>
-        </div>
-    </header>
+    <!-- Content Blur Overlay for scroll effect -->
+    <div class="content-blur-overlay" id="content-blur"></div>
 
-    <!-- SECTION 1: Nasza Wizja (Text LEFT, Visual RIGHT) -->
-    <section class="flex flex-col lg:flex-row min-h-screen bg-black">
-        <!-- Content LEFT -->
-        <div class="w-full lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center">
-            <h2 class="text-sm font-mono text-biotune-red mb-6 tracking-[0.2em] uppercase">Nasza wizja</h2>
-            <h3 class="text-5xl font-bold mb-8 text-white">Czym jest BioTune?</h3>
-            <div class="prose prose-invert prose-lg text-gray-400">
-                <p class="leading-relaxed mb-6">
-                    <span class="text-white font-semibold">BioTune</span> to polska firma z pasją dostarczająca
-                    najwyższej klasy odczynniki chemiczne. Skierowani jesteśmy do laboratoriów, jednostek badawczych
-                    oraz naukowców, którzy w swojej pracy nie uznają kompromisów.
-                </p>
-                <p class="leading-relaxed">
-                    BioTune to nie tylko dostawca — to <span class="text-biotune-red">partner w codziennej pracy
-                        laboratoryjnej</span>, zapewniający dostęp do materiałów niezbędnych do prowadzenia
-                    precyzyjnych eksperymentów i rzetelnych analiz.
-                </p>
+
+    <div id="horizontal-scroll-wrapper" style="height: 300vh; position: relative;">
+        <div id="horizontal-scroll-sticky"
+            style="position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex;">
+            <div id="horizontal-scroll-content" class="flex" style="width: 300vw; will-change: transform;">
+                <!-- SECTION 2: Nasza Misja (Visual LEFT, Text RIGHT) - REVERSED -->
+                <section
+                    class="w-screen flex-shrink-0 overflow-y-auto overflow-x-hidden flex flex-col lg:flex-row-reverse min-h-screen bg-black">
+                    <!-- Content RIGHT -->
+                    <div class="w-full lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center">
+                        <h2 class="text-sm font-mono text-biotune-red mb-12 tracking-[0.2em] uppercase">Nasza Misja</h2>
+                        <div class="mission-accordion space-y-0 border-t border-white/10">
+                            <!-- Item 1 -->
+                            <div class="mission-item py-12 border-b border-white/10 relative">
+                                <div class="mission-progress absolute top-0 left-0 h-[2px] bg-biotune-red w-0"></div>
+                                <h3
+                                    class="text-3xl md:text-5xl font-bold text-gray-700 mb-4 transition-colors duration-500">
+                                    Wspieranie Innowacji</h3>
+                                <div class="mission-content overflow-hidden transition-all duration-700"
+                                    style="max-height: 200px; opacity: 1;">
+                                    <p class="text-lg text-gray-400 leading-relaxed">
+                                        Naszym celem jest wspieranie innowacji w badaniach nad związkami peptydowymi
+                                        poprzez
+                                        dostarczanie odczynników o przejrzystej i potwierdzonej jakości.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="mission-item py-12 border-b border-white/10 relative">
+                                <div class="mission-progress absolute top-0 left-0 h-[2px] bg-biotune-red w-0"></div>
+                                <h3
+                                    class="text-3xl md:text-5xl font-bold text-gray-700 mb-4 transition-colors duration-500">
+                                    Standardy Rynku</h3>
+                                <div
+                                    class="mission-content max-h-0 overflow-hidden opacity-0 transition-all duration-700">
+                                    <p class="text-lg text-gray-400 leading-relaxed">
+                                        Powstaliśmy jako odpowiedź na brak przejrzystości i niespójne standardy na rynku
+                                        odczynników
+                                        chemicznych.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="mission-item py-12 border-b border-white/10 relative">
+                                <div class="mission-progress absolute top-0 left-0 h-[2px] bg-biotune-red w-0"></div>
+                                <h3
+                                    class="text-3xl md:text-5xl font-bold text-gray-700 mb-4 transition-colors duration-500">
+                                    Dostępność i Komunikacja</h3>
+                                <div
+                                    class="mission-content max-h-0 overflow-hidden opacity-0 transition-all duration-700">
+                                    <p class="text-lg text-gray-400 leading-relaxed">
+                                        Dążymy do tego, aby polska i międzynarodowa społeczność badawcza miała łatwy
+                                        dostęp do
+                                        materiałów spełniających rygorystyczne normy.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Visual LEFT -->
+                    <div class="hidden lg:flex w-1/2 bg-black items-center justify-center p-12 border-r border-white/5">
+                        <div
+                            class="w-full h-full max-h-[500px] border border-white/10 bg-black rounded-3xl flex flex-col items-center justify-center gap-4">
+                            <div class="w-3/4 h-2 bg-gradient-to-r from-biotune-red to-transparent rounded"></div>
+                            <div class="w-1/2 h-2 bg-gradient-to-r from-biotune-red to-transparent rounded"></div>
+                            <div class="w-2/3 h-2 bg-gradient-to-r from-biotune-red to-transparent rounded"></div>
+                            <p class="mt-8 text-gray-500 font-mono text-sm">TRANSPARENCY_MODE: ON</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 3: Jakość i Kontrola (Text LEFT, Visual RIGHT) -->
+                <section
+                    class="w-screen flex-shrink-0 overflow-y-auto overflow-x-hidden flex flex-col lg:flex-row min-h-screen bg-black">
+                    <!-- Content LEFT -->
+                    <div class="w-full lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center">
+                        <h2 class="text-sm font-mono text-biotune-red mb-6 tracking-[0.2em] uppercase">Jakość i Kontrola
+                        </h2>
+                        <h3 class="text-5xl font-bold mb-8 text-white">Precyzja w każdym miligramie</h3>
+                        <div class="prose prose-invert prose-lg text-gray-400">
+                            <p class="leading-relaxed mb-6">
+                                Każda partia naszych produktów przechodzi rygorystyczne testy czystości (HPLC) oraz
+                                identyfikacji
+                                strukturalnej (MS). Dzięki temu masz pewność, że pracujesz na materiale o najwyższym
+                                standardzie.
+                            </p>
+                            <ul class="space-y-4 mt-8">
+                                <li class="flex items-center gap-3">
+                                    <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
+                                    <span>Czystość >99% potwierdzona certyfikatem</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
+                                    <span>Pełna identyfikowalność serii</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
+                                    <span>Badania w niezależnych laboratoriach</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Visual RIGHT -->
+                    <div class="hidden lg:flex w-1/2 bg-black items-center justify-center p-12 border-l border-white/5">
+                        <div class="relative w-64 h-64">
+                            <div
+                                class="absolute inset-0 rounded-full border-2 border-biotune-red animate-[spin_10s_linear_infinite]">
+                            </div>
+                            <div
+                                class="absolute inset-4 rounded-full border border-white/20 animate-[spin_15s_linear_infinite_reverse]">
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center flex-col">
+                                <span class="text-4xl font-bold text-white">>98%</span>
+                                <span class="text-xs text-biotune-red font-bold mt-1">HPLC VERIFIED</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Bottom Grid Section - Icon Features with Hover Reveal -->
+                <section
+                    class="w-screen flex-shrink-0 overflow-y-auto overflow-x-hidden py-32 px-4 bg-black border-t border-white/5">
+                    <div class="max-w-7xl mx-auto">
+                        <h2 class="text-5xl font-bold mb-20 text-center">Wiedza i Odpowiedzialność</h2>
+
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+                            <!-- Feature 1: Przeznaczenie -->
+                            <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
+                                <!-- Minimalistic Line Icon - Beaker/Flask -->
+                                <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                                    <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5"
+                                        class="w-full h-full">
+                                        <path d="M18 6h12M20 6v14l-8 16a2 2 0 001.8 3h20.4a2 2 0 001.8-3l-8-16V6"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M16 32h16" stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-white mb-3">Przeznaczenie</h3>
+                                <!-- Description - Hidden until hover -->
+                                <p
+                                    class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
+                                    Działamy w oparciu o jasne zasady odpowiedzialności. Wszystkie oferowane przez nas
+                                    substancje są
+                                    odczynnikami chemicznymi przeznaczonymi wyłącznie do celów badawczych, naukowych i
+                                    analitycznych.
+                                </p>
+                            </div>
+
+                            <!-- Feature 2: Czym są peptydy? -->
+                            <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
+                                <!-- Minimalistic Line Icon - Molecular Chain -->
+                                <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                                    <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5"
+                                        class="w-full h-full">
+                                        <circle cx="12" cy="24" r="4" />
+                                        <circle cx="24" cy="14" r="4" />
+                                        <circle cx="36" cy="24" r="4" />
+                                        <circle cx="24" cy="34" r="4" />
+                                        <line x1="16" y1="22" x2="20" y2="16" />
+                                        <line x1="28" y1="16" x2="32" y2="22" />
+                                        <line x1="32" y1="26" x2="28" y2="32" />
+                                        <line x1="20" y1="32" x2="16" y2="26" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-white mb-3">Czym są peptydy?</h3>
+                                <!-- Description - Hidden until hover -->
+                                <p
+                                    class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
+                                    W centrum naszej oferty znajdują się peptydy — krótkie łańcuchy aminokwasów
+                                    połączonych
+                                    wiązaniami peptydowymi. Chemicznie stanowią one precyzyjne, łatwe do charakterystyki
+                                    molekuły.
+                                </p>
+                            </div>
+
+                            <!-- Feature 3: Gwarancja -->
+                            <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
+                                <!-- Minimalistic Line Icon - Shield with Checkmark -->
+                                <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                                    <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5"
+                                        class="w-full h-full">
+                                        <path d="M24 4L6 12v12c0 11 8 17 18 20 10-3 18-9 18-20V12L24 4z"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M16 24l6 6 10-12" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-white mb-3">Gwarancja</h3>
+                                <!-- Description - Hidden until hover -->
+                                <p
+                                    class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
+                                    Kupując produkty BioTune, otrzymują Państwo odczynniki, których parametry zostały
+                                    rzetelnie
+                                    zweryfikowane. Regularnie powtarzamy procedury testowe, aby zapewnić stałą jakość
+                                    między
+                                    seriami.
+                                </p>
+                            </div>
+
+                            <!-- Feature 4: Potencjał peptydów -->
+                            <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
+                                <!-- Minimalistic Line Icon - Rising Graph/Potential -->
+                                <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                                    <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5"
+                                        class="w-full h-full">
+                                        <path d="M6 38l10-10 8 6 18-22" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M32 12h10v10" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-white mb-3">Potencjał peptydów</h3>
+                                <!-- Description - Hidden until hover -->
+                                <p
+                                    class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
+                                    Peptydy są jedną z najbardziej obiecujących grup związków we współczesnej chemii
+                                    biomolekularnej. Charakteryzują się zdolnością do selektywnego oddziaływania z
+                                    określonymi
+                                    strukturami biologicznymi.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
             </div>
         </div>
-        <!-- Visual RIGHT -->
-        <div class="hidden lg:flex w-1/2 bg-black items-center justify-center p-12 border-l border-white/5">
-            <div
-                class="w-full h-full max-h-[500px] border border-biotune-red/20 bg-biotune-red/5 rounded-3xl flex items-center justify-center relative overflow-hidden">
-                <div class="text-7xl font-bold text-biotune-red opacity-20">BIOTUNE</div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Dołącz do naszego newslettera</h2>
+        <form class="newsletter-form">
+            <div class="newsletter-input-group">
+                <input type="email" class="newsletter-input" placeholder="Podaj adres email" required>
+                <button type="submit" class="newsletter-button">Zapisz się</button>
             </div>
-        </div>
-    </section>
-
-    <!-- SECTION 2: Nasza Misja (Visual LEFT, Text RIGHT) - REVERSED -->
-    <section class="flex flex-col lg:flex-row-reverse min-h-screen bg-black">
-        <!-- Content RIGHT -->
-        <div class="w-full lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center">
-            <h2 class="text-sm font-mono text-biotune-red mb-12 tracking-[0.2em] uppercase">Nasza Misja</h2>
-            <div class="mission-accordion space-y-0 border-t border-white/10">
-                <!-- Item 1 -->
-                <div class="mission-item py-12 border-b border-white/10 relative">
-                    <div class="mission-progress absolute top-0 left-0 h-[2px] bg-biotune-red w-0"></div>
-                    <h3 class="text-3xl md:text-5xl font-bold text-gray-700 mb-4 transition-colors duration-500">
-                        Wspieranie Innowacji</h3>
-                    <div class="mission-content overflow-hidden transition-all duration-700"
-                        style="max-height: 200px; opacity: 1;">
-                        <p class="text-lg text-gray-400 leading-relaxed">
-                            Naszym celem jest wspieranie innowacji w badaniach nad związkami peptydowymi poprzez
-                            dostarczanie odczynników o przejrzystej i potwierdzonej jakości.
-                        </p>
-                    </div>
-                </div>
-                <!-- Item 2 -->
-                <div class="mission-item py-12 border-b border-white/10 relative">
-                    <div class="mission-progress absolute top-0 left-0 h-[2px] bg-biotune-red w-0"></div>
-                    <h3 class="text-3xl md:text-5xl font-bold text-gray-700 mb-4 transition-colors duration-500">
-                        Standardy Rynku</h3>
-                    <div class="mission-content max-h-0 overflow-hidden opacity-0 transition-all duration-700">
-                        <p class="text-lg text-gray-400 leading-relaxed">
-                            Powstaliśmy jako odpowiedź na brak przejrzystości i niespójne standardy na rynku odczynników
-                            chemicznych.
-                        </p>
-                    </div>
-                </div>
-                <!-- Item 3 -->
-                <div class="mission-item py-12 border-b border-white/10 relative">
-                    <div class="mission-progress absolute top-0 left-0 h-[2px] bg-biotune-red w-0"></div>
-                    <h3 class="text-3xl md:text-5xl font-bold text-gray-700 mb-4 transition-colors duration-500">
-                        Dostępność i Komunikacja</h3>
-                    <div class="mission-content max-h-0 overflow-hidden opacity-0 transition-all duration-700">
-                        <p class="text-lg text-gray-400 leading-relaxed">
-                            Dążymy do tego, aby polska i międzynarodowa społeczność badawcza miała łatwy dostęp do
-                            materiałów spełniających rygorystyczne normy.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Visual LEFT -->
-        <div class="hidden lg:flex w-1/2 bg-black items-center justify-center p-12 border-r border-white/5">
-            <div
-                class="w-full h-full max-h-[500px] border border-white/10 bg-black rounded-3xl flex flex-col items-center justify-center gap-4">
-                <div class="w-3/4 h-2 bg-gradient-to-r from-biotune-red to-transparent rounded"></div>
-                <div class="w-1/2 h-2 bg-gradient-to-r from-biotune-red to-transparent rounded"></div>
-                <div class="w-2/3 h-2 bg-gradient-to-r from-biotune-red to-transparent rounded"></div>
-                <p class="mt-8 text-gray-500 font-mono text-sm">TRANSPARENCY_MODE: ON</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 3: Jakość i Kontrola (Text LEFT, Visual RIGHT) -->
-    <section class="flex flex-col lg:flex-row min-h-screen bg-black">
-        <!-- Content LEFT -->
-        <div class="w-full lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center">
-            <h2 class="text-sm font-mono text-biotune-red mb-6 tracking-[0.2em] uppercase">Jakość i Kontrola</h2>
-            <h3 class="text-5xl font-bold mb-8 text-white">Precyzja w każdym miligramie</h3>
-            <div class="prose prose-invert prose-lg text-gray-400">
-                <p class="leading-relaxed mb-6">
-                    Każda partia naszych produktów przechodzi rygorystyczne testy czystości (HPLC) oraz identyfikacji
-                    strukturalnej (MS). Dzięki temu masz pewność, że pracujesz na materiale o najwyższym standardzie.
-                </p>
-                <ul class="space-y-4 mt-8">
-                    <li class="flex items-center gap-3">
-                        <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
-                        <span>Czystość >99% potwierdzona certyfikatem</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
-                        <span>Pełna identyfikowalność serii</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
-                        <span>Badania w niezależnych laboratoriach</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Visual RIGHT -->
-        <div class="hidden lg:flex w-1/2 bg-black items-center justify-center p-12 border-l border-white/5">
-            <div class="relative w-64 h-64">
-                <div
-                    class="absolute inset-0 rounded-full border-2 border-biotune-red animate-[spin_10s_linear_infinite]">
-                </div>
-                <div
-                    class="absolute inset-4 rounded-full border border-white/20 animate-[spin_15s_linear_infinite_reverse]">
-                </div>
-                <div class="absolute inset-0 flex items-center justify-center flex-col">
-                    <span class="text-4xl font-bold text-white">99.9%</span>
-                    <span class="text-xs text-biotune-red font-bold mt-1">HPLC VERIFIED</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bottom Grid Section - Icon Features with Hover Reveal -->
-    <section class="py-32 px-4 bg-black border-t border-white/5">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl font-bold mb-20 text-center">Wiedza i Odpowiedzialność</h2>
-
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
-                <!-- Feature 1: Przeznaczenie -->
-                <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
-                    <!-- Minimalistic Line Icon - Beaker/Flask -->
-                    <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
-                        <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full">
-                            <path d="M18 6h12M20 6v14l-8 16a2 2 0 001.8 3h20.4a2 2 0 001.8-3l-8-16V6"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M16 32h16" stroke-linecap="round" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-3">Przeznaczenie</h3>
-                    <!-- Description - Hidden until hover -->
-                    <p
-                        class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
-                        Działamy w oparciu o jasne zasady odpowiedzialności. Wszystkie oferowane przez nas substancje są
-                        odczynnikami chemicznymi przeznaczonymi wyłącznie do celów badawczych, naukowych i
-                        analitycznych.
-                    </p>
-                </div>
-
-                <!-- Feature 2: Czym są peptydy? -->
-                <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
-                    <!-- Minimalistic Line Icon - Molecular Chain -->
-                    <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
-                        <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full">
-                            <circle cx="12" cy="24" r="4" />
-                            <circle cx="24" cy="14" r="4" />
-                            <circle cx="36" cy="24" r="4" />
-                            <circle cx="24" cy="34" r="4" />
-                            <line x1="16" y1="22" x2="20" y2="16" />
-                            <line x1="28" y1="16" x2="32" y2="22" />
-                            <line x1="32" y1="26" x2="28" y2="32" />
-                            <line x1="20" y1="32" x2="16" y2="26" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-3">Czym są peptydy?</h3>
-                    <!-- Description - Hidden until hover -->
-                    <p
-                        class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
-                        W centrum naszej oferty znajdują się peptydy — krótkie łańcuchy aminokwasów połączonych
-                        wiązaniami peptydowymi. Chemicznie stanowią one precyzyjne, łatwe do charakterystyki molekuły.
-                    </p>
-                </div>
-
-                <!-- Feature 3: Gwarancja -->
-                <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
-                    <!-- Minimalistic Line Icon - Shield with Checkmark -->
-                    <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
-                        <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full">
-                            <path d="M24 4L6 12v12c0 11 8 17 18 20 10-3 18-9 18-20V12L24 4z" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M16 24l6 6 10-12" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-3">Gwarancja</h3>
-                    <!-- Description - Hidden until hover -->
-                    <p
-                        class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
-                        Kupując produkty BioTune, otrzymują Państwo odczynniki, których parametry zostały rzetelnie
-                        zweryfikowane. Regularnie powtarzamy procedury testowe, aby zapewnić stałą jakość między
-                        seriami.
-                    </p>
-                </div>
-
-                <!-- Feature 4: Potencjał peptydów -->
-                <div class="feature-icon-card group flex flex-col items-center text-center cursor-pointer">
-                    <!-- Minimalistic Line Icon - Rising Graph/Potential -->
-                    <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
-                        <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full">
-                            <path d="M6 38l10-10 8 6 18-22" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M32 12h10v10" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-3">Potencjał peptydów</h3>
-                    <!-- Description - Hidden until hover -->
-                    <p
-                        class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
-                        Peptydy są jedną z najbardziej obiecujących grup związków we współczesnej chemii
-                        biomolekularnej. Charakteryzują się zdolnością do selektywnego oddziaływania z określonymi
-                        strukturami biologicznymi.
-                    </p>
-                </div>
-            </div>
-        </div>
+            <label class="newsletter-consent">
+                <input type="checkbox" required>
+                <span>Wyrażam zgodę na przetwarzanie podanych powyżej danych osobowych w celu otrzymywania
+                    newslettera.</span>
+            </label>
+            <div class="newsletter-feedback"></div>
+        </form>
     </section>
 
     <!-- Contact Section -->
@@ -488,7 +504,8 @@
                     Wiadomość</button>
             </form>
         </div>
-        <footer class="mt-24 border-t border-white/5 pt-8 text-center text-gray-500 text-sm">
+
+        <footer class="mt-24 border-t border-white/5 pt-8 text-center text-gray-500 text-sm bg-black pb-8">
             <p>&copy; 2025 BioTune. Wszelkie prawa zastrzeżone.</p>
             <div class="flex justify-center gap-4 mt-2">
                 <a href="regulamin.html" target="_blank" class="hover:text-biotune-red transition-colors">Regulamin</a>
@@ -569,7 +586,7 @@
                 missionTimeline
                     .to(title1, { color: "#52525b", duration: 0.3 }, 7)
                     .to(content1, { maxHeight: "0px", opacity: 0, duration: 0.3 }, 7)
-                    .to(progress1, { width: "0%", duration: 0.3 }, 7)
+                    .to(progress1, { width: "0%", duration: 0 }, 7) // Instant reset
                     .to(title2, { color: "#ffffff", duration: 0.3 }, 7.3)
                     .to(content2, { maxHeight: "200px", opacity: 1, duration: 0.5 }, 7.3)
                     .to(progress2, { width: "100%", duration: 7, ease: "none" }, 7.5);
@@ -589,7 +606,7 @@
                 missionTimeline
                     .to(title2, { color: "#52525b", duration: 0.3 }, 14.5)
                     .to(content2, { maxHeight: "0px", opacity: 0, duration: 0.3 }, 14.5)
-                    .to(progress2, { width: "0%", duration: 0.3 }, 14.5)
+                    .to(progress2, { width: "0%", duration: 0 }, 14.5) // Instant reset
                     .to(title3, { color: "#ffffff", duration: 0.3 }, 14.8)
                     .to(content3, { maxHeight: "200px", opacity: 1, duration: 0.5 }, 14.8)
                     .to(progress3, { width: "100%", duration: 7, ease: "none" }, 15);
@@ -597,7 +614,7 @@
                 missionTimeline
                     .to(title3, { color: "#52525b", duration: 0.3 }, 22)
                     .to(content3, { maxHeight: "0px", opacity: 0, duration: 0.3 }, 22)
-                    .to(progress3, { width: "0%", duration: 0.3 }, 22)
+                    .to(progress3, { width: "0%", duration: 0 }, 22) // Instant reset
                     .to(content1, { maxHeight: "200px", opacity: 1, duration: 0.3 }, 22.3);
             }
         }
@@ -662,24 +679,50 @@
 
     <!-- Theme Toggle Script -->
     <script>
-        const themeToggle = document.getElementById('theme-toggle');
+        // Theme toggle
         const html = document.documentElement;
-
-        // Initialize theme
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             html.classList.add('dark');
         } else {
             html.classList.remove('dark');
         }
 
-        // Toggle theme on click
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                html.classList.toggle('dark');
-                localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
-            });
-        }
+        // Navbar scroll effect
+        const nav = document.querySelector('nav.glass');
+        const contentBlur = document.getElementById('content-blur');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+                if (contentBlur) contentBlur.classList.add('active');
+            } else {
+                nav.classList.remove('scrolled');
+                if (contentBlur) contentBlur.classList.remove('active');
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrapper = document.getElementById('horizontal-scroll-wrapper');
+            const sticky = document.getElementById('horizontal-scroll-sticky');
+            const content = document.getElementById('horizontal-scroll-content');
+
+            if (wrapper && sticky && content) {
+                window.addEventListener('scroll', () => {
+                    const rect = wrapper.getBoundingClientRect();
+                    const maxScroll = rect.height - window.innerHeight;
+
+                    // How far we've scrolled into the wrapper
+                    let scrollProgress = -rect.top / maxScroll;
+                    scrollProgress = Math.max(0, Math.min(1, scrollProgress));
+
+                    const maxTranslate = content.scrollWidth - window.innerWidth;
+                    content.style.transform = `translateX(-${scrollProgress * maxTranslate}px)`;
+                });
+            }
+        });
     </script>
 </body>
+
 
 </html>

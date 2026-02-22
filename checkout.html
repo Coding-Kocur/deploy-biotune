@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasa - BioTune</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'biotune-black': '#0a0a0a',
+                        'biotune-dark': '#1a1a1a',
+                        'biotune-red': '#ff0000',
+                        'biotune-text': '#cccccc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel='icon' type='image/png' href='./assets/favicon.png'>
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased min-h-screen">
+
+    <!-- Simple Header -->
+    <header class="bg-white dark:bg-biotune-dark border-b border-black/10 dark:border-white/10 py-4">
+        <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-gray-500 hover:text-biotune-red transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+                Wróć do sklepu
+            </a>
+            <a href="index.html">
+                <img src="./assets/biotune-logo-transparent.png" alt="BioTune" class="h-12 w-auto block dark:hidden">
+                <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="h-12 w-auto hidden dark:block">
+            </a>
+            <div class="w-24"></div> <!-- Spacer for centering -->
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8 text-center">Podsumowanie zamówienia</h1>
+
+        <!-- Order Summary -->
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <!-- Left Column: Cart Items -->
+            <div class="bg-white dark:bg-biotune-dark rounded-xl p-6 border border-black/10 dark:border-white/10">
+                <h2 class="text-xl font-bold mb-4">Twoje produkty</h2>
+                <div id="checkout-cart-items" class="space-y-4 mb-6">
+                    <!-- Items will be populated by JS -->
+                </div>
+                <div class="border-t border-black/10 dark:border-white/10 pt-4">
+                    <div class="flex justify-between items-center text-lg font-bold">
+                        <span>Suma:</span>
+                        <span id="checkout-total" class="text-biotune-red">0.00 zł</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Shipping & Payment -->
+            <div class="space-y-6">
+                <!-- Shipping Info (placeholder) -->
+                <div class="bg-white dark:bg-biotune-dark rounded-xl p-6 border border-black/10 dark:border-white/10">
+                    <h2 class="text-xl font-bold mb-4">Dane do wysyłki</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Imię i
+                                nazwisko</label>
+                            <input type="text" id="shipping-name"
+                                class="w-full bg-gray-50 dark:bg-black/30 border border-gray-300 dark:border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-biotune-red transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Email</label>
+                            <input type="email" id="shipping-email"
+                                class="w-full bg-gray-50 dark:bg-black/30 border border-gray-300 dark:border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-biotune-red transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Adres</label>
+                            <input type="text" id="shipping-address"
+                                class="w-full bg-gray-50 dark:bg-black/30 border border-gray-300 dark:border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-biotune-red transition-colors">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Kod
+                                    pocztowy</label>
+                                <input type="text" id="shipping-zip"
+                                    class="w-full bg-gray-50 dark:bg-black/30 border border-gray-300 dark:border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-biotune-red transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Miasto</label>
+                                <input type="text" id="shipping-city"
+                                    class="w-full bg-gray-50 dark:bg-black/30 border border-gray-300 dark:border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-biotune-red transition-colors">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Method (placeholder) -->
+                <div class="bg-white dark:bg-biotune-dark rounded-xl p-6 border border-black/10 dark:border-white/10">
+                    <h2 class="text-xl font-bold mb-4">Metoda płatności</h2>
+                    <div class="space-y-3">
+                        <label
+                            class="flex items-center gap-3 p-3 border border-gray-300 dark:border-white/20 rounded-lg cursor-pointer hover:border-biotune-red transition-colors">
+                            <input type="radio" name="payment" value="blik"
+                                class="text-biotune-red focus:ring-biotune-red" checked>
+                            <span>BLIK</span>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 p-3 border border-gray-300 dark:border-white/20 rounded-lg cursor-pointer hover:border-biotune-red transition-colors">
+                            <input type="radio" name="payment" value="card"
+                                class="text-biotune-red focus:ring-biotune-red">
+                            <span>Karta płatnicza</span>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 p-3 border border-gray-300 dark:border-white/20 rounded-lg cursor-pointer hover:border-biotune-red transition-colors">
+                            <input type="radio" name="payment" value="transfer"
+                                class="text-biotune-red focus:ring-biotune-red">
+                            <span>Przelew bankowy</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Required Agreements Section - BEFORE FINAL BUTTON -->
+        <div class="mt-8 bg-white dark:bg-biotune-dark rounded-xl p-6 border border-black/10 dark:border-white/10">
+            <h2 class="text-xl font-bold mb-4">Wymagane zgody</h2>
+            <div id="checkout-agreements" class="space-y-4">
+
+                <!-- Agreement 1: Terms & Privacy -->
+                <div class="flex items-start gap-3">
+                    <input type="checkbox" id="agreement-terms"
+                        class="mt-1 rounded border-gray-300 dark:border-gray-600 text-biotune-red focus:ring-biotune-red cursor-pointer"
+                        required>
+                    <label for="agreement-terms"
+                        class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed cursor-pointer">
+                        Akceptuję <a href="regulamin.html" target="_blank"
+                            class="text-biotune-red hover:underline">Regulamin sklepu BioTune</a>
+                        oraz <a href="privacy.html" target="_blank" class="text-biotune-red hover:underline">Politykę
+                            Prywatności</a>.
+                    </label>
+                </div>
+
+                <!-- Agreement 2: RUO Declaration -->
+                <div class="flex items-start gap-3">
+                    <input type="checkbox" id="agreement-ruo"
+                        class="mt-1 rounded border-gray-300 dark:border-gray-600 text-biotune-red focus:ring-biotune-red cursor-pointer"
+                        required>
+                    <label for="agreement-ruo"
+                        class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed cursor-pointer">
+                        Oświadczam, że zakupione produkty są odczynnikami chemicznymi przeznaczonymi wyłącznie do celów
+                        badawczych
+                        (Research Use Only). Produkt nie jest lekiem, suplementem ani kosmetykiem i nie jest
+                        przeznaczony do spożycia
+                        ani iniekcji u ludzi.
+                    </label>
+                </div>
+
+                <!-- Agreement 3: Responsibility -->
+                <div class="flex items-start gap-3">
+                    <input type="checkbox" id="agreement-responsibility"
+                        class="mt-1 rounded border-gray-300 dark:border-gray-600 text-biotune-red focus:ring-biotune-red cursor-pointer"
+                        required>
+                    <label for="agreement-responsibility"
+                        class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed cursor-pointer">
+                        Przyjmuję do wiadomości, że ponoszę pełną odpowiedzialność za sposób użycia zakupionych
+                        odczynników
+                        chemicznych i że Sprzedawca nie sprawuje nadzoru nad ich wykorzystaniem.
+                    </label>
+                </div>
+
+            </div>
+
+            <!-- Validation Message -->
+            <p id="agreements-error" class="text-red-500 text-sm mt-4 hidden">
+                ⚠️ Proszę zaakceptować wszystkie wymagane zgody przed kontynuowaniem.
+            </p>
+        </div>
+
+        <!-- Final Purchase Button -->
+        <div class="mt-8 text-center">
+            <button id="final-checkout-btn" class="w-full md:w-auto px-12 py-4 bg-biotune-red text-white font-bold text-lg rounded-lg 
+                       opacity-50 cursor-not-allowed transition-all duration-300 uppercase tracking-wider" disabled>
+                🛒 Kupuję i płacę
+            </button>
+            <p class="text-sm text-gray-500 mt-3">
+                Klikając przycisk powyżej, potwierdzasz złożenie zamówienia z obowiązkiem zapłaty.
+            </p>
+        </div>
+
+        <!-- Download Agreement Link (shown after all checked) -->
+        <div id="download-section" class="mt-4 text-center hidden">
+            <button id="download-agreement-btn" class="text-sm text-gray-500 hover:text-biotune-red transition-colors">
+                📥 Pobierz kopię zgody (JSON)
+            </button>
+        </div>
+    </main>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Dołącz do naszego newslettera</h2>
+        <form class="newsletter-form">
+            <div class="newsletter-input-group">
+                <input type="email" class="newsletter-input" placeholder="Podaj adres email" required>
+                <button type="submit" class="newsletter-button">Zapisz się</button>
+            </div>
+            <label class="newsletter-consent">
+                <input type="checkbox" required>
+                <span>Wyrażam zgodę na przetwarzanie podanych powyżej danych osobowych w celu otrzymywania
+                    newslettera.</span>
+            </label>
+            <div class="newsletter-feedback"></div>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/5 text-center text-gray-500 text-sm bg-biotune-dark">
+        <p>&copy; 2025 BioTune. Wszelkie prawa zastrzeżone.</p>
+        <div class="flex justify-center gap-4 mt-2">
+            <a href="regulamin.html" target="_blank" class="hover:text-biotune-red transition-colors">Regulamin</a>
+            <span>|</span>
+            <a href="privacy.html" target="_blank" class="hover:text-biotune-red transition-colors">Polityka
+                Prywatności</a>
+        </div>
+    </footer>
+
+    <script src="./js/products-data.js"></script>
+    <script src="./js/main.js"></script>
+    <script>
+        // Initialize theme
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        const REGULAMIN_VERSION = 'regulamin_2025-01-03';
+
+        // Load cart items on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            loadCartItems();
+            setupAgreementListeners();
+        });
+
+        function loadCartItems() {
+            const cartItemsContainer = document.getElementById('checkout-cart-items');
+            const totalElement = document.getElementById('checkout-total');
+
+            // Get cart from localStorage
+            const cart = JSON.parse(localStorage.getItem('biotune_cart') || '[]');
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <p class="mb-4">Twój koszyk jest pusty.</p>
+                        <a href="index.html#shop" class="text-biotune-red hover:underline">Wróć do sklepu</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Group items by product ID and count quantities
+            const groupedItems = {};
+            cart.forEach(item => {
+                if (groupedItems[item.id]) {
+                    groupedItems[item.id].quantity++;
+                } else {
+                    groupedItems[item.id] = {
+                        ...item,
+                        quantity: 1
+                    };
+                }
+            });
+
+            let total = 0;
+            cartItemsContainer.innerHTML = Object.values(groupedItems).map(item => {
+                const price = item.price || 0;
+                const quantity = item.quantity || 1;
+                const itemTotal = price * quantity;
+                total += itemTotal;
+
+                // Get image path with fallback
+                const imagePath = (item.images && item.images[0]) ? item.images[0] : './assets/product-placeholder.svg';
+
+                return `
+                    <div class="flex items-center gap-4 pb-4 border-b border-black/5 dark:border-white/5">
+                        <img src="${imagePath}" 
+                             alt="${item.name || 'Produkt'}" 
+                             class="w-16 h-16 object-cover rounded-lg bg-black/10">
+                        <div class="flex-1">
+                            <h3 class="font-semibold">${item.name || 'Produkt'}</h3>
+                            <p class="text-sm text-gray-500">${item.dosage || ''}</p>
+                            <p class="text-sm">Ilość: ${quantity}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-biotune-red">${itemTotal.toFixed(2)} zł</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            totalElement.textContent = total.toFixed(2) + ' zł';
+        }
+
+        function setupAgreementListeners() {
+            const checkboxes = document.querySelectorAll('#checkout-agreements input[type="checkbox"]');
+            const submitBtn = document.getElementById('final-checkout-btn');
+            const errorMsg = document.getElementById('agreements-error');
+            const downloadSection = document.getElementById('download-section');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateButtonState);
+            });
+
+            function updateButtonState() {
+                const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+                if (allChecked) {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    submitBtn.classList.add('hover:bg-red-600', 'shadow-lg', 'hover:shadow-[0_0_20px_rgba(255,0,0,0.4)]');
+                    errorMsg.classList.add('hidden');
+                    downloadSection.classList.remove('hidden');
+                } else {
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    submitBtn.classList.remove('hover:bg-red-600', 'shadow-lg', 'hover:shadow-[0_0_20px_rgba(255,0,0,0.4)]');
+                    downloadSection.classList.add('hidden');
+                }
+            }
+
+            // Handle form submission
+            submitBtn.addEventListener('click', handleFinalCheckout);
+
+            // Handle download
+            document.getElementById('download-agreement-btn').addEventListener('click', downloadAgreement);
+        }
+
+        function handleFinalCheckout() {
+            const checkboxes = document.querySelectorAll('#checkout-agreements input[type="checkbox"]');
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            const errorMsg = document.getElementById('agreements-error');
+
+            if (!allChecked) {
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            // Gather agreement data
+            const agreementData = {
+                terms: document.getElementById('agreement-terms').checked,
+                ruo: document.getElementById('agreement-ruo').checked,
+                responsibility: document.getElementById('agreement-responsibility').checked,
+                timestamp: Date.now(),
+                version: REGULAMIN_VERSION,
+                shippingName: document.getElementById('shipping-name').value,
+                shippingEmail: document.getElementById('shipping-email').value,
+                paymentMethod: document.querySelector('input[name="payment"]:checked')?.value,
+                cartHash: calculateCartHash()
+            };
+
+            // Save to localStorage
+            localStorage.setItem('biotune_agreements', JSON.stringify(agreementData));
+
+            console.log('[BioTune Checkout] Agreement accepted:', agreementData);
+
+            // Attempt to POST to server
+            postAgreementToServer(agreementData);
+
+            // Show success and redirect (placeholder)
+            alert('Zamówienie zostało złożone!\n\n(Integracja z bramką płatniczą w przygotowaniu)');
+
+            // Clear cart after successful checkout
+            localStorage.removeItem('biotune_cart');
+            window.location.href = 'index.html';
+        }
+
+        function calculateCartHash() {
+            const cart = JSON.parse(localStorage.getItem('biotune_cart') || '[]');
+            const str = JSON.stringify(cart);
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = ((hash << 5) - hash) + str.charCodeAt(i);
+                hash = hash & hash;
+            }
+            return 'cart_' + Math.abs(hash).toString(16);
+        }
+
+        async function postAgreementToServer(data) {
+            try {
+                const response = await fetch('/api/agreements', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (response.ok) {
+                    console.log('[BioTune Checkout] Agreement posted to server');
+                }
+            } catch (error) {
+                console.warn('[BioTune Checkout] Server unavailable, saved to localStorage');
+            }
+        }
+
+        function downloadAgreement() {
+            const agreementData = {
+                terms: document.getElementById('agreement-terms').checked,
+                ruo: document.getElementById('agreement-ruo').checked,
+                responsibility: document.getElementById('agreement-responsibility').checked,
+                timestamp: Date.now(),
+                version: REGULAMIN_VERSION,
+                downloadedAt: new Date().toISOString()
+            };
+
+            const blob = new Blob([JSON.stringify(agreementData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `biotune-zgoda-${Date.now()}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+
+</html>

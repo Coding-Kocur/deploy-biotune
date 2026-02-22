@@ -42,6 +42,6 @@
 
     window.declineDisclaimer = function () {
         // Redirect back to shop
-        window.location.href = 'index.html#shop';
+        window.location.href = 'shop.html';
     };
 })();
