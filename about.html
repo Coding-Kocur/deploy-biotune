@@ -28,6 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="./css/custom.css">
     <link rel='icon' type='image/png' href='./assets/favicon.png'>
     <style>
@@ -312,7 +313,7 @@
             <section class="w-screen flex-shrink-0 flex flex-col lg:flex-row bg-transparent"
                 style="height:100vh; overflow:visible;">
                 <!-- Content LEFT -->
-                <div class="w-full lg:w-4/5 p-6 lg:p-10 flex flex-col justify-start pt-24">
+                <div class="w-full lg:w-4/5 p-6 lg:p-10 flex flex-col justify-start pt-8">
                     <h2 class="text-sm font-mono text-biotune-red mb-6 tracking-[0.2em] uppercase">Jakość i Kontrola
                     </h2>
                     <div class="hero-v3-anim mb-6">
@@ -833,8 +834,14 @@
                     scrollTrigger: {
                         trigger: "#horizontal-scroll-wrapper",
                         pin: true,
-                        scrub: 0.5,
+                        scrub: 1,
                         anticipatePin: 1,
+                        snap: {
+                            snapTo: 1 / (sections.length - 1),
+                            duration: { min: 0.3, max: 0.6 },
+                            delay: 0.5,
+                            ease: "power2.inOut"
+                        },
                         end: () => "+=" + (window.innerHeight * sections.length),
                         invalidateOnRefresh: true,
                         onUpdate: (self) => {
@@ -850,7 +857,7 @@
                             }
 
                             // Reset when going back to section 1
-                            if (currentIdx < 1 && window.precyzjaAnimated) {
+                            if (self.progress < 0.15 && window.precyzjaAnimated) {
                                 window.precyzjaAnimated = false;
                                 document.querySelectorAll('.precyzja-word').forEach(word => {
                                     word.style.transition = 'none';
@@ -884,6 +891,32 @@
 
             // Precyzja animation is handled via onUpdate in ScrollTrigger above
         });
+    </script>
+
+    <!-- Lenis smooth scroll + GSAP scrollerProxy -->
+    <script>
+        const lenis = new Lenis({
+            duration: 0.8,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+        ScrollTrigger.scrollerProxy(document.body, {
+            scrollTop(value) {
+                if (arguments.length) {
+                    lenis.scrollTo(value, { immediate: true });
+                }
+                return lenis.scroll;
+            },
+            getBoundingClientRect() {
+                return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+            },
+        });
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
     </script>
 
 </body>
