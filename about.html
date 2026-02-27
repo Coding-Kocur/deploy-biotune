@@ -1,0 +1,892 @@
+﻿<!DOCTYPE html>
+<html lang="pl" class="dark" style="scroll-behavior: smooth;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Nas - BioTune</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'biotune-black': '#050505',
+                        'biotune-dark': '#0a0a0a',
+                        'biotune-red': '#ff0000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel='icon' type='image/png' href='./assets/favicon.png'>
+    <style>
+        /* Feature Cards */
+        .feature-card {
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.08) 0%, #0a0a0a 100%);
+            border-color: #ff0000;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px -10px rgba(255, 0, 0, 0.15);
+        }
+
+        /* Icon Line Glow Effect */
+        .feature-icon-card svg {
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .feature-icon-card:hover svg {
+            filter: drop-shadow(0 0 6px #ff0000) drop-shadow(0 0 12px #ff0000) drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+        }
+
+        /* Red Glow Effect */
+        .red-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.15) 0%, rgba(255, 0, 0, 0.05) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            filter: blur(80px);
+            opacity: 0.6;
+            transition: transform 0.3s ease-out, opacity 0.5s ease;
+        }
+
+        .red-glow.near-text {
+            opacity: 0.9;
+            filter: blur(60px);
+        }
+
+        /* Account Dropdown */
+        .account-dropdown {
+            position: relative;
+        }
+
+        .account-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 1rem;
+            width: 240px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+
+        .dark .account-menu {
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .account-dropdown:hover .account-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+    <style>
+        html {
+            scroll-behavior: smooth !important;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white font-sans antialiased selection:bg-biotune-red selection:text-white overflow-x-hidden">
+
+    <!-- Subtle Red Glow Effect -->
+    <div class="red-glow" id="redGlow"></div>
+
+    <!-- Navigation (Same as Index) -->
+    <nav
+        class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-24">
+                <!-- Left: Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6 relative z-10">
+                    <a href="index.html"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
+                        główna</a>
+                    <div class="dropdown-trigger">
+                        <a href="shop.html"
+                            class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
+                            Sklep
+                            <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="py-1 max-h-80 overflow-y-auto">
+                                <a href="shop.html"
+                                    class="block px-4 py-2 text-sm font-semibold text-biotune-red hover:bg-black/20 border-b border-white/10">Wszystkie</a>
+                                <a href="product.html?id=retatrutide"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Retatrutide</a>
+                                <a href="product.html?id=bpc-157-tb-500"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">BPC-157 + TB-500</a>
+                                <a href="product.html?id=cjc-1295-ipamorelin"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">CJC-1295 +
+                                    Ipamorelin</a>
+                                <a href="product.html?id=hgh-fragment-176-191"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">HGH Fragment
+                                    176-191</a>
+                                <a href="product.html?id=ghk-cu"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">GHK-Cu</a>
+                                <a href="product.html?id=melanotan-2"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Melanotan 2</a>
+                                <a href="product.html?id=pt-141"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">PT-141</a>
+                                <a href="product.html?id=epithalon"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Epithalon</a>
+                                <a href="product.html?id=mots-c"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">MOTS-c</a>
+                                <a href="product.html?id=semax"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Semax</a>
+                                <a href="product.html?id=selank"
+                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Selank</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html"
+                        class="text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O Nas</a>
+                    <a href="index.html#contact"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
+                </div>
+
+                <!-- Center: Logo (Dual version for dark/light mode) -->
+                <div class="absolute left-1/2 transform -translate-x-1/2">
+                    <a href="index.html" class="flex items-center">
+                        <!-- Light mode logo -->
+                        <img src="./assets/biotune-logo-transparent.png" alt="BioTune"
+                            class="h-60 w-auto block dark:hidden">
+                        <!-- Dark mode logo -->
+                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
+                            class="h-60 w-auto hidden dark:block">
+                    </a>
+                </div>
+
+                <!-- Right: Icons -->
+                <div class="flex items-center gap-4 ml-auto relative z-10">
+                    <!-- Account dropdown -->
+                    <div class="account-dropdown">
+                        <a href="login.html" id="account-link" class="hover:text-biotune-red transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            </svg>
+                        </a>
+                        <div id="account-menu" class="account-menu">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Zaloguj się, aby kontynuować</p>
+                            <div class="space-y-2">
+                                <a href="login.html"
+                                    class="block w-full text-center bg-biotune-red text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">
+                                    Zaloguj się
+                                </a>
+                                <a href="register.html"
+                                    class="block w-full text-center border border-gray-300 dark:border-white/20 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors font-medium">
+                                    Zarejestruj się
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart with tooltip -->
+                    <div class="relative group">
+                        <button id="cart-trigger" class="relative hover:text-biotune-red transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+                            <span id="cart-count"
+                                class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                        </button>
+                        <!-- Tooltip -->
+                        <div
+                            class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-biotune-red text-white text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">
+                            Koszyk
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Blur Overlay for scroll effect -->
+    <div class="content-blur-overlay" id="content-blur"></div>
+
+
+    <!-- Horizontal Scroll Section -->
+    <div id="horizontal-scroll-wrapper" class="w-full overflow-hidden bg-transparent" style="height:100vh;">
+        <div id="horizontal-scroll-content" class="flex w-[300vw] will-change-transform" style="height:100vh;">
+            <!-- 1. O Nas / Misja -->
+            <section
+                class="w-screen flex-shrink-0 overflow-y-auto overflow-x-hidden flex flex-col lg:flex-row-reverse bg-transparent"
+                style="height:100vh;">
+                <!-- Content RIGHT -->
+                <div class="w-full lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center">
+                    <h2 class="text-sm font-mono text-biotune-red mb-12 tracking-[0.2em] uppercase">Nasza Misja</h2>
+                    <div class="mission-accordion space-y-0 border-t border-white/10">
+                        <!-- Item 1 -->
+                        <div class="mission-item py-12 border-b border-white/10 relative">
+                            <div class="mission-progress absolute top-0 left-0 h-[2px] bg-biotune-red w-0"></div>
+                            <h3
+                                class="text-3xl md:text-5xl font-bold text-gray-700 mb-4 transition-colors duration-500">
+                                Wspieranie Innowacji</h3>
+                            <div class="mission-content overflow-hidden transition-all duration-700"
+                                style="max-height: 200px; opacity: 1;">
+                                <p class="text-lg text-gray-400 leading-relaxed">
+                                    Naszym celem jest wspieranie innowacji w badaniach nad związkami peptydowymi
+                                    poprzez
+                                    dostarczanie odczynników o przejrzystej i potwierdzonej jakości.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="mission-item py-12 border-b border-white/10 relative">
+                            <div class="mission-progress absolute top-0 left-0 h-[2px] bg-biotune-red w-0"></div>
+                            <h3
+                                class="text-3xl md:text-5xl font-bold text-gray-700 mb-4 transition-colors duration-500">
+                                Standardy Rynku</h3>
+                            <div class="mission-content max-h-0 overflow-hidden opacity-0 transition-all duration-700">
+                                <p class="text-lg text-gray-400 leading-relaxed">
+                                    Powstaliśmy jako odpowiedź na brak przejrzystości i niespójne standardy na rynku
+                                    odczynników
+                                    chemicznych.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Item 3 -->
+                        <div class="mission-item py-12 border-b border-white/10 relative">
+                            <div class="mission-progress absolute top-0 left-0 h-[2px] bg-biotune-red w-0"></div>
+                            <h3
+                                class="text-3xl md:text-5xl font-bold text-gray-700 mb-4 transition-colors duration-500">
+                                Dostępność i Komunikacja</h3>
+                            <div class="mission-content max-h-0 overflow-hidden opacity-0 transition-all duration-700">
+                                <p class="text-lg text-gray-400 leading-relaxed">
+                                    Dążymy do tego, aby polska i międzynarodowa społeczność badawcza miała łatwy
+                                    dostęp do
+                                    materiałów spełniających rygorystyczne normy.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Visual LEFT -->
+                <div class="hidden lg:flex w-1/2 bg-transparent items-center justify-center p-12">
+                    <div
+                        class="w-full h-full max-h-[500px] border border-white/10 bg-black rounded-3xl flex flex-col items-center justify-center gap-4">
+                        <div class="w-3/4 h-2 bg-gradient-to-r from-biotune-red to-transparent rounded"></div>
+                        <div class="w-1/2 h-2 bg-gradient-to-r from-biotune-red to-transparent rounded"></div>
+                        <div class="w-2/3 h-2 bg-gradient-to-r from-biotune-red to-transparent rounded"></div>
+                        <p class="mt-8 text-gray-500 font-mono text-sm">TRANSPARENCY_MODE: ON</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Załoga i Idea -->
+            <section class="w-screen flex-shrink-0 flex flex-col lg:flex-row bg-transparent"
+                style="height:100vh; overflow:visible;">
+                <!-- Content LEFT -->
+                <div class="w-full lg:w-4/5 p-6 lg:p-10 flex flex-col justify-start pt-24">
+                    <h2 class="text-sm font-mono text-biotune-red mb-6 tracking-[0.2em] uppercase">Jakość i Kontrola
+                    </h2>
+                    <div class="hero-v3-anim mb-6">
+                        <div class="overflow-hidden pb-4">
+                            <span
+                                class="inline-block text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black text-white leading-[0.85] tracking-tighter precyzja-word"
+                                style="transform:translateY(110%)">Precyzja</span>
+                        </div>
+                        <div class="overflow-hidden pb-4">
+                            <span
+                                class="inline-block text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black text-white leading-[0.85] tracking-tighter precyzja-word"
+                                style="transform:translateY(110%)">w każdym</span>
+                        </div>
+                        <div class="overflow-hidden pb-4">
+                            <span
+                                class="inline-block text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black text-white leading-[0.85] tracking-tighter precyzja-word"
+                                style="transform:translateY(110%)">miligramie</span>
+                        </div>
+                    </div>
+                    <div class="prose prose-invert prose-lg text-gray-400">
+                        <p class="leading-relaxed mb-6">
+                            Każda partia naszych produktów przechodzi rygorystyczne testy czystości (HPLC) oraz
+                            identyfikacji
+                            strukturalnej (MS). Dzięki temu masz pewność, że pracujesz na materiale o najwyższym
+                            standardzie.
+                        </p>
+                        <ul class="space-y-4 mt-8">
+                            <li class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
+                                <span>Czystość >99% potwierdzona certyfikatem</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
+                                <span>Pełna identyfikowalność serii</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
+                                <span>Badania w niezależnych laboratoriach</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Visual RIGHT -->
+                <div class="hidden lg:flex w-1/5 bg-transparent items-center justify-center p-4">
+                    <div class="relative w-64 h-64">
+                        <div
+                            class="absolute inset-0 rounded-full border-2 border-biotune-red animate-[spin_10s_linear_infinite]">
+                        </div>
+                        <div
+                            class="absolute inset-4 rounded-full border border-white/20 animate-[spin_15s_linear_infinite_reverse]">
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center flex-col">
+                            <span class="text-4xl font-bold text-white">>98%</span>
+                            <span class="text-xs text-biotune-red font-bold mt-1">HPLC VERIFIED</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Wiedza i Odpowiedzialność -->
+            <section id="wiedza"
+                class="w-screen flex-shrink-0 overflow-y-auto overflow-x-hidden flex flex-col justify-start items-center pt-24 px-4 bg-transparent relative"
+                style="height:100vh;">
+                <div class="max-w-7xl mx-auto w-full">
+                    <h2 class="text-6xl lg:text-7xl font-bold mb-20 text-center wiedza-title">Wiedza i Odpowiedzialność
+                    </h2>
+
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20">
+                        <!-- Feature 1: Przeznaczenie -->
+                        <div
+                            class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
+                            <!-- Minimalistic Line Icon - Beaker/Flask -->
+                            <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5"
+                                    class="w-full h-full">
+                                    <path d="M18 6h12M20 6v14l-8 16a2 2 0 001.8 3h20.4a2 2 0 001.8-3l-8-16V6"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M16 32h16" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-3">Przeznaczenie</h3>
+                            <!-- Description - Hidden until hover -->
+                            <p
+                                class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
+                                Działamy w oparciu o jasne zasady odpowiedzialności. Wszystkie oferowane przez nas
+                                substancje są
+                                odczynnikami chemicznymi przeznaczonymi wyłącznie do celów badawczych, naukowych i
+                                analitycznych.
+                            </p>
+                        </div>
+
+                        <!-- Feature 2: Czym są peptydy? -->
+                        <div
+                            class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
+                            <!-- Minimalistic Line Icon - Molecular Chain -->
+                            <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5"
+                                    class="w-full h-full">
+                                    <circle cx="12" cy="24" r="4" />
+                                    <circle cx="24" cy="14" r="4" />
+                                    <circle cx="36" cy="24" r="4" />
+                                    <circle cx="24" cy="34" r="4" />
+                                    <line x1="16" y1="22" x2="20" y2="16" />
+                                    <line x1="28" y1="16" x2="32" y2="22" />
+                                    <line x1="32" y1="26" x2="28" y2="32" />
+                                    <line x1="20" y1="32" x2="16" y2="26" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-3">Czym są peptydy?</h3>
+                            <!-- Description - Hidden until hover -->
+                            <p
+                                class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
+                                W centrum naszej oferty znajdują się peptydy â€” krótkie łańcuchy aminokwasów
+                                połączonych
+                                wiązaniami peptydowymi. Chemicznie stanowią one precyzyjne, łatwe do charakterystyki
+                                molekuły.
+                            </p>
+                        </div>
+
+                        <!-- Feature 3: Gwarancja -->
+                        <div
+                            class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
+                            <!-- Minimalistic Line Icon - Shield with Checkmark -->
+                            <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5"
+                                    class="w-full h-full">
+                                    <path d="M24 4L6 12v12c0 11 8 17 18 20 10-3 18-9 18-20V12L24 4z"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M16 24l6 6 10-12" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-3">Gwarancja</h3>
+                            <!-- Description - Hidden until hover -->
+                            <p
+                                class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
+                                Kupując produkty BioTune, otrzymują Państwo odczynniki, których parametry zostały
+                                rzetelnie
+                                zweryfikowane. Regularnie powtarzamy procedury testowe, aby zapewnić stałą jakość
+                                między
+                                seriami.
+                            </p>
+                        </div>
+
+                        <!-- Feature 4: Potencjał peptydów -->
+                        <div
+                            class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
+                            <!-- Minimalistic Line Icon - Rising Graph/Potential -->
+                            <div class="w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110">
+                                <svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5"
+                                    class="w-full h-full">
+                                    <path d="M6 38l10-10 8 6 18-22" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M32 12h10v10" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-white mb-3">Potencjał peptydów</h3>
+                            <!-- Description - Hidden until hover -->
+                            <p
+                                class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
+                                Peptydy są jedną z najbardziej obiecujących grup związków we współczesnej chemii
+                                biomolekularnej. Charakteryzują się zdolnością do selektywnego oddziaływania z
+                                określonymi
+                                strukturami biologicznymi.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="text-center wiedza-cta">
+                        <a href="shop.html"
+                            class="inline-block bg-biotune-red hover:bg-red-600 text-white font-bold py-4 px-10 rounded-lg uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,0,0,0.4)] hover:-translate-y-1">
+                            Zobacz Ofertę
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Gradient transition into newsletter -->
+    <div class="h-24 bg-gradient-to-b from-black to-[#0d0000]"></div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Dołącz do naszego newslettera</h2>
+        <form class="newsletter-form">
+            <div class="newsletter-input-group">
+                <input type="email" class="newsletter-input" placeholder="Podaj adres email" required>
+                <button type="submit" class="newsletter-button">Zapisz się</button>
+            </div>
+            <label class="newsletter-consent">
+                <input type="checkbox" required>
+                <span>Wyrażam zgodę na przetwarzanie podanych powyżej danych osobowych w celu otrzymywania
+                    newslettera.</span>
+            </label>
+            <div class="newsletter-feedback"></div>
+        </form>
+    </section>
+
+    <!-- Footer -->
+
+    <!-- Gradient transition out of newsletter -->
+    <div class="h-16 bg-gradient-to-b from-transparent to-black"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-black relative overflow-hidden">
+        <div class="max-w-3xl mx-auto px-4 relative z-10">
+            <h2 class="text-3xl font-bold mb-8 text-center text-white">SKONTAKTUJ SIĘ Z NAMI</h2>
+            <form class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Imię</label>
+                    <input type="text"
+                        class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                    <input type="email"
+                        class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Wiadomość</label>
+                    <textarea rows="4"
+                        class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white"></textarea>
+                </div>
+                <button type="button"
+                    class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">WYŚLIJ
+                    WIADOMOŚĆ</button>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-[#121212] pt-16 pb-8 border-t border-white/10 relative overflow-hidden z-20 w-full mt-12 mb-0">
+        <!-- Glowing Background orb -->
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-biotune-red/5 blur-[120px] rounded-full pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+                <!-- Logo & Bio -->
+                <div class="lg:col-span-2">
+                    <a href="index.html" class="inline-block mb-6">
+                        <span class="text-3xl font-bold text-white tracking-tighter">Bio<span
+                                class="text-biotune-red">Tune</span></span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed max-w-sm">
+                        Ekspert w dziedzinie odczynników chemicznych do celów laboratoryjnych i innowacyjnych rozwiązań
+                        badawczych. Dostarczamy najwyższą jakość potwierdzoną dokumentacją.
+                    </p>
+                </div>
+
+                <!-- Kategorie -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Kategorie</h4>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors text-sm">Strona
+                                główna</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">O
+                                nas</a></li>
+                        <li><a href="shop.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Sklep</a></li>
+                    </ul>
+                </div>
+
+                <!-- Informacja -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Informacja</h4>
+                    <ul class="space-y-4">
+                        <li><a href="regulamin.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Regulamin sklepu</a>
+                        </li>
+                        <li><a href="privacy.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Polityka
+                                prywatności</a></li>
+                        <li><a href="#contact"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Kontakt</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="w-full h-px bg-white/10 mb-8" id="footer-contact"></div>
+
+            <!-- Contact & Socials -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+                <div class="flex flex-col sm:flex-row gap-8">
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <div
+                            class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:bg-biotune-red group-hover:border-biotune-red transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5 text-gray-300 group-hover:text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">E-mail informacyjny</p>
+                            <p class="text-white text-sm font-medium">kontakt@biotune.pl</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <!-- Instagram -->
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center md:text-left text-[11px] text-gray-500 font-mono">
+                &copy; 2026 BioTune. Wszelkie prawa zastrzeżone. Projekt o charakterze wyłącznie badawczym i naukowym.
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer"
+        class="fixed inset-y-0 right-0 w-full sm:w-96 bg-black border-l border-white/10 transform translate-x-full transition-transform duration-300 z-[60] shadow-2xl flex flex-col text-white">
+        <div class="p-6 border-b border-white/10 flex justify-between items-center">
+            <h2 class="text-xl font-bold">Twój Koszyk</h2>
+            <button id="close-cart" class="text-gray-400 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <p class="text-center text-gray-500 mt-10">Twój koszyk jest pusty.</p>
+        </div>
+        <div class="p-6 border-t border-white/10 bg-black/20">
+            <div class="flex justify-between items-center mb-4 text-lg font-bold"><span>Suma:</span><span
+                    id="cart-total">0.00 PLN</span></div>
+            <button id="checkout-btn"
+                class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">Przejdź
+                do kasy</button>
+        </div>
+    </div>
+    <div id="overlay"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300">
+    </div>
+
+    <!-- Scripts -->
+    <script src="./js/products-data.js"></script>
+    <script src="./js/shop.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/auth.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Mission Accordion Animation (7s per section, loops)
+        const missionContainer = document.querySelector('.mission-accordion');
+        const missionItems = document.querySelectorAll('.mission-item');
+
+        if (missionContainer && missionItems.length > 0) {
+            const missionTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: missionContainer,
+                    start: "top 60%",
+                    toggleActions: "play none none none",
+                },
+                repeat: -1,
+                repeatDelay: 0.5
+            });
+
+            const item1 = missionItems[0];
+            const progress1 = item1.querySelector('.mission-progress');
+            const title1 = item1.querySelector('h3');
+            const content1 = item1.querySelector('.mission-content');
+
+            missionTimeline
+                .to(title1, { color: "#ffffff", duration: 0.3 }, 0)
+                .to(content1, { maxHeight: "200px", opacity: 1, duration: 0.5 }, 0)
+                .to(progress1, { width: "100%", duration: 7, ease: "none" }, 0);
+
+            if (missionItems[1]) {
+                const item2 = missionItems[1];
+                const progress2 = item2.querySelector('.mission-progress');
+                const title2 = item2.querySelector('h3');
+                const content2 = item2.querySelector('.mission-content');
+
+                missionTimeline
+                    .to(title1, { color: "#52525b", duration: 0.3 }, 7)
+                    .to(content1, { maxHeight: "0px", opacity: 0, duration: 0.3 }, 7)
+                    .to(progress1, { width: "0%", duration: 0 }, 7) // Instant reset
+                    .to(title2, { color: "#ffffff", duration: 0.3 }, 7.3)
+                    .to(content2, { maxHeight: "200px", opacity: 1, duration: 0.5 }, 7.3)
+                    .to(progress2, { width: "100%", duration: 7, ease: "none" }, 7.5);
+            }
+
+            if (missionItems[2]) {
+                const item2 = missionItems[1];
+                const title2 = item2.querySelector('h3');
+                const content2 = item2.querySelector('.mission-content');
+                const progress2 = item2.querySelector('.mission-progress');
+
+                const item3 = missionItems[2];
+                const progress3 = item3.querySelector('.mission-progress');
+                const title3 = item3.querySelector('h3');
+                const content3 = item3.querySelector('.mission-content');
+
+                missionTimeline
+                    .to(title2, { color: "#52525b", duration: 0.3 }, 14.5)
+                    .to(content2, { maxHeight: "0px", opacity: 0, duration: 0.3 }, 14.5)
+                    .to(progress2, { width: "0%", duration: 0 }, 14.5) // Instant reset
+                    .to(title3, { color: "#ffffff", duration: 0.3 }, 14.8)
+                    .to(content3, { maxHeight: "200px", opacity: 1, duration: 0.5 }, 14.8)
+                    .to(progress3, { width: "100%", duration: 7, ease: "none" }, 15);
+
+                missionTimeline
+                    .to(title3, { color: "#52525b", duration: 0.3 }, 22)
+                    .to(content3, { maxHeight: "0px", opacity: 0, duration: 0.3 }, 22)
+                    .to(progress3, { width: "0%", duration: 0 }, 22) // Instant reset
+                    .to(content1, { maxHeight: "200px", opacity: 1, duration: 0.3 }, 22.3);
+            }
+        }
+
+        // Red Glow Scroll Animation
+        const redGlow = document.getElementById('redGlow');
+        const textSections = document.querySelectorAll('section');
+        let currentY = 0;
+        let targetY = 0;
+        let currentX = window.innerWidth * 0.6;
+        let targetX = window.innerWidth * 0.6;
+
+        // Update glow position based on scroll
+        function updateGlowPosition() {
+            const scrollY = window.scrollY;
+            const viewportHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
+
+            // Move glow vertically with scroll (slightly offset)
+            targetY = (scrollY * 0.3) + (viewportHeight * 0.3);
+
+            // Horizontal sway based on scroll
+            const scrollProgress = scrollY / (docHeight - viewportHeight);
+            targetX = window.innerWidth * 0.3 + Math.sin(scrollProgress * Math.PI * 4) * 200;
+
+            // Smooth interpolation
+            currentY += (targetY - currentY) * 0.08;
+            currentX += (targetX - currentX) * 0.08;
+
+            // Check proximity to text sections
+            let nearText = false;
+            textSections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionCenter = rect.top + rect.height / 2;
+                const glowCenter = viewportHeight * 0.5;
+
+                if (Math.abs(sectionCenter - glowCenter) < 300) {
+                    nearText = true;
+                }
+            });
+
+            // Apply position and state
+            redGlow.style.transform = `translate(${currentX - 300}px, ${currentY - 300}px)`;
+
+            if (nearText) {
+                redGlow.classList.add('near-text');
+            } else {
+                redGlow.classList.remove('near-text');
+            }
+
+            requestAnimationFrame(updateGlowPosition);
+        }
+
+        updateGlowPosition();
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            currentX = window.innerWidth * 0.6;
+            targetX = window.innerWidth * 0.6;
+        });
+    </script>
+
+    <!-- Theme Toggle Script -->
+    <script>
+
+
+        // Navbar scroll effect
+        const nav = document.querySelector('nav.glass');
+        const contentBlur = document.getElementById('content-blur');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+                if (contentBlur) contentBlur.classList.add('active');
+            } else {
+                nav.classList.remove('scrolled');
+                if (contentBlur) contentBlur.classList.remove('active');
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+            gsap.registerPlugin(ScrollTrigger);
+
+            const sections = gsap.utils.toArray("#horizontal-scroll-content > section");
+            const content = document.getElementById('horizontal-scroll-content');
+
+            if (sections.length > 0 && content) {
+                let tween = gsap.to(sections, {
+                    xPercent: -100 * (sections.length - 1),
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: "#horizontal-scroll-wrapper",
+                        pin: true,
+                        scrub: 0.5,
+                        anticipatePin: 1,
+                        end: () => "+=" + (window.innerHeight * sections.length),
+                        invalidateOnRefresh: true,
+                        onUpdate: (self) => {
+                            // Trigger Precyzja animation early — as soon as section 2 starts to appear
+                            if (self.progress > 0.15 && !window.precyzjaAnimated) {
+                                window.precyzjaAnimated = true;
+                                document.querySelectorAll('.precyzja-word').forEach((word, idx) => {
+                                    setTimeout(() => {
+                                        word.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                                        word.style.transform = 'translateY(0%)';
+                                    }, idx * 150);
+                                });
+                            }
+
+                            // Reset when going back to section 1
+                            if (currentIdx < 1 && window.precyzjaAnimated) {
+                                window.precyzjaAnimated = false;
+                                document.querySelectorAll('.precyzja-word').forEach(word => {
+                                    word.style.transition = 'none';
+                                    word.style.transform = 'translateY(110%)';
+                                });
+                            }
+
+                            // Wiedza section animation
+                            if (self.progress > 0.85 && !window.wiedzaAnimated) {
+                                window.wiedzaAnimated = true;
+                                gsap.to('.wiedza-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
+                                gsap.to('.wiedza-item', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', delay: 0.3 });
+                                gsap.to('.wiedza-cta', { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.2 });
+                            }
+                        }
+                    }
+                });
+
+                // Recalculate on resize/zoom
+                window.addEventListener('resize', () => {
+                    ScrollTrigger.refresh();
+                });
+            }
+
+            // Set initial states for Wiedza section
+            if (window.gsap) {
+                gsap.set('.wiedza-title', { opacity: 0, y: -30 });
+                gsap.set('.wiedza-item', { opacity: 0, y: 50 });
+                gsap.set('.wiedza-cta', { opacity: 0, scale: 0.8 });
+            }
+
+            // Precyzja animation is handled via onUpdate in ScrollTrigger above
+        });
+    </script>
+
+</body>
+
+
+</html>

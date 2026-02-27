@@ -1,0 +1,505 @@
+﻿<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasa - BioTune</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'biotune-black': '#0a0a0a',
+                        'biotune-dark': '#1a1a1a',
+                        'biotune-red': '#ff0000',
+                        'biotune-text': '#cccccc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel='icon' type='image/png' href='./assets/favicon.png'>
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased min-h-screen">
+
+    <!-- Simple Header -->
+    <header class="bg-white dark:bg-biotune-dark border-b border-black/10 dark:border-white/10 py-4">
+        <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-gray-500 hover:text-biotune-red transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+                Wróć do sklepu
+            </a>
+            <a href="index.html">
+                <img src="./assets/biotune-logo-transparent.png" alt="BioTune" class="h-12 w-auto block dark:hidden">
+                <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="h-12 w-auto hidden dark:block">
+            </a>
+            <div class="w-24"></div> <!-- Spacer for centering -->
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8 text-center">Podsumowanie zamówienia</h1>
+
+        <!-- Order Summary -->
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <!-- Left Column: Cart Items -->
+            <div class="bg-white dark:bg-biotune-dark rounded-xl p-6 border border-black/10 dark:border-white/10">
+                <h2 class="text-xl font-bold mb-4">Twoje produkty</h2>
+                <div id="checkout-cart-items" class="space-y-4 mb-6">
+                    <!-- Items will be populated by JS -->
+                </div>
+                <div class="border-t border-black/10 dark:border-white/10 pt-4">
+                    <div class="flex justify-between items-center text-lg font-bold">
+                        <span>Suma:</span>
+                        <span id="checkout-total" class="text-biotune-red">0.00 zł</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Shipping & Payment -->
+            <div class="space-y-6">
+                <!-- Shipping Info (placeholder) -->
+                <div class="bg-white dark:bg-biotune-dark rounded-xl p-6 border border-black/10 dark:border-white/10">
+                    <h2 class="text-xl font-bold mb-4">Dane do wysyłki</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Imię i
+                                nazwisko</label>
+                            <input type="text" id="shipping-name"
+                                class="w-full bg-gray-50 dark:bg-black/30 border border-gray-300 dark:border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-biotune-red transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Email</label>
+                            <input type="email" id="shipping-email"
+                                class="w-full bg-gray-50 dark:bg-black/30 border border-gray-300 dark:border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-biotune-red transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Adres</label>
+                            <input type="text" id="shipping-address"
+                                class="w-full bg-gray-50 dark:bg-black/30 border border-gray-300 dark:border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-biotune-red transition-colors">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Kod
+                                    pocztowy</label>
+                                <input type="text" id="shipping-zip"
+                                    class="w-full bg-gray-50 dark:bg-black/30 border border-gray-300 dark:border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-biotune-red transition-colors">
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Miasto</label>
+                                <input type="text" id="shipping-city"
+                                    class="w-full bg-gray-50 dark:bg-black/30 border border-gray-300 dark:border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-biotune-red transition-colors">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Method (placeholder) -->
+                <div class="bg-white dark:bg-biotune-dark rounded-xl p-6 border border-black/10 dark:border-white/10">
+                    <h2 class="text-xl font-bold mb-4">Metoda płatności</h2>
+                    <div class="space-y-3">
+                        <label
+                            class="flex items-center gap-3 p-3 border border-gray-300 dark:border-white/20 rounded-lg cursor-pointer hover:border-biotune-red transition-colors">
+                            <input type="radio" name="payment" value="blik"
+                                class="text-biotune-red focus:ring-biotune-red" checked>
+                            <span>BLIK</span>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 p-3 border border-gray-300 dark:border-white/20 rounded-lg cursor-pointer hover:border-biotune-red transition-colors">
+                            <input type="radio" name="payment" value="card"
+                                class="text-biotune-red focus:ring-biotune-red">
+                            <span>Karta płatnicza</span>
+                        </label>
+                        <label
+                            class="flex items-center gap-3 p-3 border border-gray-300 dark:border-white/20 rounded-lg cursor-pointer hover:border-biotune-red transition-colors">
+                            <input type="radio" name="payment" value="transfer"
+                                class="text-biotune-red focus:ring-biotune-red">
+                            <span>Przelew bankowy</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Required Agreements Section - BEFORE FINAL BUTTON -->
+        <div class="mt-8 bg-white dark:bg-biotune-dark rounded-xl p-6 border border-black/10 dark:border-white/10">
+            <h2 class="text-xl font-bold mb-4">Wymagane zgody</h2>
+            <div id="checkout-agreements" class="space-y-4">
+
+                <!-- Agreement 1: Terms & Privacy -->
+                <div class="flex items-start gap-3">
+                    <input type="checkbox" id="agreement-terms"
+                        class="mt-1 rounded border-gray-300 dark:border-gray-600 text-biotune-red focus:ring-biotune-red cursor-pointer"
+                        required>
+                    <label for="agreement-terms"
+                        class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed cursor-pointer">
+                        Akceptuję <a href="regulamin.html" target="_blank"
+                            class="text-biotune-red hover:underline">Regulamin sklepu BioTune</a>
+                        oraz <a href="privacy.html" target="_blank" class="text-biotune-red hover:underline">Politykę
+                            Prywatności</a>.
+                    </label>
+                </div>
+
+                <!-- Agreement 2: RUO Declaration -->
+                <div class="flex items-start gap-3">
+                    <input type="checkbox" id="agreement-ruo"
+                        class="mt-1 rounded border-gray-300 dark:border-gray-600 text-biotune-red focus:ring-biotune-red cursor-pointer"
+                        required>
+                    <label for="agreement-ruo"
+                        class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed cursor-pointer">
+                        Oświadczam, że zakupione produkty są odczynnikami chemicznymi przeznaczonymi wyłącznie do celów
+                        badawczych
+                        (Research Use Only). Produkt nie jest lekiem, suplementem ani kosmetykiem i nie jest
+                        przeznaczony do spożycia
+                        ani iniekcji u ludzi.
+                    </label>
+                </div>
+
+                <!-- Agreement 3: Responsibility -->
+                <div class="flex items-start gap-3">
+                    <input type="checkbox" id="agreement-responsibility"
+                        class="mt-1 rounded border-gray-300 dark:border-gray-600 text-biotune-red focus:ring-biotune-red cursor-pointer"
+                        required>
+                    <label for="agreement-responsibility"
+                        class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed cursor-pointer">
+                        Przyjmuję do wiadomości, że ponoszę pełną odpowiedzialność za sposób użycia zakupionych
+                        odczynników
+                        chemicznych i że Sprzedawca nie sprawuje nadzoru nad ich wykorzystaniem.
+                    </label>
+                </div>
+
+            </div>
+
+            <!-- Validation Message -->
+            <p id="agreements-error" class="text-red-500 text-sm mt-4 hidden">
+                ⚠️ Proszę zaakceptować wszystkie wymagane zgody przed kontynuowaniem.
+            </p>
+        </div>
+
+        <!-- Final Purchase Button -->
+        <div class="mt-8 text-center">
+            <button id="final-checkout-btn" class="w-full md:w-auto px-12 py-4 bg-biotune-red text-white font-bold text-lg rounded-lg 
+                       opacity-50 cursor-not-allowed transition-all duration-300 uppercase tracking-wider" disabled>
+                🛒 Kupuję i płacę
+            </button>
+            <p class="text-sm text-gray-500 mt-3">
+                Klikając przycisk powyżej, potwierdzasz złożenie zamówienia z obowiązkiem zapłaty.
+            </p>
+        </div>
+
+        <!-- Download Agreement Link (shown after all checked) -->
+        <div id="download-section" class="mt-4 text-center hidden">
+            <button id="download-agreement-btn" class="text-sm text-gray-500 hover:text-biotune-red transition-colors">
+                📥 Pobierz kopię zgody (JSON)
+            </button>
+        </div>
+    </main>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Dołącz do naszego newslettera</h2>
+        <form class="newsletter-form">
+            <div class="newsletter-input-group">
+                <input type="email" class="newsletter-input" placeholder="Podaj adres email" required>
+                <button type="submit" class="newsletter-button">Zapisz się</button>
+            </div>
+            <label class="newsletter-consent">
+                <input type="checkbox" required>
+                <span>Wyrażam zgodę na przetwarzanie podanych powyżej danych osobowych w celu otrzymywania
+                    newslettera.</span>
+            </label>
+            <div class="newsletter-feedback"></div>
+        </form>
+    </section>
+
+    
+    <!-- Footer -->
+    <footer class="bg-[#121212] pt-16 pb-8 border-t border-white/10 relative overflow-hidden z-20 w-full mt-12 mb-0">
+        <!-- Glowing Background orb -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-biotune-red/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+                <!-- Logo & Bio -->
+                <div class="lg:col-span-2">
+                    <a href="index.html" class="inline-block mb-6">
+                        <span class="text-3xl font-bold text-white tracking-tighter">Bio<span class="text-biotune-red">Tune</span></span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed max-w-sm">
+                        Ekspert w dziedzinie odczynników chemicznych do celów laboratoryjnych i innowacyjnych rozwiązań badawczych. Dostarczamy najwyższą jakość potwierdzoną dokumentacją.
+                    </p>
+                </div>
+
+                <!-- Kategorie -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Kategorie</h4>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors text-sm">Strona główna</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">O nas</a></li>
+                        <li><a href="shop.html" class="text-gray-400 hover:text-white transition-colors text-sm">Sklep</a></li>
+                    </ul>
+                </div>
+
+                <!-- Informacja -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Informacja</h4>
+                    <ul class="space-y-4">
+                        <li><a href="regulamin.html" class="text-gray-400 hover:text-white transition-colors text-sm">Regulamin sklepu</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors text-sm">Polityka prywatności</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors text-sm">Kontakt</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="w-full h-px bg-white/10 mb-8" id="footer-contact"></div>
+
+            <!-- Contact & Socials -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+                <div class="flex flex-col sm:flex-row gap-8">
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:bg-biotune-red group-hover:border-biotune-red transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-300 group-hover:text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">E-mail informacyjny</p>
+                            <p class="text-white text-sm font-medium">kontakt@biotune.pl</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <!-- Instagram -->
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center md:text-left text-[11px] text-gray-500 font-mono">
+                &copy; 2026 BioTune. Wszelkie prawa zastrzeżone. Projekt o charakterze wyłącznie badawczym i naukowym.
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="./js/products-data.js"></script>
+    <script src="./js/main.js"></script>
+    <script>
+        // Initialize theme
+        
+
+        const REGULAMIN_VERSION = 'regulamin_2025-01-03';
+
+        // Load cart items on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            loadCartItems();
+            setupAgreementListeners();
+        });
+
+        function loadCartItems() {
+            const cartItemsContainer = document.getElementById('checkout-cart-items');
+            const totalElement = document.getElementById('checkout-total');
+
+            // Get cart from localStorage
+            const cart = JSON.parse(localStorage.getItem('biotune_cart') || '[]');
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <p class="mb-4">Twój koszyk jest pusty.</p>
+                        <a href="index.html#shop" class="text-biotune-red hover:underline">Wróć do sklepu</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Group items by product ID and count quantities
+            const groupedItems = {};
+            cart.forEach(item => {
+                if (groupedItems[item.id]) {
+                    groupedItems[item.id].quantity++;
+                } else {
+                    groupedItems[item.id] = {
+                        ...item,
+                        quantity: 1
+                    };
+                }
+            });
+
+            let total = 0;
+            cartItemsContainer.innerHTML = Object.values(groupedItems).map(item => {
+                const price = item.price || 0;
+                const quantity = item.quantity || 1;
+                const itemTotal = price * quantity;
+                total += itemTotal;
+
+                // Get image path with fallback
+                const imagePath = (item.images && item.images[0]) ? item.images[0] : './assets/product-placeholder.svg';
+
+                return `
+                    <div class="flex items-center gap-4 pb-4 border-b border-black/5 dark:border-white/5">
+                        <img src="${imagePath}" 
+                             alt="${item.name || 'Produkt'}" 
+                             class="w-16 h-16 object-cover rounded-lg bg-black/10">
+                        <div class="flex-1">
+                            <h3 class="font-semibold">${item.name || 'Produkt'}</h3>
+                            <p class="text-sm text-gray-500">${item.dosage || ''}</p>
+                            <p class="text-sm">Ilość: ${quantity}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-biotune-red">${itemTotal.toFixed(2)} zł</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            totalElement.textContent = total.toFixed(2) + ' zł';
+        }
+
+        function setupAgreementListeners() {
+            const checkboxes = document.querySelectorAll('#checkout-agreements input[type="checkbox"]');
+            const submitBtn = document.getElementById('final-checkout-btn');
+            const errorMsg = document.getElementById('agreements-error');
+            const downloadSection = document.getElementById('download-section');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateButtonState);
+            });
+
+            function updateButtonState() {
+                const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+                if (allChecked) {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    submitBtn.classList.add('hover:bg-red-600', 'shadow-lg', 'hover:shadow-[0_0_20px_rgba(255,0,0,0.4)]');
+                    errorMsg.classList.add('hidden');
+                    downloadSection.classList.remove('hidden');
+                } else {
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    submitBtn.classList.remove('hover:bg-red-600', 'shadow-lg', 'hover:shadow-[0_0_20px_rgba(255,0,0,0.4)]');
+                    downloadSection.classList.add('hidden');
+                }
+            }
+
+            // Handle form submission
+            submitBtn.addEventListener('click', handleFinalCheckout);
+
+            // Handle download
+            document.getElementById('download-agreement-btn').addEventListener('click', downloadAgreement);
+        }
+
+        function handleFinalCheckout() {
+            const checkboxes = document.querySelectorAll('#checkout-agreements input[type="checkbox"]');
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            const errorMsg = document.getElementById('agreements-error');
+
+            if (!allChecked) {
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            // Gather agreement data
+            const agreementData = {
+                terms: document.getElementById('agreement-terms').checked,
+                ruo: document.getElementById('agreement-ruo').checked,
+                responsibility: document.getElementById('agreement-responsibility').checked,
+                timestamp: Date.now(),
+                version: REGULAMIN_VERSION,
+                shippingName: document.getElementById('shipping-name').value,
+                shippingEmail: document.getElementById('shipping-email').value,
+                paymentMethod: document.querySelector('input[name="payment"]:checked')?.value,
+                cartHash: calculateCartHash()
+            };
+
+            // Save to localStorage
+            localStorage.setItem('biotune_agreements', JSON.stringify(agreementData));
+
+            console.log('[BioTune Checkout] Agreement accepted:', agreementData);
+
+            // Attempt to POST to server
+            postAgreementToServer(agreementData);
+
+            // Show success and redirect (placeholder)
+            alert('Zamówienie zostało złożone!\n\n(Integracja z bramką płatniczą w przygotowaniu)');
+
+            // Clear cart after successful checkout
+            localStorage.removeItem('biotune_cart');
+            window.location.href = 'index.html';
+        }
+
+        function calculateCartHash() {
+            const cart = JSON.parse(localStorage.getItem('biotune_cart') || '[]');
+            const str = JSON.stringify(cart);
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = ((hash << 5) - hash) + str.charCodeAt(i);
+                hash = hash & hash;
+            }
+            return 'cart_' + Math.abs(hash).toString(16);
+        }
+
+        async function postAgreementToServer(data) {
+            try {
+                const response = await fetch('/api/agreements', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (response.ok) {
+                    console.log('[BioTune Checkout] Agreement posted to server');
+                }
+            } catch (error) {
+                console.warn('[BioTune Checkout] Server unavailable, saved to localStorage');
+            }
+        }
+
+        function downloadAgreement() {
+            const agreementData = {
+                terms: document.getElementById('agreement-terms').checked,
+                ruo: document.getElementById('agreement-ruo').checked,
+                responsibility: document.getElementById('agreement-responsibility').checked,
+                timestamp: Date.now(),
+                version: REGULAMIN_VERSION,
+                downloadedAt: new Date().toISOString()
+            };
+
+            const blob = new Blob([JSON.stringify(agreementData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `biotune-zgoda-${Date.now()}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+
+</html>

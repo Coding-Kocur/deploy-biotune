@@ -1,0 +1,568 @@
+﻿<!DOCTYPE html>
+<html class="scroll-smooth dark" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratory 9 Report - Chip Formation Process</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2.5cm;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            max-width: 21cm;
+            margin: 0 auto;
+            padding: 2cm;
+            background: white;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 5pt;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 14pt;
+            font-style: italic;
+            font-weight: normal;
+            margin-bottom: 20pt;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 20pt;
+            margin-bottom: 10pt;
+        }
+
+        h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 15pt;
+            margin-bottom: 10pt;
+        }
+
+        .header-info {
+            margin-bottom: 20pt;
+        }
+
+        .header-info p {
+            margin: 5pt 0;
+        }
+
+        .header-line {
+            display: inline-block;
+            border-bottom: 1px dotted black;
+            min-width: 150px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10pt 0 20pt 0;
+            font-size: 11pt;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5pt 8pt;
+            text-align: center;
+        }
+
+        th {
+            font-weight: bold;
+            background-color: #f0f0f0;
+        }
+
+        .table-caption {
+            text-align: center;
+            font-style: italic;
+            font-size: 11pt;
+            margin-bottom: 5pt;
+        }
+
+        .figure-space {
+            border: 2px dashed #999;
+            min-height: 200px;
+            margin: 20pt 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fafafa;
+        }
+
+        .figure-space p {
+            color: #666;
+            font-style: italic;
+        }
+
+        .figure-caption {
+            text-align: center;
+            font-size: 11pt;
+            margin-top: 5pt;
+            margin-bottom: 20pt;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 12pt;
+            margin-top: 25pt;
+            margin-bottom: 15pt;
+        }
+
+        .group-table {
+            width: auto;
+            margin: 10pt 0;
+        }
+
+        .group-table td,
+        .group-table th {
+            text-align: left;
+            padding: 3pt 10pt;
+        }
+
+        p {
+            text-align: justify;
+            margin: 10pt 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- COVER PAGE / HEADER -->
+    <table style="width: 100%; border: none; margin-bottom: 30pt;">
+        <tr>
+            <td style="border: none; text-align: left; vertical-align: top; width: 50%;">
+                Business, Society and Technology<br>
+                IFE, 3rd semester
+            </td>
+            <td style="border: none; text-align: right; vertical-align: top;">
+                <strong>LAB REPORT</strong><br>
+                MANUFACTURING
+            </td>
+        </tr>
+    </table>
+
+    <table style="width: 100%; border: 1px solid black; margin-bottom: 20pt;">
+        <tr>
+            <td style="width: 50%;"><strong>Lab no.</strong> 9</td>
+            <td style="width: 50%;"><strong>Title:</strong> Chip Formation Process</td>
+        </tr>
+        <tr>
+            <td colspan="2"><strong>Date of lab:</strong> 21/11/2025</td>
+        </tr>
+    </table>
+
+    <table class="group-table" style="width: 100%; margin-bottom: 30pt;">
+        <tr>
+            <th style="width: 5%;">No.</th>
+            <th style="width: 40%;">SURNAME Name</th>
+            <th style="width: 25%;">Album No.</th>
+            <th style="width: 30%;">Lab group</th>
+        </tr>
+        <tr>
+            <td>1.</td>
+            <td>KOTOWICZ Stanisław</td>
+            <td>257100</td>
+            <td>BST_en_1</td>
+        </tr>
+    </table>
+
+    <!-- INTRODUCTION -->
+    <h3>INTRODUCTION</h3>
+
+    <p>The chip formation process is one of the most fundamental phenomena in metal cutting and machining operations.
+        Understanding the mechanics of chip formation is essential for optimizing machining parameters, improving
+        surface finish quality, extending tool life, and achieving economical material removal rates. This laboratory
+        exercise focuses on the orthogonal cutting model, which provides a simplified two-dimensional representation of
+        the complex three-dimensional cutting process that occurs during turning, milling, and other machining
+        operations.</p>
+
+    <p>During the cutting process, the workpiece material undergoes severe plastic deformation in a narrow zone called
+        the shear plane or primary deformation zone. The material ahead of the cutting tool is sheared along this plane
+        and flows over the rake face of the tool as a chip. The geometry of this deformation process, characterized by
+        the shear angle Φ, determines the efficiency of the cutting operation and significantly influences cutting
+        forces, power consumption, and heat generation.</p>
+
+    <p>The chip ratio, defined as the ratio of chip thickness to uncut chip thickness (or equivalently, the ratio of
+        uncut chip length to chip length), is a critical parameter that provides insight into the degree of plastic
+        deformation occurring during cutting. A chip ratio greater than unity indicates chip thickening, which is the
+        normal condition in metal cutting due to the shearing process. The chip ratio is influenced by several factors
+        including cutting velocity, depth of cut, tool geometry (particularly the rake angle), and the mechanical
+        properties of the workpiece material.</p>
+
+    <p>The objectives of this laboratory exercise were to experimentally investigate the influence of cutting velocity,
+        depth of cut, rake angle, and workpiece material on chip ratios and chip types. By systematically varying these
+        parameters while holding others constant, the fundamental relationships governing chip formation were explored
+        and quantified.</p>
+
+    <!-- EXPERIMENTAL SECTION -->
+    <h3>EXPERIMENTAL</h3>
+
+    <h4>Part 1: Orthogonal Cutting Model</h4>
+
+    <p><strong><u>Task 1.1:</u></strong> An influence of cutting velocity v<sub>c</sub> [mm/min.] on chip ratios</p>
+
+    <p>The first experimental task investigated how changes in cutting velocity affect the chip formation process while
+        maintaining constant rake angle, depth of cut, and workpiece material.</p>
+
+    <p class="table-caption">Table 1. Constant parameters</p>
+    <table>
+        <tr>
+            <th>Rake angle α [°]</th>
+            <th>Depth of cut a<sub>p</sub> [mm]</th>
+            <th>Material</th>
+        </tr>
+        <tr>
+            <td>45</td>
+            <td>0.7</td>
+            <td>aluminum</td>
+        </tr>
+    </table>
+
+    <p class="table-caption">Table 2. Variable parameters</p>
+    <table>
+        <tr>
+            <th>Cutting velocity</th>
+            <th colspan="2">Chip ratio r<sub>l</sub> (length)</th>
+            <th colspan="2">Chip ratio r<sub>t</sub> (thickness)</th>
+            <th>Shear angle Φ [°]</th>
+        </tr>
+        <tr>
+            <td>v<sub>c1</sub> = 11 mm/min</td>
+            <td>l<sub>01</sub> = 18<br>l<sub>c1</sub> = 10</td>
+            <td>r<sub>l1</sub> = 1.8</td>
+            <td>t<sub>01</sub> = 19<br>t<sub>c1</sub> = 23</td>
+            <td>r<sub>t1</sub> = 1.643</td>
+            <td>Φ<sub>1</sub> = 35</td>
+        </tr>
+        <tr>
+            <td>v<sub>c2</sub> = 44 mm/min</td>
+            <td>l<sub>02</sub> = 18<br>l<sub>c2</sub> = 11</td>
+            <td>r<sub>l2</sub> = 1.636</td>
+            <td>t<sub>02</sub> = 15<br>t<sub>c2</sub> = 22</td>
+            <td>r<sub>t2</sub> = 1.467</td>
+            <td>Φ<sub>2</sub> = 34</td>
+        </tr>
+        <tr>
+            <td>v<sub>c3</sub> = 100 mm/min</td>
+            <td>l<sub>03</sub> = 18<br>l<sub>c3</sub> = 11</td>
+            <td>r<sub>l3</sub> = 1.636</td>
+            <td>t<sub>03</sub> = 14<br>t<sub>c3</sub> = 21</td>
+            <td>r<sub>t3</sub> = 1.5</td>
+            <td>Φ<sub>3</sub> = 38</td>
+        </tr>
+    </table>
+
+    <p>The experimental results demonstrate that cutting velocity has a moderate influence on chip ratios within the
+        tested range. As the cutting velocity increased from 11 mm/min to 44 mm/min, the chip ratio based on length
+        measurements decreased slightly from 1.8 to 1.636, while the chip ratio based on thickness measurements
+        decreased from 1.643 to 1.467. This indicates that at higher cutting velocities, there is somewhat less chip
+        compression occurring during the cutting process.</p>
+
+    <p>The shear angle values remained relatively stable across the range of cutting velocities tested, varying between
+        34° and 38°. This stability suggests that while cutting velocity does influence chip formation, its effect on
+        the fundamental geometry of the shear zone is less pronounced compared to other parameters such as rake angle.
+    </p>
+
+    <p>The relationship between cutting velocity and chip ratio can be explained by considering the strain rate effects
+        in metal cutting. At higher cutting velocities, the material experiences higher strain rates in the shear zone,
+        which can lead to strain rate hardening effects. Additionally, higher cutting velocities generate more heat at
+        the tool-chip interface, which can reduce the flow stress of the material and facilitate easier chip flow over
+        the rake face.</p>
+
+    <div style="text-align: center; margin: 20pt 0;">
+        <img src="chart_1.png" alt="Chip ratios vs Cutting velocity" style="max-width: 100%; height: auto;">
+    </div>
+    <p class="figure-caption">Figure 1a. Influence of cutting velocity on chip ratios.<br>Legend: Length - Chip ratio
+        r<sub>l</sub>, Thickness - Chip ratio r<sub>t</sub></p>
+    <div style="text-align: center; margin: 20pt 0;">
+        <img src="chart_2.png" alt="Shear angle vs Cutting velocity" style="max-width: 100%; height: auto;">
+    </div>
+    <p class="figure-caption">Figure 1b. Influence of cutting velocity on shear angle.</p>
+
+    <!-- TASK 1.2 -->
+    <p><strong><u>Task 1.2:</u></strong> An influence of depth of cut t<sub>0</sub> [mm] on chip ratios</p>
+
+    <p>The second experimental task examined the effect of varying the depth of cut on chip formation characteristics
+        while maintaining constant rake angle, cutting velocity, and workpiece material.</p>
+
+    <p class="table-caption">Table 3. Constant parameters</p>
+    <table>
+        <tr>
+            <th>Rake angle α [°]</th>
+            <th>v<sub>c</sub> [mm/min.]</th>
+            <th>Material</th>
+        </tr>
+        <tr>
+            <td>45</td>
+            <td>11</td>
+            <td>aluminum</td>
+        </tr>
+    </table>
+
+    <p class="table-caption">Table 4. Variable parameters</p>
+    <table>
+        <tr>
+            <th>Depth of cut t<sub>0</sub></th>
+            <th colspan="2">Chip ratio r<sub>l</sub> (length)</th>
+            <th colspan="2">Chip ratio r<sub>t</sub> (thickness)</th>
+            <th>Shear angle Φ [°]</th>
+        </tr>
+        <tr>
+            <td>t<sub>01</sub> = 0.4 mm</td>
+            <td>l<sub>01</sub> = 18<br>l<sub>c1</sub> = 11</td>
+            <td>r<sub>l1</sub> = 1.636</td>
+            <td>t<sub>01</sub> = 8<br>t<sub>c1</sub> = 11</td>
+            <td>r<sub>t1</sub> = 1.375</td>
+            <td>Φ<sub>1</sub> = 36</td>
+        </tr>
+        <tr>
+            <td>t<sub>02</sub> = 0.8 mm</td>
+            <td>l<sub>02</sub> = 18<br>l<sub>c2</sub> = 10</td>
+            <td>r<sub>l2</sub> = 1.8</td>
+            <td>t<sub>02</sub> = 16<br>t<sub>c2</sub> = 25</td>
+            <td>r<sub>t2</sub> = 1.563</td>
+            <td>Φ<sub>2</sub> = 36</td>
+        </tr>
+        <tr>
+            <td>t<sub>03</sub> = 1.2 mm</td>
+            <td>l<sub>03</sub> = 18<br>l<sub>c3</sub> = 9</td>
+            <td>r<sub>l3</sub> = 2</td>
+            <td>t<sub>03</sub> = 23<br>t<sub>c3</sub> = 35</td>
+            <td>r<sub>t3</sub> = 1.522</td>
+            <td>Φ<sub>3</sub> = 34</td>
+        </tr>
+    </table>
+
+    <p>The experimental data reveals a clear trend regarding the influence of depth of cut on chip ratios. As the depth
+        of cut increased from 0.4 mm to 1.2 mm, the chip ratio based on length measurements increased progressively from
+        1.636 to 2.0. This indicates that larger depths of cut result in greater chip compression, meaning the chip
+        becomes relatively shorter compared to the uncut chip length.</p>
+
+    <p>The chip ratio based on thickness measurements showed a similar but less pronounced trend, increasing from 1.375
+        at 0.4 mm depth to 1.563 at 0.8 mm depth, then slightly decreasing to 1.522 at 1.2 mm depth. The shear angle
+        remained relatively constant at approximately 35-36° across all depths of cut tested, with only a slight
+        decrease to 34° at the maximum depth.</p>
+
+    <p>The increase in chip ratio with increasing depth of cut can be attributed to several factors. Greater depths of
+        cut result in larger chip cross-sectional areas, which require more energy for plastic deformation. The
+        increased volume of material being deformed per unit time leads to higher temperatures in the cutting zone,
+        which can affect the flow properties of the material and the friction conditions at the tool-chip interface.
+        Additionally, larger chips experience greater constraint as they flow over the rake face, leading to increased
+        compression.</p>
+
+    <div style="text-align: center; margin: 20pt 0;">
+        <img src="chart_3.png" alt="Chip ratios vs Depth of cut" style="max-width: 100%; height: auto;">
+    </div>
+    <p class="figure-caption">Figure 2a. Influence of depth of cut on chip ratios.<br>Legend: Length - Chip ratio
+        r<sub>l</sub>, Thickness - Chip ratio r<sub>t</sub></p>
+    <div style="text-align: center; margin: 20pt 0;">
+        <img src="chart_4.png" alt="Shear angle vs Depth of cut" style="max-width: 100%; height: auto;">
+    </div>
+    <p class="figure-caption">Figure 2b. Influence of depth of cut on shear angle.</p>
+
+    <!-- TASK 1.3 -->
+    <p><strong><u>Task 1.3:</u></strong> An influence of rake angle α [°] on chip ratios</p>
+
+    <p>The third experimental task investigated the effect of tool rake angle on chip formation. The rake angle is one
+        of the most significant tool geometry parameters influencing the cutting process.</p>
+
+    <p class="table-caption">Table 5. Constant parameters</p>
+    <table>
+        <tr>
+            <th>v<sub>c</sub> [mm/min.]</th>
+            <th>Depth of cut t<sub>0</sub> [mm]</th>
+            <th>Material</th>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>0.7</td>
+            <td>aluminum</td>
+        </tr>
+    </table>
+
+    <p class="table-caption">Table 6. Variable parameters</p>
+    <table>
+        <tr>
+            <th>Rake angle [°]</th>
+            <th colspan="2">Chip ratio r<sub>l</sub> (length)</th>
+            <th colspan="2">Chip ratio r<sub>t</sub> (thickness)</th>
+            <th>Shear angle Φ [°]</th>
+        </tr>
+        <tr>
+            <td>α<sub>1</sub> = 45°</td>
+            <td>l<sub>01</sub> = 18<br>l<sub>c1</sub> = 10</td>
+            <td>r<sub>l1</sub> = 1.8</td>
+            <td>t<sub>01</sub> = 14<br>t<sub>c1</sub> = 23</td>
+            <td>r<sub>t1</sub> = 1.643</td>
+            <td>Φ<sub>1</sub> = 35</td>
+        </tr>
+        <tr>
+            <td>α<sub>2</sub> = 35°</td>
+            <td>l<sub>02</sub> = 18<br>l<sub>c2</sub> = 10</td>
+            <td>r<sub>l2</sub> = 1.8</td>
+            <td>t<sub>02</sub> = 13<br>t<sub>c2</sub> = 18</td>
+            <td>r<sub>t2</sub> = 1.385</td>
+            <td>Φ<sub>2</sub> = 35</td>
+        </tr>
+        <tr>
+            <td>α<sub>3</sub> = 25°</td>
+            <td>l<sub>03</sub> = 18<br>l<sub>c3</sub> = 9</td>
+            <td>r<sub>l3</sub> = 2</td>
+            <td>t<sub>03</sub> = 18<br>t<sub>c3</sub> = 27</td>
+            <td>r<sub>t3</sub> = 1.5</td>
+            <td>Φ<sub>3</sub> = 31</td>
+        </tr>
+    </table>
+
+    <p>The experimental results demonstrate a significant relationship between rake angle and chip formation
+        characteristics. As the rake angle decreased from 45° to 25°, the chip ratio based on length measurements
+        increased from 1.8 to 2.0. This indicates that smaller (less positive) rake angles result in greater chip
+        compression and more severe plastic deformation of the workpiece material.</p>
+
+    <p>The shear angle showed a clear decreasing trend with decreasing rake angle, dropping from 35° at α = 45° to 31°
+        at α = 25°. This relationship is consistent with metal cutting theory, which predicts that lower rake angles
+        lead to lower shear angles because the material must undergo greater deformation to flow over the rake face.</p>
+
+    <p>The influence of rake angle on chip formation can be understood by considering the mechanics of the cutting
+        process. A larger positive rake angle creates a sharper cutting edge and reduces the resistance to chip flow
+        over the rake face. This results in less chip compression and a more efficient cutting process with lower
+        cutting forces. Conversely, a smaller rake angle increases the constraint on chip flow, leading to greater
+        plastic deformation, higher chip ratios, and increased cutting forces.</p>
+
+    <p>The practical implications of these findings are significant for tool design and process optimization. While
+        larger rake angles reduce cutting forces and chip compression, they also weaken the cutting edge and may reduce
+        tool life, particularly when machining harder materials. Therefore, the selection of rake angle requires
+        balancing the benefits of easier chip formation against the requirements for tool strength and durability.</p>
+
+    <div style="text-align: center; margin: 20pt 0;">
+        <img src="chart_5_rake_ratio.png" alt="Chip ratios vs Rake angle" style="max-width: 100%; height: auto;">
+    </div>
+    <p class="figure-caption">Figure 3a. Influence of rake angle on chip ratios.<br>Legend: Length - Chip ratio
+        r<sub>l</sub>, Thickness - Chip ratio r<sub>t</sub></p>
+    <div style="text-align: center; margin: 20pt 0;">
+        <img src="chart_6_rake_shear.png" alt="Shear angle vs Rake angle" style="max-width: 100%; height: auto;">
+    </div>
+    <p class="figure-caption">Figure 3b. Influence of rake angle on shear angle.</p>
+
+    <!-- TASK 1.4 -->
+    <p><strong><u>Task 1.4:</u></strong> An influence of workpiece material on chip types</p>
+
+    <p>The fourth experimental task examined how different workpiece materials affect the type of chips produced during
+        machining. Chip morphology is strongly dependent on the mechanical and thermal properties of the workpiece
+        material.</p>
+
+    <p class="table-caption">Table 7. Constant parameters</p>
+    <table>
+        <tr>
+            <th>Cutting velocity v<sub>c</sub> [mm/min.]</th>
+            <th>Depth of cut t<sub>0</sub> [mm]</th>
+            <th>Rake angle α [°]</th>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>0.7</td>
+            <td>25</td>
+        </tr>
+    </table>
+
+    <p class="table-caption">Table 8. Variable parameters</p>
+    <table>
+        <tr>
+            <th>Workpiece Material</th>
+            <th>Chip type</th>
+        </tr>
+        <tr>
+            <td>Aluminium</td>
+            <td>d) continuous</td>
+        </tr>
+        <tr>
+            <td>Brass</td>
+            <td>c) segmented</td>
+        </tr>
+        <tr>
+            <td>Cast iron</td>
+            <td>a) discontinuous</td>
+        </tr>
+    </table>
+
+    <p>The experimental observations revealed distinct chip types for each of the three workpiece materials tested under
+        identical cutting conditions. Aluminum produced continuous chips, brass produced segmented chips, and cast iron
+        produced discontinuous chips.</p>
+
+    <p>The formation of continuous chips in aluminum is characteristic of ductile materials with high thermal
+        conductivity. Aluminum is a face-centered cubic (FCC) metal with excellent ductility, allowing plastic
+        deformation to occur without fracture. The material flows smoothly over the rake face, forming a long,
+        ribbon-like chip that remains intact. Continuous chips are generally associated with good surface finish quality
+        but may require chip breakers to prevent entanglement with the workpiece or machine components.</p>
+
+    <p>Brass, being a copper-zinc alloy, exhibited segmented chip formation. Segmented chips, also known as serrated or
+        saw-tooth chips, form when the material undergoes periodic catastrophic shear failure along the shear plane.
+        This behavior is typical of materials with limited ductility or those that exhibit thermal softening effects.
+        The chip appears as a series of connected segments with varying thickness along its length. The periodic nature
+        of segmented chip formation can cause fluctuating cutting forces and may affect surface finish quality.</p>
+
+    <p>Cast iron produced discontinuous chips, which is the expected behavior for this material. Cast iron is a brittle
+        material due to the presence of graphite flakes in its microstructure. These graphite inclusions act as stress
+        concentrators, causing the chip to fracture into small fragments almost immediately upon formation. While
+        discontinuous chips are easier to handle and dispose of compared to continuous chips, the intermittent nature of
+        chip formation results in fluctuating cutting forces and may cause surface finish deterioration.</p>
+
+    <div style="text-align: center; margin: 20pt 0;">
+        <img src="chip_types.png" alt="Classification of chip types" style="max-width: 100%; height: auto;">
+    </div>
+    <p class="figure-caption">Figure 4. Classification of chip types.<br>Legend: A. Discontinuous, B. Elemental, C.
+        Segmented, D. Continuous</p>
+
+    <!-- CONCLUSIONS -->
+    <h3>CONCLUSIONS</h3>
+
+    <p>This laboratory exercise on chip formation processes provided valuable insights into the fundamental mechanisms
+        governing material removal in metal cutting operations. Through systematic experimentation using the orthogonal
+        cutting model, the influences of cutting velocity, depth of cut, rake angle, and workpiece material on chip
+        ratios and chip types were quantitatively and qualitatively assessed.</p>
+
+    <p>The investigation of cutting velocity effects demonstrated that increasing the cutting speed from 11 mm/min to
+        100 mm/min resulted in a moderate decrease in chip ratio values. The chip ratio based on length measurements
+        decreased from 1.8 to approximately 1.636, indicating that higher cutting velocities promote somewhat easier
+        chip flow with less compression. However, the shear angle remained relatively stable between 34° and 38°,
+        suggesting that cutting velocity has a limited effect on the fundamental geometry of the deformation zone within
+        the tested range.</p>
+
+    <p>The depth of cut experiments revealed a more pronounced relationship between this parameter and chip formation
+        characteristics. Increasing the depth of cut from 0.4 mm to 1.2 mm caused the chip ratio to increase from 1.636
+        to 2.0, demonstrating that larger material removal rates result in greater chip compression. This finding has
+        practical implications for process planning, as it indicates that aggressive cutting parameters may lead to
+        increased cutting forces and power consumption due to the greater degree of plastic deformation involved.</p>
+
+    <p>The rake angle investigation confirmed the critical importance of tool geometry in determining chip formation
+        behavior. Reducing the rake angle from 45° to 25° increased the chip ratio from 1.8 to 2.0 and decreased the
+        shear angle from 35° to 31°. These results are consistent with metal cutting theory and highlight the trade-off
+        between using large rake angles for efficient cutting versus smaller rake angles for tool strength and
+        durability.</p>
+
+    <p>The workpiece material study demonstrated that material properties fundamentally determine chip morphology.
+        Ductile aluminum produced continuous chips that flow smoothly over the rake face, brass with moderate ductility
+        produced segmented chips with periodic shear localization, and brittle cast iron produced discontinuous chips
+        due to fracture at graphite inclusions. Understanding these material-dependent behaviors is essential for
+        selecting appropriate cutting conditions and chip management strategies.</p>
+
+    <p>Overall, this laboratory exercise successfully demonstrated the complex interrelationships between machining
+        parameters and chip formation phenomena. The experimental results validate theoretical predictions regarding the
+        effects of process variables on chip ratios and shear angles, providing a solid foundation for understanding and
+        optimizing metal cutting operations in industrial practice.</p>
+
+</body>
+
+</html>

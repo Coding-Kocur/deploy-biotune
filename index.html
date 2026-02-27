@@ -1,0 +1,1293 @@
+﻿<!DOCTYPE html>
+<html lang="pl" class="dark" style="scroll-behavior: smooth;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioTune - Precyzja w każdym mikrogramie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'biotune-black': '#0a0a0a',
+                        'biotune-dark': '#1a1a1a',
+                        'biotune-red': '#ff0000',
+                        'biotune-text': '#cccccc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .glass {
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-hover:hover {
+            border-color: #ff0000;
+            transform: translateY(-4px);
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .logo-img {
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.3));
+        }
+
+        .dark .logo-img {
+            filter: brightness(1.15) contrast(0.9);
+        }
+
+        .dark .logo-img:hover {
+            filter: brightness(1.15) contrast(0.9) drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+        }
+
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            display: inline-block;
+            animation: typing 3s steps(80) 0.5s forwards;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .dark ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff0000;
+        }
+
+        @keyframes blink {
+
+            0%,
+            49% {
+                opacity: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .cursor-blink {
+            animation: blink 1s step-start infinite;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel='icon' type='image/png' href='./assets/favicon.png'>
+
+    <style>
+        .hero-section.hidden {
+            display: none !important;
+        }
+
+        html {
+            scroll-behavior: smooth !important;
+        }
+
+        /* V3 text reveal animation */
+        @keyframes revealText {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gsap-reveal-text {
+            animation: revealText 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .gsap-fade-up {
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased selection:bg-biotune-red selection:text-white transition-colors duration-300 overflow-x-hidden">
+
+    <nav
+        class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-24">
+                <!-- Left: Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6 relative z-10">
+                    <a href="index.html"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
+                        główna</a>
+                    <div class="dropdown-trigger">
+                        <a href="shop.html"
+                            class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
+                            Sklep
+                            <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="py-1 max-h-80 overflow-y-auto">
+                                <a href="shop.html" onclick="/* removed scrollToProducts */"
+                                    class="block px-4 py-2 text-sm font-semibold text-biotune-red dark:text-biotune-red hover:bg-gray-100 dark:hover:bg-black/20 border-b border-gray-200 dark:border-white/10">Wszystkie</a>
+                                <a href="product.html?id=retatrutide"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Retatrutide</a>
+                                <a href="product.html?id=bpc-157-tb-500"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">BPC-157
+                                    + TB-500</a>
+                                <a href="product.html?id=cjc-1295-ipamorelin"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">CJC-1295
+                                    + Ipamorelin</a>
+                                <a href="product.html?id=hgh-fragment-176-191"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">HGH
+                                    Fragment 176-191</a>
+                                <a href="product.html?id=ghk-cu"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">GHK-Cu</a>
+                                <a href="product.html?id=melanotan-2"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Melanotan
+                                    2</a>
+                                <a href="product.html?id=pt-141"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">PT-141</a>
+                                <a href="product.html?id=epithalon"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Epithalon</a>
+                                <a href="product.html?id=mots-c"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">MOTS-c</a>
+                                <a href="product.html?id=semax"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Semax</a>
+                                <a href="product.html?id=selank"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Selank</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-trigger">
+                        <a href="#"
+                            class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center text-biotune-red">
+                            Wersje Hero
+                            <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="py-1">
+                                <a href="#" onclick="switchHero('hero-v1', event)"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">V1:
+                                    Oryginał</a>
+                                <a href="#" onclick="switchHero('hero-v2', event)"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">V2:
+                                    Cząsteczki (Particles)</a>
+                                <a href="#" onclick="switchHero('hero-v3', event)"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">V3:
+                                    Typografia (GSAP)</a>
+                                <a href="#" onclick="switchHero('hero-v4', event)"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">V4:
+                                    Siatka 3D (WebGL)</a>
+                                <a href="#" onclick="switchHero('hero-v5', event)"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">V5:
+                                    Kinematografia (Video)</a>
+                                <a href="#" onclick="switchHero('hero-v6', event)"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">V6:
+                                    Split-Screen Hover</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O
+                        Nas</a>
+
+                    <a href="#contact"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
+                </div>
+
+                <!-- Center: Logo (Dual version for dark/light mode) -->
+                <div class="absolute left-1/2 transform -translate-x-1/2">
+                    <a href="index.html" class="flex items-center">
+                        <!-- Light mode logo -->
+                        <img src="./assets/biotune-logo-transparent.png" alt="BioTune"
+                            class="h-60 w-auto block dark:hidden">
+                        <!-- Dark mode logo -->
+                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
+                            class="h-60 w-auto hidden dark:block">
+                    </a>
+                </div>
+
+                <!-- Right: Icons -->
+                <div class="flex items-center gap-4 ml-auto relative z-10">
+                    <div class="relative group hidden md:block">
+                        <input type="text" placeholder="Szukaj..."
+                            class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
+                    </div>
+                    <div class="account-dropdown">
+                        <a href="login.html" id="account-link" class="hover:text-biotune-red transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            </svg>
+                        </a>
+                        <div id="account-menu" class="account-menu">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Zaloguj się, aby kontynuować</p>
+                            <div class="space-y-2">
+                                <a href="login.html"
+                                    class="block w-full text-center bg-biotune-red text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">
+                                    Zaloguj się
+                                </a>
+                                <a href="register.html"
+                                    class="block w-full text-center border border-gray-300 dark:border-white/20 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors font-medium">
+                                    Zarejestruj się
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group flex items-center">
+                        <button id="wishlist-trigger" class="relative hover:text-biotune-red transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                            <span id="wishlist-count"
+                                class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                        </button>
+                        <div id="wishlist-dropdown"
+                            class="absolute right-0 top-full mt-4 w-80 glass rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-black/10 dark:border-white/10 z-50">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg mb-3 text-black dark:text-white">Lista życzeń</h3>
+                                <div class="wishlist-items max-h-96 overflow-y-auto space-y-2">
+                                    <p class="text-center text-gray-500 py-4 text-sm">Twoja lista życzeń jest pusta.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cart with tooltip -->
+                    <div class="relative group">
+                        <button id="cart-trigger" class="relative hover:text-biotune-red transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+                            <span id="cart-count"
+                                class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden shadow-[0_0_8px_rgba(255,0,0,0.6)]">0</span>
+                        </button>
+                        <div
+                            class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-biotune-red text-white text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">
+                            Koszyk
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Blur Overlay for scroll effect -->
+    <div class="content-blur-overlay" id="content-blur"></div>
+
+    <section id="hero-v1" class="hero-section pt-44 pb-0 min-h-screen relative flex flex-col justify-center">
+        <div class="w-full relative text-center">
+            <!-- Typewriter Taglines -->
+            <div
+                class="px-4 sm:px-8 lg:px-12 max-w-screen-2xl mx-auto h-40 md:h-64 mb-8 flex flex-col items-start justify-center gap-4 md:gap-6 text-left">
+                <p id="typewriter-text-1"
+                    class="text-3xl md:text-5xl lg:text-7xl text-gray-300 font-bold tracking-tight h-10 md:h-16 lg:h-20">
+                </p>
+                <p id="typewriter-text-2"
+                    class="text-3xl md:text-5xl lg:text-7xl text-gray-300 font-bold tracking-tight h-10 md:h-16 lg:h-20">
+                </p>
+                <p id="typewriter-text-3"
+                    class="text-3xl md:text-5xl lg:text-7xl text-biotune-red font-bold tracking-tight h-10 md:h-16 lg:h-20">
+                </p>
+            </div>
+
+            <!-- Hero Image Carousel -->
+            <div id="hero-carousel"
+                class="relative w-full h-[400px] md:h-[600px] xl:h-[700px] overflow-hidden mb-8 border-y border-white/10">
+                <div class="carousel-slide active" style="background-image: url('./assets/hero/slide-1.jpg')"></div>
+                <div class="carousel-slide" style="background-image: url('./assets/hero/slide-2.png')"></div>
+                <div class="carousel-slide" style="background-image: url('./assets/hero/slide-3.jpg')"></div>
+                <div class="carousel-slide" style="background-image: url('./assets/hero/slide-4.png')"></div>
+                <!-- Gradient overlay for better readability -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-biotune-black/60 via-transparent to-transparent pointer-events-none">
+                </div>
+            </div>
+
+            <!-- Progress Bars -->
+            <div id="carousel-progress" class="flex gap-3 justify-center mb-12 max-w-lg mx-auto">
+                <div class="progress-bar active" data-slide="0">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-bar" data-slide="1">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-bar" data-slide="2">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-bar" data-slide="3">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Feature Highlights -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+                <div
+                    class="feature-card glass p-6 rounded-xl border border-white/10 hover:border-biotune-red transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-full bg-biotune-red/10 text-biotune-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">>98% Czystość</h3>
+                    <p class="text-sm text-gray-400">Najwyższa jakość odczynników</p>
+                </div>
+                <div
+                    class="feature-card glass p-6 rounded-xl border border-white/10 hover:border-biotune-red transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-full bg-biotune-red/10 text-biotune-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Weryfikacja HPLC</h3>
+                    <p class="text-sm text-gray-400">Każda partia testowana</p>
+                </div>
+                <div
+                    class="feature-card glass p-6 rounded-xl border border-white/10 hover:border-biotune-red transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-full bg-biotune-red/10 text-biotune-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Szybka Dostawa</h3>
+                    <p class="text-sm text-gray-400">Wysyłka w 24h</p>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="shop.html"
+                class="inline-block bg-biotune-red hover:bg-red-600 text-white font-bold py-4 px-10 rounded-lg uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,0,0,0.4)]">
+                Zobacz Produkty
+            </a>
+        </div>
+    </section>
+    <section id="hero-v2"
+        class="pt-24 hero-section hidden pb-0 min-h-screen relative flex flex-col justify-center overflow-hidden bg-black">
+
+        <!-- Particles container -->
+        <div id="tsparticles" class="absolute inset-0 z-0"></div>
+
+        <!-- Soft gradient overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black pointer-events-none z-10">
+        </div>
+
+        <div class="w-full relative z-20 text-center px-4">
+
+            <div
+                class="max-w-4xl mx-auto glass p-8 md:p-12 rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(255,0,0,0.15)] backdrop-blur-md">
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full border border-biotune-red/30 bg-biotune-red/10 text-biotune-red text-sm font-bold uppercase tracking-widest mb-6">
+                    Wersja V2: Cząsteczki
+                </div>
+
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6">
+                    Precyzja w każdym <span class="text-biotune-red">mikrogramie</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Eksploruj najwyższej jakości odczynniki chemiczne i innowacyjne rozwiązania badawcze, zaprojektowane
+                    dla profesjonalistów doceniających czystość potwierdzoną badaniami HPLC.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="shop.html"
+                        class="w-full sm:w-auto bg-biotune-red hover:bg-red-600 text-white font-bold py-4 px-10 rounded-lg uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(255,0,0,0.3)] hover:shadow-[0_0_30px_rgba(255,0,0,0.6)]">
+                        Rozpocznij badania
+                    </a>
+                    <a href="#about"
+                        class="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/20 font-bold py-4 px-10 rounded-lg uppercase tracking-wider transition-all duration-300">
+                        Dowiedz się więcej
+                    </a>
+                </div>
+            </div>
+
+            <!-- Floating metrics below -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-16 text-center">
+                <div class="glass-hover border-transparent transition-colors p-6 rounded-2xl">
+                    <div class="text-3xl font-bold text-white mb-2">>98%</div>
+                    <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Gwarancja Czystości</div>
+                </div>
+                <div class="glass-hover border-transparent transition-colors p-6 rounded-2xl">
+                    <div class="text-3xl font-bold text-white mb-2">HPLC</div>
+                    <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Weryfikacja Laboratoryjna
+                    </div>
+                </div>
+                <div class="glass-hover border-transparent transition-colors p-6 rounded-2xl">
+                    <div class="text-3xl font-bold text-white mb-2">24h</div>
+                    <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Szybka Wysyłka</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .gsap-reveal-text {
+            animation: cubic-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .gsap-fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cubic-reveal {
+            0% {
+                transform: translateY(110%);
+            }
+
+            100% {
+                transform: translateY(0%);
+            }
+        }
+
+        @keyframes fade-up {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <section id="hero-v3"
+        class="pt-32 hero-section hidden pb-0 min-h-screen relative flex flex-col justify-center overflow-hidden bg-biotune-black">
+        <div class="w-full relative z-20 px-4 md:px-12 flex flex-col items-center">
+
+            <div
+                class="inline-block px-4 py-1.5 rounded-full border border-white/20 bg-white/5 text-white text-sm font-bold uppercase tracking-widest mb-12 gsap-fade-up">
+                Wersja V3: Kinetyczna Typografia
+            </div>
+
+            <div class="text-center max-w-7xl mx-auto">
+                <h1
+                    class="text-[12vw] leading-[0.8] font-black text-white tracking-tighter uppercase overflow-hidden mb-2">
+                    <span class="inline-block translate-y-full gsap-reveal-text">Czystość.</span>
+                </h1>
+                <h1
+                    class="text-[12vw] leading-[0.8] font-black text-white tracking-tighter uppercase overflow-hidden mb-2">
+                    <span class="inline-block translate-y-full gsap-reveal-text"
+                        style="animation-delay: 0.1s">Precyzja.</span>
+                </h1>
+                <h1
+                    class="text-[12vw] leading-[0.8] font-black tracking-tighter uppercase overflow-hidden text-transparent bg-clip-text bg-gradient-to-r from-biotune-red to-red-900 mb-12">
+                    <span class="inline-block translate-y-full gsap-reveal-text"
+                        style="animation-delay: 0.2s">Rezultaty.</span>
+                </h1>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mt-12 gap-8 border-t border-white/10 pt-8 gsap-fade-up"
+                style="animation-delay: 0.4s">
+                <p class="text-lg text-gray-400 max-w-md text-center md:text-left">
+                    Odczynniki chemiczne klasy premium dla środowisk badawczych z rygorystyczną kontrolą HPLC.
+                </p>
+
+                <a href="shop.html"
+                    class="group relative inline-flex items-center justify-center px-10 py-5 font-bold text-white bg-transparent border-2 border-biotune-red rounded-none overflow-hidden transition-all duration-300">
+                    <span
+                        class="absolute w-0 h-0 transition-all duration-500 ease-out bg-biotune-red rounded-full group-hover:w-80 group-hover:h-80 opacity-10"></span>
+                    <span
+                        class="absolute inset-0 w-full h-full -mt-1 rounded-none opacity-30 bg-gradient-to-b from-transparent via-transparent to-biotune-red"></span>
+                    <span class="relative uppercase tracking-widest">Otwórz Katalog</span>
+                    <svg class="relative ml-4 w-5 h-5 transition-transform duration-300 group-hover:translate-x-2"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </section>
+    <section id="hero-v4"
+        class="pt-24 hero-section hidden pb-0 min-h-screen relative flex flex-col justify-center overflow-hidden bg-black">
+
+        <!-- WebGL Topology Container -->
+        <div id="vanta-bg" class="absolute inset-0 z-0"></div>
+
+        <!-- Dark gradient overlay to ensure text readability -->
+        <div
+            class="absolute inset-0 bg-gradient-to-t from-biotune-black via-black/40 to-black/80 pointer-events-none z-10">
+        </div>
+
+        <div
+            class="w-full relative z-20 text-center px-4 md:px-12 flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto gap-12">
+
+            <!-- Left Info Panel -->
+            <div class="flex-1 text-left">
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full border border-biotune-red/30 bg-biotune-red/10 text-biotune-red text-sm font-bold uppercase tracking-widest mb-6">
+                    Wersja V4: Siatka 3D
+                </div>
+
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6 leading-tight">
+                    Przyszłość <br>
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-biotune-red to-red-600">Eksploracji</span>
+                </h1>
+
+                <p class="text-lg text-gray-400 mb-10 max-w-lg leading-relaxed">
+                    Wejdź w nowy wymiar badań z absolutną precyzją. Oferujemy odczynniki chemiczne testowane za pomocą
+                    spektrometrii mas i chromatografii cieczowej.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-start gap-4">
+                    <a href="shop.html"
+                        class="group relative px-8 py-4 font-bold text-white bg-biotune-red rounded overflow-hidden transition-all duration-300">
+                        <span
+                            class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                        <span class="relative uppercase tracking-wider">Katalog Produktów</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Glass Panel for Features -->
+            <div class="w-full md:w-5/12 grid grid-cols-1 gap-4">
+                <div
+                    class="glass p-6 rounded-lg border border-white/10 border-l-4 border-l-biotune-red hover:bg-white/5 transition-colors transform hover:translate-x-2 duration-300">
+                    <h3 class="text-xl font-bold text-white mb-1">Czystość >98%</h3>
+                    <p class="text-sm text-gray-400">Restrykcyjna kontrola każdej partii.</p>
+                </div>
+                <div
+                    class="glass p-6 rounded-lg border border-white/10 border-l-4 border-l-gray-500 hover:bg-white/5 transition-colors transform hover:translate-x-2 duration-300">
+                    <h3 class="text-xl font-bold text-white mb-1">Certyfikaty HPLC</h3>
+                    <p class="text-sm text-gray-400">Transparentność i pełna dokumentacja wyników testów niezależnych
+                        laboratoriów.</p>
+                </div>
+                <div
+                    class="glass p-6 rounded-lg border border-white/10 border-l-4 border-l-gray-500 hover:bg-white/5 transition-colors transform hover:translate-x-2 duration-300">
+                    <h3 class="text-xl font-bold text-white mb-1">Wysyłka w 24H</h3>
+                    <p class="text-sm text-gray-400">Bezpieczny, klimatyzowany transport paczek.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section id="hero-v5"
+        class="pt-0 hero-section hidden pb-0 min-h-screen relative flex flex-col justify-center overflow-hidden bg-black mt-[-6rem]">
+
+        <!-- Video Background Container -->
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <video autoplay loop muted playsinline
+                class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto transform -translate-x-1/2 -translate-y-1/2 object-cover opacity-60 mix-blend-screen mix-blend-luminosity filter grayscale contrast-125 sepia-[.3] hue-rotate-[320deg]">
+                <!-- Reliable Wikimedia Commons science video (Cell Division) -->
+                <source
+                    src="https://upload.wikimedia.org/wikipedia/commons/transcoded/1/1c/A_Cell_Division.webm/A_Cell_Division.webm.720p.webm"
+                    type="video/webm">
+            </video>
+        </div>
+
+        <!-- Deep Red Gradient Overlay -->
+        <div
+            class="absolute inset-0 bg-gradient-to-tr from-biotune-black via-black/70 to-red-900/40 mix-blend-multiply pointer-events-none z-10">
+        </div>
+        <div
+            class="absolute inset-0 bg-gradient-to-t from-biotune-black via-transparent to-black/80 pointer-events-none z-10">
+        </div>
+
+        <!-- Content -->
+        <div class="w-full relative z-20 text-center px-4 flex flex-col items-center justify-center mt-32">
+
+            <div
+                class="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-black/50 border border-white/20 backdrop-blur-md mb-8">
+                <span class="w-2 h-2 rounded-full bg-biotune-red animate-pulse"></span>
+                <span class="text-white text-sm font-bold tracking-widest uppercase">Wersja V5: Kinematografia</span>
+            </div>
+
+            <h1
+                class="text-6xl md:text-8xl lg:text-[8rem] font-bold text-white tracking-tighter mb-4 leading-none mix-blend-screen text-shadow">
+                BIOTUNE
+            </h1>
+
+            <p
+                class="text-xl md:text-2xl text-gray-300 font-light tracking-widest uppercase mb-12 max-w-3xl mx-auto drop-shadow-lg">
+                Zaufaj Nauce. Wymagaj Precyzji.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 mt-8">
+                <a href="shop.html"
+                    class="relative group overflow-hidden bg-white text-black font-bold py-4 px-12 rounded-full uppercase tracking-widest text-sm transition-all duration-300 hover:scale-105">
+                    <span class="relative z-10 group-hover:text-white transition-colors duration-300">Przeglądaj
+                        Produkty</span>
+                    <div
+                        class="absolute inset-0 h-full w-0 bg-biotune-red transition-all duration-300 ease-out group-hover:w-full z-0">
+                    </div>
+                </a>
+                <a href="#about"
+                    class="flex items-center justify-center gap-3 text-white font-bold py-4 px-8 rounded-full uppercase tracking-wide text-sm border-2 border-white/20 hover:border-white transition-all backdrop-blur-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
+                    </svg>
+                    <span>Nasza Misja</span>
+                </a>
+            </div>
+
+            <!-- Mouse scroll indicator -->
+            <div
+                class="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-70">
+                <span class="text-xs text-white uppercase tracking-widest mb-2 font-bold">Zjedź W Dół</span>
+                <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
+                    <div class="w-1 h-2 bg-white rounded-full"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <style>
+        .split-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: -6rem;
+            /* pull up under navbar */
+        }
+
+        .split-panel {
+            position: relative;
+            flex: 1;
+            height: 100%;
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .split-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
+            transition: opacity 0.5s ease;
+        }
+
+        .split-container:hover .split-panel {
+            flex: 0.5;
+        }
+
+        .split-container .split-panel:hover {
+            flex: 2.5;
+        }
+
+        .split-panel:hover::before {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(255, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.6) 100%);
+        }
+
+        .split-content {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            right: 5%;
+            color: white;
+            opacity: 0.6;
+            transition: all 0.5s ease;
+            transform: translateY(20px);
+        }
+
+        .split-panel:hover .split-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .split-title {
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(180deg);
+            transition: all 0.5s ease;
+            white-space: nowrap;
+        }
+
+        .split-panel:hover .split-title {
+            writing-mode: horizontal-tb;
+            transform: translate(0, 0) rotate(0);
+            position: relative;
+            top: auto;
+            left: auto;
+            margin-bottom: 1rem;
+            font-size: 3rem;
+        }
+
+        .split-desc,
+        .split-btn {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+        }
+
+        .split-panel:hover .split-desc,
+        .split-panel:hover .split-btn {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition-delay: 0.2s;
+        }
+    </style>
+    <section id="hero-v6"
+        class="p-0 hero-section hidden min-h-screen relative flex flex-col justify-center overflow-hidden bg-black">
+
+        <!-- UI Notice overlaid on top of panels -->
+        <div class="absolute top-32 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none">
+            <div
+                class="inline-block px-4 py-1.5 rounded-full border border-white/20 bg-black/50 backdrop-blur-md text-white text-sm font-bold uppercase tracking-widest">
+                Wersja V6: Interaktywny Hover
+            </div>
+        </div>
+
+        <div class="split-container z-10">
+            <!-- Panel 1: Peptydy -->
+            <div class="split-panel" style="background-image: url('./assets/hero/slide-1.jpg');">
+                <div class="split-content">
+                    <h2 class="split-title">Peptydy</h2>
+                    <p class="split-desc text-gray-300 mb-6 max-w-sm">Najwyższej jakości zsyntetyzowane łańcuchy
+                        aminokwasów dedykowane zaawansowanym badaniom in-vitro.</p>
+                    <a href="shop.html"
+                        class="split-btn inline-block bg-biotune-red text-white px-8 py-3 font-bold uppercase tracking-widest rounded hover:bg-red-600 transition-colors">
+                        Odkryj
+                    </a>
+                </div>
+            </div>
+
+            <!-- Panel 2: SARMY (Placeholder image style) -->
+            <div class="split-panel" style="background-image: url('./assets/hero/slide-3.jpg');">
+                <div class="split-content">
+                    <h2 class="split-title">SARM</h2>
+                    <p class="split-desc text-gray-300 mb-6 max-w-sm">Niesteroidowe selektywne modulatory receptora
+                        androgenowego. Absolutna czystość strukturalna w każdym miligramie.</p>
+                    <a href="shop.html"
+                        class="split-btn inline-block bg-biotune-red text-white px-8 py-3 font-bold uppercase tracking-widest rounded hover:bg-red-600 transition-colors">
+                        Odkryj
+                    </a>
+                </div>
+            </div>
+
+            <!-- Panel 3: Akcesoria -->
+            <div class="split-panel"
+                style="background-image: url('./assets/hero/slide-2.png'); border-left: 1px solid rgba(255,255,255,0.1);">
+                <div class="split-content">
+                    <h2 class="split-title">Lab <span class="text-biotune-red">Gear</span></h2>
+                    <p class="split-desc text-gray-300 mb-6 max-w-sm">Certyfikowane szkło laboratoryjne, igły, filtry
+                        strzykawkowe i woda bakteriostatyczna niezbędna w pracy chemika.</p>
+                    <a href="shop.html"
+                        class="split-btn inline-block bg-biotune-red text-white px-8 py-3 font-bold uppercase tracking-widest rounded hover:bg-red-600 transition-colors">
+                        Odkryj
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Products Section REMOVED (moved to shop.html) -->
+    <section id="about" class="relative bg-black">
+        <!-- Content cleared as requested -->
+    </section>
+
+
+
+    <!-- Gradient transition into newsletter -->
+    <div class="h-24 bg-gradient-to-b from-black to-[#0d0000]"></div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Dołącz do naszego newslettera</h2>
+        <form class="newsletter-form">
+            <div class="newsletter-input-group">
+                <input type="email" class="newsletter-input" placeholder="Podaj adres email" required>
+                <button type="submit" class="newsletter-button">Zapisz się</button>
+            </div>
+            <label class="newsletter-consent">
+                <input type="checkbox" required>
+                <span>Wyrażam zgodę na przetwarzanie podanych powyżej danych osobowych w celu otrzymywania
+                    newslettera.</span>
+            </label>
+            <div class="newsletter-feedback"></div>
+        </form>
+    </section>
+
+    <!-- Gradient transition out of newsletter -->
+    <div class="h-16 bg-gradient-to-b from-transparent to-black"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-black relative overflow-hidden">
+        <div class="max-w-3xl mx-auto px-4 relative z-10">
+            <h2 class="text-3xl font-bold mb-8 text-center text-white">SKONTAKTUJ SIĘ Z NAMI</h2>
+            <form class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Imię</label>
+                    <input type="text"
+                        class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                    <input type="email"
+                        class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Wiadomość</label>
+                    <textarea rows="4"
+                        class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white"></textarea>
+                </div>
+                <button type="button"
+                    class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">WYŚLIJ
+                    WIADOMOŚĆ</button>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-[#121212] pt-16 pb-8 border-t border-white/10 relative overflow-hidden z-20 w-full mt-12 mb-0">
+        <!-- Glowing Background orb -->
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-biotune-red/5 blur-[120px] rounded-full pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+                <!-- Logo & Bio -->
+                <div class="lg:col-span-2">
+                    <a href="index.html" class="inline-block mb-6">
+                        <span class="text-3xl font-bold text-white tracking-tighter">Bio<span
+                                class="text-biotune-red">Tune</span></span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed max-w-sm">
+                        Ekspert w dziedzinie odczynników chemicznych do celów laboratoryjnych i innowacyjnych rozwiązań
+                        badawczych. Dostarczamy najwyższą jakość potwierdzoną dokumentacją.
+                    </p>
+                </div>
+
+                <!-- Kategorie -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Kategorie</h4>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors text-sm">Strona
+                                główna</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">O
+                                nas</a></li>
+                        <li><a href="shop.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Sklep</a></li>
+                    </ul>
+                </div>
+
+                <!-- Informacja -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Informacja</h4>
+                    <ul class="space-y-4">
+                        <li><a href="regulamin.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Regulamin sklepu</a>
+                        </li>
+                        <li><a href="privacy.html"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Polityka
+                                prywatności</a></li>
+                        <li><a href="#contact"
+                                class="text-gray-400 hover:text-white transition-colors text-sm">Kontakt</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="w-full h-px bg-white/10 mb-8" id="footer-contact"></div>
+
+            <!-- Contact & Socials -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+                <div class="flex flex-col sm:flex-row gap-8">
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <div
+                            class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:bg-biotune-red group-hover:border-biotune-red transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5 text-gray-300 group-hover:text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">E-mail informacyjny</p>
+                            <p class="text-white text-sm font-medium">kontakt@biotune.pl</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <!-- Instagram -->
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center md:text-left text-[11px] text-gray-500 font-mono">
+                &copy; 2026 BioTune. Wszelkie prawa zastrzeżone. Projekt o charakterze wyłącznie badawczym i naukowym.
+            </div>
+        </div>
+    </footer>
+
+
+    <div id="cart-drawer"
+        class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white dark:bg-biotune-dark border-l border-black/10 dark:border-white/10 transform translate-x-full transition-transform duration-300 z-[60] shadow-2xl flex flex-col text-black dark:text-white">
+        <div class="p-6 border-b border-black/10 dark:border-white/10 flex justify-between items-center">
+            <h2 class="text-xl font-bold">Twój Koszyk</h2>
+            <button id="close-cart" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <p class="text-center text-gray-500 mt-10">Twój koszyk jest pusty.</p>
+        </div>
+        <div class="p-6 border-t border-black/10 dark:border-white/10 bg-gray-100 dark:bg-black/20">
+            <div class="flex justify-between items-center mb-4 text-lg font-bold">
+                <span>Suma:</span>
+                <span id="cart-total">0.00 PLN</span>
+            </div>
+            <button id="checkout-btn"
+                class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">Przejdź
+                do kasy</button>
+        </div>
+    </div>
+
+    <div id="overlay"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300">
+    </div>
+
+    <script src="./js/products-data.js"></script>
+    <script src="./js/shop.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="./js/homepage-disclaimer.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/checkoutAgreements.js"></script>
+    <script src="./js/show-about.js"></script>
+    <script src="./js/hero-carousel.js"></script>
+    <script>
+
+
+        // Scroll to product grid function
+        function scrollToProducts(event) {
+            event.preventDefault();
+            const productGrid = document.getElementById('product-grid');
+            if (productGrid) {
+                const yOffset = -80; // Account for fixed navbar height
+                const y = productGrid.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        }
+
+        // Typewriter Animation for Motto
+        const mottoLines = [
+            "Czystość potwierdzona badaniami",
+            "Precyzja w każdym miligramie",
+            "Jakość bez kompromisów"
+        ];
+
+        function typeLine(elementId, text, delayOffset) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+
+            setTimeout(() => {
+                let charIndex = 0;
+                function typeChar() {
+                    if (charIndex < text.length) {
+                        el.textContent = text.substring(0, charIndex + 1);
+                        charIndex++;
+                        setTimeout(typeChar, 80);
+                    }
+                }
+                typeChar();
+            }, delayOffset);
+        }
+
+        window.addEventListener('load', function () {
+            typeLine('typewriter-text-1', mottoLines[0], 1000);
+            typeLine('typewriter-text-2', mottoLines[1], 2500); // 1.5s later
+            typeLine('typewriter-text-3', mottoLines[2], 4000); // another 1.5s later
+        });
+
+        // Navbar scroll effect
+        const nav = document.querySelector('nav.glass');
+        const contentBlur = document.getElementById('content-blur');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+                if (contentBlur) contentBlur.classList.add('active');
+            } else {
+                nav.classList.remove('scrolled');
+                if (contentBlur) contentBlur.classList.remove('active');
+            }
+        });
+    </script>
+
+    <!-- Hero Variations Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
+    <script>
+        // Init tsParticles with FULL bundle (no manual plugin loading needed)
+        let particlesContainer = null;
+
+        async function loadParticles() {
+            if (!window.tsParticles) return;
+
+            particlesContainer = await tsParticles.load("tsparticles", {
+                fullScreen: { enable: false },
+                fpsLimit: 60,
+                interactivity: {
+                    detectsOn: "window",
+                    events: {
+                        onHover: { enable: true, mode: "grab" },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 250, links: { opacity: 0.6 } }
+                    }
+                },
+                particles: {
+                    color: { value: "#ff0000" },
+                    links: { color: "#ff0000", distance: 150, enable: true, opacity: 0.3, width: 1 },
+                    move: { enable: true, speed: 0.3, direction: "none", outModes: { default: "out" } },
+                    number: { density: { enable: true, area: 800 }, value: 100 },
+                    opacity: { value: 0.6 },
+                    shape: { type: "circle" },
+                    size: { random: true, value: 3 },
+                }
+            });
+
+            // Scroll speed boost using raw internal access with safety
+            let scrollTimer;
+            let isBoosted = false;
+
+            window.addEventListener('scroll', () => {
+                if (!particlesContainer) return;
+                try {
+                    // Access internal particle array (works with full bundle)
+                    const arr = particlesContainer.particles._array
+                        || particlesContainer.particles.array
+                        || [];
+                    if (!arr.length) return;
+
+                    if (!isBoosted) {
+                        isBoosted = true;
+                        for (let i = 0; i < arr.length; i++) {
+                            arr[i].velocity.x *= 6;
+                            arr[i].velocity.y *= 6;
+                        }
+                    }
+
+                    clearTimeout(scrollTimer);
+                    scrollTimer = setTimeout(() => {
+                        try {
+                            const arr2 = particlesContainer.particles._array
+                                || particlesContainer.particles.array
+                                || [];
+                            for (let i = 0; i < arr2.length; i++) {
+                                arr2[i].velocity.x /= 6;
+                                arr2[i].velocity.y /= 6;
+                            }
+                            isBoosted = false;
+                        } catch (e) { isBoosted = false; }
+                    }, 300);
+                } catch (e) { /* silently fail */ }
+            });
+        }
+
+        let vantaEffect = null;
+
+        function initVanta() {
+            if (window.VANTA && !vantaEffect) {
+                vantaEffect = VANTA.TOPOLOGY({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0xff0000,
+                    backgroundColor: 0x000000
+                });
+            }
+        }
+
+        // Switcher logic
+        function switchHero(heroId, event) {
+            if (event) event.preventDefault();
+
+            // Hide all
+            document.querySelectorAll('.hero-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+
+            // Show target
+            const target = document.getElementById(heroId);
+            if (target) {
+                target.classList.remove('hidden');
+
+                // Restore correct layout classes based on the original variation design
+                if (heroId === 'hero-v1' || heroId === 'hero-v2' || heroId === 'hero-v3' || heroId === 'hero-v4' || heroId === 'hero-v5' || heroId === 'hero-v6') {
+                    target.classList.add('flex');
+                    target.classList.add('flex-col');
+                }
+            }
+
+            // Init libraries if needed
+            if (heroId === 'hero-v2') setTimeout(() => { loadParticles(); }, 100);
+            if (heroId === 'hero-v4') setTimeout(() => { initVanta(); }, 100);
+
+            // Re-trigger GSAP animations for V3
+            if (heroId === 'hero-v3') {
+                const revealTexts = target.querySelectorAll('.gsap-reveal-text');
+                revealTexts.forEach((el, i) => {
+                    el.style.transform = 'translateY(100%)';
+                    el.style.transition = 'none';
+                    setTimeout(() => {
+                        el.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                        el.style.transform = 'translateY(0)';
+                    }, 100 + i * 150);
+                });
+                const fadeUps = target.querySelectorAll('.gsap-fade-up');
+                fadeUps.forEach((el, i) => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                    el.style.transition = 'none';
+                    setTimeout(() => {
+                        el.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 600 + i * 200);
+                });
+            }
+
+            // Auto-play video for V5
+            if (heroId === 'hero-v5') {
+                const video = target.querySelector('video');
+                if (video) {
+                    video.currentTime = 0;
+                    video.play().catch(() => { });
+                }
+            }
+
+            // Close dropdown manually for smooth UX
+            const dropdown = event?.target?.closest('.dropdown-trigger');
+            if (dropdown) {
+                dropdown.classList.remove('active'); // assuming active class toggle
+                // unfocus to close hover state
+                document.activeElement.blur();
+            }
+        }
+    </script>
+
+</body>
+
+</html>

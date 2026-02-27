@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html class="scroll-smooth dark"  lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioTune - Etykieta Retatrutide 10mg</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: 38mm 18mm;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .print-info {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .print-info h1 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .print-info p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .print-info ul {
+            margin-left: 20px;
+            color: #333;
+        }
+
+        .print-info li {
+            margin: 5px 0;
+        }
+
+        .print-btn {
+            background: #b81d2a;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .print-btn:hover {
+            background: #9a1823;
+        }
+
+        /* Label container - exact 38x18mm proportions (scaled up for display) */
+        .label-container {
+            width: 760px;
+            /* 38mm × 20 for display */
+            height: 360px;
+            /* 18mm × 20 for display */
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header section - grey background with logo */
+        .label-header {
+            background: #baccd1;
+            height: 22%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-size: 42px;
+            font-weight: bold;
+            font-style: italic;
+            letter-spacing: -1px;
+        }
+
+        .logo-bio {
+            color: #b81d2a;
+        }
+
+        .logo-tune {
+            color: #000000;
+        }
+
+        /* Main content area */
+        .label-content {
+            background: #ffffff;
+            height: 65%;
+            display: flex;
+            padding: 15px 25px;
+        }
+
+        .content-left {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .content-right {
+            width: 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-left: 20px;
+        }
+
+        .product-name {
+            color: #b81d2a;
+            font-size: 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-dosage {
+            color: #000000;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .cas-number {
+            color: #000000;
+            font-size: 12px;
+            margin-top: auto;
+        }
+
+        .lab-material {
+            color: #000000;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .exp-field,
+        .batch-field {
+            color: #000000;
+            font-size: 12px;
+        }
+
+        .disclaimer-italic {
+            color: #000000;
+            font-size: 10px;
+            font-style: italic;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .disclaimer-bold {
+            color: #000000;
+            font-size: 10px;
+            font-style: italic;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .storage-info {
+            color: #000000;
+            font-size: 9px;
+            font-style: italic;
+            text-align: right;
+            margin-top: 8px;
+        }
+
+        /* Footer section - red bar */
+        .label-footer {
+            background: #b81d2a;
+            height: 13%;
+            border-radius: 0 0 5px 5px;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+
+            .print-info {
+                display: none !important;
+            }
+
+            .label-container {
+                width: 38mm;
+                height: 18mm;
+                box-shadow: none;
+                page-break-after: always;
+            }
+
+            .label-header {
+                padding: 0 2mm;
+            }
+
+            .logo-text {
+                font-size: 4mm;
+            }
+
+            .label-content {
+                padding: 1.5mm 2.5mm;
+            }
+
+            .product-name {
+                font-size: 3.2mm;
+            }
+
+            .product-dosage {
+                font-size: 2.2mm;
+            }
+
+            .cas-number {
+                font-size: 1.2mm;
+            }
+
+            .lab-material {
+                font-size: 1.1mm;
+            }
+
+            .exp-field,
+            .batch-field {
+                font-size: 1.2mm;
+            }
+
+            .disclaimer-italic,
+            .disclaimer-bold {
+                font-size: 1mm;
+            }
+
+            .storage-info {
+                font-size: 0.9mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="print-info">
+        <h1>📋 Etykieta produktu: Retatrutide 10mg</h1>
+        <p><strong>Wymiary:</strong> 38mm × 18mm</p>
+        <p><strong>Format:</strong> Drukuj do PDF (wektor) lub eksportuj jako obraz 300dpi</p>
+        <p><strong>Instrukcje drukarni:</strong></p>
+        <ul>
+            <li>Zapisz jako PDF z elementami wektorowymi</li>
+            <li>Lub wyeksportuj jako bitmapę min. 300dpi</li>
+            <li>Kolory: czerwony #b81d2a, szary #baccd1</li>
+        </ul>
+        <button class="print-btn" onclick="window.print()">🖨️ Drukuj / Zapisz PDF</button>
+    </div>
+
+    <div class="label-container">
+        <!-- Header with logo -->
+        <div class="label-header">
+            <div class="logo-container">
+                <img src="./assets/biotune-logo-transparent.png" alt="BioTune" style="height: 55px; width: auto;">
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="label-content">
+            <div class="content-left">
+                <div>
+                    <div class="product-name">RETATRUTIDE</div>
+                    <div class="product-dosage">10MG</div>
+                </div>
+                <div>
+                    <div class="cas-number">CAS: 2381089-83-2</div>
+                    <div class="lab-material">SUROWIEC LABORATORYJNY</div>
+                </div>
+            </div>
+
+            <div class="content-right">
+                <div>
+                    <div class="exp-field">EXP:</div>
+                    <div class="batch-field">Batch no.:</div>
+                </div>
+                <div>
+                    <div class="disclaimer-italic">
+                        Surowiec przeznaczony wyłącznie do celów<br>
+                        badawczych.
+                    </div>
+                    <div class="disclaimer-bold">
+                        NIE DO SPOŻYCIA PRZEZ LUDZI
+                    </div>
+                </div>
+                <div class="storage-info">
+                    Nie wstrząsać. Nie zamrażać.<br>
+                    Przechowywać w temp. od 2°C do 8°C
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer red bar -->
+        <div class="label-footer"></div>
+    </div>
+
+    <div class="print-info" style="margin-top: 10px;">
+        <p><strong>💡 Wskazówka:</strong> Aby zapisać jako PDF wektor:</p>
+        <ul>
+            <li>Kliknij "Drukuj / Zapisz PDF"</li>
+            <li>Wybierz "Zapisz jako PDF" jako drukarkę</li>
+            <li>PDF zachowa elementy wektorowe (tekst, kształty)</li>
+        </ul>
+        <p style="margin-top: 10px;"><strong>Dla bitmapy 300dpi:</strong></p>
+        <ul>
+            <li>Użyj narzędzia do zrzutu ekranu w wysokiej rozdzielczości</li>
+            <li>Lub otwórz PDF w Photoshop/GIMP i eksportuj jako PNG 300dpi</li>
+        </ul>
+    </div>
+</body>
+
+</html>

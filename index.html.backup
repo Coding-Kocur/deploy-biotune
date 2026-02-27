@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth dark" style="scroll-snap-type: y mandatory;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioTune - Precyzja w kaĹĽdym mikrogramie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'biotune-black': '#0a0a0a',
+                        'biotune-dark': '#1a1a1a',
+                        'biotune-red': '#ff0000',
+                        'biotune-text': '#cccccc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .glass {
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-hover:hover {
+            border-color: #ff0000;
+            transform: translateY(-4px);
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .logo-img {
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.3));
+        }
+
+        .dark .logo-img {
+            filter: brightness(1.15) contrast(0.9);
+        }
+
+        .dark .logo-img:hover {
+            filter: brightness(1.15) contrast(0.9) drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+        }
+
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            display: inline-block;
+            animation: typing 3s steps(80) 0.5s forwards;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .dark ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff0000;
+        }
+
+        @keyframes blink {
+
+            0%,
+            49% {
+                opacity: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .cursor-blink {
+            animation: blink 1s step-start infinite;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel='icon' type='image/png' href='./assets/favicon.png'>
+</head>
+
+<body
+    class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased selection:bg-biotune-red selection:text-white transition-colors duration-300">
+
+    <nav
+        class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="hidden md:block">
+                    <div class="flex items-baseline space-x-8">
+                        <div class="dropdown-trigger">
+                            <a href="#shop"
+                                class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
+                                Sklep
+                                <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="py-1">
+                                    <a href="index.html#shop" onclick="scrollToProducts(event)"
+                                        class="block px-4 py-2 text-sm font-semibold text-biotune-red dark:text-biotune-red hover:bg-gray-100 dark:hover:bg-black/20 border-b border-gray-200 dark:border-white/10">Wszystkie</a>
+                                    <a href="product.html?id=retatrutide"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Retatrutide</a>
+                                    <a href="product.html?id=bpc-157-tb-500"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">BPC-157
+                                        + TB-500</a>
+                                    <a href="product.html?id=cjc-1295-ipamorelin"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">CJC-1295
+                                        + Ipamorelin</a>
+                                    <a href="product.html?id=hgh-fragment-176-191"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">HGH
+                                        Fragment 176-191</a>
+                                    <a href="product.html?id=ghk-cu"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">GHK-Cu</a>
+                                    <a href="product.html?id=melanotan-2"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Melanotan
+                                        2</a>
+                                    <a href="product.html?id=pt-141"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">PT-141</a>
+                                    <a href="product.html?id=epithalon"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Epithalon</a>
+                                    <a href="product.html?id=mots-c"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">MOTS-c</a>
+                                    <a href="product.html?id=semax"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Semax</a>
+                                    <a href="product.html?id=selank"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Selank</a>
+                                    <a href="product.html?id=bac-water"
+                                        class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">BAC
+                                        Water</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#about"
+                            class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O
+                            Nas</a>
+                        <div class="relative group">
+                            <input type="text" placeholder="Szukaj..."
+                                class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 ml-auto">
+                    <div class="account-dropdown">
+                        <a href="login.html" id="account-link" class="hover:text-biotune-red transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                <p
+                                class="text-gray-600 dark:text-biotune-text text-xl max-w-4xl mx-auto typewriter inline-block">
+                                NajwyĹĽszej czystoĹ›ci peptydy dla Twoich badaĹ„. Certyfikowana jakoĹ›Ä‡, ktĂłrej
+                                moĹĽesz zaufaÄ‡.
+                                </p>
+                    </div>
+                    <div id="product-grid"
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 text-left"></div>
+                </div>
+                </section>
+
+                <section id="about" class="relative h-[700vh] snap-start">
+                    <div class="sticky top-0 h-screen w-full overflow-hidden bg-black">
+                        <canvas id="sequence-canvas"
+                            class="absolute inset-0 w-full h-full object-cover opacity-60 origin-center z-0"
+                            style="transform: scale(1.7);"></canvas>
+                        <img id="microscope-bg" src="./assets/microscope.jpg" alt="Microscope"
+                            class="absolute inset-0 w-full h-full object-cover opacity-0 z-10">
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                            <div class="max-w-7xl w-full px-4 h-full flex flex-col justify-center relative">
+                                <div id="about-headline-container"
+                                    class="absolute top-1/3 left-0 right-0 text-center transform -translate-y-1/2">
+                                    <h2 class="text-5xl md:text-7xl font-bold text-white text-shadow">
+                                        <span id="typewriter-text"></span><span id="cursor"
+                                            class="cursor-blink">|</span>
+                                    </h2>
+                                </div>
+                                <div id="about-p1" class="absolute inset-0 flex items-center justify-center opacity-0">
+                                    <div class="max-w-6xl mx-4 px-8">
+                                        <p
+                                            class="text-5xl md:text-7xl text-white leading-tight font-bold text-center text-shadow">
+                                            BioTune powstaĹ‚o z buntu przeciwko przeciÄ™tnoĹ›ci. W Ĺ›wiecie zdominowanym
+                                            przez
+                                            niepewne
+                                            ĹşrĂłdĹ‚a, stworzyliĹ›my bezpiecznÄ… przystaĹ„ dla badaczy. Naszym celem
+                                            jest
+                                            dostarczanie
+                                            narzÄ™dzi, ktĂłre pozwalajÄ… przesuwaÄ‡ granice ludzkiej biologii.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div id="about-p2"
+                                    class="absolute top-32 right-0 w-full md:w-1/3 lg:w-1/4 opacity-0 transform translate-y-10 text-right pr-8">
+                                    <p class="text-3xl md:text-5xl text-black leading-tight font-bold p-4"
+                                        style="text-shadow: 0 0 20px rgba(255,255,255,0.8);">
+                                        Nie uznajemy pĂłĹ‚Ĺ›rodkĂłw. KaĹĽda partia przechodzi rygorystyczne testy HPLC
+                                        oraz MS.
+                                        Gwarantujemy czystoĹ›Ä‡ powyĹĽej 99%, potwierdzonÄ… certyfikatami COA. To, co
+                                        trafia do
+                                        Twojego laboratorium, jest dokĹ‚adnie tym, co deklarujemy.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contact"
+                    class="py-24 bg-gray-100 dark:bg-biotune-dark relative overflow-hidden snap-start transition-colors duration-300">
+                    <div class="max-w-3xl mx-auto px-4 relative z-10">
+                        <h2 class="text-3xl font-bold mb-8 text-center text-black dark:text-white">SKONTAKTUJ SIÄ Z
+                            NAMI</h2>
+                        <form class="space-y-6">
+                            <div class="group">
+                                <label
+                                    class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">ImiÄ™</label>
+                                <input type="text"
+                                    class="w-full bg-transparent border-b border-gray-400 dark:border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-600">
+                            </div>
+                            <div class="group">
+                                <label
+                                    class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Email</label>
+                                <input type="email"
+                                    class="w-full bg-transparent border-b border-gray-400 dark:border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-600">
+                            </div>
+                            <div class="group">
+                                <label
+                                    class="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">WiadomoĹ›Ä‡</label>
+                                <textarea rows="4"
+                                    class="w-full bg-transparent border-b border-gray-400 dark:border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-600"></textarea>
+                            </div>
+                            <button type="button"
+                                class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">WyĹ›lij
+                                WiadomoĹ›Ä‡</button>
+                        </form>
+                    </div>
+                    <footer
+                        class="mt-24 border-t border-black/5 dark:border-white/5 pt-8 text-center text-gray-500 text-sm">
+                        <p>&copy; 2025 BioTune. Wszelkie prawa zastrzeĹĽone.</p>
+                    </footer>
+                </section>
+
+                <div id="cart-drawer"
+                    class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white dark:bg-biotune-dark border-l border-black/10 dark:border-white/10 transform translate-x-full transition-transform duration-300 z-[60] shadow-2xl flex flex-col text-black dark:text-white">
+                    <div class="p-6 border-b border-black/10 dark:border-white/10 flex justify-between items-center">
+                        <h2 class="text-xl font-bold">TwĂłj Koszyk</h2>
+                        <button id="close-cart"
+                            class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                        <p class="text-center text-gray-500 mt-10">TwĂłj koszyk jest pusty.</p>
+                    </div>
+                    <div class="p-6 border-t border-black/10 dark:border-white/10 bg-gray-100 dark:bg-black/20">
+                        <div class="flex justify-between items-center mb-4 text-lg font-bold">
+                            <span>Suma:</span>
+                            <span id="cart-total">0.00 PLN</span>
+                        </div>
+                        <button
+                            class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">PrzejdĹş
+                            do kasy</button>
+                    </div>
+                </div>
+
+                <div id="overlay"
+                    class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300">
+                </div>
+
+                <script src="./js/products-data.js"></script>
+                <script src="./js/shop.js"></script>
+                <script src="./js/animations.js"></script>
+                <script src="./js/homepage-disclaimer.js"></script>
+                <script src="./js/main.js"></script>
+                <script src="./js/show-about.js"></script>
+                <script>
+                    const themeToggle = document.getElementById('theme-toggle');
+                    const html = document.documentElement;
+                    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                        html.classList.add('dark');
+                    } else {
+                        html.classList.remove('dark');
+                    }
+                    themeToggle.addEventListener('click', () => {
+                        html.classList.toggle('dark');
+                        localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+                    });
+
+                    // Scroll to product grid function
+                    function scrollToProducts(event) {
+                        event.preventDefault();
+                        const productGrid = document.getElementById('product-grid');
+                        if (productGrid) {
+                            const yOffset = -80; // Account for fixed navbar height
+                            const y = productGrid.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                            window.scrollTo({ top: y, behavior: 'smooth' });
+                        }
+                    }
+                </script>
+</body>
+
+</html>

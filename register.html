@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarejestruj się - BioTune</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'biotune-black': '#0a0a0a',
+                        'biotune-dark': '#1a1a1a',
+                        'biotune-red': '#ff0000',
+                        'biotune-text': '#cccccc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel='icon' type='image/png' href='./assets/favicon.png'>
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased">
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="text-center mb-8">
+                <a href="index.html">
+                    <img src="./assets/logo.png" alt="BioTune" class="w-32 mx-auto mb-4">
+                </a>
+                <h1 class="text-2xl font-bold text-black dark:text-white">Utwórz konto</h1>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Dołącz do BioTune już dziś</p>
+            </div>
+
+            <div id="error-message"></div>
+
+            <!-- OAuth Buttons -->
+            <div class="space-y-3 mb-6">
+                <button onclick="loginWithFacebook()" class="oauth-button oauth-facebook">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                    Zarejestruj się przez Facebook
+                </button>
+                <button onclick="loginWithGoogle()" class="oauth-button oauth-google">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24">
+                        <path fill="#4285F4"
+                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                        <path fill="#34A853"
+                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05"
+                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                        <path fill="#EA4335"
+                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                    </svg>
+                    Zarejestruj się przez Google
+                </button>
+            </div>
+
+            <div class="divider">
+                <span>lub zarejestruj się za pomocą</span>
+            </div>
+
+            <!-- Register Form -->
+            <form id="register-form" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Imię (opcjonalne)
+                    </label>
+                    <input type="text" id="name" class="auth-input" placeholder="Jak mamy się do Ciebie zwracać?">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Email
+                    </label>
+                    <input type="email" id="email" required class="auth-input" placeholder="Wprowadź swój email...">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Hasło
+                    </label>
+                    <input type="password" id="password" required class="auth-input" placeholder="Minimum 6 znaków...">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        Hasło musi zawierać minimum 6 znaków
+                    </p>
+                </div>
+
+                <div>
+                    <label for="confirm-password"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Potwierdź hasło
+                    </label>
+                    <input type="password" id="confirm-password" required class="auth-input"
+                        placeholder="Powtórz hasło...">
+                </div>
+
+                <!-- UPDATED: Terms checkbox with proper text and Regulamin link -->
+                <div class="flex items-start">
+                    <input type="checkbox" id="terms-accept" required class="mr-2 mt-1 rounded border-gray-300">
+                    <label for="terms-accept" class="text-sm text-gray-600 dark:text-gray-400">
+                        Akceptuję <a href="regulamin.html" target="_blank"
+                            class="text-biotune-red hover:underline">Regulamin sklepu BioTune</a>
+                        oraz potwierdzam, że będę korzystał z zakupionych odczynników wyłącznie do celów badawczych.
+                    </label>
+                </div>
+
+                <button type="submit" id="register-btn" class="auth-button">
+                    Zarejestruj się
+                </button>
+            </form>
+
+            <div class="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+                Masz już konto?
+                <a href="login.html" class="text-biotune-red font-semibold hover:underline">Zaloguj się</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Dołącz do naszego newslettera</h2>
+        <form class="newsletter-form">
+            <div class="newsletter-input-group">
+                <input type="email" class="newsletter-input" placeholder="Podaj adres email" required>
+                <button type="submit" class="newsletter-button">Zapisz się</button>
+            </div>
+            <label class="newsletter-consent">
+                <input type="checkbox" required>
+                <span>Wyrażam zgodę na przetwarzanie podanych powyżej danych osobowych w celu otrzymywania
+                    newslettera.</span>
+            </label>
+            <div class="newsletter-feedback"></div>
+        </form>
+    </section>
+
+    
+    <!-- Footer -->
+    <footer class="bg-[#121212] pt-16 pb-8 border-t border-white/10 relative overflow-hidden z-20 w-full mt-12 mb-0">
+        <!-- Glowing Background orb -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-biotune-red/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+                <!-- Logo & Bio -->
+                <div class="lg:col-span-2">
+                    <a href="index.html" class="inline-block mb-6">
+                        <span class="text-3xl font-bold text-white tracking-tighter">Bio<span class="text-biotune-red">Tune</span></span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed max-w-sm">
+                        Ekspert w dziedzinie odczynników chemicznych do celów laboratoryjnych i innowacyjnych rozwiązań badawczych. Dostarczamy najwyższą jakość potwierdzoną dokumentacją.
+                    </p>
+                </div>
+
+                <!-- Kategorie -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Kategorie</h4>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors text-sm">Strona główna</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">O nas</a></li>
+                        <li><a href="shop.html" class="text-gray-400 hover:text-white transition-colors text-sm">Sklep</a></li>
+                    </ul>
+                </div>
+
+                <!-- Informacja -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Informacja</h4>
+                    <ul class="space-y-4">
+                        <li><a href="regulamin.html" class="text-gray-400 hover:text-white transition-colors text-sm">Regulamin sklepu</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors text-sm">Polityka prywatności</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors text-sm">Kontakt</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="w-full h-px bg-white/10 mb-8" id="footer-contact"></div>
+
+            <!-- Contact & Socials -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+                <div class="flex flex-col sm:flex-row gap-8">
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:bg-biotune-red group-hover:border-biotune-red transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-300 group-hover:text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">E-mail informacyjny</p>
+                            <p class="text-white text-sm font-medium">kontakt@biotune.pl</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <!-- Instagram -->
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center md:text-left text-[11px] text-gray-500 font-mono">
+                &copy; 2026 BioTune. Wszelkie prawa zastrzeżone. Projekt o charakterze wyłącznie badawczym i naukowym.
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="./js/auth.js"></script>
+    <script src="./js/agreementsStorage.js"></script>
+    <script>
+        // Validate passwords match
+            if (password !== confirmPassword) {
+                errorDiv.innerHTML = '<div class="alert alert-error">Hasła nie są identyczne</div>';
+                return;
+            }
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<div class="spinner mx-auto"></div>';
+
+                await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
+
+                // Save registration agreement to localStorage
+                const agreementData = {
+                    type: 'registration',
+                    terms: true,
+                    researchUse: true,
+                    timestamp: Date.now(),
+                    version: 'regulamin_2025-01-03',
+                    email: email
+                };
+
+                if (window.agreementsStorage) {
+                    window.agreementsStorage.save(agreementData);
+                } else {
+                    localStorage.setItem('biotune_registration_agreement', JSON.stringify(agreementData));
+                }
+
+                console.log('[BioTune Registration] Agreement saved:', agreementData);
+
+                authSystem.register(email, password, name);
+
+                // Show success and redirect
+                errorDiv.innerHTML = '<div class="alert alert-success">Konto utworzone! Przekierowywanie...</div>';
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } catch (error) {
+                errorDiv.innerHTML = `<div class="alert alert-error">${error.message}</div>`;
+                btn.disabled = false;
+                btn.textContent = 'Zarejestruj się';
+            }
+        });
+    </script>
+</body>
+
+</html>

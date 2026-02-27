@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html class="scroll-smooth dark" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratory 10 Report - Cutting Tool Design and Sharpening</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2.5cm;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            max-width: 21cm;
+            margin: 0 auto;
+            padding: 2cm;
+            background: white;
+        }
+
+        h1 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 24pt;
+            margin-bottom: 12pt;
+        }
+
+        h2 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 18pt;
+            margin-bottom: 10pt;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10pt 0 20pt 0;
+            font-size: 11pt;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5pt 8pt;
+            text-align: center;
+        }
+
+        th {
+            font-weight: bold;
+            background-color: #f0f0f0;
+        }
+
+        p {
+            text-align: justify;
+            margin: 10pt 0;
+        }
+
+        .figure-caption {
+            text-align: center;
+            font-size: 11pt;
+            font-style: italic;
+            margin-top: 5pt;
+            margin-bottom: 20pt;
+        }
+
+        .table-caption {
+            text-align: center;
+            font-style: italic;
+            font-size: 11pt;
+            margin-bottom: 5pt;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <table style="width: 100%; border: none; margin-bottom: 30pt;">
+        <tr>
+            <td style="border: none; text-align: left; vertical-align: top; width: 50%;">
+                Business, Society and Technology<br>IFE, 3rd semester
+            </td>
+            <td style="border: none; text-align: right; vertical-align: top;">
+                LAB REPORT<br>MANUFACTURING
+            </td>
+        </tr>
+    </table>
+
+    <table style="width: 100%; border: 1px solid black; margin-bottom: 20pt;">
+        <tr>
+            <td style="width: 50%;">Lab no. 10</td>
+            <td style="width: 50%;">Title: Cutting Tool Design and Sharpening</td>
+        </tr>
+        <tr>
+            <td colspan="2">Date of lab: 28/11/2025</td>
+        </tr>
+    </table>
+
+    <table style="width: 100%; margin-bottom: 30pt;">
+        <tr>
+            <th style="width: 5%;">No.</th>
+            <th style="width: 40%;">SURNAME Name</th>
+            <th style="width: 25%;">Album No.</th>
+            <th style="width: 30%;">Lab group</th>
+        </tr>
+        <tr>
+            <td>1.</td>
+            <td>KOTOWICZ Stanisław</td>
+            <td>257100</td>
+            <td>BST_en_1</td>
+        </tr>
+    </table>
+
+    <h1>INTRODUCTION</h1>
+
+    <p>Cutting tools are fundamental components in machining operations, and their geometry directly affects the
+        efficiency, quality, and economics of the metal removal process. The design and maintenance of cutting tools
+        require a thorough understanding of tool angles and their influence on cutting performance. This laboratory
+        exercise focused on the geometry of turning tools and the methods used to sharpen various types of cutting
+        tools.</p>
+
+    <p>The geometry of a cutting tool is characterized by several important angles, each serving a specific purpose in
+        the cutting process. The rake angle influences chip formation and cutting forces, with positive rake angles
+        reducing cutting forces but weakening the cutting edge. The relief angle prevents rubbing between the tool flank
+        and the newly machined surface, reducing friction and heat generation. The cutting edge angles determine the
+        direction of chip flow and affect surface finish quality.</p>
+
+    <p>Tool sharpening is an essential maintenance operation that restores the cutting edges to their optimal condition.
+        Different types of cutting tools require specific sharpening techniques and equipment. This laboratory provided
+        practical demonstrations of sharpening methods for twist drills, shell end mill cutters, form relieved mill
+        cutters, and hob cutters, each presenting unique challenges due to their complex geometries.</p>
+
+    <h1>EXPERIMENTAL</h1>
+
+    <h2>Task 1: Turning Tool Angle Measurement</h2>
+
+    <p>The objective of this task was to measure the angles of a single-point turning tool using a protractor and angle
+        measuring instruments. The measured values were recorded and used to compose the tool signature according to ISO
+        designation standards.</p>
+
+    <p class="table-caption">Table 1. Results of measurements</p>
+    <table>
+        <tr>
+            <th>Name of an angle</th>
+            <th>Value</th>
+            <th>Units</th>
+            <th>Symbol</th>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Back rake angle</td>
+            <td>1.5</td>
+            <td>[°]</td>
+            <td>λ<sub>s</sub></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Side rake angle</td>
+            <td>14</td>
+            <td>[°]</td>
+            <td>γ<sub>0</sub></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">End relief angle</td>
+            <td>5</td>
+            <td>[°]</td>
+            <td>α'<sub>0</sub></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Side relief angle</td>
+            <td>5</td>
+            <td>[°]</td>
+            <td>α<sub>0</sub></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">End cutting edge angle</td>
+            <td>17</td>
+            <td>[°]</td>
+            <td>κ'<sub>r</sub></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Side cutting edge angle</td>
+            <td>20</td>
+            <td>[°]</td>
+            <td>ψ</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Nose radius</td>
+            <td>0.4</td>
+            <td>[mm]</td>
+            <td>r<sub>ε</sub></td>
+        </tr>
+    </table>
+
+    <p>The measured angles indicate that this turning tool has a relatively small back rake angle of 1.5°, which
+        provides a stronger cutting edge suitable for harder materials or interrupted cuts. The side rake angle of 14°
+        is moderate, providing a good balance between cutting efficiency and edge strength. The relief angles of 5° each
+        are sufficient to prevent rubbing while maintaining adequate support for the cutting edge. The cutting edge
+        angles of 17° and 20° determine the approach direction and chip flow characteristics.</p>
+
+    <p>Based on the ISO designation system, the tool signature can be expressed as: 1.5 - 14 - 5 - 5 - 17 - 20 - 0.4 (λs
+        - γ0 - α'0 - α0 - κ'r - ψ - rε).</p>
+
+    <h2>Calculated Tool Geometry Parameters</h2>
+
+    <p>Using the measured angles, additional geometric parameters of the cutting tool can be calculated:</p>
+
+    <p>The wedge angle (β) represents the angle of the cutting wedge and is calculated as:</p>
+    <p style="text-align: center;">β = 90° - γ<sub>0</sub> - α<sub>0</sub> = 90° - 14° - 5° = 71°</p>
+
+    <p>The cutting angle (δ) is the angle between the rake face and the cutting direction:</p>
+    <p style="text-align: center;">δ = 90° - γ<sub>0</sub> = 90° - 14° = 76°</p>
+
+    <p>The tool included angle (ε) between the main and auxiliary cutting edges:</p>
+    <p style="text-align: center;">ε = 180° - κ<sub>r</sub> - κ'<sub>r</sub> = 180° - 20° - 17° = 143°</p>
+
+    <p>Where κ<sub>r</sub> = 90° - ψ = 90° - 20° = 70° is the main cutting edge angle.</p>
+
+    <p class="table-caption">Table 2. Calculated tool geometry parameters</p>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Formula</th>
+            <th>Value</th>
+            <th>Symbol</th>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Wedge angle</td>
+            <td>90° - γ<sub>0</sub> - α<sub>0</sub></td>
+            <td>71°</td>
+            <td>β</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Cutting angle</td>
+            <td>90° - γ<sub>0</sub></td>
+            <td>76°</td>
+            <td>δ</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Main cutting edge angle</td>
+            <td>90° - ψ</td>
+            <td>70°</td>
+            <td>κ<sub>r</sub></td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Tool included angle</td>
+            <td>180° - κ<sub>r</sub> - κ'<sub>r</sub></td>
+            <td>143°</td>
+            <td>ε</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Sum of angles (verification)</td>
+            <td>α<sub>0</sub> + β + γ<sub>0</sub></td>
+            <td>90°</td>
+            <td>-</td>
+        </tr>
+    </table>
+
+    <p>The relationship α + β + γ = 90° is verified: 5° + 71° + 14° = 90°, confirming the measurements are consistent.</p>
+
+    <p>The wedge angle of 71° indicates a relatively strong cutting edge suitable for machining harder materials. A smaller wedge angle would provide a sharper edge but with reduced strength. The cutting angle of 76° is within the typical range for turning operations on steel and other common engineering materials.</p>
+
+    <div style="text-align: center; margin: 20pt 0;">
+        <img src="turning_tool_diagram.png" alt="Turning tool with marked angles"
+            style="max-width: 100%; height: auto;">
+    </div>
+    <p class="figure-caption">Figure 1. Schematic drawing of a single-point turning tool with the main angles marked:
+        back rake angle (λ), side rake angle (γ), relief angles (α), and cutting edge angles.</p>
+
+    <h2>Task 2: Sharpening of a Twist Drill</h2>
+
+    <p>The demonstration covered the sharpening of a twist drill, which is one of the most commonly used cutting tools
+        in manufacturing. Twist drills require periodic sharpening to maintain their cutting efficiency and produce
+        accurate holes.</p>
+
+    <p>The key aspects of twist drill sharpening include maintaining the correct point angle, which is typically 118°
+        for general-purpose drilling but may vary for specific materials. The lip relief angle should be maintained at
+        approximately 8-12° to provide clearance behind the cutting lips. Both cutting lips must be ground to equal
+        length to ensure the drill cuts on center and produces round holes. For larger drills, web thinning may be
+        necessary to reduce thrust forces. The sharpening was performed on a bench grinder with appropriate wheel
+        selection and coolant application to prevent overheating of the cutting edges.</p>
+
+    <h2>Task 3: Sharpening of Shell End Mill Cutter</h2>
+
+    <p>Shell end mill cutters are multi-flute cutting tools used for face milling and peripheral milling operations. The
+        demonstration focused on sharpening the relief angles on the cutting teeth.</p>
+
+    <p>The primary relief angle, typically 4-8°, provides the first clearance behind the cutting edge, while the
+        secondary relief angle of 12-15° provides additional clearance to prevent heel contact. Maintaining uniform
+        tooth spacing during grinding ensures equal cutting load distribution among all teeth. Specialized tool and
+        cutter grinders with indexing fixtures were used to ensure accurate and consistent relief angle grinding on each
+        tooth, producing a keen cutting edge at the intersection of the rake face and relief surface.</p>
+
+    <h2>Task 4: Sharpening of Form Relieved Mill Cutter</h2>
+
+    <p>Form relieved cutters are specialized tools that produce complex profiles, such as gear teeth or thread forms.
+        These cutters have a distinctive geometry where the relief is built into the tooth profile rather than ground as
+        a flat surface.</p>
+
+    <p>The critical consideration when sharpening form relieved cutters is that grinding must be performed exclusively
+        on the rake face to preserve the form-relieved profile. Grinding must be performed parallel to the cutter axis
+        to prevent distortion of the tooth profile, and the same amount of material must be removed from each tooth to
+        maintain concentricity. The relief surface must never be ground, as this would destroy the precisely
+        manufactured form that defines the profile being produced.</p>
+
+    <h2>Task 5: Sharpening of Hob Cutter</h2>
+
+    <p>Hob cutters are specialized gear cutting tools that generate gear teeth through a continuous rolling action. Hob
+        sharpening is a critical operation requiring high precision.</p>
+
+    <p>Like form relieved cutters, hobs are sharpened only on the rake face. Care must be taken to maintain consistent
+        flute depth across all teeth, and the generating profile must be preserved exactly to produce accurate gear
+        teeth. A fine surface finish on the sharpened face is essential for quality gear production. Specialized hob
+        sharpening machines with precise indexing mechanisms and diamond or CBN grinding wheels were demonstrated during
+        the laboratory.</p>
+
+    <h1>CONCLUSIONS</h1>
+
+    <p>This laboratory exercise on cutting tool design and sharpening provided valuable practical insights into the
+        geometry and maintenance of cutting tools used in manufacturing operations.</p>
+
+    <p>The measurement of turning tool angles demonstrated the importance of each geometric parameter in defining tool
+        performance. The measured tool exhibited a back rake angle of 1.5°, side rake angle of 14°, relief angles of 5°,
+        end cutting edge angle of 17°, side cutting edge angle of 20°, and nose radius of 0.4 mm. These angles combine
+        to create a tool suitable for general-purpose turning operations, with the tool signature 1.5-14-5-5-17-20-0.4
+        providing a standardized description of the geometry.</p>
+
+    <p>The practical demonstrations of sharpening methods for various cutting tools highlighted the diversity of
+        techniques required for different tool types. Twist drill sharpening emphasizes the importance of symmetric lip
+        grinding and proper point angle maintenance. Shell end mill cutters require careful relief angle grinding while
+        maintaining tooth-to-tooth consistency. Form relieved cutters and hob cutters present unique challenges as they
+        can only be sharpened on the rake face to preserve their precision-manufactured profiles. These concepts are
+        essential for effective tool management in manufacturing environments.</p>
+
+</body>
+
+</html>

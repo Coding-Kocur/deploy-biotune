@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulamin - BioTune</title>
+    <meta name="description"
+        content="Regulamin sklepu internetowego BioTune. Zasady korzystania ze sklepu, warunki sprzedaży odczynników chemicznych do celów badawczych.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'biotune-black': '#0a0a0a',
+                        'biotune-dark': '#1a1a1a',
+                        'biotune-red': '#ff0000',
+                        'biotune-text': '#cccccc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel='icon' type='image/png' href='./assets/favicon.png'>
+    <style>
+        .regulamin-section {
+            scroll-margin-top: 100px;
+        }
+
+        .toc-link {
+            transition: all 0.2s ease;
+        }
+
+        .toc-link:hover {
+            color: #ff0000;
+            padding-left: 8px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased">
+    <!-- Header -->
+    <header class="bg-white dark:bg-biotune-dark border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="./assets/biotune-logo-transparent.png" alt="BioTune" class="h-10 w-auto block dark:hidden">
+                <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="h-10 w-auto hidden dark:block">
+            </a>
+            <a href="index.html"
+                class="text-sm text-gray-600 dark:text-gray-400 hover:text-biotune-red transition-colors">
+                ← Powrót do sklepu
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-12">
+        <!-- Title -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold mb-4">Regulamin Sklepu Internetowego</h1>
+            <p class="text-gray-600 dark:text-gray-400">BioTune.pl</p>
+            <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">Data wejścia w życie: 2025-01-03</p>
+        </div>
+
+        <div class="grid lg:grid-cols-4 gap-8">
+            <!-- Table of Contents (Sidebar) -->
+            <aside class="lg:col-span-1">
+                <div class="sticky top-24 bg-gray-100 dark:bg-biotune-dark rounded-lg p-4">
+                    <h2 class="font-bold text-lg mb-4">Spis treści</h2>
+                    <nav class="space-y-2 text-sm">
+                        <a href="#par1" class="toc-link block text-gray-600 dark:text-gray-400">§1. Postanowienia
+                            Ogólne</a>
+                        <a href="#par2" class="toc-link block text-gray-600 dark:text-gray-400">§2. Definicje</a>
+                        <a href="#par3" class="toc-link block text-gray-600 dark:text-gray-400">§3. Zasady
+                            Korzystania</a>
+                        <a href="#par3a" class="toc-link block text-gray-600 dark:text-gray-400">§3a. Status Klienta</a>
+                        <a href="#par4" class="toc-link block text-gray-600 dark:text-gray-400">§4. Przedmiot
+                            Sprzedaży</a>
+                        <a href="#par4a" class="toc-link block text-gray-600 dark:text-gray-400">§4a. Brak Nadzoru</a>
+                        <a href="#par4b" class="toc-link block text-gray-600 dark:text-gray-400">§4b. Zakaz Dalszego
+                            Obrotu</a>
+                        <a href="#par4c" class="toc-link block text-gray-600 dark:text-gray-400">§4c. Zdjęcia
+                            Produktów</a>
+                        <a href="#par5" class="toc-link block text-gray-600 dark:text-gray-400">§5. Ceny i Płatności</a>
+                        <a href="#par5a" class="toc-link block text-gray-600 dark:text-gray-400">§5a. Ograniczenie
+                            Rękojmi</a>
+                        <a href="#par6" class="toc-link block text-gray-600 dark:text-gray-400">§6. Dostawa</a>
+                        <a href="#par7" class="toc-link block text-gray-600 dark:text-gray-400">§7. Zwroty</a>
+                        <a href="#par8" class="toc-link block text-gray-600 dark:text-gray-400">§8. Reklamacje</a>
+                        <a href="#par8a" class="toc-link block text-gray-600 dark:text-gray-400">§8a. Zakaz
+                            Marketingu</a>
+                        <a href="#par9" class="toc-link block text-gray-600 dark:text-gray-400">§9. RODO</a>
+                        <a href="#par10" class="toc-link block text-gray-600 dark:text-gray-400">§10. Postanowienia
+                            Końcowe</a>
+                        <a href="#par10a" class="toc-link block text-gray-600 dark:text-gray-400">§10a. Klauzula
+                            Eksportowa</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Regulamin Content -->
+            <article class="lg:col-span-3 prose prose-gray dark:prose-invert max-w-none">
+
+                <!-- §1 -->
+                <section id="par1" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§1. Postanowienia Ogólne</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Sklep internetowy dostępny pod adresem internetowym www.biotune.pl prowadzony jest przez
+                            spółkę: BioTune Sp. z o.o. z siedzibą w [Miejscowość], adres: ul. [Ulica i numer], [Kod
+                            pocztowy] [Miejscowość], wpisaną do Rejestru Przedsiębiorców Krajowego Rejestru Sądowego pod
+                            numerem KRS: [Numer], NIP: [Numer], REGON: [Numer], kapitał zakładowy: [Kwota] PLN.</li>
+                        <li>Niniejszy Regulamin określa zasady korzystania ze Sklepu, rodzaje i zakres usług
+                            świadczonych drogą elektroniczną, warunki zawierania umów sprzedaży oraz tryb postępowania
+                            reklamacyjnego.</li>
+                        <li class="bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border-l-4 border-biotune-red">
+                            <strong>WAŻNE OSTRZEŻENIE:</strong> Wszystkie produkty oferowane w Sklepie są odczynnikami
+                            chemicznymi przeznaczonymi wyłącznie do celów badawczych, laboratoryjnych i analitycznych
+                            (Research Use Only - RUO). Produkty te nie są produktami leczniczymi, wyrobami medycznymi,
+                            kosmetykami, żywnością ani suplementami diety w rozumieniu przepisów prawa polskiego i
+                            unijnego.
+                        </li>
+                        <li>Wszelkie informacje zamieszczone na stronie Sklepu, w tym opisy produktów, mają charakter
+                            wyłącznie edukacyjny i naukowy (z zakresu chemii i biochemii) i nie mogą być traktowane jako
+                            porada medyczna ani zachęta do stosowania produktów na ludziach.</li>
+                    </ol>
+                </section>
+
+                <!-- §2 -->
+                <section id="par2" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§2. Definicje</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li><strong>Sprzedawca</strong> – BioTune Sp. z o.o.</li>
+                        <li><strong>Klient</strong> – osoba fizyczna, osoba prawna lub jednostka organizacyjna
+                            nieposiadająca osobowości prawnej, dokonująca zakupów w Sklepie.</li>
+                        <li><strong>Towar / Produkt</strong> – substancja chemiczna (np. peptyd) dostępna w ofercie
+                            Sklepu, będąca przedmiotem Umowy Sprzedaży.</li>
+                        <li><strong>Użycie Badawcze</strong> – wykorzystanie Produktu do badań in vitro, analiz
+                            laboratoryjnych, kalibracji urządzeń lub celów dydaktycznych, z wyłączeniem stosowania na
+                            ludziach (in vivo) i zwierzętach.</li>
+                    </ol>
+                </section>
+
+                <!-- §3 -->
+                <section id="par3" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§3. Zasady Korzystania ze Sklepu i Oświadczenia
+                        Klienta</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Warunkiem złożenia zamówienia jest akceptacja niniejszego Regulaminu.</li>
+                        <li>Klient składając zamówienie oświadcza, że:
+                            <ol class="list-[lower-alpha] list-inside ml-4 mt-2 space-y-1">
+                                <li>Jest osobą pełnoletnią.</li>
+                                <li>Posiada wiedzę niezbędną do bezpiecznego obchodzenia się z odczynnikami chemicznymi
+                                    lub reprezentuje podmiot profesjonalny.</li>
+                                <li>Zakupiony Towar zostanie wykorzystany wyłącznie do celów badawczych/laboratoryjnych.
+                                </li>
+                                <li>Nie wykorzysta Towaru do celów spożywczych, farmaceutycznych ani jako środka do
+                                    iniekcji u ludzi lub zwierząt.</li>
+                            </ol>
+                        </li>
+                        <li>Sprzedawca zastrzega sobie prawo do weryfikacji Klienta oraz odmowy realizacji zamówienia w
+                            przypadku podejrzenia, że Towar może zostać użyty niezgodnie z przeznaczeniem (np. w celach
+                            konsumpcyjnych).</li>
+                    </ol>
+                </section>
+
+                <!-- §3a -->
+                <section id="par3a" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§3a. Status Klienta i Profesjonalny Charakter
+                        Zakupu</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Klient przyjmuje do wiadomości, że Sprzedawca oferuje produkty wyłącznie jako odczynniki
+                            chemiczne do zastosowań badawczych i laboratoryjnych, przeznaczone dla osób posiadających
+                            odpowiednią wiedzę specjalistyczną.</li>
+                        <li>Składając zamówienie, Klient oświadcza, że dokonuje zakupu w charakterze użytkownika
+                            profesjonalnego (professional user), rozumiejącego właściwości chemiczne substancji oraz
+                            ryzyka związane z ich niewłaściwym użyciem.</li>
+                        <li>Sprzedawca nie prowadzi i nie jest zobowiązany do prowadzenia nadzoru nad sposobem
+                            wykorzystania produktów po ich wydaniu Klientowi.</li>
+                    </ol>
+                </section>
+
+                <!-- §4 -->
+                <section id="par4" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§4. Przedmiot Sprzedaży i Ograniczenie
+                        Odpowiedzialności</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Produkty w Sklepie nie posiadają atestów spożywczych ani farmaceutycznych. Są to czyste
+                            substancje chemiczne.</li>
+                        <li>Etykiety produktów zawierają informację "Research Use Only" (Wyłącznie do celów badawczych)
+                            oraz "Not for human use" (Nie do użytku na ludziach).</li>
+                        <li>Sprzedawca nie ponosi odpowiedzialności za szkody na zdrowiu lub mieniu wynikłe z użycia
+                            Produktów niezgodnie z ich przeznaczeniem, w szczególności w przypadku ich spożycia,
+                            iniekcji lub innego wprowadzenia do organizmu ludzkiego.</li>
+                        <li>Klient przyjmuje do wiadomości, że odczynniki chemiczne mogą być szkodliwe przy niewłaściwym
+                            użyciu i zobowiązuje się stosować odpowiednie środki ochrony osobistej (rękawice, okulary
+                            ochronne) podczas pracy z substancją.</li>
+                    </ol>
+                </section>
+
+                <!-- §4a -->
+                <section id="par4a" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§4a. Brak Nadzoru i Brak Odpowiedzialności za
+                        Użycie Końcowe</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Sprzedawca nie ma faktycznej ani prawnej możliwości kontroli sposobu użycia Produktów po ich
+                            dostarczeniu Klientowi.</li>
+                        <li>Całkowita odpowiedzialność za sposób użycia, przechowywania, dalsze przetwarzanie, mieszanie
+                            z innymi substancjami lub wprowadzenie do obrotu wtórnego Produktu spoczywa na Kliencie.
+                        </li>
+                        <li>Sprzedawca nie ponosi odpowiedzialności za jakiekolwiek skutki wynikające z użycia Produktu
+                            niezgodnie z jego przeznaczeniem badawczym, nawet jeśli użycie takie było przewidywalne.
+                        </li>
+                        <li>Klient akceptuje, że wszelkie wykorzystanie zakupionych Produktów, w tym ich przechowywanie
+                            i obchodzenie się z nimi, odbywa się wyłącznie na jego własną odpowiedzialność i ryzyko.
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- §4b -->
+                <section id="par4b" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§4b. Zakaz Dalszego Obrotu i Re-etykietowania
+                    </h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Klientowi zabrania się:
+                            <ol class="list-[lower-alpha] list-inside ml-4 mt-2 space-y-1">
+                                <li>dalszej odsprzedaży Produktów jako leków, suplementów diety, wyrobów medycznych lub
+                                    produktów do stosowania na ludziach,</li>
+                                <li>usuwania, zmiany lub zakrywania oznaczeń „Research Use Only",</li>
+                                <li>re-etykietowania Produktów w sposób sugerujący ich zastosowanie in vivo.</li>
+                            </ol>
+                        </li>
+                        <li class="bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border-l-4 border-biotune-red">Naruszenie
+                            powyższego zakazu stanowi rażące naruszenie Regulaminu i skutkuje pełną odpowiedzialnością
+                            odszkodowawczą Klienta.</li>
+                    </ol>
+                </section>
+
+                <!-- §4c -->
+                <section id="par4c" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§4c. Zdjęcia i Prezentacja Produktów</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Zdjęcia produktów prezentowane na stronie Sklepu mają charakter poglądowy i ilustracyjny.
+                            Przedstawiają one typowy wygląd produktów danego rodzaju.</li>
+                        <li>Rzeczywisty wygląd produktu może nieznacznie różnić się od prezentowanego na zdjęciach, w
+                            szczególności w zakresie:
+                            <ol class="list-[lower-alpha] list-inside ml-4 mt-2 space-y-1">
+                                <li>koloru nakładki (flip-off cap) na fiolce – nakładki mogą występować w różnych
+                                    kolorach (czerwony, niebieski, zielony, żółty i inne),</li>
+                                <li>drobnych różnic w wyglądzie etykiety wynikających z procesu produkcji,</li>
+                                <li>tła i otoczenia przedstawionego na zdjęciach, które ma charakter wyłącznie
+                                    dekoracyjny.</li>
+                            </ol>
+                        </li>
+                        <li>Powyższe różnice nie stanowią wady produktu ani niezgodności towaru z umową w rozumieniu
+                            przepisów o prawach konsumenta, o ile nie wpływają na właściwości chemiczne i jakość
+                            substancji.</li>
+                        <li>Klient przed złożeniem zamówienia przyjmuje do wiadomości, że elementy wizualne takie jak
+                            kolor nakładki są szczegółem technicznym bez wpływu na przeznaczenie i jakość odczynnika
+                            chemicznego.</li>
+                    </ol>
+                </section>
+
+                <!-- §5 -->
+                <section id="par5" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§5. Ceny i Płatności</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Ceny podane w Sklepie są cenami brutto (zawierają podatek VAT) i wyrażone są w złotych
+                            polskich (PLN).</li>
+                        <li>Sklep udostępnia następujące metody płatności:
+                            <ol class="list-[lower-alpha] list-inside ml-4 mt-2 space-y-1">
+                                <li>Płatności natychmiastowe (bramka płatnicza HotPay) — o ile operator wyrazi zgodę na
+                                    obsługę danej transakcji,</li>
+                                <li>Kryptowaluty (poprzez zintegrowany portfel płatniczy),</li>
+                                <li>Przelew tradycyjny na rachunek bankowy Sprzedawcy.</li>
+                            </ol>
+                        </li>
+                        <li>W przypadku wyboru płatności kryptowalutami, kurs przeliczeniowy ustalany jest w momencie
+                            składania zamówienia przez operatora płatności.</li>
+                        <li>Zamówienie nieopłacone w terminie 3 dni roboczych może zostać anulowane przez Sprzedawcę.
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- §5a -->
+                <section id="par5a" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§5a. Ograniczenie Rękojmi</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Odpowiedzialność Sprzedawcy z tytułu rękojmi wobec Klientów niebędących Konsumentami zostaje
+                            wyłączona w najszerszym zakresie dopuszczalnym przez prawo.</li>
+                        <li>Wobec Konsumentów odpowiedzialność Sprzedawcy ogranicza się wyłącznie do wad fizycznych
+                            istniejących w chwili wydania Towaru.</li>
+                    </ol>
+                </section>
+
+                <!-- §6 -->
+                <section id="par6" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§6. Dostawa</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Dostawa realizowana jest na terytorium Rzeczypospolitej Polskiej oraz krajów Unii
+                            Europejskiej.</li>
+                        <li>Przesyłki obsługiwane są przez zewnętrznych operatorów logistycznych (zintegrowanych przez
+                            serwis Furgonetka.pl).</li>
+                        <li>Ze względu na specyfikę produktów (wymagana stabilność termiczna), Sprzedawca zaleca
+                            niezwłoczny odbiór przesyłki. Sprzedawca dokłada starań, aby produkty były odpowiednio
+                            zabezpieczone na czas transportu, jednak nie odpowiada za degradację substancji wynikającą z
+                            wielodniowego nieodbierania paczki przez Klienta.</li>
+                    </ol>
+                </section>
+
+                <!-- §7 -->
+                <section id="par7" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§7. Prawo odstąpienia od umowy (Zwroty)</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Klientowi będącemu Konsumentem przysługuje prawo do odstąpienia od umowy w terminie 14 dni
+                            bez podania przyczyny.</li>
+                        <li><strong>Wyłączenie prawa zwrotu:</strong> Zgodnie z art. 38 ustawy o prawach konsumenta,
+                            prawo odstąpienia od umowy nie przysługuje w odniesieniu do umów, w których przedmiotem
+                            świadczenia jest rzecz dostarczana w zapieczętowanym opakowaniu, której po otwarciu
+                            opakowania nie można zwrócić ze względu na ochronę zdrowia lub ze względów higienicznych,
+                            jeżeli opakowanie zostało otwarte po dostarczeniu.</li>
+                        <li>Ze względu na wrażliwość chemiczną oferowanych odczynników (konieczność zachowania łańcucha
+                            chłodniczego lub specyficznych warunków przechowywania), Sprzedawca zastrzega, że zwrot
+                            towaru otwartego, rozplombowanego lub przechowywanego w niewłaściwych warunkach przez
+                            Klienta nie zostanie przyjęty, gdyż towar taki traci swoje właściwości badawcze.</li>
+                        <li>Produkty sprzedawane jako odczynniki chemiczne nie podlegają ponownemu wprowadzeniu do
+                            obrotu po zwrocie.</li>
+                    </ol>
+                </section>
+
+                <!-- §8 -->
+                <section id="par8" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§8. Reklamacje</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Sprzedawca ma obowiązek dostarczyć Towar wolny od wad fizycznych i prawnych.</li>
+                        <li>Reklamacje należy składać drogą elektroniczną na adres e-mail: [Twój adres email].</li>
+                        <li>Podstawą reklamacji może być niezgodność składu chemicznego z deklaracją (potwierdzona
+                            badaniem analitycznym, np. HPLC) lub uszkodzenie mechaniczne w transporcie.</li>
+                        <li>Brak oczekiwanych "rezultatów biologicznych" lub "efektów fizjologicznych" nie stanowi
+                            podstawy do reklamacji, ponieważ produkt nie jest przeznaczony do wywoływania takich efektów
+                            u ludzi, a jedynie do badań laboratoryjnych.</li>
+                        <li>Sprzedawca nie odpowiada za subiektywne oczekiwania Klienta co do właściwości Produktu.</li>
+                    </ol>
+                </section>
+
+                <!-- §8a -->
+                <section id="par8a" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§8a. Brak Claimsów i Zakaz Marketingu
+                        Medycznego</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Klient zobowiązuje się do nieprzypisywania Produktom właściwości leczniczych,
+                            terapeutycznych, anabolicznych, regeneracyjnych ani jakichkolwiek innych efektów
+                            fizjologicznych u ludzi.</li>
+                        <li>Publikowanie przez Klienta treści sugerujących takie działanie, w szczególności w
+                            Internecie, z użyciem nazwy Sprzedawcy lub Produktu, stanowi naruszenie Regulaminu.</li>
+                    </ol>
+                </section>
+
+                <!-- §9 -->
+                <section id="par9" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§9. Ochrona Danych Osobowych (RODO)</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Administratorem danych osobowych jest Sprzedawca.</li>
+                        <li>Szczegółowe zasady przetwarzania danych określa <a href="privacy.html"
+                                class="text-biotune-red hover:underline">Polityka Prywatności</a> dostępna na stronie
+                            Sklepu.</li>
+                    </ol>
+                </section>
+
+                <!-- §10 -->
+                <section id="par10" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§10. Postanowienia Końcowe</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>W sprawach nieuregulowanych niniejszym Regulaminem mają zastosowanie przepisy Kodeksu
+                            Cywilnego oraz Ustawy o Prawach Konsumenta.</li>
+                        <li>Sprzedawca zastrzega sobie prawo do zmiany Regulaminu. Zamówienia złożone przed datą wejścia
+                            w życie zmian realizowane są na podstawie zapisów obowiązujących w dniu złożenia zamówienia.
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- §10a -->
+                <section id="par10a" class="regulamin-section mb-8">
+                    <h2 class="text-2xl font-bold mb-4 text-biotune-red">§10a. Klauzula Eksportowa i Sankcyjna</h2>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700 dark:text-gray-300">
+                        <li>Klient zobowiązuje się do przestrzegania przepisów dotyczących obrotu substancjami
+                            chemicznymi, w tym przepisów eksportowych i sankcyjnych.</li>
+                        <li>Sprzedawca nie ponosi odpowiedzialności za naruszenia prawa popełnione przez Klienta w
+                            związku z dalszym obrotem lub wywozem Produktów poza terytorium UE.</li>
+                    </ol>
+                </section>
+
+            </article>
+        </div>
+    </main>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Dołącz do naszego newslettera</h2>
+        <form class="newsletter-form">
+            <div class="newsletter-input-group">
+                <input type="email" class="newsletter-input" placeholder="Podaj adres email" required>
+                <button type="submit" class="newsletter-button">Zapisz się</button>
+            </div>
+            <label class="newsletter-consent">
+                <input type="checkbox" required>
+                <span>Wyrażam zgodę na przetwarzanie podanych powyżej danych osobowych w celu otrzymywania
+                    newslettera.</span>
+            </label>
+            <div class="newsletter-feedback"></div>
+        </form>
+    </section>
+
+    
+    <!-- Footer -->
+    <footer class="bg-[#121212] pt-16 pb-8 border-t border-white/10 relative overflow-hidden z-20 w-full mt-12 mb-0">
+        <!-- Glowing Background orb -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-biotune-red/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+                <!-- Logo & Bio -->
+                <div class="lg:col-span-2">
+                    <a href="index.html" class="inline-block mb-6">
+                        <span class="text-3xl font-bold text-white tracking-tighter">Bio<span class="text-biotune-red">Tune</span></span>
+                    </a>
+                    <p class="text-gray-400 leading-relaxed max-w-sm">
+                        Ekspert w dziedzinie odczynników chemicznych do celów laboratoryjnych i innowacyjnych rozwiązań badawczych. Dostarczamy najwyższą jakość potwierdzoną dokumentacją.
+                    </p>
+                </div>
+
+                <!-- Kategorie -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Kategorie</h4>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors text-sm">Strona główna</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">O nas</a></li>
+                        <li><a href="shop.html" class="text-gray-400 hover:text-white transition-colors text-sm">Sklep</a></li>
+                    </ul>
+                </div>
+
+                <!-- Informacja -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Informacja</h4>
+                    <ul class="space-y-4">
+                        <li><a href="regulamin.html" class="text-gray-400 hover:text-white transition-colors text-sm">Regulamin sklepu</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors text-sm">Polityka prywatności</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors text-sm">Kontakt</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="w-full h-px bg-white/10 mb-8" id="footer-contact"></div>
+
+            <!-- Contact & Socials -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+
+                <div class="flex flex-col sm:flex-row gap-8">
+                    <div class="flex items-center gap-4 group cursor-pointer">
+                        <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:bg-biotune-red group-hover:border-biotune-red transition-all duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-300 group-hover:text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">E-mail informacyjny</p>
+                            <p class="text-white text-sm font-medium">kontakt@biotune.pl</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <!-- Instagram -->
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center md:text-left text-[11px] text-gray-500 font-mono">
+                &copy; 2026 BioTune. Wszelkie prawa zastrzeżone. Projekt o charakterze wyłącznie badawczym i naukowym.
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        
+    </script>
+</body>
+
+</html>
