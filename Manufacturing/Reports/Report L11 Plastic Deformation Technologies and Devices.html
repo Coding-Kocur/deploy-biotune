@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html class="scroll-smooth dark" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratory 11 Report - Plastic Deformation Technologies and Devices</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2.5cm;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            max-width: 21cm;
+            margin: 0 auto;
+            padding: 2cm;
+            background: white;
+        }
+
+        h1 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 24pt;
+            margin-bottom: 12pt;
+        }
+
+        h2 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 18pt;
+            margin-bottom: 10pt;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10pt 0 20pt 0;
+            font-size: 11pt;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5pt 8pt;
+            text-align: center;
+        }
+
+        th {
+            font-weight: bold;
+            background-color: #f0f0f0;
+        }
+
+        p {
+            text-align: justify;
+            margin: 10pt 0;
+        }
+
+        .figure-caption {
+            text-align: center;
+            font-size: 11pt;
+            font-style: italic;
+            margin-top: 5pt;
+            margin-bottom: 20pt;
+        }
+
+        .table-caption {
+            text-align: center;
+            font-style: italic;
+            font-size: 11pt;
+            margin-bottom: 5pt;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <table style="width: 100%; border: none; margin-bottom: 30pt;">
+        <tr>
+            <td style="border: none; text-align: left; vertical-align: top; width: 50%;">
+                Business, Society and Technology<br>IFE, 3rd semester
+            </td>
+            <td style="border: none; text-align: right; vertical-align: top;">
+                LAB REPORT<br>MANUFACTURING
+            </td>
+        </tr>
+    </table>
+
+    <table style="width: 100%; border: 1px solid black; margin-bottom: 20pt;">
+        <tr>
+            <td style="width: 50%;">Lab no. 11</td>
+            <td style="width: 50%;">Title: Plastic Deformation Technologies and Devices</td>
+        </tr>
+        <tr>
+            <td colspan="2">Date of lab: 05/12/2025</td>
+        </tr>
+    </table>
+
+    <table style="width: 100%; margin-bottom: 30pt;">
+        <tr>
+            <th style="width: 5%;">No.</th>
+            <th style="width: 40%;">SURNAME Name</th>
+            <th style="width: 25%;">Album No.</th>
+            <th style="width: 30%;">Lab group</th>
+        </tr>
+        <tr>
+            <td>1.</td>
+            <td>KOTOWICZ Stanisław</td>
+            <td>257100</td>
+            <td>BST_en_1</td>
+        </tr>
+    </table>
+
+    <h1>INTRODUCTION</h1>
+
+    <p>Plastic deformation processes are fundamental manufacturing methods used to shape metals and alloys by applying
+        forces that exceed the material's yield strength. These processes include operations such as deep drawing,
+        punching, blanking, and formability testing. Understanding the relationships between process parameters and
+        resulting forces is essential for optimizing manufacturing operations and ensuring product quality.</p>
+
+    <p>Deep drawing is a sheet metal forming process in which a flat blank is transformed into a hollow, cup-shaped
+        part. The process involves a punch that forces the sheet metal into a die cavity while a blank holder controls
+        material flow. The blank holder plays a critical role in preventing wrinkling of the flange area while allowing
+        sufficient material to flow into the die cavity.</p>
+
+    <p>The Erichsen cupping test is a standardized method for evaluating the stretch formability of sheet metal. In this
+        test, a spherical punch is forced into a clamped sheet until a crack appears. The depth of indentation at which
+        fracture occurs, known as the Erichsen Index (IE), provides a measure of the material's formability during
+        stretch forming operations.</p>
+
+    <h1>EXPERIMENTAL</h1>
+
+    <h2>Task 3: Deep Drawing Process Analysis</h2>
+
+    <p>The objective of this task was to analyze the influence of the blank holder on the measured parameters and
+        quality of drawn cups. Deep drawing experiments were conducted using sheet metal samples of varying thicknesses,
+        with and without the application of a blank holder. The results are presented in Table 1.</p>
+
+    <p class="table-caption">Table 1. Deep drawing process results</p>
+    <table>
+        <tr>
+            <th>Sample</th>
+            <th>Thickness, mm</th>
+            <th>Die diameter, [mm]</th>
+            <th>Blank holder</th>
+            <th>Drawing force, [kN]</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>0.5</td>
+            <td>21.5</td>
+            <td>without</td>
+            <td>14.5</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>0.5</td>
+            <td>21.5</td>
+            <td>with</td>
+            <td>11</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>1</td>
+            <td>22.5</td>
+            <td>without</td>
+            <td>29.5</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>1</td>
+            <td>22.5</td>
+            <td>with</td>
+            <td>26</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>1.5</td>
+            <td>23.5</td>
+            <td>without</td>
+            <td>24.5</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>1.5</td>
+            <td>23.5</td>
+            <td>with</td>
+            <td>29.5</td>
+        </tr>
+    </table>
+
+    <h2>Task 4: Influence of Blank Holder on Drawing Parameters</h2>
+
+    <p>Analysis of the experimental results reveals the significant influence of the blank holder on the deep drawing
+        process. For the thinnest material (0.5 mm thickness), the drawing force decreased from 14.5 kN without blank
+        holder to 11 kN with blank holder. This reduction indicates that the blank holder helps control material flow
+        and reduces friction-related forces during the drawing operation.</p>
+
+    <p>For the 1 mm thick material, the drawing force was 29.5 kN without blank holder and 26 kN with blank holder,
+        showing a similar trend of force reduction when the blank holder is applied. The blank holder prevents wrinkling
+        of the flange, which would otherwise increase resistance to material flow and result in higher drawing forces.
+    </p>
+
+    <p>The quality of drawn cups is significantly affected by the presence of a blank holder. Without a blank holder,
+        thin sheets are prone to wrinkling in the flange area as the unsupported material buckles under compressive
+        stresses. The blank holder applies a controlled pressure that prevents this buckling while still allowing the
+        material to flow into the die cavity. However, excessive blank holder force can cause tearing of the sheet, so
+        proper adjustment is critical for achieving defect-free cups.</p>
+
+    <h2>Task 5: Erichsen Test</h2>
+
+    <p>The Erichsen cupping test was performed to evaluate the stretch formability of sheet metal samples. In this test,
+        a sheet specimen is clamped between a blank holder and die, and a hemispherical punch with a diameter of 20 mm
+        is forced into the sheet until a visible crack appears on the dome surface. The indentation depth at fracture is
+        recorded as the Erichsen Index (IE), which indicates the material's ability to undergo biaxial stretching
+        without failure.</p>
+
+    <div style="text-align: center; margin: 20pt 0;">
+        <img src="erichsen_test_diagram.png" alt="Erichsen test scheme" style="max-width: 80%; height: auto;">
+    </div>
+    <p class="figure-caption">Figure 1. Erichsen test scheme showing the punch (Ø20 mm), die (Ø33 mm), and specimen
+        arrangement.</p>
+
+    <p class="table-caption">Table 2. Erichsen test results</p>
+    <table>
+        <tr>
+            <th>Sample</th>
+            <th>Plate thickness, [mm]</th>
+            <th>Indentation depth, [mm]</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1.4</td>
+            <td>14.15</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>1.3</td>
+            <td>14.4</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>1.4</td>
+            <td>18.75</td>
+        </tr>
+    </table>
+
+    <p>The Erichsen test results show varying formability among the tested samples. Samples 1 and 2, with thicknesses of
+        1.4 mm and 1.3 mm respectively, exhibited similar Erichsen indices of 14.15 mm and 14.4 mm. Sample 3, despite
+        having the same thickness as Sample 1 (1.4 mm), showed a significantly higher Erichsen index of 18.75 mm,
+        indicating superior stretch formability.</p>
+
+    <p>The average Erichsen Index from the three tests is approximately 15.77 mm. Based on typical IE values for common
+        materials, the tested sheets appear to be made of steel or aluminum alloy. The variation in IE values between
+        samples of similar thickness suggests differences in material properties, surface conditions, or grain structure
+        that affect formability. Materials with higher IE values are more suitable for deep drawing and stretch forming
+        operations where significant plastic deformation is required.</p>
+
+    <h1>CONCLUSIONS</h1>
+
+    <p>This laboratory exercise on plastic deformation technologies provided practical understanding of deep drawing and
+        formability testing processes.</p>
+
+    <p>The deep drawing experiments demonstrated the importance of the blank holder in controlling material flow and
+        preventing defects. The use of a blank holder generally reduced drawing forces for thin materials by preventing
+        wrinkling and providing controlled resistance to material flow. The relationship between sheet thickness, die
+        diameter, and drawing force was observed, with thicker materials requiring higher forces due to increased
+        resistance to plastic deformation.</p>
+
+    <p>The Erichsen cupping test provided a quantitative measure of sheet metal formability. The average Erichsen Index
+        of approximately 15.77 mm indicates moderate to good stretch formability of the tested material. The variation
+        in IE values among samples highlights the importance of material consistency in manufacturing operations
+        requiring predictable forming behavior.</p>
+
+</body>
+
+</html>

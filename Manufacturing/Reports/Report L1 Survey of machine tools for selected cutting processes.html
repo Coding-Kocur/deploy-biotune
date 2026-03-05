@@ -1,0 +1,826 @@
+﻿<!DOCTYPE html>
+<html class="scroll-smooth dark"  lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 1 Report – Survey of Machine Tools for Selected Cutting Processes</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            max-width: 210mm;
+            margin: 20mm auto;
+            padding: 0 15mm;
+            color: #000;
+        }
+
+        .title-block {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title-block p {
+            margin: 2px 0;
+        }
+
+        .title-block .course {
+            font-size: 11pt;
+        }
+
+        .title-block .report-title {
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .title-block .lab-title {
+            font-size: 14pt;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 16pt;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            page-break-before: auto;
+        }
+
+        h2 {
+            font-size: 14pt;
+            margin-top: 25px;
+            margin-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 18px;
+            margin-bottom: 6px;
+        }
+
+        p {
+            text-align: justify;
+            margin: 6px 0;
+        }
+
+        .figure-container {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .figure-container img {
+            max-width: 100%;
+            max-height: 350px;
+            border: 1px solid #ccc;
+        }
+
+        .figure-caption {
+            font-style: italic;
+            font-size: 10pt;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .legend {
+            margin: 5px 0 10px 30px;
+            font-size: 11pt;
+        }
+
+        .legend p {
+            text-align: left;
+            margin: 1px 0;
+        }
+
+        ul {
+            margin: 4px 0 4px 20px;
+        }
+
+        li {
+            margin: 4px 0;
+            text-align: justify;
+        }
+
+        @media print {
+            body {
+                margin: 15mm;
+                padding: 0;
+            }
+
+            h1 {
+                page-break-before: always;
+            }
+
+            h1:first-of-type {
+                page-break-before: avoid;
+            }
+
+            .figure-container {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TITLE BLOCK -->
+    <div class="title-block">
+        <p class="course">Business, Society and Technology</p>
+        <p class="course">IFE, 3rd semester</p>
+        <br>
+        <p class="report-title">LAB REPORT</p>
+        <p class="report-title">MANUFACTURING</p>
+        <p class="lab-title">Lab no. 1</p>
+        <p><strong>Title:</strong> Survey of machine tools for selected cutting processes</p>
+        <br>
+        <p><strong>Date of lab:</strong> 09/10/2025</p>
+    </div>
+
+    <!-- ====================================================================== -->
+    <!-- SECTION 1: THE UNIVERSAL LATHE -->
+    <!-- ====================================================================== -->
+    <h1>1. The Universal Lathe</h1>
+
+    <h2>Structure of the Lathe</h2>
+    <p>The construction of a universal lathe is founded upon a rigid bed, typically cast from iron to dampen vibrations,
+        which supports all other functional components. The headstock is permanently fixed to the left side of the bed
+        and houses the main spindle along with the speed change gearbox, which transmits rotational torque from the
+        electric motor to the workpiece. Opposite the headstock lies the tailstock, a movable unit that slides along the
+        bed's guideways; it is primarily used to support long workpieces using a center or to hold axial tools such as
+        drill bits. Between these two elements operates the carriage assembly, which moves longitudinally along the bed.
+        The carriage supports the cross slide for transverse motion and the compound rest, which holds the tool post.
+        The movement of the carriage is driven by the feed rod for standard turning operations or the lead screw for
+        thread-cutting operations, ensuring precise kinematic synchronization.</p>
+
+    <div class="figure-container">
+        <img src="fig1_lathe_structure.png" alt="Basic lathe structure">
+        <p class="figure-caption">Figure 1. Basic lathe structure with the main components marked.</p>
+    </div>
+    <div class="legend">
+        <p>1. Bed</p>
+        <p>2. Left leg (with engine inside)</p>
+        <p>3. Headstock</p>
+        <p>4. Tailstock</p>
+        <p>5. Cross slide</p>
+        <p>6. Carriage</p>
+        <p>7. Feed rod</p>
+        <p>8. Lead screw</p>
+        <p>9. Tool post</p>
+        <p>10. Guideways</p>
+        <p>11. Spindle</p>
+        <p>12. Jaw chuck</p>
+        <p>13. Center</p>
+    </div>
+
+    <h2>Kinematics and Movements</h2>
+    <p>The kinematic system of a lathe is distinct in that the main cutting movement is rotary and is performed by the
+        workpiece itself. This rotational motion is generated by the spindle in the headstock. Simultaneously, the
+        cutting tool performs the feed movement, which is typically a linear translation. The tool moves longitudinally
+        along the bed to reduce the diameter of the workpiece (turning) or transversely across the axis of rotation to
+        generate a flat surface (facing). The depth of cut is determined by the position of the tool perpendicular to
+        the surface being machined. The combination of the workpiece's rotation and the tool's linear feed results in
+        the helical path of the cutting edge relative to the workpiece surface.</p>
+
+    <p>The spindle speed (n, in RPM) is selected according to the recommended cutting speed (V<sub>c</sub>) for the
+        workpiece material and the diameter (d) being machined, using the formula: n = (1000 × V<sub>c</sub>) / (π × d).
+        The feed rate (f, in mm/rev) determines the surface finish quality — lower feeds produce smoother finishes. The
+        depth of cut (a<sub>p</sub>, in mm) governs the amount of material removed per pass and is set by advancing the
+        cross slide. These three parameters — cutting speed, feed, and depth of cut — form the fundamental cutting
+        regime for all lathe operations.</p>
+
+    <div class="figure-container">
+        <img src="fig2_lathe_kinematics.png" alt="Lathe kinematics and movements">
+        <p class="figure-caption">Figure 2. Kinematics and types of movements on a lathe, showing the main rotary motion
+            of the workpiece and the linear feed of the tool.</p>
+    </div>
+
+    <h2>Shaped Surfaces and Involved Elements</h2>
+    <p>Lathes are fundamentally designed to generate surfaces of revolution. The most common operation is longitudinal
+        turning, which creates external cylindrical surfaces. By modifying the tool's trajectory or using formed tools,
+        the machine can also produce conical surfaces, spherical profiles, and varying grooves. Internal machining
+        operations, such as boring, extend these capabilities to the interior of the workpiece, creating cylindrical or
+        conical holes. Additionally, the lathe is capable of facing operations where the tool moves perpendicular to the
+        rotation axis to create a flat plane on the end of the bar. Thread cutting is another critical function,
+        achieved by synchronizing the rotation of the spindle with the longitudinal feed of the tool via the lead screw
+        to cut a helical groove. In all these processes, the headstock rotates the work while the carriage and cross
+        slide dictate the profile geometry.</p>
+
+    <div class="figure-container">
+        <img src="fig3_lathe_surfaces.png" alt="Surfaces produced on a lathe">
+        <p class="figure-caption">Figure 3. Typical shapes and surfaces produced on a lathe.</p>
+    </div>
+    <div class="legend">
+        <p>1. External cylindrical turning</p>
+        <p>2. Face turning (flat end)</p>
+        <p>3. Conical/taper turning</p>
+        <p>4. Threading</p>
+        <p>5. Grooving/parting</p>
+        <p>6. Boring (internal)</p>
+    </div>
+
+    <h2>Fixing and Clamping Methods</h2>
+    <p>The method of fixing the workpiece depends heavily on the geometry and length of the material. Several standard
+        methods are used on lathes:</p>
+    <ul>
+        <li><strong>Three-jaw self-centering chuck</strong> — the most common clamping device, mounted on the spindle
+            nose. All three jaws move simultaneously via a scroll plate, automatically centering cylindrical and
+            hexagonal workpieces. It allows for rapid setup and is ideal for short, regular-shaped parts.</li>
+        <li><strong>Four-jaw independent chuck</strong> — each jaw can be adjusted individually, allowing precise
+            centering of irregular or non-cylindrical parts (square, rectangular, or eccentric shapes). Although setup
+            is slower, it provides greater flexibility and accuracy than the three-jaw chuck.</li>
+        <li><strong>Between centers</strong> — used for long workpieces that are prone to deflection. A live center is
+            inserted into the headstock spindle and a dead (or rotating) center into the tailstock. The torque is
+            transmitted to the workpiece via a driving dog (lathe dog) clamped to the part. This method ensures the
+            highest concentricity and is used when the part must be removed and re-mounted with guaranteed alignment.
+        </li>
+        <li><strong>Collet chuck</strong> — a precision clamping device for small-diameter bar stock. A collet is a
+            slotted sleeve that contracts around the workpiece when drawn into a tapered socket. Collets provide
+            excellent concentricity and gripping force but are sized for specific diameters.</li>
+        <li><strong>Faceplate</strong> — a flat disc mounted on the spindle, used for clamping irregularly shaped
+            workpieces using T-bolts and clamps. The workpiece is bolted directly to the faceplate surface and balanced
+            with counterweights if necessary.</li>
+    </ul>
+
+    <div class="figure-container">
+        <img src="fig4_lathe_fixing.png" alt="Lathe fixing and clamping methods">
+        <p class="figure-caption">Figure 4. Different methods of fixing and clamping workpieces on a lathe.</p>
+    </div>
+    <div class="legend">
+        <p>1. Three-jaw self-centering chuck</p>
+        <p>2. Four-jaw independent chuck</p>
+        <p>3. Workpiece mounted between centers with driving dog</p>
+        <p>4. Live center (in headstock)</p>
+        <p>5. Dead center (in tailstock)</p>
+    </div>
+
+    <h2>Tools and Mounting</h2>
+    <p>The primary cutting instruments used on a lathe are single-point cutting tools. These tools consist of a shank
+        (body) and a cutting tip, which may be made of high-speed steel (HSS), brazed cemented carbide, or — most
+        commonly in modern practice — indexable carbide inserts clamped mechanically to a tool holder. The tool geometry
+        (rake angle, clearance angle, nose radius) is selected based on the workpiece material and the type of
+        operation.</p>
+    <p>Tools are securely mounted in the tool post, which sits atop the compound rest on the carriage. The tool post
+        allows for height adjustment (the tool tip must be aligned with the spindle centerline) and angular positioning.
+        Different types of tools commonly used on a lathe include:</p>
+    <ul>
+        <li><strong>Roughing tools</strong> — with a large nose radius and strong geometry, designed for rapid material
+            removal at high feed rates.</li>
+        <li><strong>Finishing tools</strong> — with a fine edge geometry and large nose radius, designed to produce
+            smooth surface finishes at low feed rates.</li>
+        <li><strong>Threading tools</strong> — ground to the precise profile of the thread form (e.g., 60° for metric
+            threads).</li>
+        <li><strong>Parting/grooving tools</strong> — narrow, blade-like tools for cutting grooves or parting off
+            (separating) the finished part from the bar stock.</li>
+        <li><strong>Boring bars</strong> — long, slender tools with a single cutting point at the end, used for
+            enlarging or finishing internal holes. They are mounted on the tool post or in a special boring bar holder.
+        </li>
+    </ul>
+    <p>Axial tools such as twist drills, reamers, and taps are not mounted on the carriage but are installed in the
+        tailstock quill, typically via a Morse taper connection or a drill chuck. The spindle provides rotation while
+        the tailstock quill provides the axial feed for these operations.</p>
+
+    <div class="figure-container">
+        <img src="fig5_lathe_tools.png" alt="Lathe tools and mounting">
+        <p class="figure-caption">Figure 5. The most important tools used on a lathe and their mounting locations.</p>
+    </div>
+    <div class="legend">
+        <p>1. Turning tool (shank with carbide insert) in tool post</p>
+        <p>2. Boring bar</p>
+        <p>3. Parting/grooving tool</p>
+        <p>4. Threading tool</p>
+        <p>5. Twist drill in tailstock chuck (Morse taper)</p>
+        <p>6. Tool post on compound rest</p>
+    </div>
+
+    <h2>Special Equipment and Lathe Types</h2>
+    <p>To enhance productivity and versatility, standard lathes can be fitted with special equipment:</p>
+    <ul>
+        <li><strong>Steady rest and follow rest</strong> — support devices for long, slender shafts to prevent bending
+            and vibration during machining. The steady rest is fixed to the bed, while the follow rest is mounted on the
+            carriage and moves with the tool, providing continuous support near the cutting point.</li>
+        <li><strong>Taper turning attachment</strong> — a device that guides the cross slide at a specific angle
+            relative to the bed, allowing the machining of conical (tapered) surfaces without offsetting the tailstock.
+        </li>
+        <li><strong>Thread-chasing dial</strong> — an indicator on the carriage that shows when to engage the half-nut
+            for successive thread-cutting passes, ensuring the tool re-enters the same helical groove each time.</li>
+    </ul>
+    <p>Several specialized types of lathes exist for specific industrial applications:</p>
+    <ul>
+        <li><strong>Turret lathe</strong> — replaces the standard tailstock with a hexagonal (or square) turret that can
+            hold up to six different tools. The turret indexes automatically to the next tool position after each
+            operation, allowing rapid sequential operations (drilling, reaming, boring, tapping) without manual tool
+            changes. Used in batch production.</li>
+        <li><strong>Carousel (Vertical) lathe</strong> — the faceplate rotates on a vertical axis rather than a
+            horizontal one. This configuration simplifies the loading and clamping of very large, heavy, disc-shaped
+            workpieces (such as flywheels, large flanges, and turbine casings), since gravity assists in seating the
+            part.</li>
+        <li><strong>Multi-spindle automatic lathe</strong> — features 4, 6, or 8 spindles arranged in a circle. Several
+            workpieces are machined simultaneously, each at a different stage of completion. After one cycle, the
+            spindle carrier indexes and each workpiece advances to the next operation. Used in mass production of small
+            parts from bar stock (screws, fittings, pins).</li>
+        <li><strong>CNC lathe</strong> — a computer numerically controlled lathe where all axis movements, spindle
+            speeds, and feeds are programmed. CNC lathes with live tooling and a C-axis can perform milling, drilling,
+            and tapping operations in addition to turning, eliminating the need for a second setup on a milling machine.
+        </li>
+    </ul>
+
+    <div class="figure-container">
+        <img src="fig6_lathe_special.png" alt="Special lathe types">
+        <p class="figure-caption">Figure 6. Special equipment and types of lathes: steady rest, turret lathe, and
+            vertical (carousel) lathe.</p>
+    </div>
+
+
+    <!-- ====================================================================== -->
+    <!-- SECTION 2: DRILLING AND MILLING MACHINES -->
+    <!-- ====================================================================== -->
+    <h1>2. Drilling and Milling Machines</h1>
+
+    <h2>A. Drilling Machines</h2>
+
+    <h3>Structure and Construction</h3>
+    <p>The bench or column drilling machine (drill press) is one of the most fundamental machine tools found in any
+        workshop. Its construction is organized around a robust vertical column, typically made of cast iron, which
+        connects the heavy base at the bottom to the headstock at the top. The base serves as a stable foundation and
+        often features T-slots or bolt holes for securing large workpieces or fixtures directly.</p>
+    <p>The headstock houses the electric motor, the V-belt or gear drive transmission, and the spindle mechanism. The
+        spindle is a hollow, rotating shaft that receives the cutting tool. It can be advanced vertically downward
+        toward the workpiece by means of a hand-operated lever (quill feed) or, on larger machines, an automatic power
+        feed mechanism. The quill is spring-loaded to return to its upper position when the lever is released.</p>
+    <p>Between the base and the headstock, the work table is mounted on the column and can be adjusted vertically by
+        loosening a clamp and sliding it to the required height. The table surface is typically flat and machined with
+        T-slots for clamping vices, jigs, or fixtures. On some models, the table can also be tilted for angular drilling
+        operations. A depth stop is provided on the quill to control the depth of the drilled hole precisely, and a
+        graduated scale on the quill allows the operator to monitor the feed depth.</p>
+    <p>A key characteristic of the standard column drill press is that the workpiece must be positioned manually beneath
+        the spindle, since neither the table nor the spindle head can be moved horizontally. This distinguishes it from
+        the radial drilling machine, where the spindle can be repositioned.</p>
+
+    <div class="figure-container">
+        <img src="fig7_drill_structure.png" alt="Drilling machine structure">
+        <p class="figure-caption">Figure 7. Structure of a column drilling machine (bench drill press).</p>
+    </div>
+    <div class="legend">
+        <p>1. Column</p>
+        <p>2. Base (with T-slots)</p>
+        <p>3. Work table</p>
+        <p>4. Headstock (housing motor and drive)</p>
+        <p>5. Spindle and quill</p>
+        <p>6. Hand feed lever</p>
+        <p>7. Depth stop</p>
+        <p>8. Drill chuck with drill bit</p>
+    </div>
+
+    <h3>Kinematics and Movements</h3>
+    <p>The kinematic system of a drilling machine is fundamentally different from that of a lathe. In a drilling
+        machine, the cutting tool performs <em>both</em> of the primary movements. The drill bit executes the main
+        rotary cutting motion (rotation around its own axis), and simultaneously performs the linear feed motion (axial
+        advancement downward into the material). The workpiece remains completely stationary throughout the entire
+        process, being clamped rigidly to the table or held in a vice.</p>
+    <p>This kinematic arrangement — where the tool provides both rotation and feed — differs significantly from the
+        lathe, where the workpiece rotates and the tool feeds, and from the milling machine, where the tool rotates but
+        the workpiece provides the feed motion. The rotational speed of the spindle (measured in revolutions per minute,
+        RPM) and the feed rate (measured in millimeters per revolution, mm/rev) are the two primary cutting parameters.
+    </p>
+    <p>The spindle speed is selected based on the cutting speed formula: <strong>n = (1000 × V<sub>c</sub>) / (π ×
+            d)</strong>, where V<sub>c</sub> is the recommended cutting speed for the workpiece material and d is the
+        drill diameter. The feed rate is chosen depending on the drill size, material hardness, and required hole
+        quality. Excessive feed can lead to drill breakage due to high thrust forces, while too low a feed causes
+        rubbing and work hardening rather than effective cutting. When drilling deep holes, a technique called "peck
+        drilling" is used — the drill is periodically retracted from the hole to clear chips and allow coolant to reach
+        the cutting zone, preventing chip jamming and overheating.</p>
+
+    <div class="figure-container">
+        <img src="fig8_drill_kinematics.png" alt="Drilling kinematics and operations">
+        <p class="figure-caption">Figure 8. Kinematics of drilling (main rotary motion + axial feed by tool) and types
+            of drilling operations.</p>
+    </div>
+
+    <h3>Shaped Surfaces and Involved Elements</h3>
+    <p>Drilling machines are primarily designed to produce cylindrical holes of various diameters and depths. However,
+        the range of machinable surfaces extends well beyond simple through-holes. The main operations and the surfaces
+        they create are:</p>
+    <ul>
+        <li><strong>Drilling</strong> — creates cylindrical through-holes (passing completely through the workpiece) or
+            blind holes (stopping at a controlled depth). The hole surface is produced by the two cutting lips (edges)
+            of the twist drill.</li>
+        <li><strong>Reaming</strong> — a finishing operation that uses a multi-fluted reamer to improve the dimensional
+            accuracy, roundness, and surface finish of a previously drilled hole. Reaming typically removes only 0.1–0.3
+            mm of material per side and produces tolerances of IT7 or better. The resulting surface is much smoother
+            than a drilled hole.</li>
+        <li><strong>Counterboring</strong> — creates a flat-bottomed cylindrical recess at the top of an existing hole
+            to accommodate the head of a socket-head cap screw or bolt, allowing it to sit flush with or below the
+            workpiece surface. A counterbore tool has a pilot pin that guides it into the existing hole.</li>
+        <li><strong>Countersinking</strong> — produces a conical recess (typically at 60°, 82°, or 90°) at the entrance
+            of a hole to accommodate flat-head screws or to deburr the hole edge.</li>
+        <li><strong>Tapping</strong> — cuts internal threads inside a drilled hole using a tap. This can be performed by
+            hand using a tap wrench, or mechanically using a tapping attachment on the drilling machine that reverses
+            the spindle at the bottom of the stroke to withdraw the tap without damaging the threads.</li>
+        <li><strong>Spot facing</strong> — machines a small, flat, circular surface around a hole on a rough or curved
+            surface to provide a proper seating area for a washer or bolt head.</li>
+    </ul>
+    <p>In all these operations, the spindle and the tool it carries perform the primary rotary motion. The vertical feed
+        of the quill advances the tool into the workpiece. The table and the fixturing clamp the workpiece securely to
+        resist the cutting forces, particularly the torque (tending to rotate the workpiece) and the axial thrust force
+        (pushing the workpiece downward).</p>
+
+    <h3>Fixing and Clamping Methods</h3>
+    <p>Proper clamping of the workpiece is critical in drilling operations to resist the torque and thrust forces
+        produced by the drill. Unlike a lathe, where the workpiece rotates, in drilling the workpiece must be held
+        absolutely stationary. Several methods are commonly used:</p>
+    <ul>
+        <li><strong>Machine vice</strong> — the most common clamping device for small to medium-sized workpieces. The
+            vice is bolted to the table through the T-slots using T-bolts and nuts. The workpiece is placed between the
+            fixed and movable jaws and tightened securely. V-blocks can be placed inside the vice jaws to hold
+            cylindrical workpieces. For precision work, the vice can be aligned with the spindle axis using a dial
+            indicator.</li>
+        <li><strong>T-slot clamps and bolts</strong> — for larger or irregularly shaped workpieces that cannot fit in a
+            vice, strap clamps, step blocks, and T-bolts are used to secure the part directly to the table surface. This
+            method offers the most flexibility in terms of workpiece geometry and provides very rigid support. The
+            clamping force should be applied as close to the drilling point as possible.</li>
+        <li><strong>Drilling jigs</strong> — specialized fixtures designed for batch or mass production. A drilling jig
+            positions and clamps the workpiece accurately and incorporates hardened drill bushings that guide the drill
+            bit to the exact required location. This eliminates the need for marking out hole positions and ensures
+            consistent placement across many identical parts, significantly reducing setup time and improving accuracy.
+        </li>
+        <li><strong>V-blocks</strong> — used alone or in pairs for clamping cylindrical or round workpieces. The
+            V-groove cradles the round part, and a strap clamp secures it from above. The V-block ensures that the
+            cylinder axis is parallel to the table surface.</li>
+        <li><strong>Angle plates</strong> — when holes must be drilled at specific angles relative to a datum surface,
+            angle plates are clamped to the table with the workpiece bolted to the plate's vertical face. Adjustable
+            angle vices can also orient the workpiece at the required inclination.</li>
+    </ul>
+    <p><strong>Safety note:</strong> Workpieces should never be held by hand when drilling, as the drill can grab the
+        workpiece and spin it violently, causing serious injury. Even small parts should be clamped in a vice or
+        fixture.</p>
+
+    <div class="figure-container">
+        <img src="fig9_drill_fixing.png" alt="Drilling machine fixing methods">
+        <p class="figure-caption">Figure 9. Different methods of fixing and clamping workpieces on a drilling machine.
+        </p>
+    </div>
+    <div class="legend">
+        <p>1. Machine vice bolted to table via T-slots</p>
+        <p>2. T-slot strap clamps with step blocks</p>
+        <p>3. Drilling jig with hardened bushings</p>
+        <p>4. V-block for cylindrical workpieces</p>
+    </div>
+
+    <h3>Tools and Mounting</h3>
+    <p>The cutting tools used on drilling machines are multi-point rotary tools, as opposed to the single-point tools
+        used on a lathe. The most common types include:</p>
+    <ul>
+        <li><strong>Twist drill</strong> — the standard drilling tool, a cylindrical body with two helical flutes that
+            create the cutting edges (lips) at the tip and provide channels for chip evacuation. The point angle is
+            typically 118° for general-purpose drilling in steel. Twist drills are available with cylindrical shanks
+            (smaller diameters, held in a drill chuck) or tapered shanks (larger diameters, inserted directly into the
+            spindle via a Morse taper).</li>
+        <li><strong>Center drill</strong> — a short, stiff combination drill-and-countersink used to create a starting
+            point (center hole) for a subsequent twist drill, preventing it from wandering off the intended position on
+            the workpiece surface.</li>
+        <li><strong>Reamer</strong> — a multi-fluted cylindrical or tapered tool for finishing holes to tight
+            dimensional tolerances. Reamers have straight or helical flutes and are designed for very light material
+            removal (typically 0.1–0.3 mm per side).</li>
+        <li><strong>Counterbore</strong> — a tool with a pilot pin that guides it into an existing hole while the larger
+            cutting diameter machines the flat-bottomed recess above.</li>
+        <li><strong>Countersink</strong> — a conical tool used to create chamfered entries to holes, typically at 60°,
+            82°, or 90°.</li>
+        <li><strong>Tap</strong> — a hardened, threaded tool used to cut internal threads inside a drilled hole. Taps
+            come in sets of three (taper, second, and bottoming) for hand tapping, or as single machine taps for use
+            with tapping attachments.</li>
+        <li><strong>Spade drill</strong> — a flat cutting blade inserted into a holder, used for drilling large-diameter
+            holes more economically than solid twist drills.</li>
+    </ul>
+    <p>Tool mounting: Cylindrical-shank tools are held in a keyed or keyless drill chuck, which is itself inserted into
+        the spindle bore by a Morse taper arbor. Taper-shank tools are inserted directly into the spindle without a
+        chuck. Removal of taper-shank tools is accomplished using a drift key (wedge) inserted through a slot in the
+        spindle. Quick-change toolholders are available for production environments to minimize tool changeover time.
+    </p>
+
+    <div class="figure-container">
+        <img src="fig10_drill_tools.png" alt="Drilling tools and mounting">
+        <p class="figure-caption">Figure 10. The most important tools used on a drilling machine and their mounting
+            methods.</p>
+    </div>
+    <div class="legend">
+        <p>1. Twist drill (cylindrical shank) in drill chuck</p>
+        <p>2. Twist drill (taper shank) directly in spindle</p>
+        <p>3. Center drill</p>
+        <p>4. Reamer</p>
+        <p>5. Counterbore with pilot</p>
+        <p>6. Countersink</p>
+        <p>7. Tap</p>
+    </div>
+
+    <h3>Special Equipment and Drilling Machine Types</h3>
+    <p>Standard column drilling machines can be enhanced with various accessories to increase their capabilities. A
+        <strong>cross-slide table</strong> (compound table) can be mounted on the drill press table to allow the
+        workpiece to be moved precisely in the X and Y directions, transforming the drill press into a coordinate
+        drilling machine. <strong>Tapping attachments</strong> with automatic spindle reversal are used for efficient
+        thread-cutting operations. <strong>Coolant systems</strong> deliver cutting fluid to the drill point to reduce
+        heat, extend tool life, and improve surface finish and chip evacuation.</p>
+    <p>Several specialized types of drilling machines exist for different industrial applications:</p>
+    <ul>
+        <li><strong>Radial drilling machine</strong> — designed for large, heavy workpieces that are difficult to move.
+            The machine features a radial arm mounted on a vertical column. The arm can swing horizontally around the
+            column, and the spindle head can slide along the arm. This allows the drill to be positioned over any point
+            on the workpiece without moving the part, making it ideal for machining large castings, frames, and
+            structural members.</li>
+        <li><strong>Gang drilling machine</strong> — consists of multiple drilling spindles mounted in a row on a single
+            long table. Each spindle can hold a different tool (e.g., center drill, twist drill, reamer), and the
+            workpiece is moved sequentially from one spindle to the next, improving efficiency for multi-operation hole
+            processing.</li>
+        <li><strong>Multi-spindle drilling machine</strong> — features a special multi-spindle head with many drill
+            spindles driven from a single power source through a system of gears. All spindles operate simultaneously,
+            drilling many holes at once in a single stroke. The positions of the spindles are adjustable to match the
+            hole pattern required. Essential in mass production for minimizing cycle time.</li>
+        <li><strong>Deep-hole drilling machine</strong> — specialized for drilling holes with a very high
+            length-to-diameter ratio (typically greater than 10:1). Uses gun drills or BTA (Boring and Trepanning
+            Association) drills with internal coolant supply through the drill body to evacuate chips from deep holes.
+            Applications include gun barrels, hydraulic cylinders, and oil exploration equipment.</li>
+        <li><strong>CNC drilling machine</strong> — a computer numerically controlled machine that automates positioning
+            and drilling. The table or spindle moves automatically to programmed coordinates, enabling high precision
+            and repeatability. Widely used in PCB (printed circuit board) manufacturing and aerospace applications.</li>
+    </ul>
+
+    <div class="figure-container">
+        <img src="fig11_drill_special.png" alt="Special drilling machine types">
+        <p class="figure-caption">Figure 11. Special types of drilling machines: radial drilling machine, multi-spindle
+            head, and gang drill.</p>
+    </div>
+
+
+    <h2>B. Milling Machines</h2>
+
+    <h3>Structure and Construction</h3>
+    <p>Milling machines are robust, versatile machine tools designed for heavy material removal and the generation of
+        complex shapes. The most common configuration is the knee-and-column type, built around a massive column made of
+        cast iron that houses the spindle drive train (motor, gearbox, and spindle). The column is the main structural
+        backbone of the machine and provides rigidity against cutting forces.</p>
+    <p>The vertical knee slides along the front face of the column on precision guideways and can be raised or lowered
+        (Z-axis) to adjust the vertical position of the workpiece relative to the cutter. On top of the knee sits the
+        saddle, which provides transverse (Y-axis, in-out) motion. On top of the saddle is the work table, which
+        provides longitudinal (X-axis, left-right) motion. Together, these three degrees of freedom allow the workpiece
+        to be positioned precisely relative to the rotating cutter in three-dimensional space.</p>
+    <p>Two principal orientations of milling machines exist:</p>
+    <ul>
+        <li><strong>Horizontal milling machine</strong> — the spindle axis is oriented horizontally. An overarm extends
+            from the top of the column to support the outer end of the arbor (a long shaft that holds the cutter). The
+            arbor is supported by one or more arbor supports (yoke or bearing brackets) hanging from the overarm, which
+            resist the cutting forces and prevent arbor deflection. This configuration is best suited for slab milling
+            and gang milling operations.</li>
+        <li><strong>Vertical milling machine</strong> — the spindle axis is oriented perpendicular (vertical) to the
+            table surface. The cutter is mounted directly on the spindle nose using collets, chucks, or shell mill
+            adapters. Some vertical milling machines have a swiveling head that allows the spindle to be tilted at an
+            angle for angular milling operations. This type is the most versatile and widely used configuration in
+            general workshop practice.</li>
+    </ul>
+
+    <div class="figure-container">
+        <img src="fig12_milling_structure.png" alt="Milling machine structure">
+        <p class="figure-caption">Figure 12. Structure of a horizontal milling machine (knee-and-column type).</p>
+    </div>
+    <div class="legend">
+        <p>1. Column (housing motor and gearbox)</p>
+        <p>2. Overarm</p>
+        <p>3. Arbor with cutter and arbor support</p>
+        <p>4. Work table (with T-slots)</p>
+        <p>5. Saddle</p>
+        <p>6. Knee</p>
+        <p>7. Base</p>
+    </div>
+
+    <h3>Kinematics and Movements</h3>
+    <p>In milling, the main cutting movement is the rotation of the cutting tool, driven by the spindle. The feed
+        movement is performed by the workpiece, which is clamped to the table and moved linearly relative to the
+        rotating cutter. This feed can be in the X direction (longitudinal, along the table), the Y direction
+        (transverse, across the saddle), or the Z direction (vertical, by raising or lowering the knee). This clear
+        separation of rotation (tool) and translation (workpiece) is what distinguishes milling from drilling, where the
+        tool performs both motions.</p>
+    <p>There are two fundamental modes of milling based on the relationship between the direction of cutter rotation and
+        the direction of workpiece feed:</p>
+    <ul>
+        <li><strong>Up-milling (conventional milling)</strong> — the cutter rotation opposes the feed direction at the
+            point of contact. The chip starts thin and grows thicker as the tooth progresses through its arc. This mode
+            tends to lift the workpiece from the table, requiring robust clamping. It is gentler on the feed mechanism
+            and is preferred when there is backlash in the feed screws.</li>
+        <li><strong>Down-milling (climb milling)</strong> — the cutter rotation is in the same direction as the feed at
+            the point of contact. The chip starts thick and becomes thinner. This provides a better surface finish,
+            generates less heat at the cutting edge, and the cutting force pushes the workpiece down into the table.
+            However, it requires a machine with backlash-free feed screws (ball screws) to prevent the cutter from
+            pulling the workpiece into it uncontrollably.</li>
+    </ul>
+    <p>The cutting speed (V<sub>c</sub>) in milling is determined by the cutter diameter and spindle RPM:
+        <strong>V<sub>c</sub> = (π × d × n) / 1000</strong>. The feed rate is typically expressed as feed per tooth
+        (f<sub>z</sub>), which is the amount of material each cutting edge removes per revolution. The table feed rate
+        (V<sub>f</sub>) equals: <strong>V<sub>f</sub> = f<sub>z</sub> × z × n</strong>, where z is the number of teeth
+        on the cutter and n is the spindle speed in RPM.</p>
+
+    <h3>Shaped Surfaces and Involved Elements</h3>
+    <p>Milling machines are among the most versatile machine tools, capable of producing a wide variety of surface
+        geometries:</p>
+    <ul>
+        <li><strong>Flat horizontal surfaces (planes)</strong> — produced by face milling (using a face mill on a
+            vertical machine) or by slab milling (using a cylindrical cutter on a horizontal machine). This is the most
+            basic milling operation and is used to create reference surfaces and achieve flatness.</li>
+        <li><strong>Flat vertical surfaces (shoulders and steps)</strong> — created by side milling or end milling. The
+            tool cuts on its periphery and/or on its end face to produce a step or shoulder on the workpiece. Multiple
+            passes can create pockets and recesses.</li>
+        <li><strong>Slots and grooves</strong> — produced using slot drills, end mills, or side-and-face cutters. Common
+            applications include T-slots (for machine tables, using a special T-slot cutter), dovetail slots (for
+            slideway connections, using a dovetail cutter), and keyways (for shaft-to-hub connections).</li>
+        <li><strong>Angular surfaces and chamfers</strong> — created using single-angle or double-angle cutters, or by
+            tilting the spindle head on a vertical milling machine.</li>
+        <li><strong>Complex 2D and 3D contours</strong> — achieved by coordinating the simultaneous movement of the
+            table in multiple axes. Profiles such as cam surfaces, die cavities, and mold shapes can be machined. This
+            capability is greatly enhanced by CNC (Computer Numerical Control), which can interpolate curved paths from
+            programmed coordinates.</li>
+        <li><strong>Gear teeth</strong> — spur, bevel, and helical gear teeth can be generated on a milling machine
+            using specially shaped involute gear cutters and a dividing head (indexing head) to rotate the workpiece by
+            the correct angle between each pass. On a universal milling machine, helical gears can be cut using change
+            gears linked to the table feed.</li>
+    </ul>
+    <p>In all of these operations, the spindle rotates the cutter and the table, saddle, and knee provide the three-axis
+        positioning of the workpiece. The choice of cutter type, feed direction, and axis of motion determines the
+        surface geometry that is produced.</p>
+
+    <h3>Fixing and Clamping Methods</h3>
+    <p>Because milling generates significant cutting forces — including tangential, radial, and axial components — the
+        workpiece must be clamped very securely to the table. The following methods are commonly used:</p>
+    <ul>
+        <li><strong>Machine vice (milling vice)</strong> — the standard clamping method for small to medium-sized
+            workpieces. Milling vices are heavier and more rigid than drilling vices, with wide jaws and a solid
+            construction designed to resist the high lateral cutting forces. The vice is bolted to the table through
+            T-slots and can be aligned precisely using a dial indicator against the fixed jaw. Swivel-base vices allow
+            the workpiece to be rotated to a specific angle for angular milling.</li>
+        <li><strong>T-slot clamps, bolts, and step blocks</strong> — for large, irregular, or heavy workpieces that do
+            not fit in a vice. Strap clamps, step blocks, jack screws, and T-bolts secure the part directly to the table
+            surface. This method provides flexible and very rigid clamping for virtually any shape of workpiece.</li>
+        <li><strong>Dividing head (indexing head)</strong> — a precision rotary device that holds and positions the
+            workpiece for operations requiring accurate angular rotation, such as milling gear teeth, hexagonal forms,
+            splines, or equally spaced slots. The dividing head typically uses a worm gear mechanism with a 40:1 ratio,
+            meaning 40 turns of the handle rotate the workpiece by one full revolution. Index plates with multiple hole
+            circles allow for precise fractional turns (e.g., to divide a circle into any number of equal parts).</li>
+        <li><strong>Rotary table</strong> — a precision circular table that can be rotated continuously or indexed to
+            specific angles. Used for machining circular features such as arcs, bolt-hole circles, and curved slots.
+            When combined with CNC control, the rotary table effectively adds a fourth axis to the machine.</li>
+        <li><strong>Fixtures</strong> — special-purpose clamping devices designed for specific parts in batch or mass
+            production. Fixtures locate the workpiece accurately and clamp it quickly, reducing setup time and ensuring
+            repeatability. They may incorporate toggle clamps, hydraulic clamps, or pneumatic actuators for rapid
+            operation.</li>
+        <li><strong>Magnetic chucks</strong> — used for clamping flat ferromagnetic workpieces. An electromagnetic or
+            permanent magnetic chuck holds the part by magnetic attraction, eliminating the need for mechanical clamps.
+            Useful for surface grinding and light milling operations where the cutting forces are relatively small.</li>
+    </ul>
+
+    <div class="figure-container">
+        <img src="fig13_milling_fixing.png" alt="Milling machine fixing methods">
+        <p class="figure-caption">Figure 13. Different methods of fixing and clamping workpieces on a milling machine.
+        </p>
+    </div>
+    <div class="legend">
+        <p>1. Heavy-duty milling vice bolted to table via T-slots</p>
+        <p>2. T-slot clamps with step blocks</p>
+        <p>3. Dividing head (indexing head) with workpiece</p>
+        <p>4. Rotary table</p>
+    </div>
+
+    <h3>Tools and Mounting</h3>
+    <p>Milling machines use multi-point rotary cutting tools, as opposed to the single-point tools used on lathes. The
+        wide variety of cutters available is one of the primary reasons for the milling machine's versatility:</p>
+    <ul>
+        <li><strong>Slab (cylindrical) mill</strong> — a plain cylindrical cutter with helical teeth on its periphery
+            only. Mounted on a horizontal arbor for machining wide, flat surfaces (slab milling or peripheral milling).
+            The helical teeth ensure a gradual engagement with the workpiece, reducing shock and vibration.</li>
+        <li><strong>Side-and-face cutter</strong> — a disc-shaped cutter with teeth on both the periphery and the side
+            faces. Used for milling slots, shoulders, and steps. When two or more are ganged together on an arbor, they
+            can machine multiple surfaces simultaneously (straddle milling or gang milling).</li>
+        <li><strong>End mill</strong> — a cylindrical cutter with cutting edges on both the end face and the periphery.
+            End mills are the most widely used tools on vertical milling machines. They can perform plunge cutting (like
+            a drill), peripheral cutting (along a contour), and face cutting. Available in 2-flute (for
+            plunging/slotting), 3-flute, and 4-flute (for better finish) configurations in HSS, solid carbide, or
+            cobalt.</li>
+        <li><strong>Face mill</strong> — a large-diameter cutter with multiple replaceable carbide inserts mounted on
+            its face. Used on vertical milling machines for rapid material removal and finishing of large flat surfaces.
+            The inserts can be indexed (rotated to a fresh cutting edge) or replaced without removing the cutter body
+            from the spindle.</li>
+        <li><strong>Slot drill</strong> — similar to an end mill but typically has only two flutes and is
+            center-cutting, designed specifically for plunge cutting and slot machining. The center-cutting design
+            allows it to drill straight down before milling laterally.</li>
+        <li><strong>Form cutters</strong> — specially shaped cutters for producing specific profiles, such as concave,
+            convex, gear-tooth involute, corner-rounding, or thread-milling cutters. The shape of the cutter is the
+            inverse (negative) of the desired profile on the workpiece.</li>
+        <li><strong>Fly cutter</strong> — a single-point tool mounted in a rotating body. Despite having only one
+            cutting edge, it can produce excellent surface finishes on large flat areas at very low cost.</li>
+    </ul>
+    <p>Tool mounting depends on the machine type:</p>
+    <ul>
+        <li><strong>Horizontal machine</strong> — cutters are mounted on a long cylindrical arbor that passes through
+            the spindle. Spacer collars are used to position the cutter at the correct location along the arbor. The
+            arbor is supported at its outer end by the arbor support bracket hanging from the overarm.</li>
+        <li><strong>Vertical machine</strong> — tools are held in the spindle using collets (R8, ER, or other systems),
+            drill chucks, shell mill adapters, or directly via a Morse taper. Quick-change toolholding systems are
+            common in CNC milling for minimizing tool changeover time. Modern CNC machining centers use standardized
+            toolholders (e.g., CAT, BT, HSK tapers) that interface with automatic tool changers.</li>
+    </ul>
+
+    <div class="figure-container">
+        <img src="fig14_milling_tools.png" alt="Milling tools and mounting">
+        <p class="figure-caption">Figure 14. The most important milling cutters and their mounting methods.</p>
+    </div>
+    <div class="legend">
+        <p>1. Slab mill on horizontal arbor</p>
+        <p>2. Side-and-face cutter</p>
+        <p>3. End mill in collet on vertical spindle</p>
+        <p>4. Face mill with carbide inserts</p>
+        <p>5. Slot drill</p>
+        <p>6. Form cutter (gear-tooth profile)</p>
+    </div>
+
+    <h3>Special Equipment and Milling Machine Types</h3>
+    <p>Standard knee-and-column milling machines can be equipped with a range of accessories to extend their
+        capabilities:</p>
+    <ul>
+        <li><strong>Dividing head (indexing head)</strong> — used for equally spacing cuts around a circumference, such
+            as when milling gear teeth, splines, or hexagonal forms. It is one of the most important milling machine
+            accessories.</li>
+        <li><strong>Slotting attachment</strong> — converts the rotary output of the spindle into a reciprocating linear
+            motion, allowing the milling machine to perform slotting operations similar to a shaper. Useful for
+            machining internal keyways and splines.</li>
+        <li><strong>Vertical milling attachment</strong> — mounted on a horizontal milling machine to convert it for
+            vertical milling operations, adding versatility without requiring a separate machine.</li>
+        <li><strong>Rack milling attachment</strong> — a specialized accessory for milling gear racks (straight teeth)
+            that converts rotary motion into the linear indexing needed between successive tooth cuts.</li>
+    </ul>
+    <p>Several important specialized milling machine variants exist:</p>
+    <ul>
+        <li><strong>Universal milling machine</strong> — essentially a horizontal milling machine with the addition of a
+            table swivel feature that allows the table to be rotated in the horizontal plane. This is essential for
+            helical milling operations, such as cutting helical gears, twist drills, and milling cutters. A dividing
+            head connected to the table lead screw via change gears provides the coordinated helical feed.</li>
+        <li><strong>Bed-type milling machine</strong> — the table is mounted on a fixed bed and can only move
+            longitudinally (X-axis). The spindle head moves vertically (Z-axis) on the column. This design provides much
+            greater rigidity than the knee-and-column type, making it suitable for heavy-duty milling of large castings
+            and structural parts.</li>
+        <li><strong>Planer-type milling machine (plano-miller)</strong> — a very large machine with multiple spindle
+            heads mounted on cross-rails above a long table. Designed for machining very large workpieces such as
+            machine tool beds, bridge components, and heavy structural frames. Multiple surfaces can be machined
+            simultaneously.</li>
+        <li><strong>CNC milling machine / machining center</strong> — a computer-controlled milling machine that
+            automates all axis movements, spindle speeds, and feed rates. Modern CNC machining centers feature automatic
+            tool changers (ATC) with tool magazines holding 20–100+ tools, allowing multiple operations (drilling,
+            tapping, milling, boring) in a single setup without manual intervention. Five-axis CNC machines add two
+            rotary axes (typically A and B or B and C), enabling the machining of extremely complex 3D geometries such
+            as turbine blades, impellers, and aerospace structural components.</li>
+        <li><strong>Copy (tracer) milling machine</strong> — uses a stylus that follows a template or model while the
+            cutter replicates the shape on the workpiece. This was an important method for producing complex 3D shapes
+            (dies, molds) before CNC technology became widely available.</li>
+    </ul>
+
+    <div class="figure-container">
+        <img src="fig15_milling_special.png" alt="Special milling machine types">
+        <p class="figure-caption">Figure 15. Special types of milling machines: universal milling machine, bed-type
+            milling machine, and CNC machining center.</p>
+    </div>
+
+
+    <!-- ====================================================================== -->
+    <!-- CONCLUSIONS -->
+    <!-- ====================================================================== -->
+    <h1>Conclusions</h1>
+
+    <p>The laboratory survey highlighted the fundamental differences in kinematics between the three primary classes of
+        machine tools studied. The lathe is unique in that the workpiece provides the main rotary motion while the tool
+        provides the feed, making it the superior choice for creating radially symmetric parts (surfaces of revolution).
+        In contrast, both drilling and milling machines rely on the tool for the main rotary cutting motion, but differ
+        fundamentally in how the feed is achieved: in drilling, the tool itself performs the axial feed into the
+        stationary workpiece, whereas in milling, the workpiece (via the table) provides a multi-axial feed relative to
+        the rotating cutter.</p>
+
+    <p>The survey also revealed important differences in workpiece clamping strategies dictated by the kinematic
+        requirements and cutting forces of each machine type. On lathes, workpieces are clamped in chucks (three-jaw,
+        four-jaw), collets, faceplates, or between centers to allow high-speed rotation. On drilling machines, vices,
+        T-clamps, V-blocks, and specialized drilling jigs hold the workpiece stationary on the table while resisting the
+        torque and thrust of the drill. On milling machines, the higher and more complex cutting forces necessitate more
+        robust clamping — heavy-duty milling vices, T-slot clamping sets, and specialized accessories such as dividing
+        heads and rotary tables, which also expand the geometric capabilities of the machine beyond simple linear
+        surfaces.</p>
+
+    <p>Furthermore, the tooling differs significantly across the three machine types. Lathes use single-point cutting
+        tools mounted on the tool post or in the tailstock. Drills use multi-point axial tools (twist drills, reamers,
+        taps, counterbores) held in the spindle chuck or taper. Milling machines employ the widest variety of
+        multi-point rotary cutters (end mills, face mills, slab mills, side-and-face cutters, form cutters), each
+        mounted according to the machine's orientation — on horizontal arbors or in vertical collets. The specialized
+        variants of each machine — turret lathes, radial drilling machines, CNC machining centers — demonstrate how the
+        basic kinematic principles are adapted and expanded to meet industrial demands for higher speed, greater
+        precision, increased flexibility, and heavy-duty machining capability.</p>
+
+    <p>The progressive evolution from manual machines to CNC-controlled systems represents the most significant trend in
+        modern manufacturing. CNC technology combines the kinematic principles of all three machine types into single
+        multi-function machining centers, reducing the number of setups, improving accuracy, and dramatically increasing
+        productivity.</p>
+
+</body>
+
+</html>
