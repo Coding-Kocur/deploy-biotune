@@ -1,4 +1,9 @@
 node_modules/
-.git/
-deploy-biotune/
+Lab9_Excel/
+Manufacturing/
+Mechanical Engineering 2/
+Erasmus/
+antigravity-auto-approve/
 korepetycje-ogloszenie/
+*.backup
+package-lock.json
