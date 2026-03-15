@@ -184,10 +184,21 @@
             flex: 1;
             height: 100%;
             transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            background-size: cover;
-            background-position: center;
             overflow: hidden;
             cursor: pointer;
+        }
+
+        .split-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 0;
+        }
+
+        .split-panel:hover .split-bg {
+            transform: scale(1.1);
         }
 
         .split-panel::before {
@@ -196,6 +207,7 @@
             inset: 0;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(187, 0, 0, 0.2) 100%);
             transition: opacity 0.5s ease;
+            z-index: 1;
         }
 
         .split-container:hover .split-panel {
@@ -219,6 +231,7 @@
             opacity: 0.6;
             transition: all 0.5s ease;
             transform: translateY(20px);
+            z-index: 2;
         }
 
         .split-panel:hover .split-content {
@@ -424,17 +437,24 @@
     <section id="hero-v6"
         class="p-0 hero-section min-h-screen relative flex flex-col justify-center overflow-hidden bg-black">
 
-        <!-- UI Notice overlaid on top of panels -->
-        <div class="absolute top-32 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none">
-            <div
-                class="inline-block px-4 py-1.5 rounded-full border border-white/20 bg-black/50 backdrop-blur-md text-white text-sm font-bold uppercase tracking-widest">
-                Wersja V6: Interaktywny Hover
-            </div>
-        </div>
-
         <div class="split-container z-10">
-            <!-- Panel 1: Peptydy -->
-            <div class="split-panel" style="background-image: url('./assets/hero/slide-1.jpg');">
+            <!-- Panel 1: Misja BioTune (was SARM) -->
+            <div class="split-panel">
+                <div class="split-bg" style="background-image: url('./assets/hero/slide-3.jpg');"></div>
+                <div class="split-content">
+                    <h2 class="split-title">Misja BioTune</h2>
+                    <p class="split-desc text-gray-300 mb-6 max-w-sm">Dostarczamy najwyższej jakości rozwiązania do
+                        zaawansowanych badań. Naszą misją jest absolutna czystość i transparentność naukowa.</p>
+                    <a href="about.html"
+                        class="split-btn inline-block bg-biotune-red text-white px-8 py-3 font-bold uppercase tracking-widest rounded hover:bg-red-600 transition-colors">
+                        Poznaj nas
+                    </a>
+                </div>
+            </div>
+
+            <!-- Panel 2: Peptydy -->
+            <div class="split-panel">
+                <div class="split-bg" style="background-image: url('./assets/hero/slide-1.jpg');"></div>
                 <div class="split-content">
                     <h2 class="split-title">Peptydy</h2>
                     <p class="split-desc text-gray-300 mb-6 max-w-sm">Najwyższej jakości zsyntetyzowane łańcuchy
@@ -446,29 +466,16 @@
                 </div>
             </div>
 
-            <!-- Panel 2: SARMY (Placeholder image style) -->
-            <div class="split-panel" style="background-image: url('./assets/hero/slide-3.jpg');">
+            <!-- Panel 3: Badania (was Lab Gear) -->
+            <div class="split-panel">
+                <div class="split-bg" style="background-image: url('./assets/hero/slide-2.png');"></div>
                 <div class="split-content">
-                    <h2 class="split-title">SARM</h2>
-                    <p class="split-desc text-gray-300 mb-6 max-w-sm">Niesteroidowe selektywne modulatory receptora
-                        androgenowego. Absolutna czystość strukturalna w każdym miligramie.</p>
+                    <h2 class="split-title">Badania</h2>
+                    <p class="split-desc text-gray-300 mb-6 max-w-sm">Transparentność i pełna dokumentacja wyników testów
+                        niezależnych laboratoriów. Certyfikaty HPLC dla każdej partii.</p>
                     <a href="shop.html"
                         class="split-btn inline-block bg-biotune-red text-white px-8 py-3 font-bold uppercase tracking-widest rounded hover:bg-red-600 transition-colors">
-                        Odkryj
-                    </a>
-                </div>
-            </div>
-
-            <!-- Panel 3: Akcesoria -->
-            <div class="split-panel"
-                style="background-image: url('./assets/hero/slide-2.png'); border-left: 1px solid rgba(255,255,255,0.1);">
-                <div class="split-content">
-                    <h2 class="split-title">Lab <span class="text-biotune-red">Gear</span></h2>
-                    <p class="split-desc text-gray-300 mb-6 max-w-sm">Certyfikowane szkło laboratoryjne, igły, filtry
-                        strzykawkowe i woda bakteriostatyczna niezbędna w pracy chemika.</p>
-                    <a href="shop.html"
-                        class="split-btn inline-block bg-biotune-red text-white px-8 py-3 font-bold uppercase tracking-widest rounded hover:bg-red-600 transition-colors">
-                        Odkryj
+                        Certyfikaty
                     </a>
                 </div>
             </div>
