@@ -225,18 +225,20 @@
         .split-content {
             position: absolute;
             bottom: 10%;
-            left: 5%;
-            right: 5%;
+            left: 50%;
+            width: 90%;
+            max-width: 600px;
             color: white;
             opacity: 0.6;
             transition: all 0.5s ease;
-            transform: translateY(20px);
+            transform: translateX(-50%) translateY(20px);
             z-index: 2;
+            text-align: center;
         }
 
         .split-panel:hover .split-content {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(-50%) translateY(0);
         }
 
         .split-title {
@@ -247,23 +249,23 @@
             margin-bottom: 0.5rem;
             writing-mode: vertical-rl;
             text-orientation: mixed;
-            transform: rotate(180deg);
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(-180deg);
-            transition: all 0.5s ease;
+            transform: translate(-50%, -50%) rotate(180deg);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             white-space: nowrap;
         }
 
         .split-panel:hover .split-title {
             writing-mode: horizontal-tb;
-            transform: translate(0, 0) rotate(0);
+            transform: rotate(360deg);
             position: relative;
             top: auto;
             left: auto;
-            margin-bottom: 1rem;
-            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-size: 3.5rem;
+            width: 100%;
         }
 
         .split-desc,
