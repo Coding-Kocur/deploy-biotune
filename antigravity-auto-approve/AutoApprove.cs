@@ -13,6 +13,44 @@ namespace AntigravityAutoApprove
         private System.Windows.Forms.Timer scanTimer;
         private bool isEnabled = true;
         private DateTime lastTrigger = DateTime.MinValue;
+        private HotKeyWindow hotKeyWindow;
+        private NotificationForm activeNotification;
+
+        [DllImport("user32.dll")]
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        private const int HOTKEY_ID = 9000;
+        private const uint MOD_CONTROL = 0x0002;
+        private const uint MOD_SHIFT = 0x0004;
+        private const uint VK_A = 0x41;
+
+        private class HotKeyWindow : NativeWindow, IDisposable
+        {
+            private const int WM_HOTKEY = 0x0312;
+            public event Action HotKeyPressed;
+
+            public HotKeyWindow()
+            {
+                this.CreateHandle(new CreateParams());
+            }
+
+            protected override void WndProc(ref Message m)
+            {
+                base.WndProc(ref m);
+                if (m.Msg == WM_HOTKEY)
+                {
+                    if (HotKeyPressed != null) HotKeyPressed();
+                }
+            }
+
+            public void Dispose()
+            {
+                this.DestroyHandle();
+            }
+        }
 
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
@@ -47,6 +85,9 @@ namespace AntigravityAutoApprove
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
+        [DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
+
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT { public int X; public int Y; }
 
@@ -60,6 +101,8 @@ namespace AntigravityAutoApprove
 
         public AutoApproveContext()
         {
+            SetProcessDPIAware();
+
             trayIcon = new NotifyIcon()
             {
                 Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath),
@@ -75,7 +118,26 @@ namespace AntigravityAutoApprove
             scanTimer.Tick += ScanTimer_Tick;
             scanTimer.Start();
 
-            ShowBalloon("Auto-Approve ON", "Precise button detection active");
+            hotKeyWindow = new HotKeyWindow();
+            hotKeyWindow.HotKeyPressed += () => ToggleEnabled();
+            RegisterHotKey(hotKeyWindow.Handle, HOTKEY_ID, MOD_CONTROL | MOD_SHIFT, VK_A);
+
+            ShowBalloon("Auto-Approve ON", "Hotkey: Ctrl+Shift+A to toggle");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (hotKeyWindow != null)
+                {
+                    UnregisterHotKey(hotKeyWindow.Handle, HOTKEY_ID);
+                    hotKeyWindow.Dispose();
+                }
+                if (trayIcon != null) trayIcon.Dispose();
+                if (scanTimer != null) scanTimer.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
         private ContextMenuStrip CreateContextMenu()
@@ -92,6 +154,19 @@ namespace AntigravityAutoApprove
             isEnabled = !isEnabled;
             trayIcon.Text = isEnabled ? "Auto-Approve: ON" : "Auto-Approve: OFF";
             ShowBalloon(isEnabled ? "ON" : "OFF", isEnabled ? "Auto scanning" : "Disabled");
+            ShowOverlayNotification(isEnabled ? "Antigravity: ON" : "Antigravity: OFF", isEnabled);
+        }
+
+        private void ShowOverlayNotification(string text, bool enabled)
+        {
+            if (activeNotification != null && !activeNotification.IsDisposed)
+            {
+                activeNotification.Close();
+            }
+
+            Color bgColor = enabled ? Color.FromArgb(34, 197, 94) : Color.FromArgb(239, 68, 68); // Green / Red
+            activeNotification = new NotificationForm(text, bgColor);
+            activeNotification.Show();
         }
 
         private void ShowBalloon(string title, string text)
@@ -212,38 +287,42 @@ namespace AntigravityAutoApprove
 
         private void ScanTimer_Tick(object sender, EventArgs e)
         {
-            if (!isEnabled) return;
-            
-            // Debounce slightly to avoid rapid-fire issues
-            if ((DateTime.Now - lastTrigger).TotalMilliseconds < 800) return;
-
-            IntPtr hwnd = GetForegroundWindow();
-            if (hwnd == IntPtr.Zero) return;
-
-            StringBuilder sb = new StringBuilder(256);
-            GetWindowText(hwnd, sb, 256);
-            string title = sb.ToString().ToLower();
-
-            if (!title.Contains("antigravity") && !title.Contains("code") && !title.Contains("cursor"))
-                return;
-
-            // FIRST: Try to find the Accept button
-            Point? buttonCenter = FindAcceptButton(hwnd);
-            
-            // If button NOT found, check if we need to scroll (scrollbar not at bottom)
-            if (!buttonCenter.HasValue && NeedsScrollDown(hwnd))
+            try
             {
-                // Scroll down using keyboard (Page Down) - NO cursor movement
-                SendScrollDown(hwnd);
-                Thread.Sleep(200);
-                buttonCenter = FindAcceptButton(hwnd);
+                if (!isEnabled) return;
+                
+                // Debounce slightly to avoid rapid-fire issues
+                if ((DateTime.Now - lastTrigger).TotalMilliseconds < 800) return;
+
+                IntPtr hwnd = GetForegroundWindow();
+                if (hwnd == IntPtr.Zero) return;
+
+                StringBuilder sb = new StringBuilder(256);
+                GetWindowText(hwnd, sb, 256);
+                string title = sb.ToString().ToLower();
+
+                if (!title.Contains("antigravity") && !title.Contains("code") && !title.Contains("cursor"))
+                    return;
+
+                // FIRST: Try to find the Accept button
+                Point? buttonCenter = FindAcceptButton(hwnd);
+                
+                // If button NOT found, check if we need to scroll (scrollbar not at bottom)
+                if (!buttonCenter.HasValue && NeedsScrollDown(hwnd))
+                {
+                    // Scroll down using keyboard (Page Down) - NO cursor movement
+                    SendScrollDown(hwnd);
+                    Thread.Sleep(200);
+                    buttonCenter = FindAcceptButton(hwnd);
+                }
+                
+                if (buttonCenter.HasValue)
+                {
+                    lastTrigger = DateTime.Now;
+                    SafeClickSequence(hwnd, buttonCenter.Value.X, buttonCenter.Value.Y);
+                }
             }
-            
-            if (buttonCenter.HasValue)
-            {
-                lastTrigger = DateTime.Now;
-                SafeClickSequence(hwnd, buttonCenter.Value.X, buttonCenter.Value.Y);
-            }
+            catch { }
         }
 
         [DllImport("user32.dll")]
@@ -409,6 +488,54 @@ namespace AntigravityAutoApprove
             // Images have VARIED colors - only some pixels match.
             // 75% ensures we only click truly solid button blocks.
             return totalChecked > 0 && matchCount > (totalChecked * 0.75);
+        }
+    }
+
+    public class NotificationForm : Form
+    {
+        private System.Windows.Forms.Timer closeTimer;
+
+        public NotificationForm(string message, Color bgColor)
+        {
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.TopMost = true;
+            this.ShowInTaskbar = false;
+            this.BackColor = bgColor;
+            this.ForeColor = Color.White;
+            this.Size = new Size(200, 50);
+            this.StartPosition = FormStartPosition.Manual;
+            this.Opacity = 0.95;
+
+            Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
+            this.Location = new Point(workingArea.Right - this.Width - 20, workingArea.Bottom - this.Height - 20);
+
+            Label label = new Label();
+            label.Text = message;
+            label.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            label.AutoSize = false;
+            label.Dock = DockStyle.Fill;
+            label.TextAlign = ContentAlignment.MiddleCenter;
+            this.Controls.Add(label);
+
+            closeTimer = new System.Windows.Forms.Timer();
+            closeTimer.Interval = 2000;
+            closeTimer.Tick += (s, e) => {
+                closeTimer.Stop();
+                closeTimer.Dispose();
+                this.Close();
+            };
+            closeTimer.Start();
+        }
+
+        protected override bool ShowWithoutActivation
+        {
+            get { return true; }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.FromArgb(200, 255, 255, 255), ButtonBorderStyle.Solid);
         }
     }
 
