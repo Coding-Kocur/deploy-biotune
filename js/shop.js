@@ -27,8 +27,7 @@ function renderGrid(filterText = '') {
     grid.innerHTML = filteredProducts.map((product, index) => {
         const imgSrc = product.images && product.images[0] ? product.images[0] : './assets/product-placeholder.svg';
 
-        return `
-        <div class="product-card-wrapper relative cursor-pointer" 
+        return `        <div class="product-card-wrapper relative cursor-pointer flex flex-col" 
              style="animation-delay: ${index * 50}ms"
              onclick="handleCardClick(event, '${product.id}')">
             
@@ -42,7 +41,8 @@ function renderGrid(filterText = '') {
             <span class="snake-corner snake-corner-tr"></span>
             <span class="snake-corner snake-corner-br"></span>
             <span class="snake-corner snake-corner-bl"></span>
-                        <div class="bg-[#151515] h-full shadow-lg hover:shadow-2xl p-4 rounded-xl relative group product-card transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col">
+            
+            <div class="bg-[#151515] h-full shadow-lg hover:shadow-2xl p-4 rounded-xl relative group product-card transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col w-full">
                 
                 <div class="aspect-square bg-black/50 rounded-lg mb-4 overflow-hidden border border-white/5 relative flex-shrink-0">
                     <img src="${imgSrc}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -51,14 +51,14 @@ function renderGrid(filterText = '') {
                         <span class="product-overlay-name text-biotune-red font-bold text-xl text-center px-4">${product.name}</span>
                     </div>
                 </div>
-                <div class="mb-3 flex-grow">
+                <div class="mb-3 flex-grow flex flex-col">
                     <div class="flex justify-between items-start gap-4">
-                        <h3 class="text-lg font-bold text-white group-hover:text-biotune-red transition-colors leading-tight flex-1">${product.name}</h3>
+                        <h3 class="text-lg font-bold text-white group-hover:text-biotune-red transition-colors leading-tight flex-1 uppercase tracking-tight">${product.name}</h3>
                         <span class="font-mono text-biotune-red font-bold text-lg whitespace-nowrap">${product.price.toFixed(2)} zł</span>
                     </div>
                     <p class="text-sm text-gray-400 mt-1">${product.dosage || ''}</p>
                 </div>
-                <div class="flex gap-2 mt-auto pt-4">
+                <div class="flex gap-2 mt-auto pt-4 relative z-30">
                     ${product.stock > 0 ? `
                     <button onclick="handleGridAddToCart(event, '${product.id}')" class="flex-1 bg-biotune-red hover:bg-red-600 text-white font-bold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-[0_0_15px_rgba(255,0,0,0.4)]">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
@@ -78,6 +78,7 @@ function renderGrid(filterText = '') {
                     </button>
                 </div>
             </div>
+>
 >
         </div >
             `;
