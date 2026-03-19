@@ -247,19 +247,16 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-bottom: 0.5rem;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(180deg);
+            transform: translate(-50%, -50%) rotate(-90deg);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             white-space: nowrap;
         }
 
         .split-panel:hover .split-title {
-            writing-mode: horizontal-tb;
-            transform: rotate(360deg);
+            transform: rotate(0deg);
             position: relative;
             top: auto;
             left: auto;
@@ -290,7 +287,7 @@
     class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased selection:bg-biotune-red selection:text-white transition-colors duration-300 overflow-x-hidden">
 
     <nav
-        class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
+        class="fixed top-0 w-full z-50 glass hero-glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-24">
                 <!-- Left: Navigation Links -->
