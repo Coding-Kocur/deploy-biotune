@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl" class="dark" style="scroll-behavior: smooth;">
 
 <head>
@@ -356,7 +356,7 @@
                     </div>
                 </div>
                 <!-- Visual RIGHT -->
-                <div class="hidden lg:flex w-1/2 bg-black items-center justify-center p-12 border-l border-white/5">
+                <div class="hidden lg:flex w-1/2 bg-transparent items-center justify-center p-12 border-l border-white/5">
                     <div class="relative w-64 h-64">
                         <div
                             class="absolute inset-0 rounded-full border-2 border-biotune-red animate-[spin_10s_linear_infinite]">
@@ -833,12 +833,12 @@
                     scrollTrigger: {
                         trigger: "#horizontal-scroll-wrapper",
                         pin: true,
-                        scrub: 1,
+                        scrub: 0.5,
                         anticipatePin: 1,
                         snap: {
                             snapTo: 1 / (sections.length - 1),
-                            duration: { min: 0.3, max: 0.6 },
-                            delay: 0.5,
+                            duration: { min: 0.4, max: 0.8 },
+                            delay: 0,
                             ease: "power2.inOut"
                         },
                         end: () => "+=" + (window.innerHeight * sections.length),
