@@ -1,29 +1,11 @@
 <!DOCTYPE html>
-<html lang="pl" class="dark" style="scroll-behavior: smooth;">
+<html lang="pl" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BioTune - Precyzja w każdym mikrogramie</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'biotune-black': '#0a0a0a',
-                        'biotune-dark': '#1a1a1a',
-                        'biotune-red': '#ff0000',
-                        'biotune-text': '#cccccc',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="./dist/output.css">
     <style>
         .glass {
             background-color: rgba(255, 255, 255, 0.1);
@@ -136,7 +118,7 @@
         }
 
         html {
-            scroll-behavior: smooth !important;
+            scroll-behavior: auto !important;
         }
 
         /* V3 text reveal animation */
@@ -256,11 +238,11 @@
         }
 
         .split-panel:hover .split-title {
-            transform: rotate(0deg);
-            position: relative;
-            top: auto;
-            left: auto;
-            margin-bottom: 1.5rem;
+            transform: translate(-50%, 0) rotate(0deg);
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            margin-bottom: 0;
             font-size: 3.5rem;
             width: 100%;
         }

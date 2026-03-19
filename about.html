@@ -1,28 +1,11 @@
 <!DOCTYPE html>
-<html lang="pl" class="dark" style="scroll-behavior: smooth;">
+<html lang="pl" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O Nas - BioTune</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'biotune-black': '#050505',
-                        'biotune-dark': '#0a0a0a',
-                        'biotune-red': '#ff0000',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="./dist/output.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -108,7 +91,7 @@
     </style>
     <style>
         html {
-            scroll-behavior: smooth !important;
+            scroll-behavior: auto !important;
         }
     </style>
 </head>
@@ -425,7 +408,7 @@
                             <!-- Description - Hidden until hover -->
                             <p
                                 class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
-                                W centrum naszej oferty znajdują się peptydy â€” krótkie łańcuchy aminokwasów
+                                W centrum naszej oferty znajdują się peptydy — krótkie łańcuchy aminokwasów
                                 połączonych
                                 wiązaniami peptydowymi. Chemicznie stanowią one precyzyjne, łatwe do charakterystyki
                                 molekuły.
@@ -837,7 +820,7 @@
                         anticipatePin: 1,
                         snap: {
                             snapTo: 1 / (sections.length - 1),
-                            duration: { min: 0.4, max: 0.8 },
+                            duration: { min: 0.1, max: 0.3 },
                             delay: 0,
                             ease: "power2.inOut"
                         },
