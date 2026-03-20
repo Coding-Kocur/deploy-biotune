@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl" class="dark" style="scroll-behavior: smooth;">
 
 <head>
@@ -61,9 +61,9 @@
     <nav
         class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-24">
+            <div class="grid grid-cols-3 items-center h-24">
                 <!-- Left: Navigation Links -->
-                <div class="hidden md:flex items-center space-x-6">
+                <div class="hidden md:flex items-center space-x-6 justify-self-start">
                     <a href="index.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
                         główna</a>
@@ -123,19 +123,19 @@
                 </div>
 
                 <!-- Center: Logo (Dual version for dark/light mode) -->
-                <div class="absolute left-1/2 transform -translate-x-1/2">
+                <div class="justify-self-center flex items-center">
                     <a href="index.html" class="flex items-center">
                         <!-- Light mode logo -->
                         <img src="./assets/biotune-logo-transparent.png" alt="BioTune"
-                            class="h-60 w-auto block dark:hidden">
+                            class="h-60 max-h-[150%] w-auto block dark:hidden">
                         <!-- Dark mode logo -->
                         <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="h-60 w-auto hidden dark:block">
+                            class="h-60 max-h-[150%] w-auto hidden dark:block">
                     </a>
                 </div>
 
                 <!-- Right: Icons -->
-                <div class="flex items-center gap-4 ml-auto">
+                <div class="flex items-center gap-4 justify-self-end">
                     <div class="relative group hidden md:block">
                         <input type="text" id="search-input" placeholder="Szukaj..."
                             class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
