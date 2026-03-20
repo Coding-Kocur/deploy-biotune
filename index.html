@@ -212,7 +212,7 @@
             max-width: 600px;
             color: white;
             opacity: 0.6;
-            transition: all 0.6s ease;
+            transition: all 0.5s ease;
             transform: translateX(-50%) translateY(20px);
             z-index: 2;
             text-align: center;
@@ -233,21 +233,19 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-90deg);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                        top 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                        font-size 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             white-space: nowrap;
-            pointer-events: none;
         }
 
-        .split-panel:hover .split-title {
-            transform: translate(-50%, -50%) rotate(0deg);
-            position: absolute;
-            top: 25%;
-            left: 50%;
-            margin-bottom: 0;
-            font-size: 3.5rem;
-            width: 100%;
+        .split-container .split-panel:hover .split-title {
+            transform: translate(0, 0) rotate(0deg) !important;
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            margin-bottom: 1.5rem !important;
+            font-size: 3.5rem !important;
+            width: 100% !important;
+            opacity: 1 !important;
         }
 
         .split-desc,
@@ -663,6 +661,31 @@
             } else {
                 nav.classList.remove('scrolled');
             }
+        });
+
+        // Hero Split Panels JS Fallback for Titles
+        document.querySelectorAll('.split-panel').forEach(panel => {
+            const title = panel.querySelector('.split-title');
+            if (!title) return;
+
+            panel.addEventListener('mouseenter', () => {
+                title.style.transform = 'translate(0, 0) rotate(0deg)';
+                title.style.position = 'relative';
+                title.style.top = 'auto';
+                title.style.left = 'auto';
+                title.style.fontSize = '3.5rem';
+                title.style.marginBottom = '1.5rem';
+                title.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+            });
+
+            panel.addEventListener('mouseleave', () => {
+                title.style.transform = '';
+                title.style.position = '';
+                title.style.top = '';
+                title.style.left = '';
+                title.style.fontSize = '';
+                title.style.marginBottom = '';
+            });
         });
 
     </script>
