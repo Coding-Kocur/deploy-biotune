@@ -95,59 +95,24 @@
     <nav
         class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-[1fr_auto_1fr] items-center h-24">
-                <!-- Left: Navigation Links -->
-                <div class="hidden md:flex items-center space-x-4 lg:space-x-6 justify-self-start">
-                    <a href="index.html"
-                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
-                        główna</a>
-                    <div class="dropdown-trigger">
-                        <a href="shop.html"
-                            class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
-                            Sklep
-                            <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                        <div class="dropdown-menu">
-                            <div class="py-1 max-h-80 overflow-y-auto">
-                                <a href="shop.html"
-                                    class="block px-4 py-2 text-sm font-semibold text-biotune-red dark:text-biotune-red hover:bg-gray-100 dark:hover:bg-black/20 border-b border-gray-200 dark:border-white/10">Wszystkie</a>
-                                <a href="product.html?id=retatrutide"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Retatrutide</a>
-                                <a href="product.html?id=bpc-157-tb-500"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">BPC-157
-                                    + TB-500</a>
-                                <a href="product.html?id=cjc-1295-ipamorelin"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">CJC-1295
-                                    + Ipamorelin</a>
-                                <a href="product.html?id=hgh-fragment-176-191"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">HGH
-                                    Fragment 176-191</a>
-                                <a href="product.html?id=ghk-cu"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">GHK-Cu</a>
-                                <a href="product.html?id=melanotan-2"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Melanotan
-                                    2</a>
-                                <a href="product.html?id=pt-141"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">PT-141</a>
-                                <a href="product.html?id=epithalon"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Epithalon</a>
-                                <a href="product.html?id=mots-c"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">MOTS-c</a>
-                                <a href="product.html?id=semax"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Semax</a>
-                                <a href="product.html?id=selank"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Selank</a>
-                                <a href="product.html?id=bac-water"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">BAC
-                                    Water</a>
-                            </div>
-                        </div>
+            <div class="flex items-center h-24">
+                <!-- Left: Navigation Links & Mobile Menu -->
+                <div class="flex-1 flex items-center relative z-10">
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="md:hidden text-gray-600 dark:text-gray-400 hover:text-biotune-red transition-colors">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+
+                    <!-- Desktop Navigation Links -->
+                    <div class="hidden md:flex items-center space-x-4 lg:space-x-6 justify-start">
+                        <a href="index.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona główna</a>
+                        <a href="shop.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Sklep</a>
+                        <a href="about.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O Nas</a>
+                        <a href="#contact" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                     </div>
+                </div>
                     <a href="about.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O
                         Nas</a>
@@ -156,19 +121,19 @@
                 </div>
 
                 <!-- Center: Logo (Dual version for dark/light mode) -->
-                <div class="justify-self-center flex items-center">
+                <div class="flex-none flex items-center px-4">
                     <a href="index.html" class="flex items-center">
                         <!-- Light mode logo -->
                         <img src="./assets/biotune-logo-transparent.png" alt="BioTune"
-                            class="h-60 max-h-[150%] w-auto block dark:hidden">
+                            class="h-12 w-auto block dark:hidden">
                         <!-- Dark mode logo -->
                         <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="h-60 max-h-[150%] w-auto hidden dark:block">
+                            class="h-12 w-auto hidden dark:block">
                     </a>
                 </div>
 
                 <!-- Right: Icons -->
-                <div class="flex items-center gap-4 justify-self-end">
+                <div class="flex-1 flex items-center gap-4 justify-end relative z-10">
                     <div class="relative group hidden md:block">
                         <input type="text" placeholder="Szukaj..."
                             class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
