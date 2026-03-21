@@ -103,11 +103,11 @@
 
     <!-- Navigation (Same as Index) -->
     <nav
-        class="fixed top-0 w-full z-50 glass group/nav border-b border-black/5 dark:border-white/5 transition-colors duration-300">
+        class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center h-24">
+            <div class="flex items-center justify-between h-24">
                 <!-- Left: Navigation Links -->
-                <div class="hidden md:flex flex-1 items-center space-x-4 lg:space-x-6 justify-start relative z-10">
+                <div class="hidden md:flex items-center space-x-6 relative z-10">
                     <a href="index.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
                         główna</a>
@@ -124,62 +124,65 @@
                         </a>
                         <div class="dropdown-menu">
                             <div class="py-1 max-h-80 overflow-y-auto">
-                                <a href="shop.html"
-                                    class="block px-4 py-2 text-sm font-semibold text-biotune-red hover:bg-black/20 border-b border-white/10">Wszystkie</a>
+                                <a href="shop.html" onclick="/* removed scrollToProducts */"
+                                    class="block px-4 py-2 text-sm font-semibold text-biotune-red dark:text-biotune-red hover:bg-gray-100 dark:hover:bg-black/20 border-b border-gray-200 dark:border-white/10">Wszystkie</a>
                                 <a href="product.html?id=retatrutide"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Retatrutide</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Retatrutide</a>
                                 <a href="product.html?id=bpc-157-tb-500"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">BPC-157 + TB-500</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">BPC-157
+                                    + TB-500</a>
                                 <a href="product.html?id=cjc-1295-ipamorelin"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">CJC-1295 +
-                                    Ipamorelin</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">CJC-1295
+                                    + Ipamorelin</a>
                                 <a href="product.html?id=hgh-fragment-176-191"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">HGH Fragment
-                                    176-191</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">HGH
+                                    Fragment 176-191</a>
                                 <a href="product.html?id=ghk-cu"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">GHK-Cu</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">GHK-Cu</a>
                                 <a href="product.html?id=melanotan-2"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Melanotan 2</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Melanotan
+                                    2</a>
                                 <a href="product.html?id=pt-141"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">PT-141</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">PT-141</a>
                                 <a href="product.html?id=epithalon"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Epithalon</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Epithalon</a>
                                 <a href="product.html?id=mots-c"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">MOTS-c</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">MOTS-c</a>
                                 <a href="product.html?id=semax"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Semax</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Semax</a>
                                 <a href="product.html?id=selank"
-                                    class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5">Selank</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Selank</a>
                             </div>
                         </div>
                     </div>
+
+
                     <a href="about.html"
-                        class="text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O Nas</a>
-                    <a href="index.html#contact"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O
+                        Nas</a>
+
+                    <a href="#contact"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                 </div>
 
-                <!-- Center: Logo (Split Layout for Dynamic Contrast) -->
-                <div class="flex-none flex items-center px-4">
-                    <a href="index.html" class="flex items-center relative group/logo">
-                        <!-- LIGHT MODE LOGO (Grey Tune) -->
+                <!-- Center: Logo (Dual version for dark/light mode) -->
+                <div class="absolute left-1/2 transform -translate-x-1/2">
+                    <a href="index.html" class="flex items-center">
+                        <!-- Light mode logo -->
                         <img src="./assets/biotune-logo-transparent.png" alt="BioTune"
-                            class="h-12 w-auto block dark:hidden transition-opacity duration-300">
-                        
-                        <!-- LIGHT MODE SCROLLED OVERLAY (Dark Grey/Black Tune) -->
-                        <img src="./assets/biotune-logo-transparent.png" alt="" aria-hidden="true"
-                            class="absolute top-0 left-0 h-12 w-auto block dark:hidden opacity-0 group-[.scrolled]/nav:opacity-100 transition-opacity duration-300 pointer-events-none"
-                            style="filter: brightness(0.15); clip-path: inset(0 0 0 38%);">
-
-                        <!-- DARK MODE LOGO (White Tune) -->
+                            class="h-60 w-auto block dark:hidden">
+                        <!-- Dark mode logo -->
                         <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="h-12 w-auto hidden dark:block transition-opacity duration-300">
+                            class="h-60 w-auto hidden dark:block">
                     </a>
                 </div>
 
                 <!-- Right: Icons -->
-                <div class="flex-1 flex items-center gap-4 justify-end relative z-10">
-                    <!-- Account dropdown -->
+                <div class="flex items-center gap-4 ml-auto relative z-10">
+                    <div class="relative group hidden md:block">
+                        <input type="text" placeholder="Szukaj..."
+                            class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
+                    </div>
                     <div class="account-dropdown">
                         <a href="login.html" id="account-link" class="hover:text-biotune-red transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -202,7 +205,26 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="relative group flex items-center">
+                        <button id="wishlist-trigger" class="relative hover:text-biotune-red transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                            <span id="wishlist-count"
+                                class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                        </button>
+                        <div id="wishlist-dropdown"
+                            class="absolute right-0 top-full mt-4 w-80 glass rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-black/10 dark:border-white/10 z-50">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg mb-3 text-black dark:text-white">Lista życzeń</h3>
+                                <div class="wishlist-items max-h-96 overflow-y-auto space-y-2">
+                                    <p class="text-center text-gray-500 py-4 text-sm">Twoja lista życzeń jest pusta.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Cart with tooltip -->
                     <div class="relative group">
                         <button id="cart-trigger" class="relative hover:text-biotune-red transition-colors">
@@ -212,9 +234,8 @@
                                     d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                             </svg>
                             <span id="cart-count"
-                                class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                                class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden shadow-[0_0_8px_rgba(255,0,0,0.6)]">0</span>
                         </button>
-                        <!-- Tooltip -->
                         <div
                             class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-biotune-red text-white text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">
                             Koszyk
