@@ -93,7 +93,7 @@
     class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased selection:bg-biotune-red selection:text-white transition-colors duration-300">
 
     <nav
-        class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
+        class="fixed top-0 w-full z-50 glass group/nav border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center h-24">
                 <!-- Left: Navigation Links & Mobile Menu -->
@@ -120,15 +120,21 @@
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                 </div>
 
-                <!-- Center: Logo (Dual version for dark/light mode) -->
+                <!-- Center: Logo (Split Layout for Dynamic Contrast) -->
                 <div class="flex-none flex items-center px-4">
-                    <a href="index.html" class="flex items-center">
-                        <!-- Light mode logo -->
+                    <a href="index.html" class="flex items-center relative group/logo">
+                        <!-- LIGHT MODE LOGO (Grey Tune) -->
                         <img src="./assets/biotune-logo-transparent.png" alt="BioTune"
-                            class="h-12 w-auto block dark:hidden">
-                        <!-- Dark mode logo -->
+                            class="h-12 w-auto block dark:hidden transition-opacity duration-300">
+                        
+                        <!-- LIGHT MODE SCROLLED OVERLAY (Dark Grey/Black Tune) -->
+                        <img src="./assets/biotune-logo-transparent.png" alt="" aria-hidden="true"
+                            class="absolute top-0 left-0 h-12 w-auto block dark:hidden opacity-0 group-[.scrolled]/nav:opacity-100 transition-opacity duration-300 pointer-events-none"
+                            style="filter: brightness(0.15); clip-path: inset(0 0 0 38%);">
+
+                        <!-- DARK MODE LOGO (White Tune) -->
                         <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="h-12 w-auto hidden dark:block">
+                            class="h-12 w-auto hidden dark:block transition-opacity duration-300">
                     </a>
                 </div>
 
