@@ -237,15 +237,14 @@
             white-space: nowrap;
         }
 
-        .split-container .split-panel:hover .split-title {
-            transform: translate(0, 0) rotate(0deg) !important;
-            position: relative !important;
-            top: auto !important;
-            left: auto !important;
-            margin-bottom: 1.5rem !important;
-            font-size: 3.5rem !important;
-            width: 100% !important;
-            opacity: 1 !important;
+        .split-panel:hover .split-title {
+            transform: rotate(0deg);
+            position: relative;
+            top: auto;
+            left: auto;
+            margin-bottom: 1.5rem;
+            font-size: 3.5rem;
+            width: 100%;
         }
 
         .split-desc,
@@ -677,31 +676,6 @@
             } else {
                 nav.classList.remove('scrolled');
             }
-        });
-
-        // Hero Split Panels JS Fallback for Titles
-        document.querySelectorAll('.split-panel').forEach(panel => {
-            const title = panel.querySelector('.split-title');
-            if (!title) return;
-
-            panel.addEventListener('mouseenter', () => {
-                title.style.transform = 'translate(0, 0) rotate(0deg)';
-                title.style.position = 'relative';
-                title.style.top = 'auto';
-                title.style.left = 'auto';
-                title.style.fontSize = '3.5rem';
-                title.style.marginBottom = '1.5rem';
-                title.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-            });
-
-            panel.addEventListener('mouseleave', () => {
-                title.style.transform = '';
-                title.style.position = '';
-                title.style.top = '';
-                title.style.left = '';
-                title.style.fontSize = '';
-                title.style.marginBottom = '';
-            });
         });
 
     </script>
