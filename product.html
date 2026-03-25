@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl" class="dark" style="scroll-behavior: smooth;">
 
 <head>
@@ -97,7 +97,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-24">
                 <!-- Left: Navigation Links -->
-                <div class="hidden md:flex items-center space-x-6">
+                <div class="hidden md:flex items-center space-x-6 relative z-10">
                     <a href="index.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
                         główna</a>
@@ -114,7 +114,7 @@
                         </a>
                         <div class="dropdown-menu">
                             <div class="py-1 max-h-80 overflow-y-auto">
-                                <a href="shop.html"
+                                <a href="shop.html" onclick="/* removed scrollToProducts */"
                                     class="block px-4 py-2 text-sm font-semibold text-biotune-red dark:text-biotune-red hover:bg-gray-100 dark:hover:bg-black/20 border-b border-gray-200 dark:border-white/10">Wszystkie</a>
                                 <a href="product.html?id=retatrutide"
                                     class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Retatrutide</a>
@@ -142,15 +142,15 @@
                                     class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Semax</a>
                                 <a href="product.html?id=selank"
                                     class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Selank</a>
-                                <a href="product.html?id=bac-water"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">BAC
-                                    Water</a>
                             </div>
                         </div>
                     </div>
+
+
                     <a href="about.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O
                         Nas</a>
+
                     <a href="#contact"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                 </div>
@@ -168,7 +168,7 @@
                 </div>
 
                 <!-- Right: Icons -->
-                <div class="flex items-center gap-4 ml-auto">
+                <div class="flex items-center gap-4 ml-auto relative z-10">
                     <div class="relative group hidden md:block">
                         <input type="text" placeholder="Szukaj..."
                             class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
@@ -361,7 +361,7 @@
 
                         <a href="shop.html"
                             class="block text-center py-3 text-gray-600 dark:text-gray-400 hover:text-biotune-red transition-colors">
-                            â† Powrót do sklepu
+                            ←  Powrót do sklepu
                         </a>
                     </div>
                 </div>
