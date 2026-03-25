@@ -78,10 +78,7 @@ function renderGrid(filterText = '') {
                     </button>
                 </div>
             </div>
->
->
-        </div >
-            `;
+</div>`;
     }).join('');
 
     // Animate cards in
