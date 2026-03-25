@@ -460,6 +460,7 @@
 
     <section class="h-screen w-full relative flex flex-col items-center justify-center bg-transparent">
         <canvas id="particle-canvas"></canvas>
+        <div class="glow"></div>
         
         <div class="content-404 relative z-10 text-center px-4 flex flex-col items-center">
             <h1 class="text-[8rem] md:text-[15rem] font-black text-biotune-red leading-none tracking-tighter drop-shadow-[0_0_25px_rgba(255,0,0,0.7)]" style="font-family: monospace;">
@@ -516,6 +517,17 @@
             left: 0;
             width: 100%;
             height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glow {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(ellipse, rgba(255, 0, 0, 0.1) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
