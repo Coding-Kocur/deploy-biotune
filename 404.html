@@ -120,6 +120,37 @@
         .cursor-blink {
             animation: blink 1s step-start infinite;
         }
+
+        /* Zetta-Joule sweep-fill button animation */
+        .zetta-sweep {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1.5px solid #ff0000;
+            background: transparent !important;
+            color: #ff0000;
+            transition: color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .zetta-sweep::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ff0000;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+        }
+        .zetta-sweep:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .zetta-sweep:hover {
+            color: white !important;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -438,9 +469,9 @@
                 Not Found
             </h2>
             <p class="text-gray-400 max-w-md mx-auto mb-10 text-lg">
-                Podana sekwencja nie istnieje. Szukany zasób wyparował ze środowiska badawczego.
+                Podana sekwencja nie istnieje.
             </p>
-            <a href="index.html" class="inline-block bg-biotune-red/10 text-biotune-red border border-biotune-red hover:bg-biotune-red hover:text-white px-8 py-3 font-bold uppercase tracking-widest rounded transition-all duration-300 backdrop-blur-sm">
+            <a href="index.html" class="zetta-sweep inline-block px-8 py-3 font-bold uppercase tracking-widest rounded transition-all duration-300 backdrop-blur-sm">
                 Powrót do bazy
             </a>
         </div>
