@@ -160,6 +160,14 @@
         /* PNG Color-Safe Inversion: Inverts only the 'Tune' part to White */
         .logo-white-overlay {
             transition: opacity 0.4s ease;
+            background-color: white;
+            mask: url('./assets/biotune-logo-dark-mode.png') no-repeat center;
+            -webkit-mask: url('./assets/biotune-logo-dark-mode.png') no-repeat center;
+            mask-size: contain;
+            -webkit-mask-size: contain;
+            --logo-split-percent: 41%;
+            clip-path: inset(0 0 0 var(--logo-split-percent));
+            -webkit-clip-path: inset(0 0 0 var(--logo-split-percent));
         }
         .nav-inverted .logo-white-overlay {
             opacity: 1 !important;
@@ -400,8 +408,7 @@
                             class="h-60 w-auto logo-dynamic">
                         
                         <!-- Overlay for "Tune" part (White transition) -->
-                        <div class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none" 
-                             style="background-color: white; mask: url('./assets/biotune-logo-dark-mode.png') no-repeat center; -webkit-mask: url('./assets/biotune-logo-dark-mode.png') no-repeat center; mask-size: contain; -webkit-mask-size: contain; clip-path: inset(0 0 0 42%); -webkit-clip-path: inset(0 0 0 42%);">
+                        <div class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none">
                         </div>
                     </a>
                 </div>
