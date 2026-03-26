@@ -121,6 +121,41 @@
         .cursor-blink {
             animation: blink 1s step-start infinite;
         }
+
+        /* Primary sweep-fill button animation */
+        .sweep-hover-btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid #ff0000;
+            background: transparent !important;
+            color: #ff0000;
+            transition: color 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .sweep-hover-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ff0000;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: -1;
+        }
+        .sweep-hover-btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .sweep-hover-btn:hover {
+            color: white !important;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -445,8 +480,11 @@
                     <p class="split-desc text-gray-300 mb-6 max-w-sm mx-auto">Dostarczamy najwyższej jakości rozwiązania do
                         zaawansowanych badań. Naszą misją jest absolutna czystość i transparentność naukowa.</p>
                     <a href="about.html"
-                        class="split-btn inline-block bg-biotune-red text-white px-8 py-3 font-bold uppercase tracking-widest rounded hover:bg-red-600 transition-colors">
+                        class="split-btn sweep-hover-btn inline-block px-8 py-3 font-bold uppercase tracking-widest rounded group">
                         Poznaj nas
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -459,8 +497,11 @@
                     <p class="split-desc text-gray-300 mb-6 max-w-sm mx-auto">Najwyższej jakości zsyntetyzowane łańcuchy
                         aminokwasów dedykowane zaawansowanym badaniom in-vitro.</p>
                     <a href="shop.html"
-                        class="split-btn inline-block bg-biotune-red text-white px-8 py-3 font-bold uppercase tracking-widest rounded hover:bg-red-600 transition-colors">
+                        class="split-btn sweep-hover-btn inline-block px-8 py-3 font-bold uppercase tracking-widest rounded group">
                         Odkryj
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -473,8 +514,11 @@
                     <p class="split-desc text-gray-300 mb-6 max-w-sm mx-auto">Transparentność i pełna dokumentacja wyników testów
                         niezależnych laboratoriów. Certyfikaty HPLC dla każdej partii.</p>
                     <a href="shop.html"
-                        class="split-btn inline-block bg-biotune-red text-white px-8 py-3 font-bold uppercase tracking-widest rounded hover:bg-red-600 transition-colors">
+                        class="split-btn sweep-hover-btn inline-block px-8 py-3 font-bold uppercase tracking-widest rounded group">
                         Certyfikaty
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
                     </a>
                 </div>
             </div>
