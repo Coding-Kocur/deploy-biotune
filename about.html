@@ -93,6 +93,44 @@
         html {
             scroll-behavior: auto !important;
         }
+
+        /* Typewriter animation */
+        .typewriter-line {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            min-height: 1.75em;
+        }
+
+        .typewriter-text {
+            display: inline;
+            border-right: 2px solid transparent;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .typewriter-text.typing {
+            border-right-color: #ff0000;
+            animation: blink-caret 0.6s step-end infinite;
+        }
+
+        .typewriter-text.done {
+            border-right-color: transparent;
+        }
+
+        .typewriter-dot {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .typewriter-dot.visible {
+            opacity: 1;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-right-color: #ff0000; }
+            50% { border-right-color: transparent; }
+        }
     </style>
 </head>
 
@@ -322,7 +360,7 @@
             <section class="w-screen flex-shrink-0 flex flex-col lg:flex-row bg-transparent"
                 style="height:100vh; overflow:visible;">
                 <!-- Content LEFT -->
-                <div class="w-full lg:w-4/5 p-6 lg:p-10 flex flex-col justify-start pt-8">
+                <div class="w-full lg:w-4/5 p-6 lg:p-10 flex flex-col justify-center">
                     <h2 class="text-sm font-mono text-biotune-red mb-6 tracking-[0.2em] uppercase">Jakość i Kontrola
                     </h2>
                     <div class="hero-v3-anim mb-6">
@@ -349,18 +387,18 @@
                             strukturalnej (MS). Dzięki temu masz pewność, że pracujesz na materiale o najwyższym
                             standardzie.
                         </p>
-                        <ul class="space-y-4 mt-8">
-                            <li class="flex items-center gap-3">
-                                <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
-                                <span>Czystość >99% potwierdzona certyfikatem</span>
+                        <ul class="space-y-4 mt-8" id="typewriter-list">
+                            <li class="typewriter-line">
+                                <span class="w-2 h-2 bg-biotune-red rounded-full flex-shrink-0 typewriter-dot" data-tw-dot></span>
+                                <span class="typewriter-text" data-tw-text="Czystość >99% potwierdzona certyfikatem"></span>
                             </li>
-                            <li class="flex items-center gap-3">
-                                <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
-                                <span>Pełna identyfikowalność serii</span>
+                            <li class="typewriter-line">
+                                <span class="w-2 h-2 bg-biotune-red rounded-full flex-shrink-0 typewriter-dot" data-tw-dot></span>
+                                <span class="typewriter-text" data-tw-text="Pełna identyfikowalność serii"></span>
                             </li>
-                            <li class="flex items-center gap-3">
-                                <span class="w-2 h-2 bg-biotune-red rounded-full"></span>
-                                <span>Badania w niezależnych laboratoriach</span>
+                            <li class="typewriter-line">
+                                <span class="w-2 h-2 bg-biotune-red rounded-full flex-shrink-0 typewriter-dot" data-tw-dot></span>
+                                <span class="typewriter-text" data-tw-text="Badania w niezależnych laboratoriach"></span>
                             </li>
                         </ul>
                     </div>
@@ -863,6 +901,8 @@
                                         word.style.transform = 'translateY(0%)';
                                     }, idx * 150);
                                 });
+                                // Trigger typewriter cascade after the title words finish appearing
+                                setTimeout(() => startTypewriterCascade(), 600);
                             }
 
                             // Reset when going back to section 1
@@ -899,6 +939,44 @@
             }
 
             // Precyzja animation is handled via onUpdate in ScrollTrigger above
+
+            // ── Typewriter cascade ──
+            window.typewriterDone = false;
+
+            window.startTypewriterCascade = function () {
+                if (window.typewriterDone) return;
+                window.typewriterDone = true;
+
+                const lines = document.querySelectorAll('#typewriter-list .typewriter-text');
+                const dots = document.querySelectorAll('#typewriter-list .typewriter-dot');
+                if (!lines.length) return;
+
+                const speed = 35;          // ms per character
+                const cascadeDelay = 400;  // ms offset between lines starting
+
+                lines.forEach((span, i) => {
+                    const fullText = span.getAttribute('data-tw-text');
+                    const dot = dots[i];
+                    span.textContent = '';
+
+                    setTimeout(() => {
+                        // Show the dot
+                        if (dot) dot.classList.add('visible');
+                        span.classList.add('typing');
+
+                        let charIdx = 0;
+                        const interval = setInterval(() => {
+                            span.textContent += fullText[charIdx];
+                            charIdx++;
+                            if (charIdx >= fullText.length) {
+                                clearInterval(interval);
+                                span.classList.remove('typing');
+                                span.classList.add('done');
+                            }
+                        }, speed);
+                    }, i * cascadeDelay);
+                });
+            };
         });
     </script>
 
