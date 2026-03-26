@@ -52,9 +52,9 @@ function renderGrid(filterText = '') {
                     </div>
                 </div>
                 <div class="mb-3 flex-grow flex flex-col">
-                    <div class="flex justify-between items-start gap-4">
-                        <h3 class="text-lg font-bold text-white group-hover:text-biotune-red transition-colors leading-tight flex-1 uppercase tracking-tight">${product.name}</h3>
-                        <span class="font-mono text-biotune-red font-bold text-lg whitespace-nowrap">${product.price.toFixed(2)} zł</span>
+                    <div class="flex justify-between items-start gap-4 flex-wrap">
+                        <h3 class="text-lg font-bold text-white group-hover:text-biotune-red transition-colors leading-tight flex-1 uppercase tracking-tight min-w-[120px]">${product.name}</h3>
+                        <span class="font-mono text-biotune-red font-bold text-lg">${product.price.toFixed(2)} zł</span>
                     </div>
                     <p class="text-sm text-gray-400 mt-1">${product.dosage || ''}</p>
                 </div>
