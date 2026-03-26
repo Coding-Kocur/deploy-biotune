@@ -160,11 +160,7 @@
         /* PNG Color-Safe Inversion: Inverts only the 'Tune' part to White */
         .logo-white-overlay {
             transition: opacity 0.4s ease;
-            background-color: white;
-            mask: url('./assets/biotune-logo-dark-mode.png') no-repeat center;
-            -webkit-mask: url('./assets/biotune-logo-dark-mode.png') no-repeat center;
-            mask-size: contain;
-            -webkit-mask-size: contain;
+            filter: brightness(0) invert(1);
             --logo-split-percent: 41%;
             clip-path: inset(0 0 0 var(--logo-split-percent));
             -webkit-clip-path: inset(0 0 0 var(--logo-split-percent));
@@ -408,8 +404,8 @@
                             class="h-60 w-auto logo-dynamic">
                         
                         <!-- Overlay for "Tune" part (White transition) -->
-                        <div class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none">
-                        </div>
+                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
+                            class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none">
                     </a>
                 </div>
 
@@ -733,7 +729,7 @@
 
         // Navbar scroll effect
         const nav = document.querySelector('nav.glass');
-        const lightSections = document.querySelectorAll('.bg-white, .bg-gray-50, .bg-gray-100');
+        const sections = document.querySelectorAll('section, [class*="bg-"], .py-24');
 
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -743,21 +739,28 @@
             }
 
             // Dynamic Logo Color Inversion Logic
-            if(lightSections.length > 0) {
-                const navBottom = 96; // h-24 -> 96px
-                let isOverLight = false;
-                lightSections.forEach(sec => {
-                    const rect = sec.getBoundingClientRect();
-                    if (rect.top <= navBottom && rect.bottom >= 0) {
-                        isOverLight = true;
+            const navBottom = 96; // h-24 -> 96px
+            let isOverLight = false;
+
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                if (rect.top <= navBottom && rect.bottom >= 0) {
+                    const bgColor = window.getComputedStyle(sec).backgroundColor;
+                    // Detect light colors (rough approximation: sum of RGB > 450)
+                    const rgb = bgColor.match(/\d+/g);
+                    if (rgb && rgb.length >= 3) {
+                        const brightness = parseInt(rgb[0]) + parseInt(rgb[1]) + parseInt(rgb[2]);
+                        if (brightness < 450) {
+                            isOverDark = true;
+                        }
                     }
-                });
-                
-                if (isOverLight) {
-                    nav.classList.add('nav-inverted');
-                } else {
-                    nav.classList.remove('nav-inverted');
                 }
+            });
+            
+            if (isOverDark) {
+                nav.classList.add('nav-inverted');
+            } else {
+                nav.classList.remove('nav-inverted');
             }
         });
 

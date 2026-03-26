@@ -81,9 +81,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/custom.css">
-    <style>
         html {
             scroll-behavior: smooth !important;
+        }
+
+        /* PNG Color-Safe Inversion: Inverts only the 'Tune' part to White */
+        .logo-white-overlay {
+            transition: opacity 0.4s ease;
+            filter: brightness(0) invert(1);
+            --logo-split-percent: 41%;
+            clip-path: inset(0 0 0 var(--logo-split-percent));
+            -webkit-clip-path: inset(0 0 0 var(--logo-split-percent));
+        }
+
+        .nav-inverted .logo-white-overlay {
+            opacity: 1;
         }
     </style>
     <link rel='icon' type='image/png' href='./assets/favicon.png'>
@@ -155,15 +167,16 @@
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                 </div>
 
-                <!-- Center: Logo (Dual version for dark/light mode) -->
+                <!-- Center: Logo (Dynamic Inversion) -->
                 <div class="absolute left-1/2 transform -translate-x-1/2">
-                    <a href="index.html" class="flex items-center">
-                        <!-- Light mode logo -->
-                        <img src="./assets/biotune-logo-transparent.png" alt="BioTune"
-                            class="h-60 w-auto block dark:hidden">
-                        <!-- Dark mode logo -->
+                    <a href="index.html" class="flex items-center relative group">
+                        <!-- Base logo (Red/Black) -->
                         <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="h-60 w-auto hidden dark:block">
+                            class="h-60 w-auto logo-dynamic">
+                        
+                        <!-- Overlay for "Tune" part (White transition) -->
+                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
+                            class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none">
                     </a>
                 </div>
 
@@ -567,6 +580,8 @@
         // Navbar scroll effect
         const nav = document.querySelector('nav.glass');
         const contentBlur = document.getElementById('content-blur');
+        const sections = document.querySelectorAll('section, [class*="bg-"], .py-24, .py-12');
+
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
@@ -574,6 +589,30 @@
             } else {
                 nav.classList.remove('scrolled');
                 if (contentBlur) contentBlur.classList.remove('active');
+            }
+
+            // Dynamic Logo Color Inversion Logic
+            const navBottom = 96;
+            let isOverDark = false;
+
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                if (rect.top <= navBottom && rect.bottom >= 0) {
+                    const bgColor = window.getComputedStyle(sec).backgroundColor;
+                    const rgb = bgColor.match(/\d+/g);
+                    if (rgb && rgb.length >= 3) {
+                        const brightness = parseInt(rgb[0]) + parseInt(rgb[1]) + parseInt(rgb[2]);
+                        if (brightness < 450) {
+                            isOverDark = true;
+                        }
+                    }
+                }
+            });
+            
+            if (isOverDark) {
+                nav.classList.add('nav-inverted');
+            } else {
+                nav.classList.remove('nav-inverted');
             }
         });
     </script>
