@@ -156,6 +156,16 @@
         .sweep-hover-btn:hover {
             color: white !important;
         }
+
+        /* Smart Invert Animation: Inverts Black to White but preserves Red */
+        .logo-dynamic {
+            transition: filter 0.4s ease;
+        }
+        .nav-inverted .logo-dynamic {
+            /* If original is white text + red accent, invert(1) makes it black + cyan,
+               hue-rotate(180deg) restores the red accent perfectly! */
+            filter: invert(1) hue-rotate(180deg) brightness(1.2);
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -384,15 +394,11 @@
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                 </div>
 
-                <!-- Center: Logo (Dual version for dark/light mode) -->
+                <!-- Center: Logo -->
                 <div class="absolute left-1/2 transform -translate-x-1/2">
                     <a href="index.html" class="flex items-center">
-                        <!-- Light mode logo -->
-                        <img src="./assets/biotune-logo-transparent.png" alt="BioTune"
-                            class="h-60 w-auto block dark:hidden">
-                        <!-- Dark mode logo -->
-                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="h-60 w-auto hidden dark:block">
+                        <img id="nav-logo-anim" src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
+                            class="h-60 w-auto logo-dynamic">
                     </a>
                 </div>
 
@@ -716,11 +722,31 @@
 
         // Navbar scroll effect
         const nav = document.querySelector('nav.glass');
+        const lightSections = document.querySelectorAll('.bg-white, .bg-gray-50, .bg-gray-100');
+
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
+            }
+
+            // Dynamic Logo Color Inversion Logic
+            if(lightSections.length > 0) {
+                const navBottom = 96; // h-24 -> 96px
+                let isOverLight = false;
+                lightSections.forEach(sec => {
+                    const rect = sec.getBoundingClientRect();
+                    if (rect.top <= navBottom && rect.bottom >= 0) {
+                        isOverLight = true;
+                    }
+                });
+                
+                if (isOverLight) {
+                    nav.classList.add('nav-inverted');
+                } else {
+                    nav.classList.remove('nav-inverted');
+                }
             }
         });
 

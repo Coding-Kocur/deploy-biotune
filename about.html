@@ -166,6 +166,41 @@
         .sweep-hover-btn:hover {
             color: white !important;
         }
+
+        /* Smart Invert Animation: Inverts Black to White but preserves Red (Hue 0 -> 180 -> 360) */
+        .logo-dynamic {
+            transition: filter 0.4s ease;
+        }
+        .nav-inverted .logo-dynamic {
+            filter: invert(1) hue-rotate(180deg) brightness(1.2);
+        }
+
+        /* Horizontal Scroll Progress Bar */
+        #scroll-progress-container {
+            position: fixed;
+            top: 96px; /* Below the 24px (6rem) navbar */
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 40;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+        #scroll-progress-container.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #scroll-progress-bar {
+            height: 100%;
+            width: 100%;
+            background: #ffffff;
+            transform-origin: left;
+            transform: scaleX(0);
+            will-change: transform;
+        }
     </style>
 </head>
 
@@ -238,15 +273,11 @@
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                 </div>
 
-                <!-- Center: Logo (Dual version for dark/light mode) -->
+                <!-- Center: Logo -->
                 <div class="absolute left-1/2 transform -translate-x-1/2">
                     <a href="index.html" class="flex items-center">
-                        <!-- Light mode logo -->
-                        <img src="./assets/biotune-logo-transparent.png" alt="BioTune"
-                            class="h-60 w-auto block dark:hidden">
-                        <!-- Dark mode logo -->
-                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="h-60 w-auto hidden dark:block">
+                        <img id="nav-logo-anim" src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
+                            class="h-60 w-auto logo-dynamic">
                     </a>
                 </div>
 
@@ -322,6 +353,10 @@
     <!-- Content Blur Overlay for scroll effect -->
     <div class="content-blur-overlay" id="content-blur"></div>
 
+    <!-- Scroll Progress line -->
+    <div id="scroll-progress-container">
+        <div id="scroll-progress-bar"></div>
+    </div>
 
     <!-- Horizontal Scroll Section -->
     <div id="horizontal-scroll-wrapper" class="w-full overflow-hidden bg-transparent" style="height:100vh;">
@@ -899,6 +934,32 @@
                 if (contentBlur) contentBlur.classList.remove('active');
             }
         });
+
+        // Dynamic Logo Color Inversion Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.querySelector('nav');
+            // Assuming sections with white backgrounds have the bg-white class
+            const lightSections = document.querySelectorAll('.bg-white, .bg-gray-50, .bg-gray-100');
+            
+            if(lightSections.length > 0) {
+                window.addEventListener('scroll', () => {
+                    const navBottom = 96; // 6rem or h-24
+                    let isOverLight = false;
+                    lightSections.forEach(sec => {
+                        const rect = sec.getBoundingClientRect();
+                        if (rect.top <= navBottom && rect.bottom >= 0) {
+                            isOverLight = true;
+                        }
+                    });
+                    
+                    if (isOverLight) {
+                        nav.classList.add('nav-inverted');
+                    } else {
+                        nav.classList.remove('nav-inverted');
+                    }
+                }, { passive: true });
+            }
+        });
     </script>
 
     <script>
@@ -908,6 +969,8 @@
 
             const sections = gsap.utils.toArray("#horizontal-scroll-content > section");
             const content = document.getElementById('horizontal-scroll-content');
+            const progressBar = document.getElementById('scroll-progress-bar');
+            const progressContainer = document.getElementById('scroll-progress-container');
 
             if (sections.length > 0 && content) {
                 let tween = gsap.to(sections, {
@@ -926,7 +989,15 @@
                         },
                         end: () => "+=" + (window.innerHeight * sections.length),
                         invalidateOnRefresh: true,
+                        onEnter: () => progressContainer.classList.add('active'),
+                        onLeave: () => progressContainer.classList.remove('active'),
+                        onEnterBack: () => progressContainer.classList.add('active'),
+                        onLeaveBack: () => progressContainer.classList.remove('active'),
                         onUpdate: (self) => {
+                            // Update progress bar
+                            if (progressBar) {
+                                progressBar.style.transform = `scaleX(${self.progress})`;
+                            }
                             // Trigger Precyzja animation early — as soon as section 2 starts to appear
                             if (self.progress > 0.15 && !window.precyzjaAnimated) {
                                 window.precyzjaAnimated = true;
