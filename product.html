@@ -89,7 +89,7 @@
         .logo-white-overlay {
             transition: opacity 0.4s ease;
             filter: brightness(0) invert(1);
-            --logo-split-percent: 41%;
+            --logo-split-percent: 39%;
             clip-path: inset(0 0 0 var(--logo-split-percent));
             -webkit-clip-path: inset(0 0 0 var(--logo-split-percent));
         }
@@ -602,14 +602,14 @@
                     const rgb = bgColor.match(/\d+/g);
                     if (rgb && rgb.length >= 3) {
                         const brightness = parseInt(rgb[0]) + parseInt(rgb[1]) + parseInt(rgb[2]);
-                        if (brightness < 450) {
-                            isOverDark = true;
+                        if (brightness > 400) {
+                            isOverLight = true;
                         }
                     }
                 }
             });
             
-            if (isOverDark) {
+            if (isOverLight) {
                 nav.classList.add('nav-inverted');
             } else {
                 nav.classList.remove('nav-inverted');
