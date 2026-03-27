@@ -530,6 +530,12 @@ nav.hero-glass.scrolled {
     }
 }
 
+/* Navbar Zoom Resistance */
+.nav-auto-scale {
+    transform-origin: top center;
+    transition: transform 0.1s ease-out;
+}
+
 /* User Info Display */
 .user-info {
     display: flex;

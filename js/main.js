@@ -288,3 +288,32 @@ class WishlistManager {
 }
 
 window.wishlistManager = new WishlistManager();
+
+// Navbar Zoom Resistance Scaling Logic
+function adjustNavScale() {
+    const row = document.getElementById('navbar-main-row');
+    if (!row) return;
+
+    const viewportWidth = window.innerWidth;
+    const targetWidth = 1200; // Optimal width for the 3-column layout
+
+    if (viewportWidth < targetWidth) {
+        const scale = viewportWidth / targetWidth;
+        row.style.width = targetWidth + 'px';
+        row.style.transform = `scale(${scale})`;
+        row.style.position = 'absolute';
+        row.style.left = '50%';
+        row.style.marginLeft = `-${targetWidth / 2}px`;
+    } else {
+        row.style.width = '';
+        row.style.transform = '';
+        row.style.position = '';
+        row.style.left = '';
+        row.style.marginLeft = '';
+    }
+}
+
+window.addEventListener('resize', adjustNavScale);
+window.addEventListener('load', () => {
+    setTimeout(adjustNavScale, 100);
+});
