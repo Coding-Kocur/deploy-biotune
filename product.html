@@ -593,8 +593,8 @@
 
             // Dynamic Logo Color Inversion Logic
             const navBottom = 96;
-            let isOverDark = false;
-
+            let isOverCamouflageColor = false;
+            
             sections.forEach(sec => {
                 const rect = sec.getBoundingClientRect();
                 if (rect.top <= navBottom && rect.bottom >= 0) {
