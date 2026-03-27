@@ -107,9 +107,9 @@
     <nav
         class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-24">
+            <div class="flex items-center justify-between h-24 min-w-[1100px] gap-8">
                 <!-- Left: Navigation Links -->
-                <div class="hidden md:flex items-center space-x-6 relative z-10">
+                <div class="hidden md:flex items-center space-x-6 relative z-10 flex-1 justify-start">
                     <a href="index.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
                         główna</a>
@@ -167,11 +167,11 @@
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                 </div>
 
-                <!-- Center: Logo (Dynamic Inversion) -->
-                <div class="absolute left-1/2 transform -translate-x-1/2">
+                <!-- Center: Logo (Refactored to flex for zoom stability) -->
+                <div class="relative z-10 flex-shrink-0">
                     <a href="index.html" class="flex items-center relative group">
                         <!-- Base logo (Red/Black) -->
-                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
+                        <img id="nav-logo-anim" src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
                             class="h-60 w-auto logo-dynamic">
                         
                         <!-- Overlay for "Tune" part (White transition) -->
@@ -181,7 +181,7 @@
                 </div>
 
                 <!-- Right: Icons -->
-                <div class="flex items-center gap-4 ml-auto relative z-10">
+                <div class="flex items-center gap-4 relative z-10 flex-1 justify-end">
                     <div class="relative group hidden md:block">
                         <input type="text" placeholder="Szukaj..."
                             class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
@@ -602,14 +602,15 @@
                     const rgb = bgColor.match(/\d+/g);
                     if (rgb && rgb.length >= 3) {
                         const brightness = parseInt(rgb[0]) + parseInt(rgb[1]) + parseInt(rgb[2]);
-                        if (brightness > 400) {
-                            isOverLight = true;
+                        // Mid-Grey Proximity Logic: Invert to white ONLY when background would camouflage the logo
+                        if (brightness > 300 && brightness < 600) {
+                            isOverCamouflageColor = true;
                         }
                     }
                 }
             });
             
-            if (isOverLight) {
+            if (isOverCamouflageColor) {
                 nav.classList.add('nav-inverted');
             } else {
                 nav.classList.remove('nav-inverted');
