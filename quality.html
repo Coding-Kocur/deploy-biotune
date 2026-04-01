@@ -37,229 +37,458 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* ZettaJoule Section Styles */
-        .zetta-container {
-            height: 250vh; /* Scroll duration */
+        .glass-hover:hover {
+            border-color: #ff0000;
+            transform: translateY(-4px);
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .logo-img {
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.3));
+        }
+
+        .dark .logo-img {
+            filter: brightness(1.15) contrast(0.9);
+        }
+
+        .dark .logo-img:hover {
+            filter: brightness(1.15) contrast(0.9) drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+        }
+
+        /* PNG Color-Safe Inversion: Inverts only the 'Tune' part to White */
+        .logo-white-overlay {
+            transition: opacity 0.4s ease;
+            filter: brightness(0) invert(1);
+            --logo-split-percent: 39%;
+            clip-path: inset(0 0 0 var(--logo-split-percent));
+            -webkit-clip-path: inset(0 0 0 var(--logo-split-percent));
+        }
+        .nav-inverted .logo-white-overlay {
+            opacity: 1 !important;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel='icon' type='image/png' href='./assets/favicon.png'>
+
+    <style>
+        /* ==========================================
+           ZETTAJOULE-STYLE SCROLL SECTION
+           ========================================== */
+
+        /* Scroll container - tall to give scroll room */
+        .zj-scroll-container {
+            height: 300vh;
             position: relative;
-            background-color: #ffffff;
         }
 
-        .dark .zetta-container {
-            background-color: #0a0a0a;
-        }
-
-        .zetta-sticky {
+        /* Sticky wrapper - pins to viewport during scroll */
+        .zj-sticky {
             position: sticky;
             top: 0;
             height: 100vh;
-            overflow: hidden;
             display: flex;
             align-items: center;
-        }
-
-        .zetta-text-left {
-            width: 35%;
-            padding: 2rem 4rem;
-            font-size: 2rem;
-            line-height: 1.4;
-            color: #1a1a1a;
-            position: relative;
-            z-index: 10;
-        }
-
-        .dark .zetta-text-left {
-            color: #ffffff;
-        }
-
-        .zetta-image-wrapper {
-            position: absolute;
-            right: 0;
-            top: 6rem; /* below navbar */
-            width: 65%;
-            height: calc(100vh - 6rem);
             overflow: hidden;
-            will-change: width, height, top;
+            background: #0a0a0a;
         }
 
-        /* The actual image */
-        .zetta-image {
+        /* Left text block */
+        .zj-text {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 4%;
+            z-index: 5;
+        }
+
+        .zj-text p {
+            font-size: 1.6rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: #ffffff;
+            letter-spacing: 0.01em;
+        }
+
+        /* Image wrapper - starts on right, expands to full */
+        .zj-media-wrapper {
+            position: absolute;
+            right: 3%;
+            top: 6rem; /* below navbar */
+            width: 62%;
+            height: calc(100vh - 6rem - 3%);
+            border-radius: 12px;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        /* The image itself */
+        .zj-media-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: top center;
         }
 
-        /* Gradient overlay to make text readable */
-        .zetta-gradient {
+        /* Dark overlay that fades in when fullscreen */
+        .zj-dark-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 40%);
+            background: rgba(0, 0, 0, 0);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Centered overlay content (line + text) */
+        .zj-overlay-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 1100px;
+            z-index: 10;
             opacity: 0;
             pointer-events: none;
         }
 
-        .zetta-overlay-text {
-            position: absolute;
-            bottom: 5%;
-            left: 0;
+        .zj-divider-line {
             width: 100%;
-            padding: 0 4rem;
-            color: white;
-            opacity: 0;
-            z-index: 20;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.5);
+            margin-bottom: 2rem;
         }
-        
-        .zetta-overlay-text hr {
-            border-color: rgba(255, 255, 255, 0.5);
+
+        .zj-overlay-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 4rem;
         }
-        
-        @media (max-width: 768px) {
-            .zetta-text-left {
+
+        .zj-overlay-left h2 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.02em;
+        }
+
+        .zj-overlay-left p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .zj-overlay-right {
+            text-align: right;
+            max-width: 550px;
+        }
+
+        .zj-overlay-right p {
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .zj-text {
                 width: 100%;
-                font-size: 1.5rem;
-                padding: 1.5rem;
-                padding-top: 8rem;
-                align-self: flex-start;
+                padding: 7rem 2rem 2rem;
+                align-items: flex-start;
             }
-            .zetta-image-wrapper {
+            .zj-text p {
+                font-size: 1.2rem;
+            }
+            .zj-media-wrapper {
                 width: 100%;
-                top: 50%;
-                height: 50vh;
+                right: 0;
+                top: 55%;
+                height: 45vh;
+                border-radius: 0;
             }
-            .zetta-overlay-text {
-                padding: 0 1.5rem;
+            .zj-overlay-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .zj-overlay-right {
+                text-align: left;
+            }
+            .zj-overlay-left h2 {
+                font-size: 1.8rem;
+            }
+            .zj-overlay-right p {
+                font-size: 1.2rem;
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 
-<body class="bg-white text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased">
-    <!-- BioTune Navbar -->
-    <nav class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
+<body
+    class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased selection:bg-biotune-red selection:text-white transition-colors duration-300 overflow-x-hidden">
+
+    <!-- ============ EXACT BIOTUNE NAVBAR FROM INDEX.HTML ============ -->
+    <nav
+        class="fixed top-0 w-full z-50 glass hero-glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-24 gap-8">
-                <!-- Left Links -->
+            <div id="navbar-main-row" class="flex items-center justify-between h-24 min-w-[1100px] gap-8 nav-auto-scale">
+                <!-- Left: Navigation Links -->
                 <div class="hidden md:flex items-center space-x-6 relative z-10 flex-1 justify-start">
-                    <a href="index.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona główna</a>
-                    <a href="shop.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Sklep</a>
-                    <a href="about.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O Nas</a>
-                </div>
-
-                <!-- Center Logo -->
-                <div class="relative z-10 flex-shrink-0">
-                    <a href="index.html" class="block">
-                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="h-16 w-auto object-contain dark:block hidden">
-                        <img src="./assets/biotune-logo.png" alt="BioTune" class="h-16 w-auto object-contain block dark:hidden">
-                    </a>
-                </div>
-
-                <!-- Right Icons -->
-                <div class="flex items-center gap-4 relative z-10 flex-1 justify-end">
-                    <a href="login.html" class="hover:text-biotune-red transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                        </svg>
-                    </a>
-                    <button class="hover:text-biotune-red transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- ZettaJoule Scrolling Section -->
-    <div class="zetta-container">
-        <div class="zetta-sticky">
-            <!-- Left Text Content -->
-            <div class="zetta-text-left font-light tracking-wide">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-            </div>
-            
-            <!-- Right Image Wrapper (Expands on Scroll) -->
-            <div class="zetta-image-wrapper bg-white shadow-2xl">
-                <!-- Replace src with your test report image path -->
-                <img src="./assets/test-report-placeholder.jpg" alt="Test Report" class="zetta-image" onerror="this.src='https://placehold.co/1200x800/eeeeee/333333?text=Test+Report'">
-                
-                <!-- Black gradient to ensure white text visibility -->
-                <div class="zetta-gradient"></div>
-
-                <!-- Fullscreen Overlay Text -->
-                <div class="zetta-overlay-text text-black dark:text-white drop-shadow-md">
-                    <hr class="border-t border-black/20 dark:border-white/30 mb-8 border-2">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                        <div>
-                            <h2 class="text-3xl md:text-5xl font-medium tracking-wide mb-2 text-black dark:text-white">Lorem Ipsum</h2>
-                            <p class="text-xl md:text-2xl font-light text-gray-800 dark:text-gray-300">\ lô-rəm-ip-səm \</p>
+                    <a href="index.html"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
+                        główna</a>
+                    <div class="dropdown-trigger">
+                        <a href="shop.html"
+                            class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
+                            Sklep
+                            <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="py-1 max-h-80 overflow-y-auto">
+                                <a href="shop.html"
+                                    class="block px-4 py-2 text-sm font-semibold text-biotune-red dark:text-biotune-red hover:bg-gray-100 dark:hover:bg-black/20 border-b border-gray-200 dark:border-white/10">Wszystkie</a>
+                                <a href="product.html?id=retatrutide"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Retatrutide</a>
+                                <a href="product.html?id=bpc-157-tb-500"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">BPC-157
+                                    + TB-500</a>
+                                <a href="product.html?id=cjc-1295-ipamorelin"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">CJC-1295
+                                    + Ipamorelin</a>
+                                <a href="product.html?id=hgh-fragment-176-191"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">HGH
+                                    Fragment 176-191</a>
+                                <a href="product.html?id=ghk-cu"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">GHK-Cu</a>
+                                <a href="product.html?id=melanotan-2"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Melanotan
+                                    2</a>
+                                <a href="product.html?id=pt-141"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">PT-141</a>
+                                <a href="product.html?id=epithalon"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Epithalon</a>
+                                <a href="product.html?id=mots-c"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">MOTS-c</a>
+                                <a href="product.html?id=semax"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Semax</a>
+                                <a href="product.html?id=selank"
+                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Selank</a>
+                            </div>
                         </div>
-                        <div class="text-xl md:text-3xl font-light md:text-right max-w-2xl leading-relaxed text-black dark:text-gray-100">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br>sed do eiusmod tempor incididunt ut labore.
+                    </div>
+
+
+                    <a href="about.html"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O
+                        Nas</a>
+
+                    <a href="#contact"
+                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
+                </div>
+
+                <!-- Center: Logo -->
+                <div class="relative z-10 flex-shrink-0">
+                    <a href="index.html" class="relative block">
+                        <!-- Original Logo -->
+                        <img id="nav-logo-anim" src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
+                            class="h-60 w-auto logo-dynamic">
+                        
+                        <!-- Overlay for "Tune" part (White transition) -->
+                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
+                            class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none">
+                    </a>
+                </div>
+
+                <!-- Right: Icons -->
+                <div class="flex items-center gap-4 relative z-10 flex-1 justify-end">
+                    <div class="relative group hidden md:block">
+                        <input type="text" placeholder="Szukaj..."
+                            class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
+                    </div>
+                    <div class="account-dropdown">
+                        <a href="login.html" id="account-link" class="hover:text-biotune-red transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            </svg>
+                        </a>
+                        <div id="account-menu" class="account-menu">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Zaloguj się, aby kontynuować</p>
+                            <div class="space-y-2">
+                                <a href="login.html"
+                                    class="block w-full text-center bg-biotune-red text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">
+                                    Zaloguj się
+                                </a>
+                                <a href="register.html"
+                                    class="block w-full text-center border border-gray-300 dark:border-white/20 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors font-medium">
+                                    Zarejestruj się
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group flex items-center">
+                        <button id="wishlist-trigger" class="relative hover:text-biotune-red transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                            <span id="wishlist-count"
+                                class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                        </button>
+                        <div id="wishlist-dropdown"
+                            class="absolute right-0 top-full mt-4 w-80 glass rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-black/10 dark:border-white/10 z-50">
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg mb-3 text-black dark:text-white">Lista życzeń</h3>
+                                <div class="wishlist-items max-h-96 overflow-y-auto space-y-2">
+                                    <p class="text-center text-gray-500 py-4 text-sm">Twoja lista życzeń jest pusta.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cart with tooltip -->
+                    <div class="relative group">
+                        <button id="cart-trigger" class="relative hover:text-biotune-red transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+                            <span id="cart-count"
+                                class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden shadow-[0_0_8px_rgba(255,0,0,0.6)]">0</span>
+                        </button>
+                        <div
+                            class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-biotune-red text-white text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">
+                            Koszyk
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </nav>
+    <!-- ============ END BIOTUNE NAVBAR ============ -->
 
-    <!-- Scripts for animation -->
+    <!-- Content Blur Overlay for scroll effect -->
+    <div class="content-blur-overlay" id="content-blur"></div>
+
+    <!-- ============ ZETTAJOULE-STYLE SCROLL SECTION ============ -->
+    <div class="zj-scroll-container">
+        <div class="zj-sticky">
+
+            <!-- Left-side text (fades out as image expands) -->
+            <div class="zj-text">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+            </div>
+
+            <!-- Image wrapper (expands from right-side box → fullscreen) -->
+            <div class="zj-media-wrapper">
+                <img src="./assets/test-report.png" alt="Test Report" class="zj-media-img">
+                
+                <!-- Dark overlay - fades in when image goes fullscreen -->
+                <div class="zj-dark-overlay"></div>
+            </div>
+
+            <!-- Centered overlay content (appears when image is fullscreen) -->
+            <div class="zj-overlay-content">
+                <div class="zj-divider-line"></div>
+                <div class="zj-overlay-row">
+                    <div class="zj-overlay-left">
+                        <h2>Lorem Ipsum</h2>
+                        <p>\ lô-rəm-ˈip-səm \</p>
+                    </div>
+                    <div class="zj-overlay-right">
+                        <p>Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- ============ END ZETTAJOULE SECTION ============ -->
+
+
+    <!-- GSAP Scroll Animation -->
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Responsive values
-        const isMobile = window.innerWidth <= 768;
-
-        let tl = gsap.timeline({
+        const tl = gsap.timeline({
             scrollTrigger: {
-                trigger: ".zetta-container",
+                trigger: ".zj-scroll-container",
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 1, // Smooth scrubbing
+                scrub: 1.2,
+                pin: false, // we use CSS sticky instead
             }
         });
 
-        // 1. Expand the image wrapper to full screen
-        tl.to(".zetta-image-wrapper", {
+        // Phase 1 (0 → 0.5): Image expands to fullscreen + text fades out
+        // Expand image wrapper to fill the entire viewport
+        tl.to(".zj-media-wrapper", {
+            right: "0%",
+            top: 0,
             width: "100%",
             height: "100vh",
-            top: 0,
+            borderRadius: "0px",
             duration: 1,
             ease: "power2.inOut"
         }, 0);
 
-        // 2. Adjust image fitting if needed (e.g. from cover to contain slightly if requested, but cover is usually better)
-        tl.to(".zetta-image", {
-            objectPosition: "50% 50%",
-            duration: 1,
-            ease: "power2.inOut"
-        }, 0);
-
-        // 3. Fade out the left side text while scrolling
-        tl.to(".zetta-text-left", {
+        // Fade out and slide the left-side text
+        tl.to(".zj-text", {
             opacity: 0,
-            x: -50,
-            duration: 0.5,
+            x: -80,
+            duration: 0.6,
             ease: "power1.in"
         }, 0);
 
-        // 4. Fade in gradient (if needed for readability)
-        // Adjust opacity based on whether the image is meant to be bright
-        tl.to(".zetta-gradient", {
-            opacity: 0.1, // Slight darkening at bottom
-            duration: 0.5
-        }, 0.5);
+        // Phase 2 (0.5 → 1): Darken image + show overlay text centered
+        // Darken the image with overlay
+        tl.to(".zj-dark-overlay", {
+            background: "rgba(0, 0, 0, 0.55)",
+            duration: 0.5,
+            ease: "power1.inOut"
+        }, 0.6);
 
-        // 5. Fade in the fullscreen overlay text
-        tl.to(".zetta-overlay-text", {
+        // Fade in the centered text + line
+        tl.to(".zj-overlay-content", {
             opacity: 1,
-            y: -20, // Slide up slightly
             duration: 0.5,
             ease: "power2.out"
-        }, 0.5);
+        }, 0.7);
+
+
+        // Navbar scroll effect
+        const nav = document.querySelector('nav.glass');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
     </script>
 </body>
 
