@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" class="dark" style="scroll-behavior: smooth;">
+<html lang="pl" class="dark" style="scroll-behavior: auto;">
 
 <head>
     <meta charset="UTF-8">
@@ -62,7 +62,7 @@
             filter: brightness(1.15) contrast(0.9) drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
         }
 
-        /* PNG Color-Safe Inversion: Inverts only the 'Tune' part to White */
+        /* PNG Color-Safe Inversion */
         .logo-white-overlay {
             transition: opacity 0.4s ease;
             filter: brightness(0) invert(1);
@@ -84,16 +84,13 @@
 
     <style>
         /* ==========================================
-           ZETTAJOULE-STYLE SCROLL SECTION
+           PHASE 1: ZETTAJOULE EXPAND
            ========================================== */
-
-        /* Scroll container - tall to give scroll room */
         .zj-scroll-container {
             height: 300vh;
             position: relative;
         }
 
-        /* Sticky wrapper - pins to viewport during scroll */
         .zj-sticky {
             position: sticky;
             top: 0;
@@ -104,7 +101,6 @@
             background: #0a0a0a;
         }
 
-        /* Left text block */
         .zj-text {
             position: absolute;
             left: 0;
@@ -125,11 +121,10 @@
             letter-spacing: 0.01em;
         }
 
-        /* Image wrapper - starts on right, expands to full */
         .zj-media-wrapper {
             position: absolute;
             right: 8%;
-            top: 6rem; /* below navbar */
+            top: 6rem;
             width: 38%;
             height: calc(100vh - 6rem - 6%);
             border-radius: 12px;
@@ -137,16 +132,15 @@
             z-index: 2;
         }
 
-        /* The image itself */
         .zj-media-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             object-position: top center;
             will-change: transform;
+            background: #0a0a0a;
         }
 
-        /* Dark overlay that fades in when fullscreen */
         .zj-dark-overlay {
             position: absolute;
             inset: 0;
@@ -155,7 +149,6 @@
             pointer-events: none;
         }
 
-        /* Centered overlay content (line + text) */
         .zj-overlay-content {
             position: absolute;
             top: 50%;
@@ -208,16 +201,145 @@
             line-height: 1.5;
         }
 
-        /* Responsive */
+
+        /* ==========================================
+           PHASE 2: DUAL-LAYER PARALLAX
+           ========================================== */
+
+        /*  The master container is very tall to give scroll room.
+            Inside, a sticky fullscreen viewport holds:
+              - The background image (pans slowly via GSAP)
+              - The description layer (scrolls out fast)
+              - The bottom content (slides up fast)                */
+
+        .parallax-master {
+            position: relative;
+            height: 500vh;             /* lots of scroll runway */
+            background: #0a0a0a;
+        }
+
+        /* Sticky viewport that stays fixed while we scroll through parallax-master */
+        .parallax-viewport {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Background image - positioned inside the viewport, translated by GSAP */
+        .px-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 250%;          /* much taller than viewport */
+            z-index: 1;
+            will-change: transform;
+        }
+
+        .px-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        /* Semi-transparent darken over the image */
+        .px-bg-darken {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        /* Description overlay – absolutely positioned, moved by GSAP */
+        .px-desc {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            will-change: transform;
+        }
+
+        .px-desc-inner {
+            width: 80%;
+            max-width: 1100px;
+        }
+
+        .px-desc-line {
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.5);
+            margin-bottom: 2rem;
+        }
+
+        .px-desc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 4rem;
+        }
+
+        .px-desc-left h2 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.02em;
+        }
+
+        .px-desc-left span {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .px-desc-right {
+            text-align: right;
+            max-width: 550px;
+        }
+
+        .px-desc-right p {
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        /* Bottom section – starts below the viewport, slides up */
+        .px-bottom {
+            position: absolute;
+            top: 100vh;             /* starts just off-screen below */
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            will-change: transform;
+        }
+
+        .px-bottom-inner {
+            background: #1a1a1a;
+            min-height: 100vh;
+            /* Subtle top edge */
+            box-shadow: 0 -30px 60px rgba(0,0,0,0.5);
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
         @media (max-width: 900px) {
             .zj-text {
                 width: 100%;
                 padding: 7rem 2rem 2rem;
                 align-items: flex-start;
             }
-            .zj-text p {
-                font-size: 1.2rem;
-            }
+            .zj-text p { font-size: 1.2rem; }
             .zj-media-wrapper {
                 width: 100%;
                 right: 0;
@@ -225,19 +347,13 @@
                 height: 45vh;
                 border-radius: 0;
             }
-            .zj-overlay-row {
+            .zj-overlay-row, .px-desc-row {
                 flex-direction: column;
                 gap: 1.5rem;
             }
-            .zj-overlay-right {
-                text-align: left;
-            }
-            .zj-overlay-left h2 {
-                font-size: 1.8rem;
-            }
-            .zj-overlay-right p {
-                font-size: 1.2rem;
-            }
+            .zj-overlay-right, .px-desc-right { text-align: left; }
+            .zj-overlay-left h2, .px-desc-left h2 { font-size: 1.8rem; }
+            .zj-overlay-right p, .px-desc-right p { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -245,12 +361,11 @@
 <body
     class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased selection:bg-biotune-red selection:text-white transition-colors duration-300 overflow-x-hidden">
 
-    <!-- ============ EXACT BIOTUNE NAVBAR FROM INDEX.HTML ============ -->
+    <!-- ============ BIOTUNE NAVBAR ============ -->
     <nav
         class="fixed top-0 w-full z-50 glass hero-glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="navbar-main-row" class="flex items-center justify-between h-24 min-w-[1100px] gap-8 nav-auto-scale">
-                <!-- Left: Navigation Links -->
                 <div class="hidden md:flex items-center space-x-6 relative z-10 flex-1 justify-start">
                     <a href="index.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
@@ -268,100 +383,56 @@
                         </a>
                         <div class="dropdown-menu">
                             <div class="py-1 max-h-80 overflow-y-auto">
-                                <a href="shop.html"
-                                    class="block px-4 py-2 text-sm font-semibold text-biotune-red dark:text-biotune-red hover:bg-gray-100 dark:hover:bg-black/20 border-b border-gray-200 dark:border-white/10">Wszystkie</a>
-                                <a href="product.html?id=retatrutide"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Retatrutide</a>
-                                <a href="product.html?id=bpc-157-tb-500"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">BPC-157
-                                    + TB-500</a>
-                                <a href="product.html?id=cjc-1295-ipamorelin"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">CJC-1295
-                                    + Ipamorelin</a>
-                                <a href="product.html?id=hgh-fragment-176-191"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">HGH
-                                    Fragment 176-191</a>
-                                <a href="product.html?id=ghk-cu"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">GHK-Cu</a>
-                                <a href="product.html?id=melanotan-2"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Melanotan
-                                    2</a>
-                                <a href="product.html?id=pt-141"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">PT-141</a>
-                                <a href="product.html?id=epithalon"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Epithalon</a>
-                                <a href="product.html?id=mots-c"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">MOTS-c</a>
-                                <a href="product.html?id=semax"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Semax</a>
-                                <a href="product.html?id=selank"
-                                    class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Selank</a>
+                                <a href="shop.html" class="block px-4 py-2 text-sm font-semibold text-biotune-red dark:text-biotune-red hover:bg-gray-100 dark:hover:bg-black/20 border-b border-gray-200 dark:border-white/10">Wszystkie</a>
+                                <a href="product.html?id=retatrutide" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Retatrutide</a>
+                                <a href="product.html?id=bpc-157-tb-500" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">BPC-157 + TB-500</a>
+                                <a href="product.html?id=cjc-1295-ipamorelin" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">CJC-1295 + Ipamorelin</a>
+                                <a href="product.html?id=hgh-fragment-176-191" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">HGH Fragment 176-191</a>
+                                <a href="product.html?id=ghk-cu" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">GHK-Cu</a>
+                                <a href="product.html?id=melanotan-2" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Melanotan 2</a>
+                                <a href="product.html?id=pt-141" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">PT-141</a>
+                                <a href="product.html?id=epithalon" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Epithalon</a>
+                                <a href="product.html?id=mots-c" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">MOTS-c</a>
+                                <a href="product.html?id=semax" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Semax</a>
+                                <a href="product.html?id=selank" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-black/20 hover:text-biotune-red">Selank</a>
                             </div>
                         </div>
                     </div>
-
-
-                    <a href="about.html"
-                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O
-                        Nas</a>
-
-                    <a href="#contact"
-                        class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
+                    <a href="about.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O Nas</a>
+                    <a href="#contact" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                 </div>
-
-                <!-- Center: Logo -->
                 <div class="relative z-10 flex-shrink-0">
                     <a href="index.html" class="relative block">
-                        <!-- Original Logo -->
-                        <img id="nav-logo-anim" src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="h-60 w-auto logo-dynamic">
-                        
-                        <!-- Overlay for "Tune" part (White transition) -->
-                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none">
+                        <img id="nav-logo-anim" src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="h-60 w-auto logo-dynamic">
+                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none">
                     </a>
                 </div>
-
-                <!-- Right: Icons -->
                 <div class="flex items-center gap-4 relative z-10 flex-1 justify-end">
                     <div class="relative group hidden md:block">
-                        <input type="text" placeholder="Szukaj..."
-                            class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
+                        <input type="text" placeholder="Szukaj..." class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
                     </div>
                     <div class="account-dropdown">
                         <a href="login.html" id="account-link" class="hover:text-biotune-red transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                             </svg>
                         </a>
                         <div id="account-menu" class="account-menu">
                             <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Zaloguj się, aby kontynuować</p>
                             <div class="space-y-2">
-                                <a href="login.html"
-                                    class="block w-full text-center bg-biotune-red text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">
-                                    Zaloguj się
-                                </a>
-                                <a href="register.html"
-                                    class="block w-full text-center border border-gray-300 dark:border-white/20 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors font-medium">
-                                    Zarejestruj się
-                                </a>
+                                <a href="login.html" class="block w-full text-center bg-biotune-red text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">Zaloguj się</a>
+                                <a href="register.html" class="block w-full text-center border border-gray-300 dark:border-white/20 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors font-medium">Zarejestruj się</a>
                             </div>
                         </div>
                     </div>
                     <div class="relative group flex items-center">
                         <button id="wishlist-trigger" class="relative hover:text-biotune-red transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                             </svg>
-                            <span id="wishlist-count"
-                                class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+                            <span id="wishlist-count" class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
                         </button>
-                        <div id="wishlist-dropdown"
-                            class="absolute right-0 top-full mt-4 w-80 glass rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-black/10 dark:border-white/10 z-50">
+                        <div id="wishlist-dropdown" class="absolute right-0 top-full mt-4 w-80 glass rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-black/10 dark:border-white/10 z-50">
                             <div class="p-4">
                                 <h3 class="font-bold text-lg mb-3 text-black dark:text-white">Lista życzeń</h3>
                                 <div class="wishlist-items max-h-96 overflow-y-auto space-y-2">
@@ -370,103 +441,122 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Cart with tooltip -->
                     <div class="relative group">
                         <button id="cart-trigger" class="relative hover:text-biotune-red transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                             </svg>
-                            <span id="cart-count"
-                                class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden shadow-[0_0_8px_rgba(255,0,0,0.6)]">0</span>
+                            <span id="cart-count" class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden shadow-[0_0_8px_rgba(255,0,0,0.6)]">0</span>
                         </button>
-                        <div
-                            class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-biotune-red text-white text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">
-                            Koszyk
-                        </div>
+                        <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1 bg-biotune-red text-white text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">Koszyk</div>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
-    <!-- ============ END BIOTUNE NAVBAR ============ -->
+    <!-- ============ END NAVBAR ============ -->
 
-    <!-- Content Blur Overlay for scroll effect -->
     <div class="content-blur-overlay" id="content-blur"></div>
 
-    <!-- ============ ZETTAJOULE-STYLE SCROLL SECTION ============ -->
+    <!-- ============ PHASE 1: ZETTAJOULE EXPAND ============ -->
     <div class="zj-scroll-container">
         <div class="zj-sticky">
-
-            <!-- Left-side text (fades out as image expands) -->
             <div class="zj-text">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
             </div>
-
-            <!-- Image wrapper (expands from right-side box → fullscreen) -->
             <div class="zj-media-wrapper">
                 <img src="./assets/test-report.png" alt="Test Report" class="zj-media-img">
-                
-                <!-- Dark overlay - fades in when image goes fullscreen -->
                 <div class="zj-dark-overlay"></div>
             </div>
-
-            <!-- Centered overlay content (appears when image is fullscreen) -->
             <div class="zj-overlay-content w-full px-4">
                 <div class="zj-divider-line"></div>
                 <div class="zj-overlay-row">
                     <div class="zj-overlay-left">
                         <h2>Lorem Ipsum</h2>
-                        <p>\ lô-rəm-ˈip-səm \</p>
+                        <p>\ lô-rəm-ˈip-səm \\</p>
                     </div>
                     <div class="zj-overlay-right">
                         <p>Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit.</p>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+    <!-- ============ PHASE 2: DUAL-LAYER PARALLAX ============ -->
+    <div class="parallax-master" id="parallax-master">
+        <div class="parallax-viewport">
+
+            <!-- Background image (scrolls SLOWLY via GSAP translateY) -->
+            <div class="px-bg" id="px-bg">
+                <img src="./assets/test-report.png" alt="Test Report">
+                <div class="px-bg-darken"></div>
+            </div>
+
+            <!-- Description overlay (scrolls FAST – exits upward) -->
+            <div class="px-desc" id="px-desc">
+                <div class="px-desc-inner">
+                    <div class="px-desc-line"></div>
+                    <div class="px-desc-row">
+                        <div class="px-desc-left">
+                            <h2>Lorem Ipsum</h2>
+                            <span>\ lô-rəm-ˈip-səm \\</span>
+                        </div>
+                        <div class="px-desc-right">
+                            <p>Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom section (slides UP fast over the image) -->
+            <div class="px-bottom" id="px-bottom">
+                <div class="px-bottom-inner">
+                    <section class="py-24 relative z-10">
+                        <div class="max-w-4xl mx-auto px-4">
+                            <div class="p-8 md:p-12 rounded-2xl text-left bg-black/40 border border-white/5 shadow-2xl">
+                                <h3 class="text-3xl font-semibold mb-6 text-white tracking-wide">Opis Techniczny</h3>
+                                <p class="text-gray-400 leading-relaxed text-lg mb-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. 
+                                    Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus 
+                                    rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna 
+                                    non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl 
+                                    ut dapibus.
+                                </p>
+                                <p class="text-gray-400 leading-relaxed text-lg">
+                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero 
+                                    sit amet quam egestas semper. Aenean ultricies mi vitae est.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
 
         </div>
     </div>
-    <!-- ============ END ZETTAJOULE SECTION ============ -->
-
-    <!-- ============ DALSZA CZEŚĆ STRONY: OPIS ============ -->
-    <section class="opis-techniczny py-24 bg-biotune-dark relative z-10">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="p-8 md:p-12 rounded-2xl text-left bg-black/40 border border-white/5 shadow-2xl">
-                <h3 class="text-3xl font-semibold mb-6 text-white tracking-wide">Opis Techniczny</h3>
-                <p class="text-gray-400 leading-relaxed text-lg mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. 
-                    Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus 
-                    rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna 
-                    non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl 
-                    ut dapibus.
-                </p>
-                <p class="text-gray-400 leading-relaxed text-lg">
-                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero 
-                    sit amet quam egestas semper. Aenean ultricies mi vitae est.
-                </p>
-            </div>
-        </div>
-    </section>
 
 
     <!-- GSAP Scroll Animation -->
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
+        /* ============================================
+           PHASE 1 – ZettaJoule Expand
+           ============================================ */
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: ".zj-scroll-container",
                 start: "top top",
                 end: "bottom bottom",
                 scrub: 1.2,
-                pin: false, // we use CSS sticky instead
+                pin: false,
             }
         });
 
-        // Phase 1: Image expands to fullscreen + text fades out
+        // Image expands to fullscreen
         tl.to(".zj-media-wrapper", {
             right: "0%",
             top: 0,
@@ -477,7 +567,7 @@
             ease: "power2.inOut"
         }, 0);
 
-        // Fade out and slide the left-side text
+        // Fade out left text
         tl.to(".zj-text", {
             opacity: 0,
             x: -80,
@@ -485,43 +575,79 @@
             ease: "power1.in"
         }, 0);
 
-        // Phase 2: Darken image + show overlay text centered
+        // Darken image
         tl.to(".zj-dark-overlay", {
             background: "rgba(0, 0, 0, 0.7)",
             duration: 0.5,
             ease: "power1.inOut"
         }, 0.8);
 
+        // Show overlay content
         tl.to(".zj-overlay-content", {
             opacity: 1,
             duration: 0.5,
             ease: "power2.out"
         }, 0.9);
 
-        // Phase 3: Panning down the image to reveal the cutoff bottom
-        // This simulates scrolling down a tall document
-        tl.to(".zj-media-img", {
-            objectPosition: "50% 100%",
-            duration: 1.5,
-            ease: "none"
-        }, 1.4);
 
-        // Slightly move the overlay content up to add depth
-        tl.to(".zj-overlay-content", {
-            yPercent: -20,
-            duration: 1.5,
-            ease: "none"
-        }, 1.4);
+        /* ============================================
+           PHASE 2 – Dual-Layer Parallax
+           ============================================
+
+           ScrollTrigger is based on the #parallax-master container.
+           
+           Three layers, three speeds:
+             - Background image:  translateY 0 → -60%  (SLOWEST)
+             - Description text:  translateY 0 → -150vh (FAST, exits early)
+             - Bottom section:    translateY 0 → -100vh (FAST, enters after desc leaves)
+        */
+
+        // Background image: slow pan down through the tall image
+        // Goes from showing the top to showing ~60% down (still has 40% room)
+        gsap.to("#px-bg", {
+            yPercent: -40,       // translate the 250%-tall image up by 40% of its height
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#parallax-master",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+            }
+        });
+
+        // Description: exits upward FAST (2.5x faster than bg)
+        // Visible at the start, scrolls away by ~35% of the section
+        gsap.to("#px-desc", {
+            y: () => -window.innerHeight * 2,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#parallax-master",
+                start: "top top",
+                end: "35% top",
+                scrub: 1,
+            }
+        });
+
+        // Bottom section: slides up FAST (starts when desc is ~gone)
+        // Moves from top:100vh to top:0 (covers the viewport)
+        gsap.to("#px-bottom", {
+            y: () => -window.innerHeight,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#parallax-master",
+                start: "45% top",         // starts after description is gone
+                end: "bottom top",
+                scrub: 1,
+            }
+        });
 
 
-        // Navbar scroll effect
+        /* ============================================
+           NAVBAR SCROLL CLASS
+           ============================================ */
         const nav = document.querySelector('nav.glass');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
+            nav.classList.toggle('scrolled', window.scrollY > 50);
         });
     </script>
 </body>
