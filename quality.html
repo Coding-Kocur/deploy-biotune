@@ -109,11 +109,11 @@
             position: absolute;
             left: 0;
             top: 0;
-            width: 30%;
+            width: 45%;
             height: 100%;
             display: flex;
             align-items: center;
-            padding: 0 4%;
+            padding: 0 4% 0 8%;
             z-index: 5;
         }
 
@@ -128,10 +128,10 @@
         /* Image wrapper - starts on right, expands to full */
         .zj-media-wrapper {
             position: absolute;
-            right: 3%;
+            right: 8%;
             top: 6rem; /* below navbar */
-            width: 62%;
-            height: calc(100vh - 6rem - 3%);
+            width: 38%;
+            height: calc(100vh - 6rem - 6%);
             border-radius: 12px;
             overflow: hidden;
             z-index: 2;
@@ -143,6 +143,7 @@
             height: 100%;
             object-fit: cover;
             object-position: top center;
+            will-change: transform;
         }
 
         /* Dark overlay that fades in when fullscreen */
@@ -412,7 +413,7 @@
             </div>
 
             <!-- Centered overlay content (appears when image is fullscreen) -->
-            <div class="zj-overlay-content">
+            <div class="zj-overlay-content w-full px-4">
                 <div class="zj-divider-line"></div>
                 <div class="zj-overlay-row">
                     <div class="zj-overlay-left">
@@ -422,6 +423,18 @@
                     <div class="zj-overlay-right">
                         <p>Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit.</p>
                     </div>
+                </div>
+                <!-- Additional Lorem Ipsum Text Box -->
+                <div class="glass mt-12 p-8 md:p-10 rounded-2xl text-left bg-black/50 backdrop-blur-md border border-white/10 shadow-2xl mx-auto max-w-4xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Opis Techniczny</h3>
+                    <p class="text-gray-300 leading-relaxed text-lg">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. 
+                        Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus 
+                        rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna 
+                        non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl 
+                        ut dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada 
+                        fames ac turpis egestas.
+                    </p>
                 </div>
             </div>
 
@@ -444,7 +457,10 @@
             }
         });
 
-        // Phase 1 (0 → 0.5): Image expands to fullscreen + text fades out
+        // Add 1.2 scale to image so we can pan it later without revealing edges
+        gsap.set(".zj-media-img", { scale: 1.15, transformOrigin: "top center" });
+
+        // Phase 1: Image expands to fullscreen + text fades out
         // Expand image wrapper to fill the entire viewport
         tl.to(".zj-media-wrapper", {
             right: "0%",
@@ -464,20 +480,33 @@
             ease: "power1.in"
         }, 0);
 
-        // Phase 2 (0.5 → 1): Darken image + show overlay text centered
-        // Darken the image with overlay
+        // Phase 2: Darken image + show overlay text centered
         tl.to(".zj-dark-overlay", {
-            background: "rgba(0, 0, 0, 0.55)",
+            background: "rgba(0, 0, 0, 0.7)",
             duration: 0.5,
             ease: "power1.inOut"
-        }, 0.6);
+        }, 0.8);
 
-        // Fade in the centered text + line
         tl.to(".zj-overlay-content", {
             opacity: 1,
             duration: 0.5,
             ease: "power2.out"
-        }, 0.7);
+        }, 0.9);
+
+        // Phase 3: Parallax scrolling down effect
+        // The background image moves up slightly
+        tl.to(".zj-media-img", {
+            yPercent: -15,
+            duration: 1.5,
+            ease: "none"
+        }, 1.4);
+
+        // The foreground content moves up much faster
+        tl.to(".zj-overlay-content", {
+            yPercent: -80,
+            duration: 1.5,
+            ease: "none"
+        }, 1.4);
 
 
         // Navbar scroll effect
