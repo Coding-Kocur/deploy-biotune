@@ -424,23 +424,32 @@
                         <p>Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit.</p>
                     </div>
                 </div>
-                <!-- Additional Lorem Ipsum Text Box -->
-                <div class="glass mt-12 p-8 md:p-10 rounded-2xl text-left bg-black/50 backdrop-blur-md border border-white/10 shadow-2xl mx-auto max-w-4xl">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Opis Techniczny</h3>
-                    <p class="text-gray-300 leading-relaxed text-lg">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. 
-                        Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus 
-                        rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna 
-                        non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl 
-                        ut dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada 
-                        fames ac turpis egestas.
-                    </p>
-                </div>
             </div>
 
         </div>
     </div>
     <!-- ============ END ZETTAJOULE SECTION ============ -->
+
+    <!-- ============ DALSZA CZEŚĆ STRONY: OPIS ============ -->
+    <section class="opis-techniczny py-24 bg-biotune-dark relative z-10">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="p-8 md:p-12 rounded-2xl text-left bg-black/40 border border-white/5 shadow-2xl">
+                <h3 class="text-3xl font-semibold mb-6 text-white tracking-wide">Opis Techniczny</h3>
+                <p class="text-gray-400 leading-relaxed text-lg mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. 
+                    Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus 
+                    rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna 
+                    non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl 
+                    ut dapibus.
+                </p>
+                <p class="text-gray-400 leading-relaxed text-lg">
+                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero 
+                    sit amet quam egestas semper. Aenean ultricies mi vitae est.
+                </p>
+            </div>
+        </div>
+    </section>
 
 
     <!-- GSAP Scroll Animation -->
@@ -457,11 +466,7 @@
             }
         });
 
-        // Add 1.2 scale to image so we can pan it later without revealing edges
-        gsap.set(".zj-media-img", { scale: 1.15, transformOrigin: "top center" });
-
         // Phase 1: Image expands to fullscreen + text fades out
-        // Expand image wrapper to fill the entire viewport
         tl.to(".zj-media-wrapper", {
             right: "0%",
             top: 0,
@@ -493,17 +498,17 @@
             ease: "power2.out"
         }, 0.9);
 
-        // Phase 3: Parallax scrolling down effect
-        // The background image moves up slightly
+        // Phase 3: Panning down the image to reveal the cutoff bottom
+        // This simulates scrolling down a tall document
         tl.to(".zj-media-img", {
-            yPercent: -15,
+            objectPosition: "50% 100%",
             duration: 1.5,
             ease: "none"
         }, 1.4);
 
-        // The foreground content moves up much faster
+        // Slightly move the overlay content up to add depth
         tl.to(".zj-overlay-content", {
-            yPercent: -80,
+            yPercent: -20,
             duration: 1.5,
             ease: "none"
         }, 1.4);
