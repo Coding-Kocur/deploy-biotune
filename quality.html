@@ -443,17 +443,17 @@
             ease: "power1.in"
         }, 0);
 
-        // Switch from contain → cover once fullscreen
-        tl.set("#img-main", {
-            objectFit: "cover",
-        }, 0.6);
+        // NO object-fit switch! We stay in "contain" mode.
+        // The zoom is achieved purely via CSS scale, and the
+        // wrapper's overflow:hidden clips the bottom naturally.
 
 
         /* ─── PHASE 2 (0.6 → 1.0): Gradually zoom into the image ─── */
-        // Zoom visible from the top — uses scale + transform-origin top center
+        // transform-origin is TOP CENTER so the top of the document
+        // stays pinned and only the bottom gets cropped away.
         tl.to("#img-main", {
-            scale: 1.35,
-            transformOrigin: "50% 15%",
+            scale: 1.8,
+            transformOrigin: "50% 0%",
             duration: 0.4,
             ease: "power1.inOut"
         }, 0.6);
@@ -477,11 +477,12 @@
         }, 1.4);
 
 
-        /* ─── PHASE 5 (1.7 → 2.3): Image pans slowly, description exits fast ─── */
+        /* ─── PHASE 5 (1.7 → 2.3): Image pans down, description exits fast ─── */
 
-        // Image pans slowly through the document (top → ~65% down)
+        // Pan down through the zoomed image using translateY
+        // (we can't use object-position since we're in contain mode)
         tl.to("#img-main", {
-            objectPosition: "50% 65%",
+            y: "-30%",
             duration: 0.9,
             ease: "none"
         }, 1.7);
@@ -502,9 +503,6 @@
             duration: 0.7,
             ease: "power1.inOut"
         }, 2.3);
-
-        // Image keeps slowly panning during this phase (already covered by
-        // the long-duration tween above: 0.9 to 2.9)
 
 
         /* ─── NAVBAR SCROLL CLASS ─── */
