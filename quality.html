@@ -206,9 +206,15 @@
             will-change: transform;
         }
         .bottom-inner {
-            background: #1a1a1a;
+            background: #0a0a0a;
             min-height: 100vh;
-            box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.6);
+        }
+        .bottom-inner::before {
+            content: '';
+            display: block;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, #0a0a0a);
+            margin-top: -80px;
         }
 
         /* === Responsive === */
@@ -369,23 +375,21 @@
             <!-- Bottom section (slides up in Phase 4) -->
             <div class="bottom-section" id="bottom-section">
                 <div class="bottom-inner">
-                    <section class="py-24 relative z-10">
-                        <div class="max-w-4xl mx-auto px-4">
-                            <div class="p-8 md:p-12 rounded-2xl text-left bg-black/40 border border-white/5 shadow-2xl">
-                                <h3 class="text-3xl font-semibold mb-6 text-white tracking-wide">Opis Techniczny</h3>
-                                <p class="text-gray-400 leading-relaxed text-lg mb-4">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. 
-                                    Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus 
-                                    rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna 
-                                    non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl 
-                                    ut dapibus.
-                                </p>
-                                <p class="text-gray-400 leading-relaxed text-lg">
-                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero 
-                                    sit amet quam egestas semper. Aenean ultricies mi vitae est.
-                                </p>
-                            </div>
+                    <section class="pt-16 pb-24 relative z-10">
+                        <div class="max-w-4xl mx-auto px-6 md:px-8">
+                            <h3 class="text-3xl font-semibold mb-8 text-white tracking-wide">Opis Techniczny</h3>
+                            <p class="text-gray-400 leading-relaxed text-lg mb-6">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. 
+                                Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus 
+                                rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna 
+                                non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl 
+                                ut dapibus.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed text-lg">
+                                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                                Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero 
+                                sit amet quam egestas semper. Aenean ultricies mi vitae est.
+                            </p>
                         </div>
                     </section>
                 </div>
@@ -399,111 +403,124 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        /*  All animations are driven by ONE ScrollTrigger on .master-scroll.
-            The timeline progress 0→1 maps to the full 800vh scroll.
-            
-            Timeline breakdown (in normalized time 0-3):
-              0.00 – 0.60  Phase 1: Image expands, left text fades
-              0.60 – 0.90  Phase 2: Darken + description appears
-              0.90 – 1.80  Phase 3: Image pans slowly (object-position),
-                                     description scrolls out fast
-              1.80 – 3.00  Phase 4: Image keeps panning slowly,
-                                     bottom section slides up
-        */
+        const imgEl = document.getElementById('img-main');
+        const ZOOM_START = 0.15;
+        const ZOOM_DUR   = 0.65;
+        const ZOOM_END   = ZOOM_START + ZOOM_DUR; // 0.80
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".master-scroll",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1.2,
-                pin: false,
+        // Dynamic scale: fill viewport width exactly
+        function getTargetScale() {
+            const imgRect = imgEl.getBoundingClientRect();
+            // Fallback: if image hasn't loaded yet, use a sensible default
+            const currentW = imgRect.width || 1;
+            return Math.max(window.innerWidth / currentW, 1.2);
+        }
+
+        function buildTimeline() {
+            // Kill any existing timeline
+            if (window._qualityTL) {
+                window._qualityTL.scrollTrigger && window._qualityTL.scrollTrigger.kill();
+                window._qualityTL.kill();
             }
+
+            // Reset inline styles so measurements are clean
+            gsap.set(imgEl, { clearProps: "scale,y,objectFit,objectPosition" });
+
+            const targetScale = getTargetScale();
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".master-scroll",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1.2,
+                    pin: false,
+                    invalidateOnRefresh: true,
+                }
+            });
+            window._qualityTL = tl;
+
+
+            /* ─── PHASE 1 (0 → 0.6): Expand image to fullscreen ─── */
+            tl.to("#img-wrapper", {
+                right: "0%",
+                top: 0,
+                width: "100%",
+                height: "100vh",
+                borderRadius: "0px",
+                duration: 0.6,
+                ease: "power2.inOut"
+            }, 0);
+
+            // Left intro text fades out
+            tl.to("#zj-text", {
+                opacity: 0,
+                x: -80,
+                duration: 0.4,
+                ease: "power1.in"
+            }, 0);
+
+
+            /* ─── PHASE 2 (overlaps Phase 1): Zoom to viewport width ─── */
+            // Dynamic scale so the image always fills the viewport width.
+            // transform-origin TOP CENTER: top stays pinned, bottom clips.
+            tl.to(imgEl, {
+                scale: targetScale,
+                transformOrigin: "50% 0%",
+                duration: ZOOM_DUR,
+                ease: "power1.inOut"
+            }, ZOOM_START);
+
+
+            /* ─── PHASE 3: Darken — starts RIGHT after zoom finishes ─── */
+            tl.to("#img-darken", {
+                background: "rgba(0, 0, 0, 0.65)",
+                duration: 0.35,
+                ease: "power1.inOut"
+            }, ZOOM_END);
+
+
+            /* ─── PHASE 4: Description fades in after darkening ─── */
+            const DESC_START = ZOOM_END + 0.35; // 1.15
+            tl.to("#desc-overlay", {
+                opacity: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            }, DESC_START);
+
+
+            /* ─── PHASE 5: Image pans down, description exits fast ─── */
+            const PAN_START = DESC_START + 0.35; // 1.50
+            tl.to(imgEl, {
+                y: "-30%",
+                duration: 0.9,
+                ease: "none"
+            }, PAN_START);
+
+            tl.to("#desc-overlay", {
+                y: () => -window.innerHeight * 1.5,
+                opacity: 0,
+                duration: 0.5,
+                ease: "power1.in"
+            }, PAN_START);
+
+
+            /* ─── PHASE 6: Bottom section slides up seamlessly ─── */
+            const BOTTOM_START = PAN_START + 0.7; // 2.20
+            tl.to("#bottom-section", {
+                y: () => -(window.innerHeight),
+                duration: 0.8,
+                ease: "power1.inOut"
+            }, BOTTOM_START);
+        }
+
+        // Build on load, rebuild on resize for dynamic responsiveness
+        buildTimeline();
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(buildTimeline, 200);
         });
-
-
-        /* ─── PHASE 1 (0 → 0.6): Expand image to fullscreen ─── */
-
-        // Image wrapper: right-side box → fullscreen
-        tl.to("#img-wrapper", {
-            right: "0%",
-            top: 0,
-            width: "100%",
-            height: "100vh",
-            borderRadius: "0px",
-            duration: 0.6,
-            ease: "power2.inOut"
-        }, 0);
-
-        // Left intro text fades out
-        tl.to("#zj-text", {
-            opacity: 0,
-            x: -80,
-            duration: 0.4,
-            ease: "power1.in"
-        }, 0);
-
-        // NO object-fit switch! We stay in "contain" mode.
-        // The zoom is achieved purely via CSS scale, and the
-        // wrapper's overflow:hidden clips the bottom naturally.
-
-
-        /* ─── PHASE 2 (overlaps Phase 1): Gradually zoom into the image ─── */
-        // Starts DURING the expand so the zoom and slide feel like one motion.
-        // transform-origin is TOP CENTER: top stays pinned, bottom clips.
-        tl.to("#img-main", {
-            scale: 1.8,
-            transformOrigin: "50% 0%",
-            duration: 0.65,
-            ease: "power1.inOut"
-        }, 0.15);
-
-
-        /* ─── PHASE 3 (1.0 → 1.4): Smoothly darken the image ─── */
-        // Only AFTER zoom is complete, the overlay fades in
-        tl.to("#img-darken", {
-            background: "rgba(0, 0, 0, 0.65)",
-            duration: 0.4,
-            ease: "power1.inOut"
-        }, 1.0);
-
-
-        /* ─── PHASE 4 (1.4 → 1.7): Show description + horizontal line ─── */
-        // Only AFTER darkening is complete, description fades in
-        tl.to("#desc-overlay", {
-            opacity: 1,
-            duration: 0.3,
-            ease: "power2.out"
-        }, 1.4);
-
-
-        /* ─── PHASE 5 (1.7 → 2.3): Image pans down, description exits fast ─── */
-
-        // Pan down through the zoomed image using translateY
-        // (we can't use object-position since we're in contain mode)
-        tl.to("#img-main", {
-            y: "-30%",
-            duration: 0.9,
-            ease: "none"
-        }, 1.7);
-
-        // Description scrolls UP fast and out of viewport
-        tl.to("#desc-overlay", {
-            y: () => -window.innerHeight * 1.5,
-            opacity: 0,
-            duration: 0.5,
-            ease: "power1.in"
-        }, 1.7);
-
-
-        /* ─── PHASE 6 (2.3 → 3.0): Bottom section slides up ─── */
-
-        tl.to("#bottom-section", {
-            y: () => -(window.innerHeight),
-            duration: 0.7,
-            ease: "power1.inOut"
-        }, 2.3);
-
 
         /* ─── NAVBAR SCROLL CLASS ─── */
         const nav = document.querySelector('nav.glass');
