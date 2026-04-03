@@ -200,9 +200,8 @@
             position: absolute;
             left: 0;
             width: 100%;
-            bottom: 0;
+            top: 100vh; /* Starts exactly below the sticky viewport */
             z-index: 20;
-            transform: translateY(100%);
             will-change: transform;
         }
         .bottom-inner {
@@ -474,12 +473,11 @@
                 ease: "power1.inOut"
             }, ZOOM_END);
 
-            // Image panning — starts RIGHT at zoom end, runs long and fast
-            // y: -65% so user sees the bottom edge of the document
+            // Image panning — starts RIGHT at zoom end, faster and deeper
             tl.to(imgEl, {
-                y: "-65%",
-                duration: 2.0,
-                ease: "none"
+                y: "-80%",
+                duration: 1.5,
+                ease: "power1.inOut"
             }, ZOOM_END);
 
 
@@ -492,24 +490,15 @@
             }, DESC_IN);
 
 
-            /* ─── PHASE 5 (1.45 → 1.85): Description scrolls out ─── */
-            const DESC_OUT = DESC_IN + 0.3; // 1.45
-            tl.to("#desc-overlay", {
+            /* ─── PHASE 5 (1.45 → 2.95): Desc and Bottom scroll together ─── */
+            // They are animated perfectly synchronously as if they were one layer.
+            // Bottom section starts naturally appearing when desc-overlay moves up.
+            const SCROLL_UP_START = DESC_IN + 0.3; // 1.45
+            tl.to(["#desc-overlay", "#bottom-section"], {
                 y: () => -window.innerHeight * 1.5,
-                opacity: 0,
-                duration: 0.4,
-                ease: "power1.in"
-            }, DESC_OUT);
-
-
-            /* ─── PHASE 6 (1.85 → 3.0): Bottom section slides up ─── */
-            // Starts exactly when description exits view
-            const BOTTOM_START = DESC_OUT + 0.4; // 1.85
-            tl.to("#bottom-section", {
-                y: () => -(window.innerHeight),
-                duration: 1.15,
-                ease: "power1.inOut"
-            }, BOTTOM_START);
+                duration: 1.5,
+                ease: "none"
+            }, SCROLL_UP_START);
         }
 
         // Build on load, rebuild on resize for dynamic responsiveness
