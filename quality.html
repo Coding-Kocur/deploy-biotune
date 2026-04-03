@@ -422,7 +422,7 @@
         });
 
 
-        /* ─── PHASE 1: Expand image to fullscreen ─── */
+        /* ─── PHASE 1 (0 → 0.6): Expand image to fullscreen ─── */
 
         // Image wrapper: right-side box → fullscreen
         tl.to("#img-wrapper", {
@@ -443,57 +443,65 @@
             ease: "power1.in"
         }, 0);
 
-        // Switch from contain → cover once fullscreen so the image fills the viewport
-        // and can be "panned" via object-position
+        // Switch from contain → cover once fullscreen
         tl.set("#img-main", {
             objectFit: "cover",
         }, 0.6);
 
 
-        /* ─── PHASE 2: Darken + show description ─── */
+        /* ─── PHASE 2 (0.6 → 1.0): Gradually zoom into the image ─── */
+        // Zoom visible from the top — uses scale + transform-origin top center
+        tl.to("#img-main", {
+            scale: 1.35,
+            transformOrigin: "50% 15%",
+            duration: 0.4,
+            ease: "power1.inOut"
+        }, 0.6);
 
+
+        /* ─── PHASE 3 (1.0 → 1.4): Smoothly darken the image ─── */
+        // Only AFTER zoom is complete, the overlay fades in
         tl.to("#img-darken", {
             background: "rgba(0, 0, 0, 0.65)",
-            duration: 0.3,
+            duration: 0.4,
             ease: "power1.inOut"
-        }, 0.55);
+        }, 1.0);
 
+
+        /* ─── PHASE 4 (1.4 → 1.7): Show description + horizontal line ─── */
+        // Only AFTER darkening is complete, description fades in
         tl.to("#desc-overlay", {
             opacity: 1,
             duration: 0.3,
             ease: "power2.out"
-        }, 0.65);
+        }, 1.4);
 
 
-        /* ─── PHASE 3: Parallax – image pans slowly, description exits fast ─── */
+        /* ─── PHASE 5 (1.7 → 2.3): Image pans slowly, description exits fast ─── */
 
         // Image pans slowly through the document (top → ~65% down)
-        // This runs from 0.9 to 2.8 (long duration = slow)
         tl.to("#img-main", {
             objectPosition: "50% 65%",
-            duration: 2.0,
+            duration: 0.9,
             ease: "none"
-        }, 0.9);
+        }, 1.7);
 
         // Description scrolls UP fast and out of viewport
-        // Short duration = fast exit (the "faster layer")
         tl.to("#desc-overlay", {
             y: () => -window.innerHeight * 1.5,
             opacity: 0,
-            duration: 0.6,
+            duration: 0.5,
             ease: "power1.in"
-        }, 0.9);
+        }, 1.7);
 
 
-        /* ─── PHASE 4: Bottom section slides up over the image ─── */
+        /* ─── PHASE 6 (2.3 → 3.0): Bottom section slides up ─── */
 
-        // The bottom section starts off-screen (translateY: 100%)
-        // and slides up to cover the viewport
         tl.to("#bottom-section", {
             y: () => -(window.innerHeight),
-            duration: 1.0,
+            duration: 0.7,
             ease: "power1.inOut"
-        }, 1.8);
+        }, 2.3);
 
         // Image keeps slowly panning during this phase (already covered by
         // the long-duration tween above: 0.9 to 2.9)
