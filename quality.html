@@ -448,15 +448,15 @@
         // wrapper's overflow:hidden clips the bottom naturally.
 
 
-        /* ─── PHASE 2 (0.6 → 1.0): Gradually zoom into the image ─── */
-        // transform-origin is TOP CENTER so the top of the document
-        // stays pinned and only the bottom gets cropped away.
+        /* ─── PHASE 2 (overlaps Phase 1): Gradually zoom into the image ─── */
+        // Starts DURING the expand so the zoom and slide feel like one motion.
+        // transform-origin is TOP CENTER: top stays pinned, bottom clips.
         tl.to("#img-main", {
             scale: 1.8,
             transformOrigin: "50% 0%",
-            duration: 0.4,
+            duration: 0.65,
             ease: "power1.inOut"
-        }, 0.6);
+        }, 0.15);
 
 
         /* ─── PHASE 3 (1.0 → 1.4): Smoothly darken the image ─── */
