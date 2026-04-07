@@ -387,6 +387,8 @@
             background: black;
             min-height: 100vh;
             padding-top: 6rem;
+            padding-bottom: 200vh;
+            margin-bottom: -200vh;
             border-radius: 40px 40px 0 0;
             overflow: hidden;
         }
@@ -653,7 +655,9 @@
                             <div class="overflow-hidden pb-4"><span class="inline-block text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black text-white leading-[0.85] tracking-tighter precyzja-word" style="transform:translateY(110%)">miligramie</span></div>
                         </div>
                         <div class="prose prose-invert prose-lg text-gray-400">
-                            <p class="leading-relaxed mb-6">Każda partia naszych produktów przechodzi rygorystyczne testy czystości (HPLC) oraz identyfikacji strukturalnej (MS). Dzięki temu masz pewność, że pracujesz na materiale o najwyższym standardzie.</p>
+                            <div class="overflow-hidden pb-4">
+                                <p class="leading-relaxed mb-6 block precyzja-word" style="transform:translateY(140%)">Każda partia naszych produktów przechodzi rygorystyczne testy czystości (HPLC) oraz identyfikacji strukturalnej (MS). Dzięki temu masz pewność, że pracujesz na materiale o najwyższym standardzie.</p>
+                            </div>
                             <ul class="space-y-4 mt-8" id="typewriter-list">
                                 <li class="typewriter-line"><span class="w-2 h-2 bg-biotune-red rounded-full flex-shrink-0 typewriter-dot" data-tw-dot></span><span class="typewriter-text text-gray-300" data-tw-text="Czystość >99% potwierdzona certyfikatem"></span></li>
                                 <li class="typewriter-line"><span class="w-2 h-2 bg-biotune-red rounded-full flex-shrink-0 typewriter-dot" data-tw-dot></span><span class="typewriter-text text-gray-300" data-tw-text="Pełna identyfikowalność serii"></span></li>
@@ -684,7 +688,11 @@
                 <div class="bottom-inner">
                     <section class="py-16 relative z-10">
                         <div class="max-w-7xl mx-auto px-6 md:px-8 flex flex-col items-center">
-                            <h2 class="text-6xl lg:text-7xl font-bold mb-20 text-center text-white wiedza-title">Wiedza i Odpowiedzialność</h2>
+                            <div class="mb-20 text-center flex justify-center gap-4 flex-wrap">
+                                <div class="overflow-hidden pb-4"><span class="inline-block text-6xl lg:text-7xl font-bold text-white tracking-tighter wiedza-anim-word flex-shrink-0" style="transform:translateY(110%)">Wiedza</span></div>
+                                <div class="overflow-hidden pb-4"><span class="inline-block text-6xl lg:text-7xl font-bold text-white tracking-tighter wiedza-anim-word flex-shrink-0" style="transform:translateY(110%)">i</span></div>
+                                <div class="overflow-hidden pb-4"><span class="inline-block text-6xl lg:text-7xl font-bold text-white tracking-tighter wiedza-anim-word flex-shrink-0" style="transform:translateY(110%)">Odpowiedzialność</span></div>
+                            </div>
                             <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20 w-full">
                                 <div class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
                                     <div class="wiedza-icon-box w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110"><svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full"><path d="M18 6h12M20 6v14l-8 16a2 2 0 001.8 3h20.4a2 2 0 001.8-3l-8-16V6" stroke-linecap="round" stroke-linejoin="round" /><path d="M16 32h16" stroke-linecap="round" /></svg></div>
@@ -911,7 +919,8 @@
                                     word.style.transform = 'translateY(0%)';
                                 }, idx * 150);
                             });
-                            setTimeout(() => startTypewriterCascade(), 600);
+                            // Start typewriter cascade AFTER Precyzja title and paragraph have animated
+                            setTimeout(() => startTypewriterCascade(), 1100);
                         }
                     }
                 }
@@ -998,9 +1007,14 @@
                 y: () => -window.innerHeight * 1.5,
                 duration: 1.0, ease: "none",
                 onStart: function() {
-                    gsap.to('.wiedza-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' });
-                    gsap.to('.wiedza-item', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', delay: 0.3 });
-                    gsap.to('.wiedza-cta', { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.2 });
+                    document.querySelectorAll('.wiedza-anim-word').forEach((word, idx) => {
+                        setTimeout(() => {
+                            word.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                            word.style.transform = 'translateY(0%)';
+                        }, idx * 150);
+                    });
+                    gsap.to('.wiedza-item', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', delay: 0.8 });
+                    gsap.to('.wiedza-cta', { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.6 });
                 }
             }, SCROLL_UP_START);
             tl.to(imgEl, {
