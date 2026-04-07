@@ -1206,3 +1206,18 @@ footer.reveal-footer {
     bottom: 0;
     z-index: 1;
 }
+
+/* ==========================================================================
+   Global Animations (Intersection Observer)
+   ========================================================================== */
+.global-anim-hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.global-anim-reveal {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}

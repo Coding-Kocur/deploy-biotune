@@ -288,3 +288,27 @@ class WishlistManager {
 }
 
 window.wishlistManager = new WishlistManager();
+
+// Global Generic Reveal Animation for Newsletter and Contact forms
+document.addEventListener('DOMContentLoaded', () => {
+    const animObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('global-anim-reveal');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    const targets = document.querySelectorAll('.newsletter-section > *, #contact .max-w-3xl > *');
+    targets.forEach(el => {
+        el.classList.add('global-anim-hidden');
+        
+        // Calculate delay based on index relative to parent
+        const children = Array.from(el.parentElement.children);
+        const idx = children.indexOf(el);
+        el.style.transitionDelay = `${idx * 0.15}s`;
+        
+        animObserver.observe(el);
+    });
+});
