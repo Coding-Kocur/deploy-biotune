@@ -1180,3 +1180,29 @@ nav.hero-glass.scrolled {
         gap: 0.5rem;
     }
 }
+
+/* ============================================
+   REVEAL FOOTER — zetta-joule style
+   Footer stays as a fixed base layer (z-index 1).
+   The page content wrapper sits above it (z-index 2).
+   Scrolling past the content reveals the footer from behind.
+   ============================================ */
+
+.page-content-wrapper {
+    position: relative;
+    z-index: 2;
+    background-color: rgb(249, 250, 251); /* bg-gray-50 */
+    transition: background-color 0.3s;
+}
+
+.dark .page-content-wrapper,
+body.bg-black .page-content-wrapper,
+body.bg-biotune-black .page-content-wrapper {
+    background-color: #0c0c0c; /* biotune-black */
+}
+
+footer.reveal-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
