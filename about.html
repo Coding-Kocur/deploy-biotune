@@ -655,9 +655,7 @@
                             <div class="overflow-hidden pb-4"><span class="inline-block text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black text-white leading-[0.85] tracking-tighter precyzja-word" style="transform:translateY(110%)">miligramie</span></div>
                         </div>
                         <div class="prose prose-invert prose-lg text-gray-400">
-                            <div class="overflow-hidden pb-4">
-                                <p class="leading-relaxed mb-6 block precyzja-word" style="transform:translateY(140%)">Każda partia naszych produktów przechodzi rygorystyczne testy czystości (HPLC) oraz identyfikacji strukturalnej (MS). Dzięki temu masz pewność, że pracujesz na materiale o najwyższym standardzie.</p>
-                            </div>
+                            <p class="leading-relaxed mb-6 block desc-anim-word" style="opacity: 0; transform: translateY(30px); will-change: transform, opacity;">Każda partia naszych produktów przechodzi rygorystyczne testy czystości (HPLC) oraz identyfikacji strukturalnej (MS). Dzięki temu masz pewność, że pracujesz na materiale o najwyższym standardzie.</p>
                             <ul class="space-y-4 mt-8" id="typewriter-list">
                                 <li class="typewriter-line"><span class="w-2 h-2 bg-biotune-red rounded-full flex-shrink-0 typewriter-dot" data-tw-dot></span><span class="typewriter-text text-gray-300" data-tw-text="Czystość >99% potwierdzona certyfikatem"></span></li>
                                 <li class="typewriter-line"><span class="w-2 h-2 bg-biotune-red rounded-full flex-shrink-0 typewriter-dot" data-tw-dot></span><span class="typewriter-text text-gray-300" data-tw-text="Pełna identyfikowalność serii"></span></li>
@@ -919,6 +917,15 @@
                                     word.style.transform = 'translateY(0%)';
                                 }, idx * 150);
                             });
+                            // Animate description cascade right after title
+                            setTimeout(() => {
+                                const desc = document.querySelector('.desc-anim-word');
+                                if (desc) {
+                                    desc.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                                    desc.style.opacity = '1';
+                                    desc.style.transform = 'translateY(0)';
+                                }
+                            }, 450);
                             // Start typewriter cascade AFTER Precyzja title and paragraph have animated
                             setTimeout(() => startTypewriterCascade(), 1100);
                         }
@@ -1136,6 +1143,33 @@
             }
             tick();
         };
+
+        /* ─── NEWSLETTER & CONTACT REVEAL ANIMATIONS ─── */
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.fromTo('.newsletter-section > *', 
+                { opacity: 0, y: 50 },
+                { 
+                    opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: ".newsletter-section",
+                        start: "top 85%",
+                        once: true
+                    }
+                }
+            );
+
+            gsap.fromTo('#contact .max-w-3xl > *', 
+                { opacity: 0, y: 50 },
+                { 
+                    opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: "#contact",
+                        start: "top 85%",
+                        once: true
+                    }
+                }
+            );
+        });
 
         /* ─── NAVBAR SCROLL CLASS ─── */
         const navEl = document.querySelector('nav.glass');
