@@ -2,6 +2,34 @@
 <html lang="pl" class="dark">
 
 <head>
+
+    <script>
+        // Access Code Protection
+        (function() {
+            if (sessionStorage.getItem('biotune_access_granted') === 'true') return;
+            
+            // Hide everything immediately to prevent flashing content
+            document.documentElement.style.opacity = '0';
+            document.documentElement.style.pointerEvents = 'none';
+            document.documentElement.style.transition = 'opacity 0.2s';
+            
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    let pw = prompt("Dostęp chroniony. Proszę podać kod dostępu:");
+                    if (pw === "Nadja7072") {
+                        sessionStorage.setItem('biotune_access_granted', 'true');
+                        document.documentElement.style.opacity = '1';
+                        document.documentElement.style.pointerEvents = 'auto';
+                    } else {
+                        document.body.innerHTML = "<div style='display:flex;justify-content:center;align-items:center;height:100vh;background:#030303;color:#ff0000;font-family:monospace;font-size:1.5rem;text-align:center;'>Brak dostępu / Ochrona kodem</div>";
+                        document.documentElement.style.opacity = '1';
+                        document.documentElement.style.pointerEvents = 'auto';
+                    }
+                }, 100);
+            });
+        })();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O Nas - BioTune</title>
