@@ -1,4 +1,4 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl" class="dark">
 
 <head>
@@ -15,13 +15,13 @@
             
             window.addEventListener('load', function() {
                 setTimeout(function() {
-                    let pw = prompt("Dostƒôp chroniony. Proszƒô podaƒá kod dostƒôpu:");
+                    let pw = prompt("DostÍp chroniony. ProszÍ podaÊ kod dostÍpu:");
                     if (pw === "Nadja7072") {
                         sessionStorage.setItem('biotune_access_granted', 'true');
                         document.documentElement.style.opacity = '1';
                         document.documentElement.style.pointerEvents = 'auto';
                     } else {
-                        document.body.innerHTML = "<div style='display:flex;justify-content:center;align-items:center;height:100vh;background:#030303;color:#ff0000;font-family:monospace;font-size:1.5rem;text-align:center;'>Brak dostƒôpu / Ochrona kodem</div>";
+                        document.body.innerHTML = "<div style='display:flex;justify-content:center;align-items:center;height:100vh;background:#030303;color:#ff0000;font-family:monospace;font-size:1.5rem;text-align:center;'>Brak dostÍpu / Ochrona kodem</div>";
                         document.documentElement.style.opacity = '1';
                         document.documentElement.style.pointerEvents = 'auto';
                     }
@@ -249,12 +249,18 @@
     <nav
         class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-24 min-w-[1000px]">
+            <div class="flex items-center justify-between h-24 ">
                 <!-- Left: Navigation Links -->
+                
+                <!-- Hamburger Button (Mobile) -->
+                <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 hover:text-biotune-red transition-colors z-[210] relative flex-shrink-0">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
                 <div class="hidden md:flex items-center space-x-6 relative z-10 flex-shrink-0">
+
                     <a href="index.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
-                        g‚îº√©‚îú‚îÇwna</a>
+                        g+È+-wna</a>
                     <div class="dropdown-trigger">
                         <a href="shop.html"
                             class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
@@ -337,15 +343,15 @@
                             </svg>
                         </a>
                         <div id="account-menu" class="account-menu">
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Zaloguj si‚îÄ√ñ, aby kontynuowa‚îÄ√ß</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Zaloguj si¶÷, aby kontynuowa¶Á</p>
                             <div class="space-y-2">
                                 <a href="login.html"
                                     class="block w-full text-center bg-biotune-red text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">
-                                    Zaloguj si‚îÄ√ñ
+                                    Zaloguj si¶÷
                                 </a>
                                 <a href="register.html"
                                     class="block w-full text-center border border-gray-300 dark:border-white/20 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors font-medium">
-                                    Zarejestruj si‚îÄ√ñ
+                                    Zarejestruj si¶÷
                                 </a>
                             </div>
                         </div>
@@ -363,9 +369,9 @@
                         <div id="wishlist-dropdown"
                             class="absolute right-0 top-full mt-4 w-80 glass rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-black/10 dark:border-white/10 z-50">
                             <div class="p-4">
-                                <h3 class="font-bold text-lg mb-3 text-black dark:text-white">Lista ‚îº‚ïùycze‚îº√§</h3>
+                                <h3 class="font-bold text-lg mb-3 text-black dark:text-white">Lista +-ycze+‰</h3>
                                 <div class="wishlist-items max-h-96 overflow-y-auto space-y-2">
-                                    <p class="text-center text-gray-500 py-4 text-sm">Twoja lista ‚îº‚ïùycze‚îº√§ jest pusta.</p>
+                                    <p class="text-center text-gray-500 py-4 text-sm">Twoja lista +-ycze+‰ jest pusta.</p>
                                 </div>
                             </div>
                         </div>
@@ -389,7 +395,22 @@
                 </div>
             </div>
         </div>
+    
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu-panel" class="mobile-menu hidden fixed inset-0 z-[200]">
+            <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
+                <a href="index.html" class="hover:text-biotune-red transition-colors font-bold">Strona g≥Ûwna</a>
+                <a href="shop.html" class="hover:text-biotune-red transition-colors font-bold">Sklep</a>
+                <a href="about.html" class="hover:text-biotune-red transition-colors font-bold">O Nas</a>
+                <a href="quality.html" class="hover:text-biotune-red transition-colors font-bold">JakoúÊ</a>
+                
+                <div class="h-px w-24 bg-white/20 my-4"></div>
+                
+                <a href="login.html" class="hover:text-biotune-red transition-colors text-lg text-gray-400">Moje konto</a>
+            </div>
+        </div>
     </nav>
+
 
     <!-- Content Blur Overlay for scroll effect -->
     <div class="content-blur-overlay" id="content-blur"></div>
@@ -419,9 +440,9 @@
                             <div class="mission-content overflow-hidden transition-all duration-700"
                                 style="max-height: 200px; opacity: 1;">
                                 <p class="text-lg text-gray-400 leading-relaxed">
-                                    Naszym celem jest wspieranie innowacji w badaniach nad zwi‚îÄ≈Øzkami peptydowymi
+                                    Naszym celem jest wspieranie innowacji w badaniach nad zwi¶˘zkami peptydowymi
                                     poprzez
-                                    dostarczanie odczynnik‚îú‚îÇw o przejrzystej i potwierdzonej jako‚îº≈§ci.
+                                    dostarczanie odczynnik+-w o przejrzystej i potwierdzonej jako+çci.
                                 </p>
                             </div>
                         </div>
@@ -433,8 +454,8 @@
                                 Standardy Rynku</h3>
                             <div class="mission-content max-h-0 overflow-hidden opacity-0 transition-all duration-700">
                                 <p class="text-lg text-gray-400 leading-relaxed">
-                                    Powstali‚îº≈§my jako odpowied‚îº‚ïë na brak przejrzysto‚îº≈§ci i niesp‚îú‚îÇjne standardy na rynku
-                                    odczynnik‚îú‚îÇw
+                                    Powstali+çmy jako odpowied+¶ na brak przejrzysto+çci i niesp+-jne standardy na rynku
+                                    odczynnik+-w
                                     chemicznych.
                                 </p>
                             </div>
@@ -444,12 +465,12 @@
                             <div class="mission-progress absolute top-0 left-0 h-[2px] bg-biotune-red w-0"></div>
                             <h3
                                 class="text-3xl md:text-5xl font-bold text-gray-700 mb-4 transition-colors duration-500">
-                                Dost‚îÄ√ñpno‚îº≈§‚îÄ√ß i Komunikacja</h3>
+                                Dost¶÷pno+ç¶Á i Komunikacja</h3>
                             <div class="mission-content max-h-0 overflow-hidden opacity-0 transition-all duration-700">
                                 <p class="text-lg text-gray-400 leading-relaxed">
-                                    D‚îÄ≈Ø‚îº‚ïùymy do tego, aby polska i mi‚îÄ√ñdzynarodowa spo‚îº√©eczno‚îº≈§‚îÄ√ß badawcza mia‚îº√©a ‚îº√©atwy
-                                    dost‚îÄ√ñp do
-                                    materia‚îº√©‚îú‚îÇw spe‚îº√©niaj‚îÄ≈Øcych rygorystyczne normy.
+                                    D¶˘+-ymy do tego, aby polska i mi¶÷dzynarodowa spo+Èeczno+ç¶Á badawcza mia+Èa +Èatwy
+                                    dost¶÷p do
+                                    materia+È+-w spe+Èniaj¶˘cych rygorystyczne normy.
                                 </p>
                             </div>
                         </div>
@@ -467,12 +488,12 @@
                 </div>
             </section>
 
-            <!-- 2. Za‚îº√©oga i Idea -->
+            <!-- 2. Za+Èoga i Idea -->
             <section class="w-screen flex-shrink-0 flex flex-col lg:flex-row bg-transparent"
                 style="height:100vh; overflow:visible;">
                 <!-- Content LEFT -->
                 <div class="w-full lg:w-4/5 p-6 lg:p-10 flex flex-col justify-center">
-                    <h2 class="text-sm font-mono text-biotune-red mb-6 tracking-[0.2em] uppercase">Jako‚îº≈§‚îÄ√ß i Kontrola
+                    <h2 class="text-sm font-mono text-biotune-red mb-6 tracking-[0.2em] uppercase">Jako+ç¶Á i Kontrola
                     </h2>
                     <div class="hero-v3-anim mb-6">
                         <div class="overflow-hidden pb-4">
@@ -483,7 +504,7 @@
                         <div class="overflow-hidden pb-4">
                             <span
                                 class="inline-block text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black text-white leading-[0.85] tracking-tighter precyzja-word"
-                                style="transform:translateY(110%)">w ka‚îº‚ïùdym</span>
+                                style="transform:translateY(110%)">w ka+-dym</span>
                         </div>
                         <div class="overflow-hidden pb-4">
                             <span
@@ -493,23 +514,23 @@
                     </div>
                     <div class="prose prose-invert prose-lg text-gray-400">
                         <p class="leading-relaxed mb-6">
-                            Ka‚îº‚ïùda partia naszych produkt‚îú‚îÇw przechodzi rygorystyczne testy czysto‚îº≈§ci (HPLC) oraz
+                            Ka+-da partia naszych produkt+-w przechodzi rygorystyczne testy czysto+çci (HPLC) oraz
                             identyfikacji
-                            strukturalnej (MS). Dzi‚îÄ√ñki temu masz pewno‚îº≈§‚îÄ√ß, ‚îº‚ïùe pracujesz na materiale o najwy‚îº‚ïùszym
+                            strukturalnej (MS). Dzi¶÷ki temu masz pewno+ç¶Á, +-e pracujesz na materiale o najwy+-szym
                             standardzie.
                         </p>
                         <ul class="space-y-4 mt-8" id="typewriter-list">
                             <li class="typewriter-line">
                                 <span class="w-2 h-2 bg-biotune-red rounded-full flex-shrink-0 typewriter-dot" data-tw-dot></span>
-                                <span class="typewriter-text" data-tw-text="Czysto‚îº≈§‚îÄ√ß >99% potwierdzona certyfikatem"></span>
+                                <span class="typewriter-text" data-tw-text="Czysto+ç¶Á >99% potwierdzona certyfikatem"></span>
                             </li>
                             <li class="typewriter-line">
                                 <span class="w-2 h-2 bg-biotune-red rounded-full flex-shrink-0 typewriter-dot" data-tw-dot></span>
-                                <span class="typewriter-text" data-tw-text="Pe‚îº√©na identyfikowalno‚îº≈§‚îÄ√ß serii"></span>
+                                <span class="typewriter-text" data-tw-text="Pe+Èna identyfikowalno+ç¶Á serii"></span>
                             </li>
                             <li class="typewriter-line">
                                 <span class="w-2 h-2 bg-biotune-red rounded-full flex-shrink-0 typewriter-dot" data-tw-dot></span>
-                                <span class="typewriter-text" data-tw-text="Badania w niezale‚îº‚ïùnych laboratoriach"></span>
+                                <span class="typewriter-text" data-tw-text="Badania w niezale+-nych laboratoriach"></span>
                             </li>
                         </ul>
                     </div>
@@ -531,12 +552,12 @@
                 </div>
             </section>
 
-            <!-- 3. Wiedza i Odpowiedzialno‚îº≈§‚îÄ√ß -->
+            <!-- 3. Wiedza i Odpowiedzialno+ç¶Á -->
             <section id="wiedza"
                 class="w-screen flex-shrink-0 overflow-y-auto overflow-x-hidden flex flex-col justify-center items-center px-4 bg-transparent relative"
                 style="height:100vh;">
                 <div class="max-w-7xl mx-auto w-full">
-                    <h2 class="text-6xl lg:text-7xl font-bold mb-20 text-center wiedza-title">Wiedza i Odpowiedzialno‚îº≈§‚îÄ√ß
+                    <h2 class="text-6xl lg:text-7xl font-bold mb-20 text-center wiedza-title">Wiedza i Odpowiedzialno+ç¶Á
                     </h2>
 
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20">
@@ -556,14 +577,14 @@
                             <!-- Description - Hidden until hover -->
                             <p
                                 class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
-                                Dzia‚îº√©amy w oparciu o jasne zasady odpowiedzialno‚îº≈§ci. Wszystkie oferowane przez nas
-                                substancje s‚îÄ≈Ø
-                                odczynnikami chemicznymi przeznaczonymi wy‚îº√©‚îÄ≈Øcznie do cel‚îú‚îÇw badawczych, naukowych i
+                                Dzia+Èamy w oparciu o jasne zasady odpowiedzialno+çci. Wszystkie oferowane przez nas
+                                substancje s¶˘
+                                odczynnikami chemicznymi przeznaczonymi wy+È¶˘cznie do cel+-w badawczych, naukowych i
                                 analitycznych.
                             </p>
                         </div>
 
-                        <!-- Feature 2: Czym s‚îÄ≈Ø peptydy? -->
+                        <!-- Feature 2: Czym s¶˘ peptydy? -->
                         <div
                             class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
                             <!-- Minimalistic Line Icon - Molecular Chain -->
@@ -580,14 +601,14 @@
                                     <line x1="20" y1="32" x2="16" y2="26" />
                                 </svg>
                             </div>
-                            <h3 class="text-lg font-semibold text-white mb-3">Czym s‚îÄ≈Ø peptydy?</h3>
+                            <h3 class="text-lg font-semibold text-white mb-3">Czym s¶˘ peptydy?</h3>
                             <!-- Description - Hidden until hover -->
                             <p
                                 class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
-                                W centrum naszej oferty znajduj‚îÄ≈Ø si‚îÄ√ñ peptydy √î√á√∂ kr‚îú‚îÇtkie ‚îº√©a‚îº√§cuchy aminokwas‚îú‚îÇw
-                                po‚îº√©‚îÄ≈Øczonych
-                                wi‚îÄ≈Øzaniami peptydowymi. Chemicznie stanowi‚îÄ≈Ø one precyzyjne, ‚îº√©atwe do charakterystyki
-                                moleku‚îº√©y.
+                                W centrum naszej oferty znajduj¶˘ si¶÷ peptydy ‘«ˆ kr+-tkie +Èa+‰cuchy aminokwas+-w
+                                po+È¶˘czonych
+                                wi¶˘zaniami peptydowymi. Chemicznie stanowi¶˘ one precyzyjne, +Èatwe do charakterystyki
+                                moleku+Èy.
                             </p>
                         </div>
 
@@ -607,15 +628,15 @@
                             <!-- Description - Hidden until hover -->
                             <p
                                 class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
-                                Kupuj‚îÄ≈Øc produkty BioTune, otrzymuj‚îÄ≈Ø Pa‚îº√§stwo odczynniki, kt‚îú‚îÇrych parametry zosta‚îº√©y
+                                Kupuj¶˘c produkty BioTune, otrzymuj¶˘ Pa+‰stwo odczynniki, kt+-rych parametry zosta+Èy
                                 rzetelnie
-                                zweryfikowane. Regularnie powtarzamy procedury testowe, aby zapewni‚îÄ√ß sta‚îº√©‚îÄ≈Ø jako‚îº≈§‚îÄ√ß
-                                mi‚îÄ√ñdzy
+                                zweryfikowane. Regularnie powtarzamy procedury testowe, aby zapewni¶Á sta+È¶˘ jako+ç¶Á
+                                mi¶÷dzy
                                 seriami.
                             </p>
                         </div>
 
-                        <!-- Feature 4: Potencja‚îº√© peptyd‚îú‚îÇw -->
+                        <!-- Feature 4: Potencja+È peptyd+-w -->
                         <div
                             class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
                             <!-- Minimalistic Line Icon - Rising Graph/Potential -->
@@ -626,13 +647,13 @@
                                     <path d="M32 12h10v10" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-                            <h3 class="text-lg font-semibold text-white mb-3">Potencja‚îº√© peptyd‚îú‚îÇw</h3>
+                            <h3 class="text-lg font-semibold text-white mb-3">Potencja+È peptyd+-w</h3>
                             <!-- Description - Hidden until hover -->
                             <p
                                 class="text-gray-400 text-sm leading-relaxed max-h-0 opacity-0 overflow-hidden transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
-                                Peptydy s‚îÄ≈Ø jedn‚îÄ≈Ø z najbardziej obiecuj‚îÄ≈Øcych grup zwi‚îÄ≈Øzk‚îú‚îÇw we wsp‚îú‚îÇ‚îº√©czesnej chemii
-                                biomolekularnej. Charakteryzuj‚îÄ≈Ø si‚îÄ√ñ zdolno‚îº≈§ci‚îÄ≈Ø do selektywnego oddzia‚îº√©ywania z
-                                okre‚îº≈§lonymi
+                                Peptydy s¶˘ jedn¶˘ z najbardziej obiecuj¶˘cych grup zwi¶˘zk+-w we wsp+-+Èczesnej chemii
+                                biomolekularnej. Charakteryzuj¶˘ si¶÷ zdolno+çci¶˘ do selektywnego oddzia+Èywania z
+                                okre+çlonymi
                                 strukturami biologicznymi.
                             </p>
                         </div>
@@ -642,7 +663,7 @@
                     <div class="text-center wiedza-cta">
                         <a href="shop.html"
                             class="sweep-hover-btn inline-block font-bold py-4 px-10 rounded-lg uppercase tracking-wider transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,0,0,0.4)] hover:-translate-y-1">
-                            Zobacz Ofert‚îÄ√ñ
+                            Zobacz Ofert¶÷
                         </a>
                     </div>
                 </div>
@@ -656,15 +677,15 @@
 
     <!-- Newsletter Section -->
     <section class="newsletter-section">
-        <h2 class="newsletter-title">Do‚îº√©‚îÄ≈Øcz do naszego newslettera</h2>
+        <h2 class="newsletter-title">Do+È¶˘cz do naszego newslettera</h2>
         <form class="newsletter-form">
             <div class="newsletter-input-group">
                 <input type="email" class="newsletter-input" placeholder="Podaj adres email" required>
-                <button type="submit" class="newsletter-button">Zapisz si‚îÄ√ñ</button>
+                <button type="submit" class="newsletter-button">Zapisz si¶÷</button>
             </div>
             <label class="newsletter-consent">
                 <input type="checkbox" required>
-                <span>Wyra‚îº‚ïùam zgod‚îÄ√ñ na przetwarzanie podanych powy‚îº‚ïùej danych osobowych w celu otrzymywania
+                <span>Wyra+-am zgod¶÷ na przetwarzanie podanych powy+-ej danych osobowych w celu otrzymywania
                     newslettera.</span>
             </label>
             <div class="newsletter-feedback"></div>
@@ -679,10 +700,10 @@
     <!-- Contact Section -->
     <section id="contact" class="py-24 bg-black relative overflow-hidden">
         <div class="max-w-3xl mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold mb-8 text-center text-white">SKONTAKTUJ SI‚îÄ≈õ Z NAMI</h2>
+            <h2 class="text-3xl font-bold mb-8 text-center text-white">SKONTAKTUJ SI¶ú Z NAMI</h2>
             <form class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">Imi‚îÄ√ñ</label>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Imi¶÷</label>
                     <input type="text"
                         class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
                 </div>
@@ -692,13 +713,13 @@
                         class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">Wiadomo‚îº≈§‚îÄ√ß</label>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Wiadomo+ç¶Á</label>
                     <textarea rows="4"
                         class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white"></textarea>
                 </div>
                 <button type="button"
-                    class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">WY‚îº√úLIJ
-                    WIADOMO‚îº√ú‚îÄƒá</button>
+                    class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">WY+‹LIJ
+                    WIADOMO+‹¶Ê</button>
             </form>
         </div>
     </section>
@@ -720,8 +741,8 @@
                             <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="absolute top-1/2 -translate-y-1/2 -left-3 h-60 w-auto pointer-events-none max-w-none">
                         </a>
                     <p class="text-gray-400 leading-relaxed max-w-sm">
-                        Ekspert w dziedzinie odczynnik‚îú‚îÇw chemicznych do cel‚îú‚îÇw laboratoryjnych i innowacyjnych rozwi‚îÄ≈Øza‚îº√§
-                        badawczych. Dostarczamy najwy‚îº‚ïùsz‚îÄ≈Ø jako‚îº≈§‚îÄ√ß potwierdzon‚îÄ≈Ø dokumentacj‚îÄ≈Ø.
+                        Ekspert w dziedzinie odczynnik+-w chemicznych do cel+-w laboratoryjnych i innowacyjnych rozwi¶˘za+‰
+                        badawczych. Dostarczamy najwy+-sz¶˘ jako+ç¶Á potwierdzon¶˘ dokumentacj¶˘.
                     </p>
                 </div>
 
@@ -730,7 +751,7 @@
                     <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Kategorie</h4>
                     <ul class="space-y-4">
                         <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors text-sm">Strona
-                                g‚îº√©‚îú‚îÇwna</a></li>
+                                g+È+-wna</a></li>
                         <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">O
                                 nas</a></li>
                         <li><a href="shop.html"
@@ -747,7 +768,7 @@
                         </li>
                         <li><a href="privacy.html"
                                 class="text-gray-400 hover:text-white transition-colors text-sm">Polityka
-                                prywatno‚îº≈§ci</a></li>
+                                prywatno+çci</a></li>
                         <li><a href="#contact"
                                 class="text-gray-400 hover:text-white transition-colors text-sm">Kontakt</a></li>
                     </ul>
@@ -791,7 +812,7 @@
             </div>
 
             <div class="mt-8 text-center md:text-left text-[11px] text-gray-500 font-mono">
-                &copy; 2026 BioTune. Wszelkie prawa zastrze‚îº‚ïùone. Projekt o charakterze wy‚îº√©‚îÄ≈Øcznie badawczym i naukowym.
+                &copy; 2026 BioTune. Wszelkie prawa zastrze+-one. Projekt o charakterze wy+È¶˘cznie badawczym i naukowym.
             </div>
         </div>
     </footer>
@@ -801,7 +822,7 @@
     <div id="cart-drawer"
         class="fixed inset-y-0 right-0 w-full sm:w-96 bg-black border-l border-white/10 transform translate-x-full transition-transform duration-300 z-[60] shadow-2xl flex flex-col text-white">
         <div class="p-6 border-b border-white/10 flex justify-between items-center">
-            <h2 class="text-xl font-bold">Tw‚îú‚îÇj Koszyk</h2>
+            <h2 class="text-xl font-bold">Tw+-j Koszyk</h2>
             <button id="close-cart" class="text-gray-400 hover:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -810,13 +831,13 @@
             </button>
         </div>
         <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-            <p class="text-center text-gray-500 mt-10">Tw‚îú‚îÇj koszyk jest pusty.</p>
+            <p class="text-center text-gray-500 mt-10">Tw+-j koszyk jest pusty.</p>
         </div>
         <div class="p-6 border-t border-white/10 bg-black/20">
             <div class="flex justify-between items-center mb-4 text-lg font-bold"><span>Suma:</span><span
                     id="cart-total">0.00 PLN</span></div>
             <button id="checkout-btn"
-                class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">Przejd‚îº‚ïë
+                class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">Przejd+¶
                 do kasy</button>
         </div>
     </div>
@@ -1038,7 +1059,7 @@
                             if (progressBar) {
                                 progressBar.style.transform = `scaleX(${self.progress})`;
                             }
-                            // Trigger Precyzja animation early √î√á√∂ as soon as section 2 starts to appear
+                            // Trigger Precyzja animation early ‘«ˆ as soon as section 2 starts to appear
                             if (self.progress > 0.15 && !window.precyzjaAnimated) {
                                 window.precyzjaAnimated = true;
                                 document.querySelectorAll('.precyzja-word').forEach((word, idx) => {
@@ -1086,7 +1107,7 @@
 
             // Precyzja animation is handled via onUpdate in ScrollTrigger above
 
-            // √î√∂√á√î√∂√á Typewriter cascade √î√∂√á√î√∂√á
+            // ‘ˆ«‘ˆ« Typewriter cascade ‘ˆ«‘ˆ«
             window.typewriterDone = false;
 
             window.startTypewriterCascade = function () {

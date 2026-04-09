@@ -312,3 +312,32 @@ document.addEventListener('DOMContentLoaded', () => {
         animObserver.observe(el);
     });
 });
+
+    // Hamburger Menu Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+    
+    if (mobileMenuBtn && mobileMenuPanel) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuPanel.classList.toggle('hidden');
+            document.body.style.overflow = mobileMenuPanel.classList.contains('hidden') ? '' : 'hidden';
+            
+            // Transform hamburger to X
+            const svg = mobileMenuBtn.querySelector('svg');
+            if (mobileMenuPanel.classList.contains('hidden')) {
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            } else {
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            }
+        });
+        
+        // Close menu on link click
+        mobileMenuPanel.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuPanel.classList.add('hidden');
+                document.body.style.overflow = '';
+                const svg = mobileMenuBtn.querySelector('svg');
+                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+            });
+        });
+    }

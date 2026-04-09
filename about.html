@@ -340,7 +340,7 @@
         }
         .desc-left { flex: 1; }
         .desc-left h2 {
-            font-size: 2rem;
+            font-size: clamp(1.2rem, 0.8rem + 1.5vw, 2rem);
             font-weight: 500;
             color: #ffffff;
             margin-bottom: 0.25rem;
@@ -353,7 +353,7 @@
             flex-shrink: 0;
         }
         .desc-right p {
-            font-size: 1.6rem;
+            font-size: clamp(1rem, 0.7rem + 1.2vw, 1.6rem);
             font-weight: 300;
             color: #ffffff;
             line-height: 1.5;
@@ -372,7 +372,7 @@
             letter-spacing: -0.01em;
         }
         .purity-prefix {
-            font-size: 2.4rem;
+            font-size: clamp(1.6rem, 1rem + 2vw, 2.4rem);
             font-weight: 700;
             color: #ffffff;
             line-height: 1;
@@ -380,7 +380,7 @@
             transition: opacity 0.3s ease;
         }
         .purity-number {
-            font-size: 2.4rem;
+            font-size: clamp(1.6rem, 1rem + 2vw, 2.4rem);
             font-weight: 700;
             color: #ffffff;
             line-height: 1;
@@ -389,7 +389,7 @@
             text-align: right;
         }
         .purity-percent {
-            font-size: 2.4rem;
+            font-size: clamp(1.6rem, 1rem + 2vw, 2.4rem);
             font-weight: 700;
             color: #ffffff;
             line-height: 1;
@@ -467,7 +467,67 @@
             .img-wrapper { width: 100%; right: 0; top: 55%; height: 45vh; border-radius: 0; }
             .desc-row { flex-direction: column; gap: 1.5rem; }
             .desc-right { text-align: left; }
-            .desc-left h2 { font-size: 1.5rem; }
+            .desc-left h2 { font-size: clamp(1.2rem, 0.8rem + 1.5vw, 1.5rem); }
+        }
+        
+        /* MOBILE STACKED OVERLAPPING LAYOUT */
+        @media (max-width: 768px) {
+            .master-scroll, .master-sticky, #h-scroll-track {
+                height: auto !important;
+                position: relative !important;
+                overflow: visible !important;
+            }
+            #section-misja {
+                position: relative !important;
+                height: auto !important;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            #section-quality {
+                position: relative !important;
+                transform: none !important;
+                height: auto !important;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                margin-top: -10vh; /* overlap effect */
+                padding-top: 15vh;
+                z-index: 10;
+                background: linear-gradient(to bottom, transparent 0%, black 15vh, black 100%);
+            }
+            .bottom-section {
+                position: relative !important;
+                top: auto !important;
+                transform: none !important;
+                margin-top: -10vh; /* overlap effect */
+            }
+            .bottom-inner {
+                padding-top: 15vh;
+                padding-bottom: 0 !important;
+                margin-bottom: 0 !important;
+                border-radius: 40px 40px 0 0 !important;
+                min-height: auto;
+            }
+            .img-wrapper {
+                position: relative !important;
+                width: 100% !important;
+                height: 50vh !important;
+                margin-top: 2rem;
+                top: auto !important;
+            }
+            .desc-overlay {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                width: 100% !important;
+                opacity: 1 !important;
+                pointer-events: auto !important;
+                padding: 2rem 1rem;
+            }
+            .grid-cols-2 { grid-template-columns: 1fr !important; }
+            #scroll-progress-container { display: none !important; }
         }
     </style>
 </head>
@@ -482,9 +542,15 @@
     <nav
         class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-24 min-w-[1000px]">
+            <div class="flex items-center justify-between h-24 ">
                 <!-- Left: Navigation Links -->
+                
+                <!-- Hamburger Button (Mobile) -->
+                <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 hover:text-biotune-red transition-colors z-[210] relative flex-shrink-0">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
                 <div class="hidden md:flex items-center space-x-6 relative z-10 flex-shrink-0">
+
                     <a href="index.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
                         główna</a>
@@ -618,7 +684,22 @@
                 </div>
             </div>
         </div>
+    
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu-panel" class="mobile-menu hidden fixed inset-0 z-[200]">
+            <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
+                <a href="index.html" class="hover:text-biotune-red transition-colors font-bold">Strona główna</a>
+                <a href="shop.html" class="hover:text-biotune-red transition-colors font-bold">Sklep</a>
+                <a href="about.html" class="hover:text-biotune-red transition-colors font-bold">O Nas</a>
+                <a href="quality.html" class="hover:text-biotune-red transition-colors font-bold">Jakość</a>
+                
+                <div class="h-px w-24 bg-white/20 my-4"></div>
+                
+                <a href="login.html" class="hover:text-biotune-red transition-colors text-lg text-gray-400">Moje konto</a>
+            </div>
+        </div>
     </nav>
+
 
     <!-- Content Blur Overlay for scroll effect -->
     <div class="content-blur-overlay" id="content-blur"></div>
@@ -678,9 +759,9 @@
                     <div class="w-full lg:w-1/2 p-6 lg:p-10 flex flex-col justify-center h-[100vh] relative z-10" id="intro-text">
                         <h2 class="text-sm font-mono text-biotune-red mb-6 tracking-[0.2em] uppercase">Jakość i Kontrola</h2>
                         <div class="hero-v3-anim mb-6">
-                            <div class="overflow-hidden pb-4"><span class="inline-block text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black text-white leading-[0.85] tracking-tighter precyzja-word" style="transform:translateY(110%)">Precyzja</span></div>
-                            <div class="overflow-hidden pb-4"><span class="inline-block text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black text-white leading-[0.85] tracking-tighter precyzja-word" style="transform:translateY(110%)">w każdym</span></div>
-                            <div class="overflow-hidden pb-4"><span class="inline-block text-[4rem] md:text-[5.5rem] lg:text-[7rem] font-black text-white leading-[0.85] tracking-tighter precyzja-word" style="transform:translateY(110%)">miligramie</span></div>
+                            <div class="overflow-hidden pb-4"><span class="inline-block font-black text-white leading-[0.85] tracking-tighter precyzja-word" style="font-size: clamp(3rem, 1.5rem + 5vw, 7rem); transform:translateY(110%)">Precyzja</span></div>
+                            <div class="overflow-hidden pb-4"><span class="inline-block font-black text-white leading-[0.85] tracking-tighter precyzja-word" style="font-size: clamp(3rem, 1.5rem + 5vw, 7rem); transform:translateY(110%)">w każdym</span></div>
+                            <div class="overflow-hidden pb-4"><span class="inline-block font-black text-white leading-[0.85] tracking-tighter precyzja-word" style="font-size: clamp(3rem, 1.5rem + 5vw, 7rem); transform:translateY(110%)">miligramie</span></div>
                         </div>
                         <div class="prose prose-invert prose-lg text-gray-400">
                             <p class="leading-relaxed mb-6 block desc-anim-word" style="opacity: 0; transform: translateY(30px); will-change: transform, opacity;">Każda partia naszych produktów przechodzi rygorystyczne testy czystości (HPLC) oraz identyfikacji strukturalnej (MS). Dzięki temu masz pewność, że pracujesz na materiale o najwyższym standardzie.</p>
@@ -910,6 +991,7 @@
 
             gsap.set(imgEl, { clearProps: "all" });
             gsap.set("#h-scroll-track", { clearProps: "all" });
+            gsap.set("#section-quality", { clearProps: "all" });
             gsap.set("#img-wrapper", { clearProps: "all" });
             gsap.set("#intro-text", { clearProps: "all" });
             gsap.set("#img-darken", { clearProps: "all" });
@@ -920,6 +1002,53 @@
             gsap.set('.wiedza-title', { opacity: 0, y: -30 });
             gsap.set('.wiedza-item', { opacity: 0, y: 50 });
             gsap.set('.wiedza-cta', { opacity: 0, scale: 0.8 });
+            
+            if (window.innerWidth < 768) {
+                // MOBILE GSAP ANIMATIONS
+                gsap.set('.precyzja-word', { transition: 'none' });
+                ScrollTrigger.create({
+                    trigger: '#intro-text', start: "top 80%",
+                    onEnter: () => {
+                        document.querySelectorAll('.precyzja-word').forEach((w, i) => {
+                            setTimeout(() => {
+                                w.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                                w.style.transform = 'translateY(0%)';
+                            }, i * 150);
+                        });
+                        setTimeout(() => {
+                            const desc = document.querySelector('.desc-anim-word');
+                            if (desc) {
+                                desc.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                                desc.style.opacity = '1';
+                                desc.style.transform = 'translateY(0)';
+                            }
+                        }, 450);
+                        setTimeout(() => { if(window.startTypewriterCascade) window.startTypewriterCascade(); }, 700);
+                    }
+                });
+                
+                ScrollTrigger.create({
+                    trigger: '#desc-overlay', start: "top 80%",
+                    onEnter: () => {
+                        if (window.startCountingAnimation) window.startCountingAnimation();
+                    }
+                });
+                
+                ScrollTrigger.create({
+                    trigger: '#bottom-section', start: "top 70%",
+                    onEnter: () => {
+                        document.querySelectorAll('.wiedza-anim-word').forEach((word, idx) => {
+                            setTimeout(() => {
+                                word.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                                word.style.transform = 'translateY(0%)';
+                            }, idx * 150);
+                        });
+                        gsap.to('.wiedza-item', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', delay: 0.8 });
+                        gsap.to('.wiedza-cta', { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.6 });
+                    }
+                });
+                return; // SKIP DESKTOP SCROLL ARCHITECTURE
+            }
 
             gsap.set(imgEl, { objectFit: "contain", transformOrigin: "50% 0%" });
 

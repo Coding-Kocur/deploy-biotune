@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl" class="scroll-smooth dark">
 
 <head>
@@ -15,13 +15,13 @@
             
             window.addEventListener('load', function() {
                 setTimeout(function() {
-                    let pw = prompt("Dostęp chroniony. Proszę podać kod dostępu:");
+                    let pw = prompt("Dost�p chroniony. Prosz� poda� kod dost�pu:");
                     if (pw === "Nadja7072") {
                         sessionStorage.setItem('biotune_access_granted', 'true');
                         document.documentElement.style.opacity = '1';
                         document.documentElement.style.pointerEvents = 'auto';
                     } else {
-                        document.body.innerHTML = "<div style='display:flex;justify-content:center;align-items:center;height:100vh;background:#030303;color:#ff0000;font-family:monospace;font-size:1.5rem;text-align:center;'>Brak dostępu / Ochrona kodem</div>";
+                        document.body.innerHTML = "<div style='display:flex;justify-content:center;align-items:center;height:100vh;background:#030303;color:#ff0000;font-family:monospace;font-size:1.5rem;text-align:center;'>Brak dost�pu / Ochrona kodem</div>";
                         document.documentElement.style.opacity = '1';
                         document.documentElement.style.pointerEvents = 'auto';
                     }
@@ -67,13 +67,13 @@
                 <h1 class="text-4xl font-bold">Panel Administracyjny</h1>
                 <a href="index.html"
                     class="bg-biotune-red text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors">
-                    ←  Powrót do sklepu
+                    � � Powr�t do sklepu
                 </a>
             </div>
 
             <!-- Stock Management Section -->
             <div class="glass rounded-xl p-6 mb-8">
-                <h2 class="text-2xl font-bold mb-4">Zarządzanie Magazynem</h2>
+                <h2 class="text-2xl font-bold mb-4">Zarz�dzanie Magazynem</h2>
 
                 <div class="overflow-x-auto">
                     <table class="admin-table">
@@ -96,11 +96,11 @@
                 <div class="mt-6 flex gap-4">
                     <button onclick="saveChanges()"
                         class="bg-biotune-red text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors font-bold">
-                        đź’ľ Zapisz Zmiany
+                        💾 Zapisz Zmiany
                     </button>
                     <button onclick="exportData()"
                         class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-bold">
-                        đź“Ą Eksportuj Dane
+                        📥 Eksportuj Dane
                     </button>
                 </div>
             </div>
@@ -140,7 +140,7 @@
 
                 <button onclick="addNewProduct()"
                     class="mt-4 bg-biotune-red text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors font-bold">
-                    âž• Dodaj Produkt
+                    ➕ Dodaj Produkt
                 </button>
             </div>
         </div>

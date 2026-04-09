@@ -369,9 +369,15 @@
     <nav
         class="fixed top-0 w-full z-50 glass hero-glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-24 min-w-[1000px]">
+            <div class="flex items-center justify-between h-24 ">
                 <!-- Left: Navigation Links -->
+                
+                <!-- Hamburger Button (Mobile) -->
+                <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 hover:text-biotune-red transition-colors z-[210] relative flex-shrink-0">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
                 <div class="hidden md:flex items-center space-x-6 relative z-10 flex-shrink-0">
+
                     <a href="index.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
                         główna</a>
@@ -505,7 +511,22 @@
                 </div>
             </div>
         </div>
+    
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu-panel" class="mobile-menu hidden fixed inset-0 z-[200]">
+            <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
+                <a href="index.html" class="hover:text-biotune-red transition-colors font-bold">Strona główna</a>
+                <a href="shop.html" class="hover:text-biotune-red transition-colors font-bold">Sklep</a>
+                <a href="about.html" class="hover:text-biotune-red transition-colors font-bold">O Nas</a>
+                <a href="quality.html" class="hover:text-biotune-red transition-colors font-bold">Jakość</a>
+                
+                <div class="h-px w-24 bg-white/20 my-4"></div>
+                
+                <a href="login.html" class="hover:text-biotune-red transition-colors text-lg text-gray-400">Moje konto</a>
+            </div>
+        </div>
     </nav>
+
 
     <!-- Content Blur Overlay for scroll effect -->
     <div class="content-blur-overlay" id="content-blur"></div>
