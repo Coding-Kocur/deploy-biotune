@@ -1,7 +1,35 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl" class="scroll-smooth dark">
 
 <head>
+
+    <script>
+        // Access Code Protection
+        (function() {
+            if (sessionStorage.getItem('biotune_access_granted') === 'true') return;
+            
+            // Hide everything immediately to prevent flashing content
+            document.documentElement.style.opacity = '0';
+            document.documentElement.style.pointerEvents = 'none';
+            document.documentElement.style.transition = 'opacity 0.2s';
+            
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    let pw = prompt("Dostęp chroniony. Proszę podać kod dostępu:");
+                    if (pw === "Nadja7072") {
+                        sessionStorage.setItem('biotune_access_granted', 'true');
+                        document.documentElement.style.opacity = '1';
+                        document.documentElement.style.pointerEvents = 'auto';
+                    } else {
+                        document.body.innerHTML = "<div style='display:flex;justify-content:center;align-items:center;height:100vh;background:#030303;color:#ff0000;font-family:monospace;font-size:1.5rem;text-align:center;'>Brak dostępu / Ochrona kodem</div>";
+                        document.documentElement.style.opacity = '1';
+                        document.documentElement.style.pointerEvents = 'auto';
+                    }
+                }, 100);
+            });
+        })();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regulamin - BioTune</title>
@@ -418,9 +446,10 @@
         </form>
     </section>
 
-    
+        </div><!-- END .page-content-wrapper -->
+
     <!-- Footer -->
-    <footer class="bg-[#121212] pt-16 pb-8 border-t border-white/10 relative overflow-hidden z-20 w-full mt-12 mb-0">
+    <footer class="reveal-footer bg-[#121212] pt-16 pb-8 border-t border-white/10 relative overflow-hidden w-full mt-0 mb-0">
         <!-- Glowing Background orb -->
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-biotune-red/5 blur-[120px] rounded-full pointer-events-none"></div>
 
@@ -429,9 +458,9 @@
 
                 <!-- Logo & Bio -->
                 <div class="lg:col-span-2">
-                    <a href="index.html" class="inline-block mb-6">
-                        <span class="text-3xl font-bold text-white tracking-tighter">Bio<span class="text-biotune-red">Tune</span></span>
-                    </a>
+                    <a href="index.html" class="inline-flex relative h-12 w-48 mb-6 items-center cursor-pointer">
+                            <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="absolute top-1/2 -translate-y-1/2 -left-3 h-60 w-auto pointer-events-none max-w-none">
+                        </a>
                     <p class="text-gray-400 leading-relaxed max-w-sm">
                         Ekspert w dziedzinie odczynników chemicznych do celów laboratoryjnych i innowacyjnych rozwiązań badawczych. Dostarczamy najwyższą jakość potwierdzoną dokumentacją.
                     </p>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pl" class="dark" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioTune - 404 Not Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'biotune-black': '#0a0a0a',
+                        'biotune-dark': '#1a1a1a',
+                        'biotune-red': '#ff0000',
+                        'biotune-text': '#cccccc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .glass {
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-hover:hover {
+            border-color: #ff0000;
+            transform: translateY(-4px);
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .logo-img {
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.3));
+        }
+
+        .dark .logo-img {
+            filter: brightness(1.15) contrast(0.9);
+        }
+
+        .dark .logo-img:hover {
+            filter: brightness(1.15) contrast(0.9) drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .dark ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff0000;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel='icon' type='image/png' href='../assets/favicon.png'>
+
+    <style>
+        /* Custom glitter background - EXACT COPY from custom chrome page with red colors */
+        body {
+            background: #000 !important;
+            overflow: hidden;
+        }
+        
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255, 0, 0, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 90%, rgba(255, 0, 0, 0.06) 0%, transparent 60%);
+        }
+
+        /* Floating orbs - EXACT COPY from custom chrome page with red colors */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 0, 0, 0.12);
+            top: 10%;
+            left: -5%;
+            animation: float1 20s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 0, 0, 0.1);
+            bottom: 10%;
+            right: -5%;
+            animation: float2 25s ease-in-out infinite;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 0, 0, 0.08);
+            top: 50%;
+            left: 40%;
+            animation: float3 18s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            33% {
+                transform: translate(60px, 40px);
+            }
+
+            66% {
+                transform: translate(-30px, 80px);
+            }
+        }
+
+        @keyframes float2 {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            33% {
+                transform: translate(-50px, -30px);
+            }
+
+            66% {
+                transform: translate(40px, -60px);
+            }
+        }
+
+        @keyframes float3 {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(70px, -50px);
+            }
+        }
+
+        /* 404 Content Styles */
+        .error-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-code {
+            font-size: 12rem;
+            font-weight: 900;
+            line-height: 1;
+            color: #ff0000;
+            text-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+            margin-bottom: 1rem;
+        }
+
+        .error-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .error-button {
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid rgba(255, 0, 0, 0.4);
+            color: white;
+            padding: 1rem 3rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 2rem;
+        }
+
+        .error-button:hover {
+            background: rgba(255, 0, 0, 0.4);
+            border-color: #ff0000;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased selection:bg-biotune-red selection:text-white transition-colors duration-300 overflow-hidden">
+    <!-- Glitter Background Elements -->
+    <div class="bg-pattern"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-24">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="../index.html" class="flex items-center space-x-3">
+                        <img src="../assets/logo.png" alt="BioTune Logo" class="h-12 w-auto logo-img">
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">BioTune</span>
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="../index.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona główna</a>
+                    <a href="../shop.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Sklep</a>
+                    <a href="../about.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">O nas</a>
+                    <a href="../contact.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-gray-500 hover:text-biotune-red">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 404 Content -->
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-title">Not Found</div>
+        <a href="../index.html" class="error-button">Go to Homepage</a>
+    </div>
+
+    <!-- JavaScript for mouse-responsive glitter -->
+    <script>
+        // Make glitter animation responsive to mouse movement
+        document.addEventListener('mousemove', function(e) {
+            const orbs = document.querySelectorAll('.orb');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            orbs.forEach((orb, index) => {
+                // Calculate movement based on mouse position
+                const moveX = (mouseX - 0.5) * 40;
+                const moveY = (mouseY - 0.5) * 40;
+                
+                // Apply different movement intensity for each orb
+                const intensity = [0.8, 0.6, 0.4][index] || 0.5;
+                
+                // Update transform with mouse movement
+                orb.style.transform = `translate(${moveX * intensity}px, ${moveY * intensity}px)`;
+            });
+        });
+
+        // Reset position when mouse leaves
+        document.addEventListener('mouseleave', function() {
+            const orbs = document.querySelectorAll('.orb');
+            orbs.forEach(orb => {
+                orb.style.transform = 'translate(0, 0)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -289,31 +289,26 @@ class WishlistManager {
 
 window.wishlistManager = new WishlistManager();
 
-// Navbar Zoom Resistance Scaling Logic
-function adjustNavScale() {
-    const row = document.getElementById('navbar-main-row');
-    if (!row) return;
+// Global Generic Reveal Animation for Newsletter and Contact forms
+document.addEventListener('DOMContentLoaded', () => {
+    const animObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('global-anim-reveal');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
 
-    const viewportWidth = window.innerWidth;
-    const targetWidth = 1200; // Optimal width for the 3-column layout
-
-    if (viewportWidth < targetWidth) {
-        const scale = viewportWidth / targetWidth;
-        row.style.width = targetWidth + 'px';
-        row.style.transform = `scale(${scale})`;
-        row.style.position = 'absolute';
-        row.style.left = '50%';
-        row.style.marginLeft = `-${targetWidth / 2}px`;
-    } else {
-        row.style.width = '';
-        row.style.transform = '';
-        row.style.position = '';
-        row.style.left = '';
-        row.style.marginLeft = '';
-    }
-}
-
-window.addEventListener('resize', adjustNavScale);
-window.addEventListener('load', () => {
-    setTimeout(adjustNavScale, 100);
+    const targets = document.querySelectorAll('.newsletter-section > *, #contact .max-w-3xl > *');
+    targets.forEach(el => {
+        el.classList.add('global-anim-hidden');
+        
+        // Calculate delay based on index relative to parent
+        const children = Array.from(el.parentElement.children);
+        const idx = children.indexOf(el);
+        el.style.transitionDelay = `${idx * 0.15}s`;
+        
+        animObserver.observe(el);
+    });
 });

@@ -1,7 +1,35 @@
 <!DOCTYPE html>
-<html lang="pl" class="dark" style="scroll-behavior: smooth;">
+<html lang="pl" class="dark">
 
 <head>
+
+    <script>
+        // Access Code Protection
+        (function() {
+            if (sessionStorage.getItem('biotune_access_granted') === 'true') return;
+            
+            // Hide everything immediately to prevent flashing content
+            document.documentElement.style.opacity = '0';
+            document.documentElement.style.pointerEvents = 'none';
+            document.documentElement.style.transition = 'opacity 0.2s';
+            
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    let pw = prompt("Dostęp chroniony. Proszę podać kod dostępu:");
+                    if (pw === "Nadja7072") {
+                        sessionStorage.setItem('biotune_access_granted', 'true');
+                        document.documentElement.style.opacity = '1';
+                        document.documentElement.style.pointerEvents = 'auto';
+                    } else {
+                        document.body.innerHTML = "<div style='display:flex;justify-content:center;align-items:center;height:100vh;background:#030303;color:#ff0000;font-family:monospace;font-size:1.5rem;text-align:center;'>Brak dostępu / Ochrona kodem</div>";
+                        document.documentElement.style.opacity = '1';
+                        document.documentElement.style.pointerEvents = 'auto';
+                    }
+                }, 100);
+            });
+        })();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BioTune - Precyzja w każdym mikrogramie</title>
@@ -27,8 +55,8 @@
     <style>
         .glass {
             background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
@@ -160,10 +188,14 @@
         /* PNG Color-Safe Inversion: Inverts only the 'Tune' part to White */
         .logo-white-overlay {
             transition: opacity 0.4s ease;
-            filter: brightness(0) invert(1);
-            --logo-split-percent: 39%;
-            clip-path: inset(0 0 0 var(--logo-split-percent));
+            background-color: white;
+            -webkit-mask: url('./assets/biotune-logo-dark-mode.png') no-repeat center;
+            mask: url('./assets/biotune-logo-dark-mode.png') no-repeat center;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            --logo-split-percent: 41%;
             -webkit-clip-path: inset(0 0 0 var(--logo-split-percent));
+            clip-path: inset(0 0 0 var(--logo-split-percent));
         }
         .nav-inverted .logo-white-overlay {
             opacity: 1 !important;
@@ -333,12 +365,13 @@
 <body
     class="bg-gray-50 text-gray-900 dark:bg-biotune-black dark:text-white font-sans antialiased selection:bg-biotune-red selection:text-white transition-colors duration-300 overflow-x-hidden">
 
+    <div class="page-content-wrapper">
     <nav
         class="fixed top-0 w-full z-50 glass hero-glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="navbar-main-row" class="flex items-center justify-between h-24 min-w-[1100px] gap-8 nav-auto-scale">
+            <div class="flex items-center justify-between h-24 min-w-[1000px]">
                 <!-- Left: Navigation Links -->
-                <div class="hidden md:flex items-center space-x-6 relative z-10 flex-1 justify-start">
+                <div class="hidden md:flex items-center space-x-6 relative z-10 flex-shrink-0">
                     <a href="index.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
                         główna</a>
@@ -396,27 +429,23 @@
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
                 </div>
 
-                <!-- Center: Logo (Refactored to flex for zoom stability) -->
-                <div class="relative z-10 flex-shrink-0">
+                <!-- Center: Logo -->
+                <div class="absolute left-1/2 transform -translate-x-1/2">
                     <a href="index.html" class="relative block">
                         <!-- Original Logo -->
                         <img id="nav-logo-anim" src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
                             class="h-60 w-auto logo-dynamic">
                         
                         <!-- Overlay for "Tune" part (White transition) -->
-                        <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none">
+                        <div class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none">
+                        </div>
                     </a>
                 </div>
 
                 <!-- Right: Icons -->
-                <div class="flex items-center gap-4 relative z-10 flex-1 justify-end">
-                    <div class="relative group hidden md:block">
-                        <input type="text" placeholder="Szukaj..."
-                            class="bg-white/50 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-full py-1 px-4 text-sm focus:outline-none focus:border-biotune-red transition-colors w-32 focus:w-48 text-black dark:text-white">
-                    </div>
+                <div class="flex items-center gap-4 ml-auto relative z-10 flex-shrink-0">
                     <div class="account-dropdown">
-                        <a href="login.html" id="account-link" class="hover:text-biotune-red transition-colors">
+                        <a href="login.html" id="account-link" class="hover:text-biotune-red transition-colors" title="Moje konto" aria-label="Moje konto">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -438,7 +467,7 @@
                         </div>
                     </div>
                     <div class="relative group flex items-center">
-                        <button id="wishlist-trigger" class="relative hover:text-biotune-red transition-colors">
+                        <button id="wishlist-trigger" class="relative hover:text-biotune-red transition-colors" title="Lista życzeń" aria-label="Lista życzeń">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -459,7 +488,7 @@
                     </div>
                     <!-- Cart with tooltip -->
                     <div class="relative group">
-                        <button id="cart-trigger" class="relative hover:text-biotune-red transition-colors">
+                        <button id="cart-trigger" class="relative hover:text-biotune-red transition-colors" title="Koszyk" aria-label="Koszyk">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -487,7 +516,7 @@
         <div class="split-container z-10">
             <!-- Panel 1: Misja BioTune (was SARM) -->
             <div class="split-panel">
-                <div class="split-bg" style="background-image: url('./assets/hero/slide-3.jpg');"></div>
+                <div class="split-bg bg-[url('./assets/hero/slide-3.jpg')]"></div>
                 <div class="split-content">
                     <h2 class="split-title">Misja BioTune</h2>
                     <p class="split-desc text-gray-300 mb-6 max-w-sm mx-auto">Dostarczamy najwyższej jakości rozwiązania do
@@ -504,7 +533,7 @@
 
             <!-- Panel 2: Peptydy -->
             <div class="split-panel">
-                <div class="split-bg" style="background-image: url('./assets/hero/slide-1.jpg');"></div>
+                <div class="split-bg bg-[url('./assets/hero/slide-1.jpg')]"></div>
                 <div class="split-content">
                     <h2 class="split-title">Peptydy</h2>
                     <p class="split-desc text-gray-300 mb-6 max-w-sm mx-auto">Najwyższej jakości zsyntetyzowane łańcuchy
@@ -521,7 +550,7 @@
 
             <!-- Panel 3: Badania (was Lab Gear) -->
             <div class="split-panel">
-                <div class="split-bg" style="background-image: url('./assets/hero/slide-2.png');"></div>
+                <div class="split-bg bg-[url('./assets/hero/slide-2.png')]"></div>
                 <div class="split-content">
                     <h2 class="split-title">Badania</h2>
                     <p class="split-desc text-gray-300 mb-6 max-w-sm mx-auto">Transparentność i pełna dokumentacja wyników testów
@@ -550,11 +579,11 @@
         <h2 class="newsletter-title">Dołącz do naszego newslettera</h2>
         <form class="newsletter-form">
             <div class="newsletter-input-group">
-                <input type="email" class="newsletter-input" placeholder="Podaj adres email" required>
+                <input type="email" class="newsletter-input" placeholder="Podaj adres email" required title="Podaj adres email">
                 <button type="submit" class="newsletter-button">Zapisz się</button>
             </div>
             <label class="newsletter-consent">
-                <input type="checkbox" required>
+                <input type="checkbox" required title="Zgoda na newsletter">
                 <span>Wyrażam zgodę na przetwarzanie podanych powyżej danych osobowych w celu otrzymywania
                     newslettera.</span>
             </label>
@@ -571,18 +600,18 @@
             <h2 class="text-3xl font-bold mb-8 text-center text-white">SKONTAKTUJ SIĘ Z NAMI</h2>
             <form class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">Imię</label>
-                    <input type="text"
+                    <label for="contact-name" class="block text-sm font-medium text-gray-400 mb-1">Imię</label>
+                    <input id="contact-name" name="name" title="Imię" type="text"
                         class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">Email</label>
-                    <input type="email"
+                    <label for="contact-email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                    <input id="contact-email" name="email" title="Email" type="email"
                         class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-1">Wiadomość</label>
-                    <textarea rows="4"
+                    <label for="contact-msg" class="block text-sm font-medium text-gray-400 mb-1">Wiadomość</label>
+                    <textarea id="contact-msg" name="message" title="Wiadomość" rows="4"
                         class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white"></textarea>
                 </div>
                 <button type="button"
@@ -592,9 +621,10 @@
         </div>
     </section>
 
+    </div><!-- END .page-content-wrapper -->
 
     <!-- Footer -->
-    <footer class="bg-[#121212] pt-16 pb-8 border-t border-white/10 relative overflow-hidden z-20 w-full mt-12 mb-0">
+    <footer class="reveal-footer bg-[#121212] pt-16 pb-8 border-t border-white/10 relative overflow-hidden w-full mt-0 mb-0">
         <!-- Glowing Background orb -->
         <div
             class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-biotune-red/5 blur-[120px] rounded-full pointer-events-none">
@@ -605,10 +635,9 @@
 
                 <!-- Logo & Bio -->
                 <div class="lg:col-span-2">
-                    <a href="index.html" class="inline-block mb-6">
-                        <span class="text-3xl font-bold text-white tracking-tighter">Bio<span
-                                class="text-biotune-red">Tune</span></span>
-                    </a>
+                    <a href="index.html" class="inline-flex relative h-12 w-48 mb-6 items-center cursor-pointer">
+                            <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="absolute top-1/2 -translate-y-1/2 -left-3 h-60 w-auto pointer-events-none max-w-none">
+                        </a>
                     <p class="text-gray-400 leading-relaxed max-w-sm">
                         Ekspert w dziedzinie odczynników chemicznych do celów laboratoryjnych i innowacyjnych rozwiązań
                         badawczych. Dostarczamy najwyższą jakość potwierdzoną dokumentacją.
@@ -670,7 +699,7 @@
 
                 <div class="flex items-center gap-6">
                     <!-- Instagram -->
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors" title="Instagram" aria-label="Instagram">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path fill-rule="evenodd"
                                 d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
@@ -691,7 +720,7 @@
         class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white dark:bg-biotune-dark border-l border-black/10 dark:border-white/10 transform translate-x-full transition-transform duration-300 z-[60] shadow-2xl flex flex-col text-black dark:text-white">
         <div class="p-6 border-b border-black/10 dark:border-white/10 flex justify-between items-center">
             <h2 class="text-xl font-bold">Twój Koszyk</h2>
-            <button id="close-cart" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white">
+            <button id="close-cart" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white" title="Zamknij koszyk" aria-label="Zamknij koszyk">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -729,7 +758,7 @@
 
         // Navbar scroll effect
         const nav = document.querySelector('nav.glass');
-        const sections = document.querySelectorAll('section, [class*="bg-"], .py-24');
+        const lightSections = document.querySelectorAll('.bg-white, .bg-gray-50, .bg-gray-100');
 
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -739,29 +768,21 @@
             }
 
             // Dynamic Logo Color Inversion Logic
-            const navBottom = 96;
-            let isOverCamouflageColor = false;
-
-            sections.forEach(sec => {
-                const rect = sec.getBoundingClientRect();
-                if (rect.top <= navBottom && rect.bottom >= 0) {
-                    const bgColor = window.getComputedStyle(sec).backgroundColor;
-                    // Detect light colors (rough approximation: sum of RGB > 450)
-                    const rgb = bgColor.match(/\d+/g);
-                    if (rgb && rgb.length >= 3) {
-                        const brightness = parseInt(rgb[0]) + parseInt(rgb[1]) + parseInt(rgb[2]);
-                        // Mid-Grey Proximity Logic: Invert to white ONLY when background would camouflage the logo
-                        if (brightness > 300 && brightness < 600) {
-                            isOverCamouflageColor = true;
-                        }
+            if(lightSections.length > 0) {
+                const navBottom = 96; // h-24 -> 96px
+                let isOverLight = false;
+                lightSections.forEach(sec => {
+                    const rect = sec.getBoundingClientRect();
+                    if (rect.top <= navBottom && rect.bottom >= 0) {
+                        isOverLight = true;
                     }
+                });
+                
+                if (isOverLight) {
+                    nav.classList.add('nav-inverted');
+                } else {
+                    nav.classList.remove('nav-inverted');
                 }
-            });
-            
-            if (isOverCamouflageColor) {
-                nav.classList.add('nav-inverted');
-            } else {
-                nav.classList.remove('nav-inverted');
             }
         });
 
