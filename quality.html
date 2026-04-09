@@ -95,7 +95,7 @@
         }
 
         /* === Left text block (Phase 1 only) === */
-        .zj-text {
+        .intro-text {
             position: absolute;
             left: 0;
             top: 0;
@@ -106,7 +106,7 @@
             padding: 0 4% 0 8%;
             z-index: 5;
         }
-        .zj-text p {
+        .intro-text p {
             font-size: 1.6rem;
             font-weight: 300;
             line-height: 1.5;
@@ -200,25 +200,24 @@
             position: absolute;
             left: 0;
             width: 100%;
-            bottom: 0;
-            z-index: 15;
-            transform: translateY(100%);
+            top: 100vh; /* Starts exactly below the sticky viewport */
+            z-index: 20;
             will-change: transform;
         }
         .bottom-inner {
-            background: #1a1a1a;
-            min-height: 100vh;
-            box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.6);
+            background: #0a0a0a;
+            min-height: 200vh;
+            padding-top: 6rem;
         }
 
         /* === Responsive === */
         @media (max-width: 900px) {
-            .zj-text {
+            .intro-text {
                 width: 100%;
                 padding: 7rem 2rem 2rem;
                 align-items: flex-start;
             }
-            .zj-text p { font-size: 1.2rem; }
+            .intro-text p { font-size: 1.2rem; }
             .img-wrapper {
                 width: 100%;
                 right: 0;
@@ -357,7 +356,7 @@
         <div class="master-sticky">
 
             <!-- Left-side intro text (Phase 1 only) -->
-            <div class="zj-text" id="zj-text">
+            <div class="intro-text" id="intro-text">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
             </div>
 
@@ -384,23 +383,21 @@
             <!-- Bottom section (slides up in Phase 4) -->
             <div class="bottom-section" id="bottom-section">
                 <div class="bottom-inner">
-                    <section class="py-24 relative z-10">
-                        <div class="max-w-4xl mx-auto px-4">
-                            <div class="p-8 md:p-12 rounded-2xl text-left bg-black/40 border border-white/5 shadow-2xl">
-                                <h3 class="text-3xl font-semibold mb-6 text-white tracking-wide">Opis Techniczny</h3>
-                                <p class="text-gray-400 leading-relaxed text-lg mb-4">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. 
-                                    Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus 
-                                    rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna 
-                                    non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl 
-                                    ut dapibus.
-                                </p>
-                                <p class="text-gray-400 leading-relaxed text-lg">
-                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero 
-                                    sit amet quam egestas semper. Aenean ultricies mi vitae est.
-                                </p>
-                            </div>
+                    <section class="pt-16 pb-24 relative z-10">
+                        <div class="max-w-4xl mx-auto px-6 md:px-8">
+                            <h3 class="text-3xl font-semibold mb-8 text-white tracking-wide">Opis Techniczny</h3>
+                            <p class="text-gray-400 leading-relaxed text-lg mb-6">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. 
+                                Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus 
+                                rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna 
+                                non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl 
+                                ut dapibus.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed text-lg">
+                                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                                Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero 
+                                sit amet quam egestas semper. Aenean ultricies mi vitae est.
+                            </p>
                         </div>
                     </section>
                 </div>
@@ -414,105 +411,118 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        /*  All animations are driven by ONE ScrollTrigger on .master-scroll.
-            The timeline progress 0→1 maps to the full 800vh scroll.
-            
-            Timeline breakdown (in normalized time 0-3):
-              0.00 – 0.60  Phase 1: Image expands, left text fades
-              0.60 – 0.90  Phase 2: Darken + description appears
-              0.90 – 1.80  Phase 3: Image pans slowly (object-position),
-                                     description scrolls out fast
-              1.80 – 3.00  Phase 4: Image keeps panning slowly,
-                                     bottom section slides up
-        */
+        const imgEl = document.getElementById('img-main');
+        const ZOOM_START = 0.15;
+        const ZOOM_DUR   = 0.65;
+        const ZOOM_END   = ZOOM_START + ZOOM_DUR; // 0.80
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".master-scroll",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1.2,
-                pin: false,
+        // Dynamic scale: fill viewport width exactly
+        function getTargetScale() {
+            const imgRect = imgEl.getBoundingClientRect();
+            // Fallback: if image hasn't loaded yet, use a sensible default
+            const currentW = imgRect.width || 1;
+            return Math.max(window.innerWidth / currentW, 1.2);
+        }
+
+        function buildTimeline() {
+            // Kill any existing timeline
+            if (window._qualityTL) {
+                window._qualityTL.scrollTrigger && window._qualityTL.scrollTrigger.kill();
+                window._qualityTL.kill();
             }
+
+            // Reset inline styles so measurements are clean
+            gsap.set(imgEl, { clearProps: "scale,y,objectFit,objectPosition" });
+
+            const targetScale = getTargetScale();
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".master-scroll",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1.2,
+                    pin: false,
+                    invalidateOnRefresh: true,
+                }
+            });
+            window._qualityTL = tl;
+
+
+            /* ─── PHASE 1 (0 → 0.6): Expand image to fullscreen ─── */
+            tl.to("#img-wrapper", {
+                right: "0%",
+                top: 0,
+                width: "100%",
+                height: "100vh",
+                borderRadius: "0px",
+                duration: 0.6,
+                ease: "power2.inOut"
+            }, 0);
+
+            // Left intro text fades out
+            tl.to("#intro-text", {
+                opacity: 0,
+                x: -80,
+                duration: 0.4,
+                ease: "power1.in"
+            }, 0);
+
+
+            /* ─── PHASE 2 (overlaps Phase 1): Zoom to viewport width ─── */
+            // Dynamic scale so the image always fills the viewport width.
+            // transform-origin TOP CENTER: top stays pinned, bottom clips.
+            tl.to(imgEl, {
+                scale: targetScale,
+                transformOrigin: "50% 0%",
+                duration: ZOOM_DUR,
+                ease: "power1.inOut"
+            }, ZOOM_START);
+
+
+            /* ─── PHASE 3 (0.80): Darken + image starts panning ─── */
+            // Both happen simultaneously right after zoom completes
+            tl.to("#img-darken", {
+                background: "rgba(0, 0, 0, 0.65)",
+                duration: 0.35,
+                ease: "power1.inOut"
+            }, ZOOM_END);
+
+            // Image panning — starts RIGHT at zoom end, faster and deeper
+            tl.to(imgEl, {
+                y: "-80%",
+                duration: 1.5,
+                ease: "power1.inOut"
+            }, ZOOM_END);
+
+
+            /* ─── PHASE 4 (1.15 → 1.45): Description fades in ─── */
+            const DESC_IN = ZOOM_END + 0.35; // 1.15
+            tl.to("#desc-overlay", {
+                opacity: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            }, DESC_IN);
+
+
+            /* ─── PHASE 5 (1.45 → 2.95): Desc and Bottom scroll together ─── */
+            // They are animated perfectly synchronously as if they were one layer.
+            // Bottom section starts naturally appearing when desc-overlay moves up.
+            const SCROLL_UP_START = DESC_IN + 0.3; // 1.45
+            tl.to(["#desc-overlay", "#bottom-section"], {
+                y: () => -window.innerHeight * 1.5,
+                duration: 1.5,
+                ease: "none"
+            }, SCROLL_UP_START);
+        }
+
+        // Build on load, rebuild on resize for dynamic responsiveness
+        buildTimeline();
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(buildTimeline, 200);
         });
-
-
-        /* ─── PHASE 1: Expand image to fullscreen ─── */
-
-        // Image wrapper: right-side box → fullscreen
-        tl.to("#img-wrapper", {
-            right: "0%",
-            top: 0,
-            width: "100%",
-            height: "100vh",
-            borderRadius: "0px",
-            duration: 0.6,
-            ease: "power2.inOut"
-        }, 0);
-
-        // Left intro text fades out
-        tl.to("#zj-text", {
-            opacity: 0,
-            x: -80,
-            duration: 0.4,
-            ease: "power1.in"
-        }, 0);
-
-        // Switch from contain → cover once fullscreen so the image fills the viewport
-        // and can be "panned" via object-position
-        tl.set("#img-main", {
-            objectFit: "cover",
-        }, 0.6);
-
-
-        /* ─── PHASE 2: Darken + show description ─── */
-
-        tl.to("#img-darken", {
-            background: "rgba(0, 0, 0, 0.65)",
-            duration: 0.3,
-            ease: "power1.inOut"
-        }, 0.55);
-
-        tl.to("#desc-overlay", {
-            opacity: 1,
-            duration: 0.3,
-            ease: "power2.out"
-        }, 0.65);
-
-
-        /* ─── PHASE 3: Parallax – image pans slowly, description exits fast ─── */
-
-        // Image pans slowly through the document (top → ~65% down)
-        // This runs from 0.9 to 2.8 (long duration = slow)
-        tl.to("#img-main", {
-            objectPosition: "50% 65%",
-            duration: 2.0,
-            ease: "none"
-        }, 0.9);
-
-        // Description scrolls UP fast and out of viewport
-        // Short duration = fast exit (the "faster layer")
-        tl.to("#desc-overlay", {
-            y: () => -window.innerHeight * 1.5,
-            opacity: 0,
-            duration: 0.6,
-            ease: "power1.in"
-        }, 0.9);
-
-
-        /* ─── PHASE 4: Bottom section slides up over the image ─── */
-
-        // The bottom section starts off-screen (translateY: 100%)
-        // and slides up to cover the viewport
-        tl.to("#bottom-section", {
-            y: () => -(window.innerHeight),
-            duration: 1.0,
-            ease: "power1.inOut"
-        }, 1.8);
-
-        // Image keeps slowly panning during this phase (already covered by
-        // the long-duration tween above: 0.9 to 2.9)
-
 
         /* ─── NAVBAR SCROLL CLASS ─── */
         const nav = document.querySelector('nav.glass');
