@@ -1162,31 +1162,6 @@ nav.hero-glass.scrolled {
     background: rgba(255, 255, 255, 0.05);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .hero-logo {
-        max-width: 300px;
-    }
-
-    .tagline-text {
-        font-size: 1.125rem;
-    }
-
-    #hero-carousel {
-        height: 300px;
-    }
-
-    .filters-wrapper {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .sort-options {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-}
-
 /* ============================================
    REVEAL FOOTER — zetta-joule style
    Footer stays as a fixed base layer (z-index 1).
@@ -1227,6 +1202,7 @@ footer.reveal-footer {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
+
 /* ============================================
    MOBILE RESPONSIVENESS & HAMBURGER
    ============================================ */
@@ -1235,6 +1211,7 @@ footer.reveal-footer {
     inset: 0;
     background: rgba(0,0,0,0.95);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     z-index: 200;
     transform: translateX(-100%);
     transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
@@ -1245,6 +1222,237 @@ footer.reveal-footer {
     pointer-events: auto;
 }
 
-@media (max-width: 768px) {
+/* ============================================
+   FLUID TYPOGRAPHY — Zoom-safe clamp() system
+   ============================================ */
+.newsletter-title {
+    font-size: clamp(1.25rem, 1rem + 1.5vw, 1.75rem);
+}
+
+.newsletter-section {
+    padding: clamp(2rem, 5vw, 4rem) 1rem;
+}
+
+#contact h2 {
+    font-size: clamp(1.5rem, 1.25rem + 1.5vw, 1.875rem);
+}
+
+/* ============================================
+   NAVBAR — Fluid responsive padding
+   ============================================ */
+nav.glass .max-w-7xl {
+    padding-left: clamp(0.75rem, 2vw, 2rem);
+    padding-right: clamp(0.75rem, 2vw, 2rem);
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* ---------- SMALL MOBILE (≤480px) ---------- */
+@media (max-width: 480px) {
+    .newsletter-input-group {
+        flex-direction: column;
+    }
+
+    .newsletter-button {
+        width: 100%;
+    }
+
+    .newsletter-consent {
+        font-size: 0.6875rem;
+    }
+
+    /* Contact form tap targets */
+    #contact input,
+    #contact textarea {
+        min-height: 44px;
+        font-size: 1rem;
+    }
+
+    /* Footer logo overflow fix */
+    footer .lg\:col-span-2 a img {
+        max-height: 100px;
+        height: auto;
+    }
+
+    /* Smaller hero cards on very small screens */
+    .split-panel {
+        min-height: 300px !important;
+    }
+}
+
+/* ---------- MOBILE & TABLET SHARED (≤1024px) ---------- */
+@media (max-width: 1024px) {
+    /* === HERO: Vertical stacked cards === */
+    .split-container {
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+        margin-top: 4rem;
+    }
+
+    .split-panel {
+        flex: none !important;
+        width: 100%;
+        height: 70vh;
+        min-height: 400px;
+        transition: none;
+    }
+
+    /* Panel reorder: Peptydy 1st, Misja 2nd, Badania 3rd */
+    .split-panel:nth-child(1) { order: 2; }
+    .split-panel:nth-child(2) { order: 1; }
+    .split-panel:nth-child(3) { order: 3; }
+
+    /* Override desktop hover behaviors */
+    .split-container:hover .split-panel {
+        flex: none !important;
+    }
+    .split-container .split-panel:hover {
+        flex: none !important;
+    }
+    .split-panel:hover .split-bg {
+        transform: none;
+    }
+
+    /* Title: always visible, de-rotated, positioned normally */
+    .split-title {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        font-size: clamp(1.75rem, 1.25rem + 2vw, 2.5rem);
+        margin-bottom: 1rem;
+        white-space: normal;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Content: positioned at bottom, starts semi-visible */
+    .split-content {
+        bottom: 5%;
+        opacity: 0.7;
+        transform: translateX(-50%) translateY(10px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Description & Button: hidden until scroll-reveal */
+    .split-desc,
+    .split-btn {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* === Scroll-reveal state (added by Intersection Observer) === */
+    .split-panel.mobile-revealed .split-content {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .split-panel.mobile-revealed .split-desc,
+    .split-panel.mobile-revealed .split-btn {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .split-panel.mobile-revealed .split-desc {
+        transition-delay: 0.15s;
+    }
+
+    .split-panel.mobile-revealed .split-btn {
+        transition-delay: 0.3s;
+    }
+
+    /* Background zoom on reveal */
+    .split-panel.mobile-revealed .split-bg {
+        transform: scale(1.08);
+        transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Gradient overlay enhancement on reveal */
+    .split-panel.mobile-revealed::before {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(255, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.5) 100%);
+    }
+
+    /* Hide desktop nav links, show hamburger */
     .desktop-nav-icons { display: none !important; }
+}
+
+/* ---------- MOBILE ONLY (≤768px) ---------- */
+@media (max-width: 768px) {
+    .hero-logo {
+        max-width: 300px;
+    }
+
+    .tagline-text {
+        font-size: clamp(0.9375rem, 0.75rem + 0.75vw, 1.125rem);
+    }
+
+    #hero-carousel {
+        height: 300px;
+    }
+
+    .filters-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sort-options {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    /* Navbar mobile height sync */
+    .split-container {
+        margin-top: 4rem;
+    }
+
+    /* Mobile nav logo cap */
+    nav .logo-dynamic {
+        max-height: 120px;
+    }
+
+    /* Footer logo overflow cap */
+    footer .lg\:col-span-2 a img {
+        max-height: 120px;
+    }
+
+    /* Contact form mobile padding */
+    #contact {
+        padding-top: clamp(3rem, 5vw, 6rem);
+        padding-bottom: clamp(3rem, 5vw, 6rem);
+    }
+
+    /* Hero panels smaller on mobile */
+    .split-panel {
+        height: 65vh;
+        min-height: 350px;
+    }
+}
+
+/* ---------- TABLET ONLY (769px – 1024px) ---------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .split-container {
+        margin-top: 5rem;
+    }
+
+    .split-panel {
+        height: 60vh;
+        min-height: 350px;
+    }
+
+    .split-title {
+        font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2.25rem);
+    }
+
+    nav .logo-dynamic {
+        max-height: 160px;
+    }
 }

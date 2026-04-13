@@ -313,31 +313,96 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-    // Hamburger Menu Logic
+    // ============================================
+    // HAMBURGER MENU — CSS Transition Toggle
+    // ============================================
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenuPanel = document.getElementById('mobile-menu-panel');
-    
+
     if (mobileMenuBtn && mobileMenuPanel) {
         mobileMenuBtn.addEventListener('click', () => {
-            mobileMenuPanel.classList.toggle('hidden');
-            document.body.style.overflow = mobileMenuPanel.classList.contains('hidden') ? '' : 'hidden';
-            
+            const isOpen = mobileMenuPanel.classList.contains('open');
+            mobileMenuPanel.classList.toggle('open');
+            mobileMenuBtn.setAttribute('aria-expanded', String(!isOpen));
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+
             // Transform hamburger to X
             const svg = mobileMenuBtn.querySelector('svg');
-            if (mobileMenuPanel.classList.contains('hidden')) {
+            if (isOpen) {
                 svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
             } else {
                 svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
             }
         });
-        
+
         // Close menu on link click
         mobileMenuPanel.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenuPanel.classList.add('hidden');
+                mobileMenuPanel.classList.remove('open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
                 const svg = mobileMenuBtn.querySelector('svg');
                 svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
             });
         });
     }
+
+// ============================================
+// MOBILE HERO SCROLL REVEAL (≤1024px)
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    const isMobileOrTablet = () => window.innerWidth <= 1024;
+
+    function setupMobileHeroReveal() {
+        if (!isMobileOrTablet()) return;
+
+        const panels = document.querySelectorAll('.split-panel');
+        if (!panels.length) return;
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && isMobileOrTablet()) {
+                    entry.target.classList.add('mobile-revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        panels.forEach(panel => revealObserver.observe(panel));
+
+        // Also immediately reveal any panel already in viewport
+        // (the first panel is likely visible on load)
+        requestAnimationFrame(() => {
+            panels.forEach(panel => {
+                const rect = panel.getBoundingClientRect();
+                const inView = rect.top < window.innerHeight && rect.bottom > 0;
+                if (inView && isMobileOrTablet()) {
+                    panel.classList.add('mobile-revealed');
+                    revealObserver.unobserve(panel);
+                }
+            });
+        });
+    }
+
+    setupMobileHeroReveal();
+
+    // Re-initialize on resize (handles orientation changes)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const panels = document.querySelectorAll('.split-panel');
+            if (isMobileOrTablet()) {
+                setupMobileHeroReveal();
+            } else {
+                // On desktop, remove mobile-revealed classes
+                panels.forEach(panel => {
+                    panel.classList.remove('mobile-revealed');
+                });
+            }
+        }, 250);
+    });
+});
+
