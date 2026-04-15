@@ -314,38 +314,65 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
     // ============================================
-    // HAMBURGER MENU — CSS Transition Toggle
+    // HAMBURGER MENU — slide-in panel + overlay
     // ============================================
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileMenuCloseBtn = document.getElementById('mobile-menu-close-btn');
 
-    if (mobileMenuBtn && mobileMenuPanel) {
+    function openMobileMenu() {
+        if (!mobileMenuPanel) return;
+        mobileMenuPanel.classList.add('open');
+        if (mobileMenuOverlay) mobileMenuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        // Switch hamburger → X
+        const svg = mobileMenuBtn && mobileMenuBtn.querySelector('svg');
+        if (svg) svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+    }
+
+    window.closeMobileMenu = function() {
+        if (!mobileMenuPanel) return;
+        mobileMenuPanel.classList.remove('open');
+        if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        // Switch X → hamburger
+        const svg = mobileMenuBtn && mobileMenuBtn.querySelector('svg');
+        if (svg) svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+    };
+
+    if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', () => {
-            const isOpen = mobileMenuPanel.classList.contains('open');
-            mobileMenuPanel.classList.toggle('open');
-            mobileMenuBtn.setAttribute('aria-expanded', String(!isOpen));
-            document.body.style.overflow = isOpen ? '' : 'hidden';
-
-            // Transform hamburger to X
-            const svg = mobileMenuBtn.querySelector('svg');
-            if (isOpen) {
-                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-            } else {
-                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
-            }
-        });
-
-        // Close menu on link click
-        mobileMenuPanel.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuPanel.classList.remove('open');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-                const svg = mobileMenuBtn.querySelector('svg');
-                svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
-            });
+            const isOpen = mobileMenuPanel && mobileMenuPanel.classList.contains('open');
+            if (isOpen) window.closeMobileMenu();
+            else openMobileMenu();
         });
     }
+
+    // Close on overlay click
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', window.closeMobileMenu);
+    }
+
+    // Close button inside panel
+    if (mobileMenuCloseBtn) {
+        mobileMenuCloseBtn.addEventListener('click', window.closeMobileMenu);
+    }
+
+    // Close menu on any primary link click (not sublinks or buttons)
+    if (mobileMenuPanel) {
+        mobileMenuPanel.querySelectorAll('.mobile-menu-link, .mobile-menu-sublink').forEach(link => {
+            if (link.tagName === 'A') {
+                link.addEventListener('click', () => {
+                    // Small delay so the navigation registers
+                    setTimeout(window.closeMobileMenu, 150);
+                });
+            }
+        });
+    }
+
 
 // ============================================
 // MOBILE HERO SCROLL-ACCORDION (≤1024px)

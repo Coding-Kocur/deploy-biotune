@@ -626,17 +626,89 @@
             </div>
         </div>
     
-        <!-- Mobile Menu Panel -->
-        <div id="mobile-menu-panel" class="mobile-menu fixed inset-0 z-[200]">
-            <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-                <a href="index.html" class="hover:text-biotune-red transition-colors font-bold">Strona główna</a>
-                <a href="shop.html" class="hover:text-biotune-red transition-colors font-bold">Sklep</a>
-                <a href="about.html" class="hover:text-biotune-red transition-colors font-bold">O Nas</a>
-                <a href="quality.html" class="hover:text-biotune-red transition-colors font-bold">Jakość</a>
-                
-                <div class="h-px w-24 bg-white/20 my-4"></div>
-                
-                <a href="login.html" class="hover:text-biotune-red transition-colors text-lg text-gray-400">Moje konto</a>
+        <!-- Mobile Menu Overlay (darkens background) -->
+        <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+        <!-- Mobile Menu Panel (slides in from left) -->
+        <div id="mobile-menu-panel" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu nawigacyjne">
+
+            <!-- Header: Logo + Close button -->
+            <div class="mobile-menu-header">
+                <a href="index.html" class="relative block h-10 w-32 flex-shrink-0" onclick="closeMobileMenu()">
+                    <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="h-28 w-auto absolute top-1/2 -translate-y-1/2 -left-2 max-w-none pointer-events-none">
+                </a>
+                <button class="mobile-menu-close" id="mobile-menu-close-btn" aria-label="Zamknij menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Main Navigation -->
+            <div class="mobile-menu-label">Nawigacja</div>
+
+            <a href="index.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+                Strona główna
+            </a>
+            <a href="about.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+                O Nas
+            </a>
+            <a href="quality.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+                Jakość i Kontrola
+            </a>
+            <a href="#contact" class="mobile-menu-link" onclick="closeMobileMenu()">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+                Kontakt
+            </a>
+
+            <div class="mobile-menu-divider"></div>
+
+            <!-- Shop Section -->
+            <div class="mobile-menu-label">Sklep</div>
+            <a href="shop.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
+                Wszystkie produkty
+            </a>
+            <a href="product.html?id=retatrutide" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> Retatrutide
+            </a>
+            <a href="product.html?id=bpc-157-tb-500" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> BPC-157 + TB-500
+            </a>
+            <a href="product.html?id=cjc-1295-ipamorelin" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> CJC-1295 + Ipamorelin
+            </a>
+            <a href="product.html?id=ghk-cu" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> GHK-Cu
+            </a>
+            <a href="product.html?id=epithalon" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> Epithalon
+            </a>
+
+            <div class="mobile-menu-divider"></div>
+
+            <!-- Account Section -->
+            <div class="mobile-menu-label">Konto</div>
+            <a href="login.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                Moje konto
+            </a>
+            <a href="login.html" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> Zaloguj się
+            </a>
+            <a href="register.html" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> Zarejestruj się
+            </a>
+            <button class="mobile-menu-link" style="background:none;border:none;text-align:left;width:100%;cursor:pointer;" onclick="closeMobileMenu(); if(window.openCart) setTimeout(window.openCart,200);">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                Koszyk
+            </button>
+
+            <!-- Login / Register CTA at bottom -->
+            <div class="mobile-menu-cta">
+                <a href="login.html" class="mobile-menu-btn-primary">Zaloguj się</a>
+                <a href="register.html" class="mobile-menu-btn-secondary">Utwórz konto</a>
             </div>
         </div>
     </nav>
