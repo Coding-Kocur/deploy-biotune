@@ -1452,11 +1452,6 @@ nav.glass .max-w-7xl {
         max-height: 100px;
         height: auto;
     }
-
-    /* Smaller hero cards on very small screens */
-    .split-panel {
-        min-height: 300px !important;
-    }
 }
 
 /* ---------- MOBILE & TABLET SHARED (≤1024px) ---------- */
