@@ -472,66 +472,98 @@
         
         /* MOBILE STACKED OVERLAPPING LAYOUT */
         @media (max-width: 768px) {
-            .master-scroll, .master-sticky, #h-scroll-track {
-                height: auto !important;
-                position: relative !important;
-                overflow: visible !important;
+            .master-scroll {
+                height: 500vh;
+                position: relative;
+            }
+            .master-sticky {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                overflow: hidden;
+            }
+            #h-scroll-track {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                overflow: hidden;
             }
             #section-misja {
-                position: relative !important;
-                height: auto !important;
-                min-height: 100vh;
+                position: absolute;
+                inset: 0;
+                height: 100vh;
                 display: flex;
                 flex-direction: column;
                 padding-top: 100px; /* Clear fixed navbar */
+                z-index: 1;
+                overflow-y: auto;
             }
             #section-misja > div {
                 justify-content: flex-start !important;
             }
             #section-quality {
-                position: relative !important;
-                transform: none !important;
-                height: auto !important;
+                position: absolute;
+                inset: 0;
+                height: auto;
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
-                margin-top: -10vh; /* overlap effect */
-                padding-top: 15vh;
                 z-index: 10;
-                background: linear-gradient(to bottom, transparent 0%, black 15vh, black 100%);
+                background: black;
+                /* GSAP controls translateY — starts at 100vh */
+                transform: translateY(100vh);
+                will-change: transform;
             }
             .bottom-section {
-                position: relative !important;
-                top: auto !important;
-                transform: none !important;
-                margin-top: -10vh; /* overlap effect */
+                position: absolute;
+                left: 0;
+                width: 100%;
+                top: 100vh;
+                z-index: 20;
+                will-change: transform;
             }
             .bottom-inner {
-                padding-top: 15vh;
-                padding-bottom: 0 !important;
-                margin-bottom: 0 !important;
-                border-radius: 40px 40px 0 0 !important;
+                padding-top: 6rem;
+                padding-bottom: 0;
+                margin-bottom: 0;
+                border-radius: 40px 40px 0 0;
                 min-height: auto;
+                background: black;
             }
+            /* Image wrapper: GSAP controls expansion */
             .img-wrapper {
-                position: relative !important;
-                width: 100% !important;
-                height: 50vh !important;
+                position: relative;
+                width: 100%;
+                height: 50vh;
                 margin-top: 2rem;
-                top: auto !important;
+                top: auto;
+                border-radius: 12px;
+                overflow: hidden;
             }
+            /* Desc overlay: GSAP controls opacity */
             .desc-overlay {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                width: 100% !important;
-                opacity: 1 !important;
-                pointer-events: auto !important;
-                padding: 2rem 1rem;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 90%;
+                opacity: 0;
+                pointer-events: none;
+                padding: 0;
+                z-index: 10;
             }
+            .desc-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .desc-right { text-align: left; }
             .grid-cols-2 { grid-template-columns: 1fr !important; }
             #scroll-progress-container { display: none !important; }
+            /* Intro text column on mobile */
+            #section-quality #intro-text {
+                height: auto;
+                padding-top: 100px;
+            }
         }
     </style>
 </head>
@@ -1008,39 +1040,109 @@
             gsap.set('.wiedza-cta', { opacity: 0, scale: 0.8 });
             
             if (window.innerWidth < 768) {
-                // MOBILE GSAP ANIMATIONS
+                // ─── MOBILE GSAP ANIMATIONS ───
+                // Uses a single scrubbed timeline for all phases:
+                //   Phase 1 (0→0.2): Quality slides up over Misja
+                //   Phase 2 (0.2→0.4): Precyzja words reveal + typewriter
+                //   Phase 3 (0.4→0.6): Image expands, zooms, darkens
+                //   Phase 4 (0.6→0.75): Desc overlay fades in + purity counter
+                //   Phase 5 (0.75→1.0): Bottom section slides up
+
+                const vh = window.innerHeight;
                 gsap.set('.precyzja-word', { transition: 'none' });
-                ScrollTrigger.create({
-                    trigger: '#intro-text', start: "top 80%",
-                    onEnter: () => {
+                gsap.set('#section-quality', { y: vh });
+
+                const mobileTL = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: '.master-scroll',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 0.8,
+                        invalidateOnRefresh: true
+                    }
+                });
+
+                // Phase 1: Quality section slides up over Misja
+                mobileTL.to('#section-quality', {
+                    y: 0,
+                    duration: 0.2,
+                    ease: 'power2.inOut',
+                    onStart: () => {
+                        // Reveal Precyzja words as quality slides in
                         document.querySelectorAll('.precyzja-word').forEach((w, i) => {
                             setTimeout(() => {
                                 w.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
                                 w.style.transform = 'translateY(0%)';
                             }, i * 150);
                         });
-                        setTimeout(() => {
-                            const desc = document.querySelector('.desc-anim-word');
-                            if (desc) {
-                                desc.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-                                desc.style.opacity = '1';
-                                desc.style.transform = 'translateY(0)';
-                            }
-                        }, 450);
-                        setTimeout(() => { if(window.startTypewriterCascade) window.startTypewriterCascade(); }, 700);
                     }
-                });
-                
-                ScrollTrigger.create({
-                    trigger: '#desc-overlay', start: "top 80%",
-                    onEnter: () => {
+                }, 0);
+
+                // Phase 2: Description paragraph + typewriter
+                mobileTL.to({}, {
+                    duration: 0.15,
+                    onStart: () => {
+                        const desc = document.querySelector('.desc-anim-word');
+                        if (desc) {
+                            desc.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                            desc.style.opacity = '1';
+                            desc.style.transform = 'translateY(0)';
+                        }
+                        setTimeout(() => { if(window.startTypewriterCascade) window.startTypewriterCascade(); }, 400);
+                    }
+                }, 0.2);
+
+                // Phase 3: Image expands to full width, zooms in, darkens
+                mobileTL.to('#img-wrapper', {
+                    width: '100%',
+                    height: '100vh',
+                    borderRadius: '0px',
+                    marginTop: '0',
+                    duration: 0.15,
+                    ease: 'power2.inOut'
+                }, 0.35);
+                mobileTL.to('#intro-text', {
+                    opacity: 0,
+                    y: -60,
+                    duration: 0.1,
+                    ease: 'power1.in'
+                }, 0.35);
+                // Zoom the image
+                mobileTL.to(imgEl, {
+                    scale: 1.4,
+                    transformOrigin: '50% 0%',
+                    duration: 0.15,
+                    ease: 'power1.inOut'
+                }, 0.45);
+                // Darken overlay
+                mobileTL.to('#img-darken', {
+                    background: 'rgba(0, 0, 0, 0.65)',
+                    duration: 0.1,
+                    ease: 'power1.inOut'
+                }, 0.55);
+                // Pan image up
+                mobileTL.to(imgEl, {
+                    y: '-50%',
+                    duration: 0.25,
+                    ease: 'power1.inOut'
+                }, 0.55);
+
+                // Phase 4: Description overlay fades in + purity counter
+                mobileTL.to('#desc-overlay', {
+                    opacity: 1,
+                    duration: 0.08,
+                    ease: 'power2.out',
+                    onStart: () => {
                         if (window.startCountingAnimation) window.startCountingAnimation();
                     }
-                });
-                
-                ScrollTrigger.create({
-                    trigger: '#bottom-section', start: "top 70%",
-                    onEnter: () => {
+                }, 0.63);
+
+                // Phase 5: Bottom section + desc scroll up, Wiedza entrance
+                mobileTL.to(['#desc-overlay', '#bottom-section'], {
+                    y: () => -vh * 1.2,
+                    duration: 0.25,
+                    ease: 'none',
+                    onStart: () => {
                         document.querySelectorAll('.wiedza-anim-word').forEach((word, idx) => {
                             setTimeout(() => {
                                 word.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
@@ -1050,7 +1152,13 @@
                         gsap.to('.wiedza-item', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', delay: 0.8 });
                         gsap.to('.wiedza-cta', { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.6 });
                     }
-                });
+                }, 0.75);
+                mobileTL.to(imgEl, {
+                    y: '-100%',
+                    duration: 0.25,
+                    ease: 'none'
+                }, 0.75);
+
                 return; // SKIP DESKTOP SCROLL ARCHITECTURE
             }
 

@@ -360,19 +360,21 @@
             transition-delay: 0.2s;
         }
 
-        /* Mobile/Tablet: Override hover-based interactions with scroll-reveal */
+        /* Mobile/Tablet: Scroll-driven accordion — one panel expanded at a time */
         @media (max-width: 1024px) {
             .split-container {
                 flex-direction: column;
-                height: auto;
-                min-height: auto;
+                height: 100vh;
+                margin-top: 0;
+                overflow: hidden;
             }
 
             .split-panel {
-                flex: none !important;
                 width: 100%;
-                height: 70vh;
-                min-height: 400px;
+                min-height: 0;
+                height: auto;
+                overflow: hidden;
+                transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             }
 
             /* Reorder: Peptydy 1st, Misja 2nd, Badania 3rd */
@@ -380,15 +382,16 @@
             .split-panel:nth-child(2) { order: 1; }
             .split-panel:nth-child(3) { order: 3; }
 
+            /* Disable desktop hover behaviors entirely */
             .split-container:hover .split-panel,
             .split-container .split-panel:hover {
-                flex: none !important;
+                flex: unset;
             }
-
             .split-panel:hover .split-bg {
                 transform: none;
             }
 
+            /* Title: always de-rotated, positioned normally */
             .split-title {
                 position: relative !important;
                 top: auto !important;
@@ -400,7 +403,6 @@
                 text-align: center;
                 width: 100%;
             }
-
             .split-panel:hover .split-title {
                 transform: none !important;
                 position: relative !important;
@@ -409,65 +411,66 @@
                 font-size: clamp(1.75rem, 1.25rem + 2vw, 2.5rem);
             }
 
+            /* Content: starts semi-visible */
             .split-content {
                 bottom: 5%;
-                opacity: 0.8;
+                opacity: 0.6;
                 transform: translateX(-50%) translateY(10px);
+                transition: opacity 0.5s ease, transform 0.5s ease;
             }
-
             .split-panel:hover .split-content {
-                opacity: 0.8;
+                opacity: 0.6;
                 transform: translateX(-50%) translateY(10px);
             }
 
-            /* Keep desc/btn hidden (override hover reveal) */
+            /* Desc/btn hidden by default on mobile */
             .split-desc,
             .split-btn {
-                opacity: 0 !important;
-                visibility: hidden !important;
-                transform: translateY(20px) !important;
-                transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                            visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                            transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20px);
+                transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                            visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                            transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             }
-
             .split-panel:hover .split-desc,
             .split-panel:hover .split-btn {
-                opacity: 0 !important;
-                visibility: hidden !important;
-                transform: translateY(20px) !important;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(20px);
             }
 
-            /* Scroll-reveal state — Intersection Observer adds this */
-            .split-panel.mobile-revealed .split-content {
-                opacity: 1 !important;
-                transform: translateX(-50%) translateY(0) !important;
+            /* ── Active panel state (GSAP adds .active-panel) ── */
+            .split-panel.active-panel .split-content {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            .split-panel.active-panel .split-desc {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                transition-delay: 0.15s;
+            }
+            .split-panel.active-panel .split-btn {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                transition-delay: 0.3s;
+            }
+            .split-panel.active-panel .split-bg {
+                transform: scale(1.08);
+                transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .split-panel.active-panel::before {
+                background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(255,0,0,0.15) 50%, rgba(0,0,0,0.5) 100%);
             }
 
-            .split-panel.mobile-revealed .split-desc {
-                opacity: 1 !important;
-                visibility: visible !important;
-                transform: translateY(0) !important;
-                transition-delay: 0.15s !important;
+            /* Collapsed panels get a darker overlay */
+            .split-panel:not(.active-panel)::before {
+                background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 100%);
             }
-
-            .split-panel.mobile-revealed .split-btn {
-                opacity: 1 !important;
-                visibility: visible !important;
-                transform: translateY(0) !important;
-                transition-delay: 0.3s !important;
-            }
-
-            .split-panel.mobile-revealed .split-bg {
-                transform: scale(1.08) !important;
-                transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .split-panel {
-                height: 65vh;
-                min-height: 350px;
+            .split-panel:not(.active-panel) .split-bg {
+                transform: scale(1.0);
             }
         }
     </style>

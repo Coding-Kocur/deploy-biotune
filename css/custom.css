@@ -1284,20 +1284,21 @@ nav.glass .max-w-7xl {
 
 /* ---------- MOBILE & TABLET SHARED (≤1024px) ---------- */
 @media (max-width: 1024px) {
-    /* === HERO: Vertical stacked cards === */
+    /* === HERO: Scroll-driven accordion === */
     .split-container {
         flex-direction: column;
-        height: auto;
-        min-height: auto;
-        margin-top: 4rem;
+        height: 100vh;
+        min-height: 100vh;
+        margin-top: 0;
+        overflow: hidden;
     }
 
     .split-panel {
-        flex: none !important;
         width: 100%;
-        height: 70vh;
-        min-height: 400px;
-        transition: none;
+        min-height: 0;
+        height: auto;
+        overflow: hidden;
+        transition: none; /* GSAP handles transitions */
     }
 
     /* Panel reorder: Peptydy 1st, Misja 2nd, Badania 3rd */
@@ -1307,10 +1308,10 @@ nav.glass .max-w-7xl {
 
     /* Override desktop hover behaviors */
     .split-container:hover .split-panel {
-        flex: none !important;
+        flex: unset;
     }
     .split-container .split-panel:hover {
-        flex: none !important;
+        flex: unset;
     }
     .split-panel:hover .split-bg {
         transform: none;
@@ -1332,53 +1333,58 @@ nav.glass .max-w-7xl {
     /* Content: positioned at bottom, starts semi-visible */
     .split-content {
         bottom: 5%;
-        opacity: 0.7;
+        opacity: 0.6;
         transform: translateX(-50%) translateY(10px);
-        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Description & Button: hidden until scroll-reveal */
+    /* Description & Button: hidden until active-panel */
     .split-desc,
     .split-btn {
         opacity: 0;
         visibility: hidden;
         transform: translateY(20px);
-        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                    visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* === Scroll-reveal state (added by Intersection Observer) === */
-    .split-panel.mobile-revealed .split-content {
+    /* === Active panel state (added by GSAP scroll-accordion) === */
+    .split-panel.active-panel .split-content {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
     }
 
-    .split-panel.mobile-revealed .split-desc,
-    .split-panel.mobile-revealed .split-btn {
+    .split-panel.active-panel .split-desc,
+    .split-panel.active-panel .split-btn {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
     }
 
-    .split-panel.mobile-revealed .split-desc {
+    .split-panel.active-panel .split-desc {
         transition-delay: 0.15s;
     }
 
-    .split-panel.mobile-revealed .split-btn {
+    .split-panel.active-panel .split-btn {
         transition-delay: 0.3s;
     }
 
-    /* Background zoom on reveal */
-    .split-panel.mobile-revealed .split-bg {
+    /* Background zoom on active */
+    .split-panel.active-panel .split-bg {
         transform: scale(1.08);
-        transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Gradient overlay enhancement on reveal */
-    .split-panel.mobile-revealed::before {
+    /* Gradient overlay enhancement on active */
+    .split-panel.active-panel::before {
         background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(255, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.5) 100%);
+    }
+
+    /* Collapsed panels: darker overlay */
+    .split-panel:not(.active-panel)::before {
+        background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 100%);
     }
 
     /* Hide desktop nav links, show hamburger */
@@ -1409,10 +1415,7 @@ nav.glass .max-w-7xl {
         gap: 0.5rem;
     }
 
-    /* Navbar mobile height sync */
-    .split-container {
-        margin-top: 4rem;
-    }
+    /* Navbar mobile height sync — accordion handles this */
 
     /* Mobile nav logo cap */
     nav .logo-dynamic {
@@ -1430,24 +1433,11 @@ nav.glass .max-w-7xl {
         padding-bottom: clamp(3rem, 5vw, 6rem);
     }
 
-    /* Hero panels smaller on mobile */
-    .split-panel {
-        height: 65vh;
-        min-height: 350px;
-    }
+    /* Hero panels — accordion handles sizing */
 }
 
 /* ---------- TABLET ONLY (769px – 1024px) ---------- */
 @media (min-width: 769px) and (max-width: 1024px) {
-    .split-container {
-        margin-top: 5rem;
-    }
-
-    .split-panel {
-        height: 60vh;
-        min-height: 350px;
-    }
-
     .split-title {
         font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2.25rem);
     }

@@ -348,61 +348,165 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 // ============================================
-// MOBILE HERO SCROLL REVEAL (≤1024px)
+// MOBILE HERO SCROLL-ACCORDION (≤1024px)
+// Uses GSAP ScrollTrigger to pin the hero and
+// expand one panel at a time as the user scrolls.
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     const isMobileOrTablet = () => window.innerWidth <= 1024;
 
-    function setupMobileHeroReveal() {
-        if (!isMobileOrTablet()) return;
+    // Store references for cleanup
+    let heroAccordionST = null;
+    let heroAccordionTL = null;
+    let heroSpacer = null;
 
+    function cleanupHeroAccordion() {
+        if (heroAccordionTL) {
+            heroAccordionTL.kill();
+            heroAccordionTL = null;
+        }
+        if (heroAccordionST) {
+            heroAccordionST.kill();
+            heroAccordionST = null;
+        }
+        // Remove spacer wrapper if it exists
+        if (heroSpacer) {
+            const container = heroSpacer.querySelector('.split-container');
+            if (container && heroSpacer.parentNode) {
+                heroSpacer.parentNode.insertBefore(container, heroSpacer);
+                heroSpacer.remove();
+            }
+            heroSpacer = null;
+        }
+        // Clean up classes and inline styles from panels
         const panels = document.querySelectorAll('.split-panel');
-        if (!panels.length) return;
-
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && isMobileOrTablet()) {
-                    entry.target.classList.add('mobile-revealed');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.15
-        });
-
-        panels.forEach(panel => revealObserver.observe(panel));
-
-        // Also immediately reveal any panel already in viewport
-        // (the first panel is likely visible on load)
-        requestAnimationFrame(() => {
-            panels.forEach(panel => {
-                const rect = panel.getBoundingClientRect();
-                const inView = rect.top < window.innerHeight && rect.bottom > 0;
-                if (inView && isMobileOrTablet()) {
-                    panel.classList.add('mobile-revealed');
-                    revealObserver.unobserve(panel);
-                }
-            });
+        panels.forEach(p => {
+            p.classList.remove('active-panel', 'mobile-revealed');
+            p.style.flex = '';
         });
     }
 
-    setupMobileHeroReveal();
+    function setupHeroAccordion() {
+        if (!isMobileOrTablet()) return;
+        if (!window.gsap || !window.ScrollTrigger) return;
 
-    // Re-initialize on resize (handles orientation changes)
+        const container = document.querySelector('.split-container');
+        if (!container) return;
+
+        // Get panels sorted by their CSS order (visual order)
+        const panelsRaw = Array.from(container.querySelectorAll('.split-panel'));
+        if (!panelsRaw.length) return;
+
+        const panels = panelsRaw.slice().sort((a, b) => {
+            return (parseInt(getComputedStyle(a).order) || 0) - (parseInt(getComputedStyle(b).order) || 0);
+        });
+
+        const numPanels = panels.length; // 3
+
+        // Wrap container in a spacer div for scroll length
+        if (!heroSpacer) {
+            heroSpacer = document.createElement('div');
+            heroSpacer.className = 'hero-accordion-spacer';
+            heroSpacer.style.position = 'relative';
+            container.parentNode.insertBefore(heroSpacer, container);
+            heroSpacer.appendChild(container);
+        }
+        // Spacer height = numPanels screens of scroll
+        heroSpacer.style.height = (numPanels * 100) + 'vh';
+
+        // Set initial flex values: first panel expanded, rest collapsed
+        const EXPANDED = 5;
+        const COLLAPSED = 0.8;
+
+        panels.forEach((panel, i) => {
+            panel.style.flex = (i === 0) ? EXPANDED : COLLAPSED;
+            if (i === 0) {
+                panel.classList.add('active-panel');
+            } else {
+                panel.classList.remove('active-panel');
+            }
+        });
+
+        // Build GSAP timeline
+        heroAccordionTL = gsap.timeline({
+            scrollTrigger: {
+                trigger: heroSpacer,
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 0.5,
+                pin: container,
+                pinSpacing: false,
+                invalidateOnRefresh: true,
+                snap: {
+                    snapTo: 1 / (numPanels - 1),
+                    duration: { min: 0.2, max: 0.5 },
+                    ease: 'power2.inOut'
+                },
+                onUpdate: function(self) {
+                    // Determine which panel should be active based on progress
+                    const progress = self.progress;
+                    let activeIdx = Math.round(progress * (numPanels - 1));
+                    activeIdx = Math.max(0, Math.min(numPanels - 1, activeIdx));
+                    panels.forEach((panel, i) => {
+                        if (i === activeIdx) {
+                            panel.classList.add('active-panel');
+                        } else {
+                            panel.classList.remove('active-panel');
+                        }
+                    });
+                }
+            }
+        });
+
+        // Animate flex transitions between panels
+        for (let i = 0; i < numPanels - 1; i++) {
+            const step = i; // timeline position
+            // Collapse current panel
+            heroAccordionTL.to(panels[i], {
+                flex: COLLAPSED,
+                duration: 1,
+                ease: 'power2.inOut'
+            }, step);
+            // Expand next panel
+            heroAccordionTL.to(panels[i + 1], {
+                flex: EXPANDED,
+                duration: 1,
+                ease: 'power2.inOut'
+            }, step);
+            // Also collapse any other panels that might be expanded
+            panels.forEach((p, j) => {
+                if (j !== i && j !== i + 1) {
+                    heroAccordionTL.to(p, {
+                        flex: COLLAPSED,
+                        duration: 1,
+                        ease: 'power2.inOut'
+                    }, step);
+                }
+            });
+        }
+
+        // Store the ScrollTrigger reference
+        heroAccordionST = heroAccordionTL.scrollTrigger;
+    }
+
+    // Initialize
+    if (isMobileOrTablet()) {
+        setupHeroAccordion();
+    }
+
+    // Handle resize / orientation change
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-            const panels = document.querySelectorAll('.split-panel');
+            cleanupHeroAccordion();
             if (isMobileOrTablet()) {
-                setupMobileHeroReveal();
-            } else {
-                // On desktop, remove mobile-revealed classes
-                panels.forEach(panel => {
-                    panel.classList.remove('mobile-revealed');
-                });
+                setupHeroAccordion();
             }
-        }, 250);
+            if (window.ScrollTrigger) {
+                ScrollTrigger.refresh();
+            }
+        }, 300);
     });
 });
 
