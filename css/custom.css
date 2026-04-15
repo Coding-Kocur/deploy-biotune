@@ -1380,24 +1380,7 @@ footer.reveal-footer {
     transform: translateY(0) !important;
 }
 
-/* ============================================
-   MOBILE RESPONSIVENESS & HAMBURGER
-   ============================================ */
-.mobile-menu {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    z-index: 200;
-    transform: translateX(-100%);
-    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-    pointer-events: none;
-}
-.mobile-menu.open {
-    transform: translateX(0);
-    pointer-events: auto;
-}
+/* (Mobile menu styles are at the top of this file) */
 
 /* ============================================
    FLUID TYPOGRAPHY — Zoom-safe clamp() system

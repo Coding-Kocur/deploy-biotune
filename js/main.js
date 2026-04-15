@@ -435,11 +435,15 @@ document.addEventListener('DOMContentLoaded', function() {
             heroSpacer = document.createElement('div');
             heroSpacer.className = 'hero-accordion-spacer';
             heroSpacer.style.position = 'relative';
+            heroSpacer.style.width = '100%';
             container.parentNode.insertBefore(heroSpacer, container);
             heroSpacer.appendChild(container);
         }
         // Spacer height = numPanels screens of scroll
         heroSpacer.style.height = (numPanels * 100) + 'vh';
+
+        // Ensure container has full width (critical for GSAP pin)
+        container.style.width = '100%';
 
         // Set initial flex values: first panel expanded, rest collapsed
         const EXPANDED = 5;
