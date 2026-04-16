@@ -470,67 +470,165 @@
             .desc-left h2 { font-size: clamp(1.2rem, 0.8rem + 1.5vw, 1.5rem); }
         }
         
-        /* MOBILE STACKED OVERLAPPING LAYOUT */
-        @media (max-width: 768px) {
+        /* ===================================================================
+           MOBILE VERSION (≤1024px) — STRICTLY VERTICAL STACKED ACCORDION 
+           DO NOT EDIT FOR DESKTOP
+           =================================================================== */
+        @media (max-width: 1024px) {
             .master-scroll, .master-sticky, #h-scroll-track {
                 height: auto !important;
+                min-height: 100vh !important;
                 position: relative !important;
                 overflow: visible !important;
+                width: 100% !important;
+                transform: none !important;
+                display: flex !important;
+                flex-direction: column !important;
             }
             #section-misja {
                 position: relative !important;
                 height: auto !important;
-                min-height: 100vh;
+                width: 100% !important;
+                min-height: auto;
+                padding-top: 100px;
                 display: flex;
                 flex-direction: column;
-                padding-top: 100px; /* Clear fixed navbar */
             }
             #section-misja > div {
+                width: 100% !important;
                 justify-content: flex-start !important;
             }
             #section-quality {
                 position: relative !important;
-                transform: none !important;
+                width: 100% !important;
                 height: auto !important;
-                min-height: 100vh;
+                min-height: auto;
                 display: flex;
                 flex-direction: column;
-                margin-top: -10vh; /* overlap effect */
-                padding-top: 15vh;
-                z-index: 10;
-                background: linear-gradient(to bottom, transparent 0%, black 15vh, black 100%);
+                margin-top: 0;
             }
-            .bottom-section {
-                position: relative !important;
-                top: auto !important;
-                transform: none !important;
-                margin-top: -10vh; /* overlap effect */
-            }
-            .bottom-inner {
-                padding-top: 15vh;
-                padding-bottom: 0 !important;
-                margin-bottom: 0 !important;
-                border-radius: 40px 40px 0 0 !important;
-                min-height: auto;
-            }
-            .img-wrapper {
-                position: relative !important;
+            #intro-text {
                 width: 100% !important;
-                height: 50vh !important;
-                margin-top: 2rem;
-                top: auto !important;
+                padding-top: 4rem;
+                padding-bottom: 2rem;
+                height: auto !important;
+            }
+            
+            /* Photo block: act as overlay */
+            .img-wrapper {
+                position: sticky !important;
+                top: 0 !important;
+                width: 100% !important;
+                height: 100vh !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                z-index: 10;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: black;
+            }
+            .img-main {
+                height: 60vh !important;
+                width: 100% !important;
+                object-fit: contain !important;
+                transform-origin: center center !important;
             }
             .desc-overlay {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                width: 100% !important;
-                opacity: 1 !important;
-                pointer-events: auto !important;
-                padding: 2rem 1rem;
+                position: absolute !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                width: 90% !important;
+                text-align: center;
+                padding: 1.5rem !important;
+                border-radius: 12px;
+                opacity: 0;
+                pointer-events: none;
+                flex-direction: column !important;
+                background: rgba(0, 0, 0, 0.85);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255,255,255,0.1);
             }
-            .grid-cols-2 { grid-template-columns: 1fr !important; }
+            .desc-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .desc-right {
+                text-align: center;
+            }
+
+            /* Bottom section and Wiedza accordion */
+            .bottom-section {
+                position: relative !important;
+                width: 100% !important;
+                z-index: 20;
+                background: #000;
+            }
+            .bottom-inner {
+                padding-top: 4rem;
+            }
+            
+            /* Convert Wiedza grid to stacked accordion */
+            .wiedza-grid-container {
+                display: flex !important;
+                flex-direction: column !important;
+                height: 80vh;
+                gap: 0 !important;
+                overflow: hidden;
+                border-radius: 20px;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            .wiedza-item {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                overflow: hidden;
+                transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), background 0.6s ease;
+                background: #0a0a0a;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+                position: relative;
+            }
+            .wiedza-item:last-child {
+                border-bottom: none;
+            }
+            .wiedza-title-bar {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                padding: 20px;
+            }
+            .wiedza-icon-box {
+                width: 32px !important;
+                height: 32px !important;
+                margin-bottom: 0 !important;
+            }
+            .wiedza-item h3 {
+                margin: 0 !important;
+                font-size: 1.25rem !important;
+                font-weight: 700;
+            }
+            .wiedza-text-box {
+                opacity: 0;
+                transform: translateY(10px);
+                transition: opacity 0.4s ease, transform 0.4s ease;
+                padding: 0 20px 20px 67px; /* Align text under title (32px icon + 15px gap + 20px padding) */
+                display: none;
+            }
+            
+            /* Active Wiedza State */
+            .wiedza-item.active-panel {
+                background: #111;
+            }
+            .wiedza-item.active-panel .wiedza-title-bar {
+                background: rgba(255, 0, 0, 0.05);
+            }
+            .wiedza-item.active-panel .wiedza-text-box {
+                display: block;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
             #scroll-progress-container { display: none !important; }
         }
     </style>
@@ -804,25 +902,33 @@
                                 <div class="overflow-hidden pb-4"><span class="inline-block text-6xl lg:text-7xl font-bold text-white tracking-tighter wiedza-anim-word flex-shrink-0" style="transform:translateY(110%)">i</span></div>
                                 <div class="overflow-hidden pb-4"><span class="inline-block text-6xl lg:text-7xl font-bold text-white tracking-tighter wiedza-anim-word flex-shrink-0" style="transform:translateY(110%)">Odpowiedzialność</span></div>
                             </div>
-                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20 w-full">
-                                <div class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
-                                    <div class="wiedza-icon-box w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110"><svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full"><path d="M18 6h12M20 6v14l-8 16a2 2 0 001.8 3h20.4a2 2 0 001.8-3l-8-16V6" stroke-linecap="round" stroke-linejoin="round" /><path d="M16 32h16" stroke-linecap="round" /></svg></div>
-                                    <h3 class="text-lg font-semibold text-white mb-3">Przeznaczenie</h3>
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-20 w-full wiedza-grid-container">
+                                <div class="feature-icon-card wiedza-item group flex flex-col items-center lg:text-center text-left cursor-pointer">
+                                    <div class="wiedza-title-bar w-full justify-start lg:justify-center">
+                                        <div class="wiedza-icon-box w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110"><svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full"><path d="M18 6h12M20 6v14l-8 16a2 2 0 001.8 3h20.4a2 2 0 001.8-3l-8-16V6" stroke-linecap="round" stroke-linejoin="round" /><path d="M16 32h16" stroke-linecap="round" /></svg></div>
+                                        <h3 class="text-lg font-semibold text-white mb-3">Przeznaczenie</h3>
+                                    </div>
                                     <div class="wiedza-text-box w-full"><p class="text-gray-400 text-sm leading-relaxed">Działamy w oparciu o jasne zasady. Wszystkie oferowane przez nas substancje są odczynnikami chemicznymi przeznaczonymi wyłącznie do celów badawczych, naukowych i analitycznych.</p></div>
                                 </div>
-                                <div class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
-                                    <div class="wiedza-icon-box w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110"><svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full"><circle cx="12" cy="24" r="4"/><circle cx="24" cy="14" r="4"/><circle cx="36" cy="24" r="4"/><circle cx="24" cy="34" r="4"/><line x1="16" y1="22" x2="20" y2="16"/><line x1="28" y1="16" x2="32" y2="22"/><line x1="32" y1="26" x2="28" y2="32"/><line x1="20" y1="32" x2="16" y2="26"/></svg></div>
-                                    <h3 class="text-lg font-semibold text-white mb-3">Czym są peptydy?</h3>
+                                <div class="feature-icon-card wiedza-item group flex flex-col items-center lg:text-center text-left cursor-pointer">
+                                    <div class="wiedza-title-bar w-full justify-start lg:justify-center">
+                                        <div class="wiedza-icon-box w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110"><svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full"><circle cx="12" cy="24" r="4"/><circle cx="24" cy="14" r="4"/><circle cx="36" cy="24" r="4"/><circle cx="24" cy="34" r="4"/><line x1="16" y1="22" x2="20" y2="16"/><line x1="28" y1="16" x2="32" y2="22"/><line x1="32" y1="26" x2="28" y2="32"/><line x1="20" y1="32" x2="16" y2="26"/></svg></div>
+                                        <h3 class="text-lg font-semibold text-white mb-3">Czym są peptydy?</h3>
+                                    </div>
                                     <div class="wiedza-text-box w-full"><p class="text-gray-400 text-sm leading-relaxed">W sercu naszej oferty znajdują się peptydy — precyzyjnie zsyntetyzowane sekwencje aminokwasowe, stworzone z myślą o zaawansowanych badaniach, gdzie tak istotne jest wysokie stężenie i brak jakichkolwiek zanieczyszczeń.</p></div>
                                 </div>
-                                <div class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
-                                    <div class="wiedza-icon-box w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110"><svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full"><path d="M24 4L6 12v12c0 11 8 17 18 20 10-3 18-9 18-20V12L24 4z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 24l6 6 10-12" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                                    <h3 class="text-lg font-semibold text-white mb-3">Gwarancja</h3>
+                                <div class="feature-icon-card wiedza-item group flex flex-col items-center lg:text-center text-left cursor-pointer">
+                                    <div class="wiedza-title-bar w-full justify-start lg:justify-center">
+                                        <div class="wiedza-icon-box w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110"><svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full"><path d="M24 4L6 12v12c0 11 8 17 18 20 10-3 18-9 18-20V12L24 4z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 24l6 6 10-12" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                        <h3 class="text-lg font-semibold text-white mb-3">Gwarancja</h3>
+                                    </div>
                                     <div class="wiedza-text-box w-full"><p class="text-gray-400 text-sm leading-relaxed">Kupując produkty BioTune, otrzymują Państwo odczynniki, których parametry zostały rzetelnie zweryfikowane. Regularnie powtarzamy procedury testowe, aby zapewnić stałą jakość każdej partii danego produktu.</p></div>
                                 </div>
-                                <div class="feature-icon-card wiedza-item group flex flex-col items-center text-center cursor-pointer">
-                                    <div class="wiedza-icon-box w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110"><svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full"><path d="M6 38l10-10 8 6 18-22" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 12h10v10" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                                    <h3 class="text-lg font-semibold text-white mb-3">Potencjał peptydów</h3>
+                                <div class="feature-icon-card wiedza-item group flex flex-col items-center lg:text-center text-left cursor-pointer">
+                                    <div class="wiedza-title-bar w-full justify-start lg:justify-center">
+                                        <div class="wiedza-icon-box w-16 h-16 mb-6 transition-transform duration-300 group-hover:scale-110"><svg viewBox="0 0 48 48" fill="none" stroke="#ff0000" stroke-width="1.5" class="w-full h-full"><path d="M6 38l10-10 8 6 18-22" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 12h10v10" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                        <h3 class="text-lg font-semibold text-white mb-3">Potencjał peptydów</h3>
+                                    </div>
                                     <div class="wiedza-text-box w-full"><p class="text-gray-400 text-sm leading-relaxed">Peptydy są jedną z najbardziej obiecujących grup związków we współczesnej chemii biomolekularnej. Charakteryzują się zdolnością do selektywnego oddziaływania z określonymi strukturami biologicznymi.</p></div>
                                 </div>
                             </div>
@@ -1007,9 +1113,11 @@
             gsap.set('.wiedza-item', { opacity: 0, y: 50 });
             gsap.set('.wiedza-cta', { opacity: 0, scale: 0.8 });
             
-            if (window.innerWidth < 768) {
-                // MOBILE GSAP ANIMATIONS
+            if (window.innerWidth < 1024) {
+                // MOBILE GSAP ANIMATIONS (VERTICAL ONLY)
                 gsap.set('.precyzja-word', { transition: 'none' });
+                
+                // Animate Precyzja text naturally on normal scroll down
                 ScrollTrigger.create({
                     trigger: '#intro-text', start: "top 80%",
                     onEnter: () => {
@@ -1031,15 +1139,37 @@
                     }
                 });
                 
-                ScrollTrigger.create({
-                    trigger: '#desc-overlay', start: "top 80%",
-                    onEnter: () => {
-                        if (window.startCountingAnimation) window.startCountingAnimation();
+                // Photo pinned sequence: slide over from below, then zoom + overlay
+                const photoTL = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: '.img-wrapper',
+                        start: 'top top',
+                        end: '+=100%',
+                        scrub: 1,
+                        pin: true,
+                        invalidateOnRefresh: true,
                     }
                 });
                 
+                // Initial state
+                gsap.set('.img-main', { scale: 1 });
+                gsap.set('#img-darken', { background: 'rgba(0,0,0,0)' });
+                gsap.set('#desc-overlay', { opacity: 0, scale: 0.95 });
+                
+                // Photo timeline progression
+                photoTL.to('.img-main', { scale: 1.25, duration: 2, ease: "power1.inOut" }, 0)
+                       .to('#img-darken', { background: 'rgba(0,0,0,0.65)', duration: 1, ease: "power1.inOut" }, 0.5)
+                       .to('#desc-overlay', { 
+                           opacity: 1, 
+                           scale: 1, 
+                           duration: 1, 
+                           ease: "power2.out",
+                           onStart: () => { if (window.startCountingAnimation) window.startCountingAnimation(); }
+                       }, 1);
+                
+                // Wiedza section triggers
                 ScrollTrigger.create({
-                    trigger: '#bottom-section', start: "top 70%",
+                    trigger: '.wiedza-grid-container', start: "top 75%",
                     onEnter: () => {
                         document.querySelectorAll('.wiedza-anim-word').forEach((word, idx) => {
                             setTimeout(() => {
@@ -1047,10 +1177,51 @@
                                 word.style.transform = 'translateY(0%)';
                             }, idx * 150);
                         });
-                        gsap.to('.wiedza-item', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', delay: 0.8 });
-                        gsap.to('.wiedza-cta', { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.6 });
+                        gsap.to('.wiedza-item', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', delay: 0.5 });
+                        gsap.to('.wiedza-cta', { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.2 });
                     }
                 });
+                
+                // Wiedza Accordion Logic (Mobile)
+                const wiedzaPanels = gsap.utils.toArray('.wiedza-item');
+                wiedzaPanels.forEach((panel, i) => {
+                    const ctx = gsap.context(() => {}, panel);
+                    
+                    ScrollTrigger.create({
+                        trigger: panel,
+                        start: "top center",
+                        end: "bottom center",
+                        onToggle: self => {
+                            if (self.isActive) {
+                                // Close all others
+                                wiedzaPanels.forEach(p => {
+                                    if(p !== panel) {
+                                        p.classList.remove('active-panel');
+                                        gsap.to(p, { flex: 1, duration: 0.6, ease: "power2.inOut" });
+                                    }
+                                });
+                                // Open this one
+                                panel.classList.add('active-panel');
+                                gsap.to(panel, { flex: 3.5, duration: 0.6, ease: "power2.inOut" });
+                            }
+                        }
+                    });
+                });
+                
+                // Handle manual clicks on accordion as well
+                document.querySelectorAll('.wiedza-item').forEach(panel => {
+                    panel.addEventListener('click', () => {
+                        if (panel.classList.contains('active-panel')) return; // Already open
+                        
+                        document.querySelectorAll('.wiedza-item').forEach(p => {
+                            p.classList.remove('active-panel');
+                            gsap.to(p, { flex: 1, duration: 0.6, ease: "power2.inOut" });
+                        });
+                        panel.classList.add('active-panel');
+                        gsap.to(panel, { flex: 3.5, duration: 0.6, ease: "power2.inOut" });
+                    });
+                });
+
                 return; // SKIP DESKTOP SCROLL ARCHITECTURE
             }
 
