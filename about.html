@@ -480,7 +480,7 @@
                 position: sticky;
                 top: 0;
                 height: 100vh;
-                overflow: hidden;
+                overflow: visible; /* Changed from hidden — h-scroll-track clips animations, this lets bottom-section show */
             }
             #h-scroll-track {
                 position: relative;
@@ -530,15 +530,17 @@
                 min-height: auto;
                 background: black;
             }
-            /* Image wrapper: override absolute base, GSAP controls expansion */
+            /* Image wrapper: absolutely positioned at bottom of viewport for visibility */
             .img-wrapper {
-                position: relative !important;
+                position: absolute !important;
+                bottom: 0 !important;
+                left: 4% !important;
                 right: auto !important;
                 top: auto !important;
                 width: 92% !important;
-                height: 65vh !important;
-                margin: 1.5rem auto 0 !important;
-                border-radius: 12px;
+                height: 50vh !important;
+                margin: 0 !important;
+                border-radius: 12px 12px 0 0;
                 overflow: hidden;
                 z-index: 2;
             }
@@ -1065,12 +1067,30 @@
             
             if (window.innerWidth < 768) {
                 // ─── MOBILE GSAP ANIMATIONS ───
-                // Uses a single scrubbed timeline for all phases:
+                // Uses a single scrubbed timeline for animation phases:
                 //   Phase 1 (0→0.2): Quality slides up over Misja
-                //   Phase 2 (0.2→0.4): Precyzja words reveal + typewriter
-                //   Phase 3 (0.4→0.6): Image expands, zooms, darkens
-                //   Phase 4 (0.6→0.75): Desc overlay fades in + purity counter
-                //   Phase 5 (0.75→1.0): Bottom section slides up
+                //   Phase 2 (0.2→0.35): Precyzja words reveal + typewriter
+                //   Phase 3 (0.35→0.55): Image expands from bottom to fill viewport, zooms, darkens
+                //   Phase 4 (0.55→0.75): Desc overlay fades in + purity counter
+                //   Phase 5 (0.75→1.0): Desc fades out, cleanup
+                //
+                // Bottom-section (Wiedza, newsletter, contact) is moved OUTSIDE
+                // master-scroll so it flows naturally after the sticky area.
+                // Wiedza animations use IntersectionObserver.
+
+                // Move bottom-section outside master-scroll for proper visibility
+                const bottomSection = document.getElementById('bottom-section');
+                const masterScroll = document.querySelector('.master-scroll');
+                const pageWrapper = document.querySelector('.page-content-wrapper');
+                if (bottomSection && masterScroll && pageWrapper) {
+                    // Insert bottom-section after master-scroll, inside page-content-wrapper
+                    pageWrapper.insertBefore(bottomSection, masterScroll.nextSibling);
+                    // Reset mobile CSS overrides since it's now in normal flow
+                    bottomSection.style.position = 'relative';
+                    bottomSection.style.top = 'auto';
+                    bottomSection.style.width = '100%';
+                    bottomSection.style.transform = 'none';
+                }
 
                 const vh = window.innerHeight;
                 gsap.set('.precyzja-word', { transition: 'none' });
@@ -1092,7 +1112,6 @@
                     duration: 0.2,
                     ease: 'power2.inOut',
                     onStart: () => {
-                        // Reveal Precyzja words as quality slides in
                         document.querySelectorAll('.precyzja-word').forEach((w, i) => {
                             setTimeout(() => {
                                 w.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
@@ -1116,10 +1135,8 @@
                     }
                 }, 0.2);
 
-                // Phase 3: Image expands to fill viewport, zooms, darkens
-                // We switch img-wrapper to position:absolute to cover the whole sticky container
+                // Phase 3: Image expands from bottom to fill entire viewport
                 mobileTL.to('#img-wrapper', {
-                    position: 'absolute',
                     top: 0,
                     left: 0,
                     right: 0,
@@ -1128,61 +1145,74 @@
                     height: '100%',
                     margin: 0,
                     borderRadius: '0px',
-                    duration: 0.12,
+                    duration: 0.15,
                     ease: 'power2.inOut'
-                }, 0.35);
+                }, 0.32);
                 mobileTL.to('#intro-text', {
                     opacity: 0,
                     y: -50,
                     duration: 0.1,
                     ease: 'power1.in'
-                }, 0.35);
-                // Zoom image
+                }, 0.32);
+                // Zoom image + scale up further
                 mobileTL.to(imgEl, {
-                    scale: 1.35,
+                    scale: 1.4,
                     transformOrigin: '50% 20%',
-                    duration: 0.18,
+                    duration: 0.2,
                     ease: 'power1.inOut'
-                }, 0.45);
+                }, 0.42);
                 // Darken + slight pan
                 mobileTL.to('#img-darken', {
                     background: 'rgba(0, 0, 0, 0.6)',
                     duration: 0.1,
                     ease: 'power1.inOut'
-                }, 0.58);
+                }, 0.55);
                 mobileTL.to(imgEl, {
                     y: '-30%',
                     duration: 0.2,
                     ease: 'power1.inOut'
-                }, 0.58);
+                }, 0.55);
 
-                // Phase 4: Description overlay fades in + purity counter
+                // Phase 4: Description overlay fades in + purity counter + slight extra zoom
                 mobileTL.to('#desc-overlay', {
                     opacity: 1,
-                    duration: 0.08,
+                    duration: 0.1,
                     ease: 'power2.out',
                     onStart: () => {
                         if (window.startCountingAnimation) window.startCountingAnimation();
                     }
-                }, 0.70);
+                }, 0.65);
+                // Extra zoom to emphasize during desc overlay
+                mobileTL.to(imgEl, {
+                    scale: 1.55,
+                    duration: 0.15,
+                    ease: 'power1.inOut'
+                }, 0.65);
 
-                // Phase 5: desc fades + Wiedza entrance (Wiedza is in normal flow below)
+                // Phase 5: Desc fades out (Wiedza handled by IO below)
                 mobileTL.to('#desc-overlay', {
                     opacity: 0,
-                    duration: 0.1,
-                    ease: 'power1.in',
-                    onStart: () => {
-                        // Trigger Wiedza entrance via scroll-based IO observer (already set up by global observer)
-                        document.querySelectorAll('.wiedza-anim-word').forEach((word, idx) => {
-                            setTimeout(() => {
-                                word.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-                                word.style.transform = 'translateY(0%)';
-                            }, idx * 150);
-                        });
-                        gsap.to('.wiedza-item', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', delay: 0.4 });
-                        gsap.to('.wiedza-cta', { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.2 });
-                    }
-                }, 0.88);
+                    duration: 0.15,
+                    ease: 'power1.in'
+                }, 0.85);
+
+                // Wiedza animations via IntersectionObserver (bottom-section is now in normal doc flow)
+                const wiedzaObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            document.querySelectorAll('.wiedza-anim-word').forEach((word, idx) => {
+                                setTimeout(() => {
+                                    word.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                                    word.style.transform = 'translateY(0%)';
+                                }, idx * 150);
+                            });
+                            gsap.to('.wiedza-item', { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out', delay: 0.3 });
+                            gsap.to('.wiedza-cta', { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.0 });
+                            wiedzaObserver.disconnect();
+                        }
+                    });
+                }, { threshold: 0.1 });
+                if (bottomSection) wiedzaObserver.observe(bottomSection);
 
                 return; // SKIP DESKTOP SCROLL ARCHITECTURE
             }

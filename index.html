@@ -249,11 +249,11 @@
             animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* V6 Hero - Vertical Columns (Side-by-Side) */
+        /* V6 Hero - Vertical Columns (Side-by-Side) — DESKTOP */
         .split-container {
             display: flex;
             width: 100%;
-            height: calc(100svh - 6rem);
+            height: calc(100vh - 6rem);
             overflow: hidden;
             margin-top: 6rem;
         }
@@ -321,7 +321,7 @@
         }
 
         .split-title {
-            font-size: clamp(1.5rem, 1rem + 1.5vw, 2rem);
+            font-size: 2rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -340,7 +340,7 @@
             top: auto;
             left: auto;
             margin-bottom: 1.5rem;
-            font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+            font-size: 3.5rem;
             width: 100%;
         }
 
@@ -360,7 +360,10 @@
             transition-delay: 0.2s;
         }
 
-        /* Mobile/Tablet: Scroll-driven accordion — one panel expanded at a time */
+        /* ===================================================================
+           MOBILE VERSION (≤1024px) — DO NOT EDIT WHEN CHANGING DESKTOP
+           Scroll-driven accordion — one panel expanded at a time
+           =================================================================== */
         @media (max-width: 1024px) {
             .split-container {
                 flex-direction: column;
@@ -472,6 +475,11 @@
             .split-panel:not(.active-panel) .split-bg {
                 transform: scale(1.0);
             }
+
+            /* Mobile nav adjustments */
+            nav .flex.items-center.justify-between {
+                height: 4rem; /* h-16 on mobile */
+            }
         }
     </style>
 </head>
@@ -483,14 +491,14 @@
     <nav
         class="fixed top-0 w-full z-50 glass hero-glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16 md:h-24 ">
+            <div class="flex items-center justify-between h-24 ">
                 <!-- Left: Navigation Links -->
                 
                 <!-- Hamburger Button (Mobile) -->
-                <button id="mobile-menu-btn" class="lg:hidden flex items-center justify-center p-2 hover:text-biotune-red transition-colors z-[210] relative flex-shrink-0" aria-expanded="false" aria-label="Menu nawigacyjne">
+                <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 hover:text-biotune-red transition-colors z-[210] relative flex-shrink-0" aria-expanded="false" aria-label="Menu nawigacyjne">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
-                <div class="hidden lg:flex items-center space-x-6 relative z-10 flex-shrink-0">
+                <div class="hidden md:flex items-center space-x-6 relative z-10 flex-shrink-0">
 
                     <a href="index.html"
                         class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona
@@ -554,7 +562,7 @@
                     <a href="index.html" class="relative block">
                         <!-- Original Logo -->
                         <img id="nav-logo-anim" src="./assets/biotune-logo-dark-mode.png" alt="BioTune"
-                            class="h-36 sm:h-44 md:h-52 lg:h-60 w-auto logo-dynamic">
+                            class="h-60 w-auto logo-dynamic">
                         
                         <!-- Overlay for "Tune" part (White transition) -->
                         <div class="logo-white-overlay absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none">
@@ -563,7 +571,7 @@
                 </div>
 
                 <!-- Right: Icons -->
-                <div class="flex items-center gap-2 sm:gap-4 ml-auto relative z-10 flex-shrink-0">
+                <div class="flex items-center gap-4 ml-auto relative z-10 flex-shrink-0">
                     <div class="account-dropdown">
                         <a href="login.html" id="account-link" class="hover:text-biotune-red transition-colors" title="Moje konto" aria-label="Moje konto">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -718,7 +726,7 @@
     <div class="content-blur-overlay" id="content-blur"></div>
 
     <section id="hero-v6"
-        class="p-0 hero-section min-h-screen relative bg-black">
+        class="p-0 hero-section min-h-screen relative flex flex-col justify-center overflow-hidden bg-black">
 
         <div class="split-container z-10">
             <!-- Panel 1: Misja BioTune (was SARM) -->
@@ -840,7 +848,7 @@
                 <!-- Logo & Bio -->
                 <div class="lg:col-span-2">
                     <a href="index.html" class="inline-flex relative h-12 w-48 mb-6 items-center cursor-pointer">
-                            <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="absolute top-1/2 -translate-y-1/2 -left-3 h-36 sm:h-44 md:h-52 lg:h-60 w-auto pointer-events-none max-w-none">
+                            <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="absolute top-1/2 -translate-y-1/2 -left-3 h-60 w-auto pointer-events-none max-w-none">
                         </a>
                     <p class="text-gray-400 leading-relaxed max-w-sm">
                         Peptydy najwyższej jakości do celów badawczych. Gwarancja czystości potwierdzona rygorystycznymi testami przez niezależne labolatoria
