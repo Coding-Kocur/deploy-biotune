@@ -157,10 +157,14 @@
             padding: 16px 20px;
             background: #0a0a0a;
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: all 0.3s ease;
             min-height: 60px;
+            overflow: hidden;
         }
         .db-row:hover { background: #111; }
+        .db-row-wrap.expanded .db-row {
+            min-height: 0; height: 0; padding-top: 0; padding-bottom: 0; opacity: 0;
+        }
 
         .db-row .col-name { font-weight: 600; font-size: 0.92rem; color: #fff; }
         .db-row .col-dosage { font-size: 0.8rem; color: #888; }
@@ -222,31 +226,6 @@
             font-size: 0.82rem; color: #ccc; font-family: monospace;
         }
         .expand-right { flex: 1; flex-shrink: 0; }
-        .report-container {
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
-            overflow: hidden; position: relative;
-            cursor: pointer;
-        }
-        .report-container .report-img {
-            width: 100%; display: block;
-            transition: transform 0.6s ease;
-            transform-origin: center;
-        }
-        .report-container:hover .report-img { transform: scale(1.3); }
-        .report-darken {
-            position: absolute; inset: 0;
-            background: rgba(0,0,0,0);
-            transition: background 0.6s ease;
-            pointer-events: none;
-        }
-        .report-container:hover .report-darken { background: rgba(0,0,0,0.45); }
-        .report-label {
-            position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
-            font-size: 0.7rem; color: rgba(255,255,255,0.5);
-            letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
-            opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
-        }
-        .report-container:hover .report-label { opacity: 1; }
         .expand-footer {
             padding: 0 1.5rem 1.5rem;
             display: flex; justify-content: flex-start;
@@ -621,27 +600,43 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="expand-left">
                         <h3>${p.name} – Specyfikacja</h3>
                         <div class="mol-grid">
-                            <div class="mol-item">
-                                <label>Masa molowa</label>
-                                <span>${p.molarMass || 'N/A'}</span>
-                            </div>
-                            <div class="mol-item">
-                                <label>Wzór sumaryczny</label>
-                                <span>${p.formula || 'N/A'}</span>
-                            </div>
-                            <div class="mol-item">
-                                <label>Numer CAS</label>
-                                <span>${p.cas || 'N/A'}</span>
-                            </div>
+                            <div class="mol-item"><label>Masa molowa</label><span>${p.molarMass || 'N/A'}</span></div>
+                            <div class="mol-item"><label>Wzór sumaryczny</label><span>${p.formula || 'N/A'}</span></div>
+                            <div class="mol-item"><label>Numer CAS</label><span>${p.cas || 'N/A'}</span></div>
                         </div>
                         <p>${p.description}</p>
-                        <a href="product.html?id=${p.id}" class="sweep-hover-btn" style="padding: 10px 20px; font-weight: 600; font-size: 0.85rem; border-radius: 4px; letter-spacing: 0.05em; margin-top: 10px;">Pełna karta produktu →</a>
+                        
+                        <ul style="margin-top:1.5rem; margin-bottom: 1.5rem; color: #ccc; font-size: 0.85rem; list-style-type: none; padding-left: 0; line-height: 1.8;">
+                            <li style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Czystość:</strong> >99.138%</li>
+                            <li style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Stężenie:</strong> 10.30mg</li>
+                            <li style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Data badania:</strong> 2026-03-15</li>
+                        </ul>
+
+                        <div style="display:flex; gap:12px; margin-top: 15px;">
+                            <a href="product.html?id=${p.id}" class="sweep-hover-btn" style="padding: 10px 20px; font-weight: 600; font-size: 0.85rem; border-radius: 4px; letter-spacing: 0.05em;">Pełna karta produktu →</a>
+                            <button class="btn-collapse-panel hover:text-white" style="padding: 10px 20px; font-weight: 600; font-size: 0.85rem; border-radius: 4px; letter-spacing: 0.05em; background: rgba(255,255,255,0.05); color: #ccc; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; transition: all 0.2s ease;">Zwiń ▲</button>
+                        </div>
                     </div>
                     <div class="expand-right">
-                        <div class="report-container">
-                            <img src="./assets/test-report.png" alt="Raport z badań ${p.name}" class="report-img">
-                            <div class="report-darken"></div>
-                            <div class="report-label">Powiększ raport</div>
+                        <div class="product-card-wrapper relative cursor-pointer transition-transform duration-400 hover:scale-105 group" style="border-radius: 12px; transform: translateZ(0); display: block; height: 100%;">
+                            <span class="snake-border snake-border-top"></span>
+                            <span class="snake-border snake-border-right"></span>
+                            <span class="snake-border snake-border-bottom"></span>
+                            <span class="snake-border snake-border-left"></span>
+                            <span class="snake-corner snake-corner-tl"></span>
+                            <span class="snake-corner snake-corner-tr"></span>
+                            <span class="snake-corner snake-corner-br"></span>
+                            <span class="snake-corner snake-corner-bl"></span>
+
+                            <div class="relative overflow-hidden bg-[#111] w-full h-full" style="border-radius: 12px; transform: translateZ(0);">
+                                <img src="./assets/test-report.png" alt="Raport z badań ${p.name}" class="w-full h-full object-cover block">
+                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/75 transition-colors duration-300 pointer-events-none z-0"></div>
+                                
+                                <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 p-6">
+                                    <button class="bg-biotune-red w-full text-white font-bold py-3 px-6 rounded-lg hover:bg-red-600 transition-colors shadow-lg border-0" onclick="window.open('./assets/test-report.png', '_blank', 'noopener,noreferrer')" style="color: white !important;">POWIĘKSZ</button>
+                                    <a href="https://verify.janoshik.com/tests/89171_YNFUMX15DE6Z" target="_blank" rel="noopener noreferrer" class="w-full text-center border border-white/40 text-white font-bold py-3 px-6 rounded-lg hover:bg-white hover:text-black transition-colors backdrop-blur-sm">LINK DO BADAŃ</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -650,6 +645,16 @@ document.addEventListener('DOMContentLoaded', () => {
             rowWrap.appendChild(row);
             rowWrap.appendChild(panel);
             tableBody.appendChild(rowWrap);
+
+            // Add listener to the internal collapse button
+            const collapseBtn = panel.querySelector('.btn-collapse-panel');
+            if(collapseBtn) {
+                collapseBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    rowWrap.classList.remove('expanded');
+                    rowWrap.querySelector('.btn-expand').textContent = 'Rozwiń ▼';
+                });
+            }
 
             // Accordion Logic
             row.addEventListener('click', (e) => {
