@@ -80,6 +80,35 @@
         .sweep-hover-btn:hover::before { transform: scaleX(1); transform-origin: left; }
         .sweep-hover-btn:hover { color: white !important; }
 
+        /* Custom report buttons */
+        .sweep-btn-red {
+            position: relative; overflow: hidden; z-index: 1;
+            border: 1px solid #ff0000; background: rgba(255,0,0,0.1) !important;
+            color: white; transition: color 0.4s cubic-bezier(0.25,1,0.5,1);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .sweep-btn-red::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; background: #ff0000;
+            transform: scaleX(0); transform-origin: right;
+            transition: transform 0.5s cubic-bezier(0.19,1,0.22,1); z-index: -1;
+        }
+        .sweep-btn-red:hover::before { transform: scaleX(1); transform-origin: left; }
+
+        .sweep-btn-white {
+            position: relative; overflow: hidden; z-index: 1;
+            border: 1px solid rgba(255,255,255,0.4); background: transparent !important;
+            color: white; transition: color 0.4s cubic-bezier(0.25,1,0.5,1);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .sweep-btn-white::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(255,255,255,0.2);
+            transform: scaleX(0); transform-origin: right;
+            transition: transform 0.5s cubic-bezier(0.19,1,0.22,1); z-index: -1;
+        }
+        .sweep-btn-white:hover::before { transform: scaleX(1); transform-origin: left; }
+
         /* ── Logo ── */
         .logo-white-overlay {
             transition: opacity 0.4s ease; background-color: white;
@@ -607,14 +636,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p>${p.description}</p>
                         
                         <ul style="margin-top:1.5rem; margin-bottom: 1.5rem; color: #ccc; font-size: 0.85rem; list-style-type: none; padding-left: 0; line-height: 1.8;">
-                            <li style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Czystość:</strong> >99.138%</li>
-                            <li style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Stężenie:</strong> 10.30mg</li>
-                            <li style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Data badania:</strong> 2026-03-15</li>
+                            <li class="bullet-anim" style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Czystość:</strong> >99.138%</li>
+                            <li class="bullet-anim" style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Stężenie:</strong> 10.30mg</li>
+                            <li class="bullet-anim" style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Data badania:</strong> 2026-03-15</li>
                         </ul>
 
                         <div style="display:flex; gap:12px; margin-top: 15px;">
                             <a href="product.html?id=${p.id}" class="sweep-hover-btn" style="padding: 10px 20px; font-weight: 600; font-size: 0.85rem; border-radius: 4px; letter-spacing: 0.05em;">Pełna karta produktu →</a>
-                            <button class="btn-collapse-panel hover:text-white" style="padding: 10px 20px; font-weight: 600; font-size: 0.85rem; border-radius: 4px; letter-spacing: 0.05em; background: rgba(255,255,255,0.05); color: #ccc; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; transition: all 0.2s ease;">Zwiń ▲</button>
+                            <button class="btn-collapse-panel hover:text-white hover:bg-white/10 hover:scale-105" style="padding: 10px 20px; font-weight: 600; font-size: 0.85rem; border-radius: 4px; letter-spacing: 0.05em; background: rgba(255,255,255,0.05); color: #ccc; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; transition: all 0.2s ease;">Zwiń ▲</button>
                         </div>
                     </div>
                     <div class="expand-right">
@@ -628,13 +657,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="snake-corner snake-corner-br"></span>
                             <span class="snake-corner snake-corner-bl"></span>
 
-                            <div class="relative overflow-hidden bg-[#111] w-full h-full" style="border-radius: 12px; transform: translateZ(0);">
-                                <img src="./assets/test-report.png" alt="Raport z badań ${p.name}" class="w-full h-full object-cover block">
-                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/75 transition-colors duration-300 pointer-events-none z-0"></div>
+                            <div class="relative overflow-hidden bg-[#111] w-full h-full rounded-xl" style="transform: translateZ(0);">
+                                <img src="./assets/test-report.png" alt="Raport z badań ${p.name}" class="w-full h-full object-cover block rounded-xl">
+                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/75 transition-colors duration-300 pointer-events-none z-0 rounded-xl"></div>
                                 
                                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 p-6">
-                                    <button class="bg-biotune-red w-full text-white font-bold py-3 px-6 rounded-lg hover:bg-red-600 transition-colors shadow-lg border-0" onclick="window.open('./assets/test-report.png', '_blank', 'noopener,noreferrer')" style="color: white !important;">POWIĘKSZ</button>
-                                    <a href="https://verify.janoshik.com/tests/89171_YNFUMX15DE6Z" target="_blank" rel="noopener noreferrer" class="w-full text-center border border-white/40 text-white font-bold py-3 px-6 rounded-lg hover:bg-white hover:text-black transition-colors backdrop-blur-sm">LINK DO BADAŃ</a>
+                                    <button class="sweep-btn-red w-full font-bold py-2 px-4 text-sm rounded-lg shadow-lg" onclick="window.open('./assets/test-report.png', '_blank', 'noopener,noreferrer')">POWIĘKSZ</button>
+                                    <a href="https://verify.janoshik.com/tests/89171_YNFUMX15DE6Z" target="_blank" rel="noopener noreferrer" class="sweep-btn-white w-full text-center font-bold py-2 px-4 text-sm rounded-lg backdrop-blur-sm">LINK DO BADAŃ</a>
                                 </div>
                             </div>
                         </div>
@@ -672,6 +701,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(!isExpanded) {
                     rowWrap.classList.add('expanded');
                     rowWrap.querySelector('.btn-expand').textContent = 'Zwiń ▲';
+                    
+                    // Trigger bullet cascade animation
+                    gsap.fromTo(panel.querySelectorAll('.bullet-anim'), 
+                        { opacity: 0, x: -15 }, 
+                        { opacity: 1, x: 0, duration: 0.5, stagger: 0.15, ease: "power2.out", delay: 0.1 }
+                    );
                 }
             });
         });

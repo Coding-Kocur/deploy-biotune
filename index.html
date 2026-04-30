@@ -696,27 +696,22 @@
 
             <div class="mobile-menu-divider"></div>
 
-            <!-- Account Section -->
-            <div class="mobile-menu-label">Konto</div>
-            <a href="login.html" class="mobile-menu-link">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-                Moje konto
-            </a>
-            <a href="login.html" class="mobile-menu-sublink">
-                <span class="mobile-menu-dot"></span> Zaloguj się
-            </a>
-            <a href="register.html" class="mobile-menu-sublink">
-                <span class="mobile-menu-dot"></span> Zarejestruj się
-            </a>
+            <div class="mobile-menu-divider"></div>
+
             <button class="mobile-menu-link" style="background:none;border:none;text-align:left;width:100%;cursor:pointer;" onclick="closeMobileMenu(); if(window.openCart) setTimeout(window.openCart,200);">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
                 Koszyk
             </button>
+            <button class="mobile-menu-link" style="background:none;border:none;text-align:left;width:100%;cursor:pointer;" onclick="closeMobileMenu();">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+                Lista życzeń
+            </button>
 
-            <!-- Login / Register CTA at bottom -->
-            <div class="mobile-menu-cta">
-                <a href="login.html" class="mobile-menu-btn-primary">Zaloguj się</a>
-                <a href="register.html" class="mobile-menu-btn-secondary">Utwórz konto</a>
+            <!-- Centrally aligned Konto at the bottom -->
+            <div class="mt-auto pt-8 pb-4 flex flex-col items-center text-center">
+                <div class="text-[10px] uppercase tracking-[0.2em] text-gray-500 mb-4 font-bold">KONTO</div>
+                <a href="login.html" class="w-full max-w-[200px] text-center bg-biotune-red text-white py-2.5 rounded-lg font-bold hover:bg-red-600 transition-colors mb-3">Zaloguj się</a>
+                <a href="register.html" class="w-full max-w-[200px] text-center border border-white/20 text-white py-2.5 rounded-lg font-bold hover:bg-white/10 transition-colors">Utwórz konto</a>
             </div>
         </div>
     </nav>
