@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl" class="dark">
 <head>
     <script>
@@ -385,18 +385,19 @@
     <div class="content-blur-overlay" id="content-blur"></div>
 
     <!-- Hero Full Page (From V3) -->
-    <header class="relative w-full h-[60vh] min-h-[500px] flex flex-col items-center justify-center border-b border-white/5 overflow-hidden">
+    <header class="relative w-full h-screen flex flex-col items-center justify-center border-b border-white/5 overflow-hidden">
         <div class="absolute inset-0 w-full h-full">
             <img src="./assets/hero/slide-2.png" alt="Laboratorium BioTune" class="w-full h-full object-cover opacity-30">
             <div class="absolute inset-0 bg-gradient-to-b from-biotune-black/80 via-transparent to-biotune-black"></div>
         </div>
         
         <div class="relative z-10 max-w-5xl mx-auto px-4 text-center mt-16">
+            <div style="font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:#ff0000;margin-bottom:1.25rem;font-weight:600;">BIOTUNE RESEARCH DATABASE</div>
             <h1 class="hero-title text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter">
                 <span>Badania</span> <span>i</span> <span>Certyfikaty</span>
             </h1>
             <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                Transparentność w każdym miligramie
+                kompletna dokumentacja analityczna wszystkich odczynników BioTune. Zweryfikowane przez niezależne laboratoria
             </p>
         </div>
 
@@ -412,10 +413,10 @@
     <div id="badania-search-bar">
         <div style="max-width:80rem;margin:0 auto;padding:0 1.5rem;display:flex;gap:1rem;align-items:center;">
             <div style="position:relative;flex:1;" class="group">
-                <div style="position:absolute;inset-y:0;left:0;padding-left:14px;display:flex;align-items:center;pointer-events:none;">
+                <div style="position:absolute;top:0;bottom:0;left:0;padding-left:14px;display:flex;align-items:center;pointer-events:none;">
                     <svg aria-hidden="true" style="width:18px;height:18px;color:#555;" class="group-focus-within:text-biotune-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </div>
-                <input type="text" id="search-input" placeholder="Szukaj produktu (np. Retatrutide, BPC-157, CAS...)..." title="Szukaj produktów" aria-label="Szukaj produktów"
+                <input type="text" id="search-input" placeholder="Szukaj produktu (np. Retatrutide, BPC-157, CAS)..." title="Szukaj produktów" aria-label="Szukaj produktów"
                     style="width:100%;background:#0f0f0f;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:11px 14px 11px 42px;font-size:0.88rem;color:#ccc;outline:none;transition:border-color 0.25s ease, box-shadow 0.25s ease;"
                     onfocus="this.style.borderColor='#ff0000';this.style.boxShadow='0 0 14px rgba(255,0,0,0.18)'"
                     onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none'"
