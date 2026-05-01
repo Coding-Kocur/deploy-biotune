@@ -326,10 +326,11 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenuPanel.classList.add('open');
         if (mobileMenuOverlay) mobileMenuOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
-        if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'true');
-        // Switch hamburger → X
-        const svg = mobileMenuBtn && mobileMenuBtn.querySelector('svg');
-        if (svg) svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+        if (mobileMenuBtn) {
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            mobileMenuBtn.style.opacity = '0';
+            mobileMenuBtn.style.pointerEvents = 'none';
+        }
     }
 
     window.closeMobileMenu = function() {
@@ -337,10 +338,11 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenuPanel.classList.remove('open');
         if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('active');
         document.body.style.overflow = '';
-        if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        // Switch X → hamburger
-        const svg = mobileMenuBtn && mobileMenuBtn.querySelector('svg');
-        if (svg) svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+        if (mobileMenuBtn) {
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.style.opacity = '1';
+            mobileMenuBtn.style.pointerEvents = 'auto';
+        }
     };
 
     if (mobileMenuBtn) {
