@@ -883,19 +883,23 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openReportLightbox = function(src) {
         const lightbox = document.getElementById('report-lightbox');
         const img = document.getElementById('lightbox-img');
+        const nav = document.querySelector('nav');
         if(lightbox && img) {
             img.src = src;
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
+            if (nav) nav.style.display = 'none';
         }
     };
 
     window.closeReportLightbox = function(e) {
         if(e && e.target.tagName === 'IMG') return; // Ignore click on image itself
         const lightbox = document.getElementById('report-lightbox');
+        const nav = document.querySelector('nav');
         if(lightbox) {
             lightbox.classList.remove('active');
             document.body.style.overflow = '';
+            if (nav) nav.style.display = '';
             setTimeout(() => {
                 document.getElementById('lightbox-img').src = '';
             }, 300); // Wait for transition

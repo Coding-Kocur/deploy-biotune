@@ -327,9 +327,11 @@
             letter-spacing: 0.1em;
             margin-bottom: 0.5rem;
             position: absolute;
-            top: 50%;
+            top: auto;
+            bottom: 30%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(-90deg);
+            transform-origin: 0 50%;
+            transform: rotate(-90deg);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             white-space: nowrap;
         }

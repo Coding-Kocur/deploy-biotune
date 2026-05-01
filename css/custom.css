@@ -1476,6 +1476,7 @@ nav.glass .max-w-7xl {
     .split-title {
         position: relative !important;
         top: auto !important;
+        bottom: auto !important;
         left: auto !important;
         transform: none !important;
         font-size: clamp(1.75rem, 1.25rem + 2vw, 2.5rem);
