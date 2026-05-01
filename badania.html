@@ -301,7 +301,7 @@
     <nav class="fixed top-0 w-full z-50 glass hero-glass border-b border-black/5 dark:border-white/5 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-24">
-                <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 hover:text-biotune-red transition-colors z-[210] relative flex-shrink-0" aria-expanded="false" aria-label="Menu nawigacyjne">
+                <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 hover:text-biotune-red transition-all z-[210] relative flex-shrink-0" aria-expanded="false" aria-label="Menu nawigacyjne" style="transition: opacity 0.2s ease;">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
                 <div class="hidden md:flex items-center space-x-6 relative z-10 flex-shrink-0">
@@ -382,12 +382,50 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
             </div>
+
             <div class="mobile-menu-label">Nawigacja</div>
-            <a href="index.html" class="mobile-menu-link">Strona główna</a>
-            <a href="shop.html" class="mobile-menu-link">Sklep</a>
-            <a href="about.html" class="mobile-menu-link">O Nas</a>
-            <a href="#contact" class="mobile-menu-link" onclick="closeMobileMenu()">Kontakt</a>
+
+            <a href="index.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+                Strona główna
+            </a>
+            <a href="about.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+                O Nas
+            </a>
+            <a href="badania.html" class="mobile-menu-link" style="color:#ff0000;">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+                Badania
+            </a>
+            <a href="#contact" class="mobile-menu-link" onclick="closeMobileMenu()">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+                Kontakt
+            </a>
+
+            <div class="mobile-menu-label">Sklep</div>
+            <a href="shop.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                Wszystkie produkty
+            </a>
+            <a href="product.html?id=retatrutide" class="mobile-menu-sublink">• Retatrutide</a>
+            <a href="product.html?id=bpc-157-tb-500" class="mobile-menu-sublink">• BPC-157 + TB-500</a>
+            <a href="product.html?id=cjc-1295-ipamorelin" class="mobile-menu-sublink">• CJC-1295 + Ipamorelin</a>
+            <a href="product.html?id=ghk-cu" class="mobile-menu-sublink">• GHK-Cu</a>
+
+            <div class="mobile-menu-label">Koszyk</div>
+            <button onclick="window.openCart && window.openCart(); closeMobileMenu();" class="mobile-menu-link w-full text-left">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                Koszyk
+            </button>
+            <button onclick="document.getElementById('wishlist-trigger') && document.getElementById('wishlist-trigger').click(); closeMobileMenu();" class="mobile-menu-link w-full text-left">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+                Lista życzeń
+            </button>
+
+            <div style="flex: 1;"></div>
+
             <div class="mobile-menu-divider"></div>
+            <div class="mobile-menu-label" style="text-align:center;">Konto</div>
             <div class="mobile-menu-cta">
                 <a href="login.html" class="mobile-menu-btn-primary">Zaloguj się</a>
                 <a href="register.html" class="mobile-menu-btn-secondary">Utwórz konto</a>
@@ -763,6 +801,51 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.classList.remove('scrolled');
         }
     });
+
+    // 4. Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileMenuCloseBtn = document.getElementById('mobile-menu-close-btn');
+
+    function openMobileMenu() {
+        if (!mobileMenuPanel) return;
+        mobileMenuPanel.classList.add('open');
+        if (mobileMenuOverlay) mobileMenuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (mobileMenuBtn) {
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            mobileMenuBtn.style.opacity = '0';
+            mobileMenuBtn.style.pointerEvents = 'none';
+        }
+    }
+
+    window.closeMobileMenu = function() {
+        if (!mobileMenuPanel) return;
+        mobileMenuPanel.classList.remove('open');
+        if (mobileMenuOverlay) mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        if (mobileMenuBtn) {
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.style.opacity = '1';
+            mobileMenuBtn.style.pointerEvents = 'auto';
+        }
+    };
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenuPanel && mobileMenuPanel.classList.contains('open');
+            if (isOpen) window.closeMobileMenu();
+            else openMobileMenu();
+        });
+    }
+    if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', window.closeMobileMenu);
+    if (mobileMenuCloseBtn) mobileMenuCloseBtn.addEventListener('click', window.closeMobileMenu);
+    if (mobileMenuPanel) {
+        mobileMenuPanel.querySelectorAll('.mobile-menu-link, .mobile-menu-sublink').forEach(link => {
+            if (link.tagName === 'A') link.addEventListener('click', () => setTimeout(window.closeMobileMenu, 150));
+        });
+    }
 });
 </script>
 </body>
