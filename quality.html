@@ -79,13 +79,13 @@
            One image, multiple animation phases
            ========================================== */
 
-        /* The master scroll container – very tall for all phases */
+        /* The master scroll container â€“ very tall for all phases */
         .master-scroll {
             height: 800vh;
             position: relative;
         }
 
-        /* Sticky viewport – pins to screen for the entire journey */
+        /* Sticky viewport â€“ pins to screen for the entire journey */
         .master-sticky {
             position: sticky;
             top: 0;
@@ -127,7 +127,7 @@
             z-index: 2;
         }
 
-        /* The actual image – uses object-fit:cover with object-position
+        /* The actual image â€“ uses object-fit:cover with object-position
            animated by GSAP to "pan" down through the document */
         .img-main {
             width: 100%;
@@ -244,7 +244,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="navbar-main-row" class="flex items-center justify-between h-24  gap-8 nav-auto-scale">
                 <div class="hidden md:flex items-center space-x-6 relative z-10 flex-1 justify-start">
-                    <a href="index.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona główna</a>
+                    <a href="index.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona gĹ‚Ăłwna</a>
                     <div class="dropdown-trigger">
                         <a href="shop.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">
                             Sklep
@@ -289,10 +289,10 @@
                             </svg>
                         </a>
                         <div id="account-menu" class="account-menu">
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Zaloguj się, aby kontynuować</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Zaloguj siÄ™, aby kontynuowaÄ‡</p>
                             <div class="space-y-2">
-                                <a href="login.html" class="block w-full text-center bg-biotune-red text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">Zaloguj się</a>
-                                <a href="register.html" class="block w-full text-center border border-gray-300 dark:border-white/20 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors font-medium">Zarejestruj się</a>
+                                <a href="login.html" class="block w-full text-center bg-biotune-red text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">Zaloguj siÄ™</a>
+                                <a href="register.html" class="block w-full text-center border border-gray-300 dark:border-white/20 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors font-medium">Zarejestruj siÄ™</a>
                             </div>
                         </div>
                     </div>
@@ -305,9 +305,9 @@
                         </button>
                         <div id="wishlist-dropdown" class="absolute right-0 top-full mt-4 w-80 glass rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-black/10 dark:border-white/10 z-50">
                             <div class="p-4">
-                                <h3 class="font-bold text-lg mb-3 text-black dark:text-white">Lista życzeń</h3>
+                                <h3 class="font-bold text-lg mb-3 text-black dark:text-white">Lista ĹĽyczeĹ„</h3>
                                 <div class="wishlist-items max-h-96 overflow-y-auto space-y-2">
-                                    <p class="text-center text-gray-500 py-4 text-sm">Twoja lista życzeń jest pusta.</p>
+                                    <p class="text-center text-gray-500 py-4 text-sm">Twoja lista ĹĽyczeĹ„ jest pusta.</p>
                                 </div>
                             </div>
                         </div>
@@ -325,17 +325,84 @@
             </div>
         </div>
     
-        <!-- Mobile Menu Panel -->
-        <div id="mobile-menu-panel" class="mobile-menu hidden fixed inset-0 z-[200]">
-            <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-                <a href="index.html" class="hover:text-biotune-red transition-colors font-bold">Strona główna</a>
-                <a href="shop.html" class="hover:text-biotune-red transition-colors font-bold">Sklep</a>
-                <a href="about.html" class="hover:text-biotune-red transition-colors font-bold">O Nas</a>
-                <a href="quality.html" class="hover:text-biotune-red transition-colors font-bold">Jakość</a>
-                
-                <div class="h-px w-24 bg-white/20 my-4"></div>
-                
-                <a href="login.html" class="hover:text-biotune-red transition-colors text-lg text-gray-400">Moje konto</a>
+        <!-- Mobile Menu Overlay (darkens background) -->
+        <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+        <!-- Mobile Menu Panel (slides in from left) -->
+        <div id="mobile-menu-panel" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu nawigacyjne">
+
+            <!-- Header: Logo + Close button -->
+            <div class="mobile-menu-header">
+                <a href="index.html" class="relative block h-10 w-32 flex-shrink-0" onclick="closeMobileMenu()">
+                    <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="h-28 w-auto absolute top-1/2 -translate-y-1/2 -left-2 max-w-none pointer-events-none">
+                </a>
+                <button class="mobile-menu-close" id="mobile-menu-close-btn" aria-label="Zamknij menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Main Navigation -->
+            <div class="mobile-menu-label">Nawigacja</div>
+
+            <a href="index.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+                Strona gĹ‚Ăłwna
+            </a>
+            <a href="about.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+                O Nas
+            </a>
+            <a href="badania.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+                Badania
+            </a>
+            <a href="#contact" class="mobile-menu-link" onclick="closeMobileMenu()">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+                Kontakt
+            </a>
+
+            <div class="mobile-menu-divider"></div>
+
+            <!-- Shop Section -->
+            <div class="mobile-menu-label">Sklep</div>
+            <a href="shop.html" class="mobile-menu-link">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
+                Wszystkie produkty
+            </a>
+            <a href="product.html?id=retatrutide" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> Retatrutide
+            </a>
+            <a href="product.html?id=bpc-157-tb-500" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> BPC-157 + TB-500
+            </a>
+            <a href="product.html?id=cjc-1295-ipamorelin" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> CJC-1295 + Ipamorelin
+            </a>
+            <a href="product.html?id=ghk-cu" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> GHK-Cu
+            </a>
+            <a href="product.html?id=epithalon" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> Epithalon
+            </a>
+
+            <div class="mobile-menu-divider"></div>
+
+            <div class="mobile-menu-divider"></div>
+
+            <button class="mobile-menu-link" style="background:none;border:none;text-align:left;width:100%;cursor:pointer;" onclick="closeMobileMenu(); if(window.openCart) setTimeout(window.openCart,200);">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                Koszyk
+            </button>
+            <button class="mobile-menu-link" style="background:none;border:none;text-align:left;width:100%;cursor:pointer;" onclick="closeMobileMenu();">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+                Lista ĹĽyczeĹ„
+            </button>
+
+            <!-- Centrally aligned Konto at the bottom -->
+            <div class="mt-auto pt-8 pb-4 flex flex-col items-center text-center">
+                <div class="text-[10px] uppercase tracking-[0.2em] text-gray-500 mb-4 font-bold">KONTO</div>
+                <a href="login.html" class="w-full max-w-[200px] text-center bg-biotune-red text-white py-2.5 rounded-lg font-bold hover:bg-red-600 transition-colors mb-3">Zaloguj siÄ™</a>
+                <a href="register.html" class="w-full max-w-[200px] text-center border border-white/20 text-white py-2.5 rounded-lg font-bold hover:bg-white/10 transition-colors">UtwĂłrz konto</a>
             </div>
         </div>
     </nav>
@@ -347,7 +414,7 @@
 
     <!-- ============ UNIFIED SCROLL SECTION ============
          ONE image. All phases happen here:
-           Phase 1: Right-box → fullscreen expand + left text fades
+           Phase 1: Right-box â†’ fullscreen expand + left text fades
            Phase 2: Darken + description overlay appears
            Phase 3: Image pans slowly, description scrolls out fast (parallax)
            Phase 4: Bottom section slides up over the still-panning image
@@ -372,7 +439,7 @@
                 <div class="desc-row">
                     <div class="desc-left">
                         <h2>Lorem Ipsum</h2>
-                        <p>\ lô-rəm-ˈip-səm \\</p>
+                        <p>\ lĂ´-rÉ™m-Ëip-sÉ™m \\</p>
                     </div>
                     <div class="desc-right">
                         <p>Lorem ipsum dolor sit amet,<br>consectetur adipiscing elit.</p>
@@ -449,7 +516,7 @@
             window._qualityTL = tl;
 
 
-            /* ─── PHASE 1 (0 → 0.6): Expand image to fullscreen ─── */
+            /* â”€â”€â”€ PHASE 1 (0 â†’ 0.6): Expand image to fullscreen â”€â”€â”€ */
             tl.to("#img-wrapper", {
                 right: "0%",
                 top: 0,
@@ -469,7 +536,7 @@
             }, 0);
 
 
-            /* ─── PHASE 2 (overlaps Phase 1): Zoom to viewport width ─── */
+            /* â”€â”€â”€ PHASE 2 (overlaps Phase 1): Zoom to viewport width â”€â”€â”€ */
             // Dynamic scale so the image always fills the viewport width.
             // transform-origin TOP CENTER: top stays pinned, bottom clips.
             tl.to(imgEl, {
@@ -480,7 +547,7 @@
             }, ZOOM_START);
 
 
-            /* ─── PHASE 3 (0.80): Darken + image starts panning ─── */
+            /* â”€â”€â”€ PHASE 3 (0.80): Darken + image starts panning â”€â”€â”€ */
             // Both happen simultaneously right after zoom completes
             tl.to("#img-darken", {
                 background: "rgba(0, 0, 0, 0.65)",
@@ -488,7 +555,7 @@
                 ease: "power1.inOut"
             }, ZOOM_END);
 
-            // Image panning — starts RIGHT at zoom end, faster and deeper
+            // Image panning â€” starts RIGHT at zoom end, faster and deeper
             tl.to(imgEl, {
                 y: "-80%",
                 duration: 1.5,
@@ -496,7 +563,7 @@
             }, ZOOM_END);
 
 
-            /* ─── PHASE 4 (1.15 → 1.45): Description fades in ─── */
+            /* â”€â”€â”€ PHASE 4 (1.15 â†’ 1.45): Description fades in â”€â”€â”€ */
             const DESC_IN = ZOOM_END + 0.35; // 1.15
             tl.to("#desc-overlay", {
                 opacity: 1,
@@ -505,7 +572,7 @@
             }, DESC_IN);
 
 
-            /* ─── PHASE 5 (1.45 → 2.95): Desc and Bottom scroll together ─── */
+            /* â”€â”€â”€ PHASE 5 (1.45 â†’ 2.95): Desc and Bottom scroll together â”€â”€â”€ */
             // They are animated perfectly synchronously as if they were one layer.
             // Bottom section starts naturally appearing when desc-overlay moves up.
             const SCROLL_UP_START = DESC_IN + 0.3; // 1.45
@@ -524,7 +591,7 @@
             resizeTimer = setTimeout(buildTimeline, 200);
         });
 
-        /* ─── NAVBAR SCROLL CLASS ─── */
+        /* â”€â”€â”€ NAVBAR SCROLL CLASS â”€â”€â”€ */
         const nav = document.querySelector('nav.glass');
         window.addEventListener('scroll', () => {
             nav.classList.toggle('scrolled', window.scrollY > 50);

@@ -9,13 +9,13 @@
             document.documentElement.style.transition = 'opacity 0.2s';
             window.addEventListener('load', function() {
                 setTimeout(function() {
-                    let pw = prompt("Dostęp chroniony. Proszę podać kod dostępu:");
+                    let pw = prompt("DostÄ™p chroniony. ProszÄ™ podaÄ‡ kod dostÄ™pu:");
                     if (pw === "Nadja7072") {
                         sessionStorage.setItem('biotune_access_granted', 'true');
                         document.documentElement.style.opacity = '1';
                         document.documentElement.style.pointerEvents = 'auto';
                     } else {
-                        document.body.innerHTML = "<div style='display:flex;justify-content:center;align-items:center;height:100vh;background:#030303;color:#ff0000;font-family:monospace;font-size:1.5rem;text-align:center;'>Brak dostępu / Ochrona kodem</div>";
+                        document.body.innerHTML = "<div style='display:flex;justify-content:center;align-items:center;height:100vh;background:#030303;color:#ff0000;font-family:monospace;font-size:1.5rem;text-align:center;'>Brak dostÄ™pu / Ochrona kodem</div>";
                         document.documentElement.style.opacity = '1';
                         document.documentElement.style.pointerEvents = 'auto';
                     }
@@ -26,7 +26,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Badania - BioTune</title>
-    <meta name="description" content="Baza danych badawczych BioTune – kompletna dokumentacja analityczna wszystkich odczynników. Raporty HPLC+MS, czystość powyżej 99%.">
+    <meta name="description" content="Baza danych badawczych BioTune â€“ kompletna dokumentacja analityczna wszystkich odczynnikĂłw. Raporty HPLC+MS, czystoĹ›Ä‡ powyĹĽej 99%.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="./css/custom.css">
     <link rel="icon" type="image/png" href="./assets/favicon.png">
     <style>
-        /* ── Global ── */
+        /* â”€â”€ Global â”€â”€ */
         html { scroll-behavior: smooth !important; }
         body { background: #0a0a0a; }
 
@@ -63,7 +63,7 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* ── Sweep button ── */
+        /* â”€â”€ Sweep button â”€â”€ */
         .sweep-hover-btn {
             position: relative; overflow: hidden; z-index: 1;
             border: 1px solid #ff0000; background: transparent !important;
@@ -109,7 +109,7 @@
         }
         .sweep-btn-white:hover::before { transform: scaleX(1); transform-origin: left; }
 
-        /* ── Logo ── */
+        /* â”€â”€ Logo â”€â”€ */
         .logo-white-overlay {
             transition: opacity 0.4s ease; background-color: white;
             -webkit-mask: url('./assets/biotune-logo-dark-mode.png') no-repeat center;
@@ -121,7 +121,7 @@
         }
         .nav-inverted .logo-white-overlay { opacity: 1 !important; }
 
-        /* ── Hero animation (from v3) ── */
+        /* â”€â”€ Hero animation (from v3) â”€â”€ */
         .hero-title {
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
             display: inline-block;
@@ -140,7 +140,7 @@
             transform: translateY(30px);
         }
 
-        /* ── Sticky search bar ── */
+        /* â”€â”€ Sticky search bar â”€â”€ */
         #badania-search-bar {
             position: sticky;
             top: 96px;
@@ -151,7 +151,7 @@
             padding: 14px 0;
         }
 
-        /* ── Data table ── */
+        /* â”€â”€ Data table â”€â”€ */
         .db-table-wrap { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem 4rem; }
 
         .db-table-header {
@@ -222,7 +222,7 @@
         }
         .btn-catalog:hover { border-color: white; color: white; }
 
-        /* ── Expanded panel ── */
+        /* â”€â”€ Expanded panel â”€â”€ */
         .db-expand-panel {
             max-height: 0; overflow: hidden; opacity: 0;
             transition: max-height 0.5s ease, opacity 0.4s ease;
@@ -260,7 +260,7 @@
             display: flex; justify-content: flex-start;
         }
 
-        /* ── Lightbox ── */
+        /* â”€â”€ Lightbox â”€â”€ */
         .report-lightbox {
             display: none; position: fixed; inset: 0; z-index: 9999;
             background: rgba(0,0,0,0.9); backdrop-filter: blur(8px);
@@ -286,13 +286,13 @@
             background: rgba(255,0,0,0.8); transform: scale(1.1);
         }
 
-        /* ── Scrollbar ── */
+        /* â”€â”€ Scrollbar â”€â”€ */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #ff0000; }
 
-        /* ── Account/dropdown ── */
+        /* â”€â”€ Account/dropdown â”€â”€ */
         .account-dropdown { position: relative; }
         .account-menu {
             position: absolute; top: 100%; right: 0; margin-top: 1rem;
@@ -306,7 +306,7 @@
             opacity: 1; visibility: visible; transform: translateY(0);
         }
 
-        /* ── MOBILE STUB (≤1024px) ── */
+        /* â”€â”€ MOBILE STUB (â‰¤1024px) â”€â”€ */
         @media (max-width: 1024px) {
             #badania-search-bar { top: 0; }
             .db-table-header { display: none; }
@@ -331,7 +331,7 @@
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
                 <div class="hidden md:flex items-center space-x-6 relative z-10 flex-shrink-0">
-                    <a href="index.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona główna</a>
+                    <a href="index.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium">Strona gĹ‚Ăłwna</a>
                     <div class="dropdown-trigger">
                         <a href="shop.html" class="hover:text-biotune-red transition-colors px-3 py-2 rounded-md text-sm font-medium inline-flex items-center">Sklep
                             <svg class="ml-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
@@ -368,22 +368,22 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
                         </a>
                         <div id="account-menu" class="account-menu">
-                            <p class="text-sm text-gray-400 mb-4">Zaloguj się, aby kontynuować</p>
+                            <p class="text-sm text-gray-400 mb-4">Zaloguj siÄ™, aby kontynuowaÄ‡</p>
                             <div class="space-y-2">
-                                <a href="login.html" class="block w-full text-center bg-biotune-red text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">Zaloguj się</a>
-                                <a href="register.html" class="block w-full text-center border border-white/20 px-4 py-2 rounded-lg hover:bg-white/10 transition-colors font-medium">Zarejestruj się</a>
+                                <a href="login.html" class="block w-full text-center bg-biotune-red text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">Zaloguj siÄ™</a>
+                                <a href="register.html" class="block w-full text-center border border-white/20 px-4 py-2 rounded-lg hover:bg-white/10 transition-colors font-medium">Zarejestruj siÄ™</a>
                             </div>
                         </div>
                     </div>
                     <div class="relative group flex items-center">
-                        <button id="wishlist-trigger" class="relative hover:text-biotune-red transition-colors" title="Lista życzeń" aria-label="Lista życzeń">
+                        <button id="wishlist-trigger" class="relative hover:text-biotune-red transition-colors" title="Lista ĹĽyczeĹ„" aria-label="Lista ĹĽyczeĹ„">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
                             <span id="wishlist-count" class="absolute -top-2 -right-2 bg-biotune-red text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
                         </button>
                         <div id="wishlist-dropdown" class="absolute right-0 top-full mt-4 w-80 glass rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-white/10 z-50">
                             <div class="p-4">
-                                <h3 class="font-bold text-lg mb-3 text-white">Lista życzeń</h3>
-                                <div class="wishlist-items max-h-96 overflow-y-auto space-y-2"><p class="text-center text-gray-500 py-4 text-sm">Twoja lista życzeń jest pusta.</p></div>
+                                <h3 class="font-bold text-lg mb-3 text-white">Lista ĹĽyczeĹ„</h3>
+                                <div class="wishlist-items max-h-96 overflow-y-auto space-y-2"><p class="text-center text-gray-500 py-4 text-sm">Twoja lista ĹĽyczeĹ„ jest pusta.</p></div>
                             </div>
                         </div>
                     </div>
@@ -397,9 +397,13 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile overlay / panel -->
+        <!-- Mobile Menu Overlay (darkens background) -->
         <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+        <!-- Mobile Menu Panel (slides in from left) -->
         <div id="mobile-menu-panel" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu nawigacyjne">
+
+            <!-- Header: Logo + Close button -->
             <div class="mobile-menu-header">
                 <a href="index.html" class="relative block h-10 w-32 flex-shrink-0" onclick="closeMobileMenu()">
                     <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="h-28 w-auto absolute top-1/2 -translate-y-1/2 -left-2 max-w-none pointer-events-none">
@@ -409,17 +413,18 @@
                 </button>
             </div>
 
+            <!-- Main Navigation -->
             <div class="mobile-menu-label">Nawigacja</div>
 
             <a href="index.html" class="mobile-menu-link">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
-                Strona główna
+                Strona gĹ‚Ăłwna
             </a>
             <a href="about.html" class="mobile-menu-link">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
                 O Nas
             </a>
-            <a href="badania.html" class="mobile-menu-link" style="color:#ff0000;">
+            <a href="badania.html" class="mobile-menu-link">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
                 Badania
             </a>
@@ -428,33 +433,48 @@
                 Kontakt
             </a>
 
+            <div class="mobile-menu-divider"></div>
+
+            <!-- Shop Section -->
             <div class="mobile-menu-label">Sklep</div>
             <a href="shop.html" class="mobile-menu-link">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
                 Wszystkie produkty
             </a>
-            <a href="product.html?id=retatrutide" class="mobile-menu-sublink">• Retatrutide</a>
-            <a href="product.html?id=bpc-157-tb-500" class="mobile-menu-sublink">• BPC-157 + TB-500</a>
-            <a href="product.html?id=cjc-1295-ipamorelin" class="mobile-menu-sublink">• CJC-1295 + Ipamorelin</a>
-            <a href="product.html?id=ghk-cu" class="mobile-menu-sublink">• GHK-Cu</a>
+            <a href="product.html?id=retatrutide" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> Retatrutide
+            </a>
+            <a href="product.html?id=bpc-157-tb-500" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> BPC-157 + TB-500
+            </a>
+            <a href="product.html?id=cjc-1295-ipamorelin" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> CJC-1295 + Ipamorelin
+            </a>
+            <a href="product.html?id=ghk-cu" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> GHK-Cu
+            </a>
+            <a href="product.html?id=epithalon" class="mobile-menu-sublink">
+                <span class="mobile-menu-dot"></span> Epithalon
+            </a>
 
-            <div class="mobile-menu-label">Koszyk</div>
-            <button onclick="window.openCart && window.openCart(); closeMobileMenu();" class="mobile-menu-link w-full text-left">
+            <div class="mobile-menu-divider"></div>
+
+            <div class="mobile-menu-divider"></div>
+
+            <button class="mobile-menu-link" style="background:none;border:none;text-align:left;width:100%;cursor:pointer;" onclick="closeMobileMenu(); if(window.openCart) setTimeout(window.openCart,200);">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
                 Koszyk
             </button>
-            <button onclick="document.getElementById('wishlist-trigger') && document.getElementById('wishlist-trigger').click(); closeMobileMenu();" class="mobile-menu-link w-full text-left">
+            <button class="mobile-menu-link" style="background:none;border:none;text-align:left;width:100%;cursor:pointer;" onclick="closeMobileMenu();">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-                Lista życzeń
+                Lista ĹĽyczeĹ„
             </button>
 
-            <div style="flex: 1;"></div>
-
-            <div class="mobile-menu-divider"></div>
-            <div class="mobile-menu-label" style="text-align:center;">Konto</div>
-            <div class="mobile-menu-cta">
-                <a href="login.html" class="mobile-menu-btn-primary">Zaloguj się</a>
-                <a href="register.html" class="mobile-menu-btn-secondary">Utwórz konto</a>
+            <!-- Centrally aligned Konto at the bottom -->
+            <div class="mt-auto pt-8 pb-4 flex flex-col items-center text-center">
+                <div class="text-[10px] uppercase tracking-[0.2em] text-gray-500 mb-4 font-bold">KONTO</div>
+                <a href="login.html" class="w-full max-w-[200px] text-center bg-biotune-red text-white py-2.5 rounded-lg font-bold hover:bg-red-600 transition-colors mb-3">Zaloguj siÄ™</a>
+                <a href="register.html" class="w-full max-w-[200px] text-center border border-white/20 text-white py-2.5 rounded-lg font-bold hover:bg-white/10 transition-colors">UtwĂłrz konto</a>
             </div>
         </div>
     </nav>
@@ -474,7 +494,7 @@
                 <span>Badania</span> <span>i</span> <span>Certyfikaty</span>
             </h1>
             <p class="hero-cascade text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                kompletna dokumentacja analityczna wszystkich odczynników BioTune. Zweryfikowane przez niezależne laboratoria
+                kompletna dokumentacja analityczna wszystkich odczynnikĂłw BioTune. Zweryfikowane przez niezaleĹĽne laboratoria
             </p>
         </div>
 
@@ -494,7 +514,7 @@
                 <div style="position:absolute;top:0;bottom:0;left:0;padding-left:14px;display:flex;align-items:center;pointer-events:none;">
                     <svg aria-hidden="true" style="width:18px;height:18px;color:#555;" class="group-focus-within:text-biotune-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </div>
-                <input type="text" id="search-input" placeholder="Szukaj produktu (np. Retatrutide, BPC-157, CAS)..." title="Szukaj produktów" aria-label="Szukaj produktów"
+                <input type="text" id="search-input" placeholder="Szukaj produktu (np. Retatrutide, BPC-157, CAS)..." title="Szukaj produktĂłw" aria-label="Szukaj produktĂłw"
                     style="width:100%;background:#0f0f0f;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:11px 14px 11px 42px;font-size:0.88rem;color:#ccc;outline:none;transition:border-color 0.25s ease, box-shadow 0.25s ease;"
                     onfocus="this.style.borderColor='#ff0000';this.style.boxShadow='0 0 14px rgba(255,0,0,0.18)'"
                     onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none'"
@@ -502,8 +522,8 @@
             </div>
             <select id="sort-select" title="Sortuj" aria-label="Sortuj produkty"
                 style="background:#0f0f0f;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:11px 14px;font-size:0.82rem;color:#888;outline:none;cursor:pointer;min-width:160px;">
-                <option value="name">Sortuj: Nazwa A–Z</option>
-                <option value="nameDesc">Sortuj: Nazwa Z–A</option>
+                <option value="name">Sortuj: Nazwa Aâ€“Z</option>
+                <option value="nameDesc">Sortuj: Nazwa Zâ€“A</option>
                 <option value="cas">Sortuj: CAS</option>
             </select>
         </div>
@@ -517,7 +537,7 @@
                 <span>Nazwa</span>
                 <span>Dawka</span>
                 <span>CAS</span>
-                <span>Stężenie</span>
+                <span>StÄ™ĹĽenie</span>
                 <span>Data badania</span>
                 <!-- Removed "Akcje" title but kept span for grid alignment -->
                 <span style="text-align:right;"></span>
@@ -529,21 +549,21 @@
         <!-- Lightbox -->
         <div id="report-lightbox" class="report-lightbox" onclick="closeReportLightbox(event)">
             <button class="lightbox-close" onclick="closeReportLightbox(event)" title="Zamknij (ESC)">&times;</button>
-            <img id="lightbox-img" src="" alt="Powiększony raport z badań" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="PowiÄ™kszony raport z badaĹ„" onclick="event.stopPropagation()">
         </div>
     </main>
 
     <!-- NEWSLETTER -->
     <section class="newsletter-section">
-        <h2 class="newsletter-title">Dołącz do naszego newslettera</h2>
+        <h2 class="newsletter-title">DoĹ‚Ä…cz do naszego newslettera</h2>
         <form class="newsletter-form">
             <div class="newsletter-input-group">
                 <input type="email" class="newsletter-input" placeholder="Podaj adres email" required title="Podaj adres email">
-                <button type="submit" class="newsletter-button">Zapisz się</button>
+                <button type="submit" class="newsletter-button">Zapisz siÄ™</button>
             </div>
             <label class="newsletter-consent">
                 <input type="checkbox" required title="Zgoda na newsletter">
-                <span>Wyrażam zgodę na przetwarzanie podanych powyżej danych osobowych w celu otrzymywania newslettera.</span>
+                <span>WyraĹĽam zgodÄ™ na przetwarzanie podanych powyĹĽej danych osobowych w celu otrzymywania newslettera.</span>
             </label>
             <div class="newsletter-feedback"></div>
         </form>
@@ -554,21 +574,21 @@
     <!-- CONTACT -->
     <section id="contact" class="py-24 bg-black relative overflow-hidden">
         <div class="max-w-3xl mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold mb-8 text-center text-white">SKONTAKTUJ SIĘ Z NAMI</h2>
+            <h2 class="text-3xl font-bold mb-8 text-center text-white">SKONTAKTUJ SIÄ Z NAMI</h2>
             <form class="space-y-6">
                 <div>
-                    <label for="contact-name" class="block text-sm font-medium text-gray-400 mb-1">Imię</label>
-                    <input id="contact-name" name="name" title="Imię" type="text" class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
+                    <label for="contact-name" class="block text-sm font-medium text-gray-400 mb-1">ImiÄ™</label>
+                    <input id="contact-name" name="name" title="ImiÄ™" type="text" class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
                 </div>
                 <div>
                     <label for="contact-email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
                     <input id="contact-email" name="email" title="Email" type="email" class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white">
                 </div>
                 <div>
-                    <label for="contact-msg" class="block text-sm font-medium text-gray-400 mb-1">Wiadomość</label>
-                    <textarea id="contact-msg" name="message" title="Wiadomość" rows="4" class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white"></textarea>
+                    <label for="contact-msg" class="block text-sm font-medium text-gray-400 mb-1">WiadomoĹ›Ä‡</label>
+                    <textarea id="contact-msg" name="message" title="WiadomoĹ›Ä‡" rows="4" class="w-full bg-transparent border-b border-gray-700 py-2 focus:outline-none focus:border-biotune-red transition-colors text-white"></textarea>
                 </div>
-                <button type="button" class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">WYŚLIJ WIADOMOŚĆ</button>
+                <button type="button" class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">WYĹšLIJ WIADOMOĹšÄ†</button>
             </form>
         </div>
     </section>
@@ -585,12 +605,12 @@
                 <a href="index.html" class="inline-flex relative h-12 w-48 mb-6 items-center cursor-pointer">
                     <img src="./assets/biotune-logo-dark-mode.png" alt="BioTune" class="absolute top-1/2 -translate-y-1/2 -left-3 h-60 w-auto pointer-events-none max-w-none">
                 </a>
-                <p class="text-gray-400 leading-relaxed max-w-sm">Peptydy najwyższej jakości do celów badawczych. Gwarancja czystości potwierdzona rygorystycznymi testami przez niezależne labolatoria</p>
+                <p class="text-gray-400 leading-relaxed max-w-sm">Peptydy najwyĹĽszej jakoĹ›ci do celĂłw badawczych. Gwarancja czystoĹ›ci potwierdzona rygorystycznymi testami przez niezaleĹĽne labolatoria</p>
             </div>
             <div>
                 <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Kategorie</h4>
                 <ul class="space-y-4">
-                    <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors text-sm">Strona główna</a></li>
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors text-sm">Strona gĹ‚Ăłwna</a></li>
                     <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">O nas</a></li>
                     <li><a href="shop.html" class="text-gray-400 hover:text-white transition-colors text-sm">Sklep</a></li>
                 </ul>
@@ -599,7 +619,7 @@
                 <h4 class="text-white font-bold mb-6 tracking-wider text-sm uppercase">Informacja</h4>
                 <ul class="space-y-4">
                     <li><a href="regulamin.html" class="text-gray-400 hover:text-white transition-colors text-sm">Regulamin sklepu</a></li>
-                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors text-sm">Polityka prywatności</a></li>
+                    <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors text-sm">Polityka prywatnoĹ›ci</a></li>
                     <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors text-sm">Kontakt</a></li>
                 </ul>
             </div>
@@ -621,26 +641,26 @@
 575:                 </a>
 576:             </div>
 577:         </div>
-578:         <div class="mt-8 text-center md:text-left text-[11px] text-gray-500 font-mono">&copy; 2026 BioTune. Wszelkie prawa zastrzeżone. Projekt o charakterze wyłącznie badawczym i naukowym.</div>
+578:         <div class="mt-8 text-center md:text-left text-[11px] text-gray-500 font-mono">&copy; 2026 BioTune. Wszelkie prawa zastrzeĹĽone. Projekt o charakterze wyĹ‚Ä…cznie badawczym i naukowym.</div>
 579:     </div>
 580: </footer>
 581: 
 582: <!-- CART DRAWER -->
 583: <div id="cart-drawer" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-biotune-dark border-l border-white/10 transform translate-x-full transition-transform duration-300 z-[60] shadow-2xl flex flex-col text-white">
 584:     <div class="p-6 border-b border-white/10 flex justify-between items-center">
-585:         <h2 class="text-xl font-bold">Twój Koszyk</h2>
+585:         <h2 class="text-xl font-bold">TwĂłj Koszyk</h2>
 586:         <button id="close-cart" class="text-gray-400 hover:text-white" title="Zamknij koszyk" aria-label="Zamknij koszyk">
 587:             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
 588:         </button>
 589:     </div>
 590:     <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-591:         <p class="text-center text-gray-500 mt-10">Twój koszyk jest pusty.</p>
+591:         <p class="text-center text-gray-500 mt-10">TwĂłj koszyk jest pusty.</p>
 592:     </div>
 593:     <div class="p-6 border-t border-white/10 bg-black/20">
 594:         <div class="flex justify-between items-center mb-4 text-lg font-bold">
 595:             <span>Suma:</span><span id="cart-total">0.00 PLN</span>
 596:         </div>
-597:         <button id="checkout-btn" class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">Przejdź do kasy</button>
+597:         <button id="checkout-btn" class="w-full bg-biotune-red text-white font-bold py-3 px-6 hover:bg-red-600 transition-colors uppercase tracking-wider">PrzejdĹş do kasy</button>
 598:     </div>
 599: </div>
 600: <div id="overlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[55] hidden opacity-0 transition-opacity duration-300"></div>
@@ -686,8 +706,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="col-purity">>99.1%</div>
                 <div class="col-date">2026-03-15</div>
                 <div class="col-actions">
-                    <button class="btn-expand">Rozwiń ▼</button>
-                    <a href="product.html?id=${p.id}" class="btn-catalog">Katalog →</a>
+                    <button class="btn-expand">RozwiĹ„ â–Ľ</button>
+                    <a href="product.html?id=${p.id}" class="btn-catalog">Katalog â†’</a>
                 </div>
             `;
             
@@ -697,23 +717,23 @@ document.addEventListener('DOMContentLoaded', () => {
             panel.innerHTML = `
                 <div class="expand-inner">
                     <div class="expand-left">
-                        <h3>${p.name} – Specyfikacja</h3>
+                        <h3>${p.name} â€“ Specyfikacja</h3>
                         <div class="mol-grid">
                             <div class="mol-item"><label>Masa molowa</label><span>${p.molarMass || 'N/A'}</span></div>
-                            <div class="mol-item"><label>Wzór sumaryczny</label><span>${p.formula || 'N/A'}</span></div>
+                            <div class="mol-item"><label>WzĂłr sumaryczny</label><span>${p.formula || 'N/A'}</span></div>
                             <div class="mol-item"><label>Numer CAS</label><span>${p.cas || 'N/A'}</span></div>
                         </div>
                         <p>${p.description}</p>
                         
                         <ul style="margin-top:1.5rem; margin-bottom: 1.5rem; color: #ccc; font-size: 0.85rem; list-style-type: none; padding-left: 0; line-height: 1.8;">
-                            <li class="bullet-anim" style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Czystość:</strong> >99.138%</li>
-                            <li class="bullet-anim" style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Stężenie:</strong> 10.30mg</li>
-                            <li class="bullet-anim" style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">•</span> <strong>Data badania:</strong> 2026-03-15</li>
+                            <li class="bullet-anim" style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">â€˘</span> <strong>CzystoĹ›Ä‡:</strong> >99.138%</li>
+                            <li class="bullet-anim" style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">â€˘</span> <strong>StÄ™ĹĽenie:</strong> 10.30mg</li>
+                            <li class="bullet-anim" style="display:flex; align-items:center; gap:8px;"><span style="color:#ff0000;">â€˘</span> <strong>Data badania:</strong> 2026-03-15</li>
                         </ul>
 
                         <div style="display:flex; gap:12px; margin-top: 15px;">
-                            <a href="product.html?id=${p.id}" class="sweep-hover-btn" style="padding: 10px 20px; font-weight: 600; font-size: 0.85rem; border-radius: 4px; letter-spacing: 0.05em;">Pełna karta produktu →</a>
-                            <button class="btn-collapse-panel hover:text-white hover:bg-white/10 hover:scale-105" style="padding: 10px 20px; font-weight: 600; font-size: 0.85rem; border-radius: 4px; letter-spacing: 0.05em; background: rgba(255,255,255,0.05); color: #ccc; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; transition: all 0.2s ease;">Zwiń ▲</button>
+                            <a href="product.html?id=${p.id}" class="sweep-hover-btn" style="padding: 10px 20px; font-weight: 600; font-size: 0.85rem; border-radius: 4px; letter-spacing: 0.05em;">PeĹ‚na karta produktu â†’</a>
+                            <button class="btn-collapse-panel hover:text-white hover:bg-white/10 hover:scale-105" style="padding: 10px 20px; font-weight: 600; font-size: 0.85rem; border-radius: 4px; letter-spacing: 0.05em; background: rgba(255,255,255,0.05); color: #ccc; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; transition: all 0.2s ease;">ZwiĹ„ â–˛</button>
                         </div>
                     </div>
                     <div class="expand-right">
@@ -728,12 +748,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="snake-corner snake-corner-bl"></span>
 
                             <div class="relative overflow-hidden bg-[#111] w-full h-full rounded-xl" style="transform: translateZ(0);">
-                                <img src="./assets/test-report.png" alt="Raport z badań ${p.name}" class="w-full h-full object-contain block rounded-xl">
+                                <img src="./assets/test-report.png" alt="Raport z badaĹ„ ${p.name}" class="w-full h-full object-contain block rounded-xl">
                                 <div class="absolute inset-0 bg-black/0 group-hover:bg-black/75 transition-colors duration-300 pointer-events-none z-0 rounded-xl"></div>
                                 
                                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 p-6">
-                                    <button class="sweep-btn-red w-full font-bold py-2 px-4 text-sm rounded-lg shadow-lg" onclick="openReportLightbox('./assets/test-report.png')">POWIĘKSZ</button>
-                                    <a href="https://verify.janoshik.com/tests/89171_YNFUMX15DE6Z" target="_blank" rel="noopener noreferrer" class="sweep-btn-white w-full text-center font-bold py-2 px-4 text-sm rounded-lg backdrop-blur-sm">LINK DO BADAŃ</a>
+                                    <button class="sweep-btn-red w-full font-bold py-2 px-4 text-sm rounded-lg shadow-lg" onclick="openReportLightbox('./assets/test-report.png')">POWIÄKSZ</button>
+                                    <a href="https://verify.janoshik.com/tests/89171_YNFUMX15DE6Z" target="_blank" rel="noopener noreferrer" class="sweep-btn-white w-full text-center font-bold py-2 px-4 text-sm rounded-lg backdrop-blur-sm">LINK DO BADAĹ</a>
                                 </div>
                             </div>
                         </div>
@@ -751,7 +771,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 collapseBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     rowWrap.classList.remove('expanded');
-                    rowWrap.querySelector('.btn-expand').textContent = 'Rozwiń ▼';
+                    rowWrap.querySelector('.btn-expand').textContent = 'RozwiĹ„ â–Ľ';
                 });
             }
 
@@ -765,12 +785,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Close all others
                 document.querySelectorAll('.db-row-wrap').forEach(w => {
                     w.classList.remove('expanded');
-                    w.querySelector('.btn-expand').textContent = 'Rozwiń ▼';
+                    w.querySelector('.btn-expand').textContent = 'RozwiĹ„ â–Ľ';
                 });
 
                 if(!isExpanded) {
                     rowWrap.classList.add('expanded');
-                    rowWrap.querySelector('.btn-expand').textContent = 'Zwiń ▲';
+                    rowWrap.querySelector('.btn-expand').textContent = 'ZwiĹ„ â–˛';
                     
                     // Trigger bullet cascade animation
                     gsap.fromTo(panel.querySelectorAll('.bullet-anim'), 
